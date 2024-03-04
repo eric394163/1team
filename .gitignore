@@ -24,3 +24,15 @@ hs_err_pid*
 replay_pid*
 
 pom.xml
+/bin/
+
+
+.classpath
+.project
+**/.gitignore
+.settings/
+MANIFEST.MF
+
+*.lst
+
+*.properties
