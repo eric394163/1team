@@ -14,7 +14,7 @@ public class SignUpDTO { //UserVO 와 동일하면 VO로만 사용해도 됨, Us
     private String nickname;
     private String email;
     private Date birth;
-    private Date state_date;
+    private Date stateDate;
     private String role;
     private String state;
 
