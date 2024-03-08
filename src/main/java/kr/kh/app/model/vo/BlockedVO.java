@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class BlockedVO {
-    private int blocked_id;
-    private String blocking_user_id;
-    private String blocked_user_id;
+    private int blockedId;
+    private String blockingUserId;
+    private String blockedUserId;
 }
