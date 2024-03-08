@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Header</title>
+<title>aside</title>
 <style type="text/css">
 	.manage-btn {
 		border: 1px solid #fff;
@@ -95,23 +95,6 @@
 						<span class="float-end">▽</span>
 					</a>
 					<ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav1">
-						<li style="padding-left:35px;">
-							<a href="#" class="nav-link text-white">하위 게시판 1</a>
-						</li>					
-						<li style="padding-left:35px;">
-							<a href="#" class="nav-link text-white">하위 게시판 2</a>
-						</li>					
-						<li style="padding-left:35px;">
-							<a href="#" class="nav-link text-white">하위 게시판 3</a>
-						</li>					
-					</ul>
-				</li>
-				<li class="drop-down">
-					<a href="#" class="nav-link text-white clearfix"> 
-						<span class="float-start">음악 카테고리</span>
-						<span class="float-end">▽</span>
-					</a>
-					<ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav2">
 						<li style="padding-left:35px;">
 							<a href="#" class="nav-link text-white">하위 게시판 1</a>
 						</li>					

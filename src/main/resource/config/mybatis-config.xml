@@ -6,13 +6,13 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/team1" />
+                <property name="url" value="jdbc:mysql://localhost:3306/music" />
                 <property name="username" value="root" />
-                <property name="password" value="root" />
+                <property name="password" value="1234" />
             </dataSource>
         </environment>
     </environments>
     <mappers>
-
+		<mapper resource="kr/kh/app/dao/CommonMapper.xml"/>
     </mappers>
 </configuration>
