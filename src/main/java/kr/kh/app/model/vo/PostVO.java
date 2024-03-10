@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PostVO {
-    private int postId;
+	private int postId;
     private int postBoardNum;
     private String postTitle;
     private String postContent;
@@ -18,4 +18,9 @@ public class PostVO {
     private int postReported;
     private String postUserId;
 
+    public PostVO(int postBoardNum, String title, String content) {
+    	this.postBoardNum = postBoardNum;
+    	this.postTitle = title;
+    	this.postContent = content;
+    }
 }

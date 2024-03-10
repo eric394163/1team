@@ -18,6 +18,9 @@
 			<jsp:include page="/WEB-INF/views/common/aside.jsp"/>
 			<div class="main-contents">
 				<!-- 메인페이지에서만 보이는 것 인클루드 -->
+				<div>
+					<a href="<c:url value="/post/insert" />">게시글 쓰기</a>
+				</div>
 			</div>
 		</div>
 	</div>
