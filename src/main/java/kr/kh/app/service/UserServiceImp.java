@@ -57,8 +57,10 @@ public class UserServiceImp implements UserService {
     public boolean signUp(SignUpDTO signUpDTO) {
         if (signUpDTO == null ||
                 signUpDTO.getId() == null ||
-                signUpDTO.getPw==  null ||
-                signUpDTO.getEmail==  null) {
+                signUpDTO.getPw() == null ||
+                signUpDTO.getEmail() == null ||
+                signUpDTO.getNickname() == null ||
+                signUpDTO.getBirth() == null) {
             return false;
         }
         // 정규표현식 체크 : to do

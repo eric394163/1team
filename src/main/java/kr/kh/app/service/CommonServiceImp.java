@@ -13,12 +13,12 @@ import kr.kh.app.dao.CommonDAO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CategoryVO;
 
-public class CommonServiceImp implements CommonService{
+public class CommonServiceImp implements CommonService {
 	private CommonDAO commonDao;
-	
+
 	public CommonServiceImp() {
-		String resource = "config/mybatis-config.xml";
-		
+		String resource = "kr/kh/app/config/mybatis-config.xml";
+
 		try {
 			InputStream inputStream = Resources.getResourceAsStream(resource);
 			SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -38,8 +38,5 @@ public class CommonServiceImp implements CommonService{
 	public ArrayList<BoardVO> getBoardList() {
 		return commonDao.selectBoardList();
 	}
-	
-	
-	
-	
+
 }

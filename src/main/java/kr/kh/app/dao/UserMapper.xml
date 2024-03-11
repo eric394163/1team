@@ -3,4 +3,7 @@
 <mapper namespace="kr.kh.app.dao.UserDAO">
     <select id="selectUser" resultType="kr.kh.app.model.vo.UserVO"> SELECT * FROM USER WHERE user_id
         = #{user_id} </select>
+    <insert id="insertMember"> INSERT INTO USER(user_id, user_pw, user_email, user_)
+        VALUES(#{user.me_id},#{user.me_pw},#{user.me_email},"이용중") </insert>
+
 </mapper>

@@ -87,8 +87,8 @@ prefix="c"%> <%@ page isELIgnored="false" %>
             PLAY GROUND를 이용해 보세요
           </p>
           <ul>
-            <li><a href="/team1/login">로그인</a></li>
-            <li><a href="/team1/signup">회원가입</a></li>
+            <li><a href='<c:url value="/login" />'>로그인</a></li>
+            <li><a href='<c:url value="/signup" />'>회원가입</a></li>
           </ul>
         </div>
         <hr />
