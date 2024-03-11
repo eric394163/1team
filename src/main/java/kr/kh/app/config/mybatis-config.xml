@@ -20,5 +20,5 @@
   </environments>
   <mappers>
   	<mapper resource="kr/kh/app/dao/PostMapper.xml"/>
+    <mapper resource="kr/kh/app/dao/UserMapper.xml" />
   </mappers>
-</configuration>

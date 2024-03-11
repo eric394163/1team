@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/team1/css/style.css" />
 <style type="text/css">
 	.main-wrap{ background-color: #212529; }
 	.inner-wrap{  width: 1440px; max-width: 100%; min-height: 1000px;  margin: 0 auto; display: flex; background-color: #fff; align-items: stretch;  }
@@ -27,3 +28,10 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
+
+
+    
+
+
+
+ 
