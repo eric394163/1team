@@ -8,14 +8,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserVO {
-    private String userId;
-    private String userPw;
-    private String userNickname;
-    private String userEmail;
-    private Date userBirth;
-    private Date userStateDate;
-    private String userRole;
-    private String userState;
-
+    private String user_id;
+    private String user_pw;
+    private String user_nickname;
+    private String user_email;
+    private Date user_birth;
+    private Date user_stateDate;
+    private String user_role;
+    private String user_state;
 
 }
