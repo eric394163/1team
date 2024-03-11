@@ -14,6 +14,6 @@
     </environments>
     <mappers>
         <mapper resource="kr/kh/app/dao/UserMapper.xml" />
-		<mapper resource="/kr/kh/app/dao/CommonMapper.xml"/>
+		<mapper resource="kr/kh/app/dao/CommonMapper.xml"/>
     </mappers>
 </configuration>
