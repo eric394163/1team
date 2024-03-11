@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CommentVO {
-    private int commentId;
-    private String commentUserId;
-    private int commentPostNum;
-    private String commentContent;
-    private Date commentDate;
+    private int comment_id;
+    private String comment_user_id;
+    private int comment_post_num;
+    private String comment_content;
+    private Date comment_date;
 
 }
