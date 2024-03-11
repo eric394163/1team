@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,8 +68,12 @@
 					    </select>
 					</div>
 					<div class="mb-3 mt-3">
-					    <label for="tsitle" class="form-label">제목</label>
+					    <label for="title" class="form-label">제목</label>
 					    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title">
+					 </div>
+					 <div class="mb-3 mt-3">
+					    <label for="writer" class="form-label">작성자 :</label>
+					    <input type="text" class="form-control" id="writer" name="writer" value = "${user.user_nickname }">
 					 </div>
 					 <div class="mb-3 mt-3">
 					    <label for="content" class="form-label">내용</label>
@@ -86,11 +92,7 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-	  $('#content').summernote({
-	    placeholder: 'Hello Bootstrap 4',
-	    tabsize: 2,
-	    height: 400
-	  });
+	 
 	</script>
 </body>
 </html>

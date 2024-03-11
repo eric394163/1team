@@ -17,7 +17,7 @@ public class PostServiceImp implements PostService{
 	private PostDAO postDao;
 	
 	public PostServiceImp() {
-		String resource = "kr/kh/app/config/mybatis-config.xml";
+		String resource = "config/mybatis-config.xml";
 
 		try {
 			InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -38,7 +38,7 @@ public class PostServiceImp implements PostService{
 
 	@Override
 	public boolean insertPost(PostVO post) {
-		if(post == null || !checkString(post.getPostContent()) || !checkString(post.getPostTitle())) {
+		if(post == null || !checkString(post.getPost_content()) || !checkString(post.getPost_title())) {
 			return false;
 		}
 

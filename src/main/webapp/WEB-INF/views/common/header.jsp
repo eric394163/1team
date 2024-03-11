@@ -22,7 +22,7 @@
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<div class="container-fluid">
 				<h1>
-					<a class="navbar-brand" href="/team1/"> 
+					<a class="navbar-brand" href="/"> 
 						<img
 						alt="LOGO"
 						src="http://playground.dothome.co.kr/logo_blackversion.svg">
@@ -33,10 +33,10 @@
 			     </form>
 				<ul class="navbar-nav">
 					<li class="nav-item"> 
-						<a class="nav-link" href="/team1/login">로그인</a>
+						<a class="nav-link" href="/login">로그인</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/team1/signup">회원가입</a>
+						<a class="nav-link" href="/signup">회원가입</a>
 					</li>
 				</ul>
 			</div>

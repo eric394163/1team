@@ -3,6 +3,7 @@ package kr.kh.app.controller;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -41,18 +42,25 @@ public class PostInsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		UserVO user = (UserVO)session.getAttribute("user") ;
-		int postBoardNum = Integer.parseInt(request.getParameter("board"));
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		
+		if (user == null) {
+			response.sendRedirect(request.getContextPath() + "/post/list");
+			return;
+		}
+		
+		int post_board_num = Integer.parseInt(request.getParameter("board"));
+		String post_title = request.getParameter("title");
+		String post_content = request.getParameter("content");
 		String writer = user.getUserId();
+		Date post_date = new Date();
 		
 		
-		PostVO post = new PostVO(postBoardNum, title, content, writer);
+		PostVO post = new PostVO(post_board_num, post_title, post_content, writer, post_date);
 		
 		if(postService.insertPost(post)) {
-			response.sendRedirect(request.getContextPath() + "/board/list");
+			response.sendRedirect(request.getContextPath() + "/post/list");
 		} else {
-			response.sendRedirect(request.getContextPath() + "/board/insert");
+			response.sendRedirect(request.getContextPath() + "/post/insert");
 		}
 		
 	}
