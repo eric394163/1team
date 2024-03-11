@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PostVO {
+
 	private int post_id;
     private int post_board_num;
     private String post_title;
