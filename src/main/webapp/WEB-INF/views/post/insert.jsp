@@ -51,7 +51,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="main-wrap">
 			<div class="inner-wrap">
-			<jsp:include page="/WEB-INF/views/common/aside.jsp"/>
+			<jsp:include page="/WEB-INF/views/common/aside.jsp" />
 			<div class="main-contents">
 				<form action="<c:url value="/post/insert"/>" method = "post" enctype ="multipart/form-data" class="insert-form">
 					<h3>게시글 쓰기</h3> 

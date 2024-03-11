@@ -17,7 +17,7 @@ public class PostServiceImp implements PostService{
 	private PostDAO postDao;
 	
 	public PostServiceImp() {
-		String resource = "config/mybatis-config.xml";
+		String resource = "kr/kh/app/config/mybatis-config.xml";
 
 		try {
 			InputStream inputStream = Resources.getResourceAsStream(resource);
