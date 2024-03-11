@@ -7,10 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-footer p {
-	font-size: 12px;
-	color: #999;
-}
+<link rel="stylesheet" href="/team1/css/common.css">
 </style>
 </head>
 <body>
@@ -19,7 +16,7 @@ footer p {
 			<h1>
 				<a class="navbar-brand" href="<c:url value="/"/>"> <img
 					alt="LOGO"
-					src="http://playground.dothome.co.kr/logo_blackversion.svg">
+					src="/team1/images/logo_blackversion.svg">
 				</a>
 			</h1>
 			<p>
