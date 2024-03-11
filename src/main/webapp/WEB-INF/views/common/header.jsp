@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,7 @@
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<div class="container-fluid">
 				<h1>
-					<a class="navbar-brand" href="/team1/"> 
+					<a class="navbar-brand" href="<c:url value="/" />"> 
 						<img
 						alt="LOGO"
 						src="http://playground.dothome.co.kr/logo_blackversion.svg">
@@ -32,12 +33,22 @@
 			        <input class="form-control me-2" type="text" placeholder="검색어를 입력하세요" name="search" id="search">
 			     </form>
 				<ul class="navbar-nav">
-					<li class="nav-item"> 
-						<a class="nav-link" href="/team1/login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/team1/signup">회원가입</a>
-					</li>
+					<c:if test="${user == null}">
+						<li class="nav-item"> 
+							<a class="nav-link" href="<c:url value="/login" />">로그인</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/signup" />">회원가입</a>
+						</li>
+					</c:if>
+					<c:if test="${user != null}">
+						<li class="nav-item"> 
+							<a class="nav-link" href="<c:url value="/mypage" />">마이페이지</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/logout" />">로그아웃</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</nav>
