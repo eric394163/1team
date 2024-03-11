@@ -14,15 +14,30 @@ prefix="c"%> <%@ page isELIgnored="false" %>
         style="width: 280px"
       >
         <div class="login-box">
-          <img alt="예시이미지" src="https://via.placeholder.com/80" /> <br />
-          <p>
-            로그인 후 더 편하게 <br />
-            PLAY GROUND를 이용해 보세요
-          </p>
-          <ul>
-            <li><a href="<c:url value="/login" />">로그인</a></li>
-            <li><a href="<c:url value="/signup" />">회원가입</a></li>
-          </ul>
+          <c:if test="${user == null}">
+          	<img alt="로그아웃얼굴" src="/team1/images/face_logout.svg" width="80" /> <br />
+	          <p>
+	            로그인 후 더 편하게 <br>
+	            PLAY GROUND를 <br>
+	            이용해 보세요
+	          </p>
+	          <ul>
+	            <li><a href="<c:url value="/login" />">로그인</a></li>
+	            <li><a href="<c:url value="/signup" />">회원가입</a></li>
+	          </ul>
+          </c:if>
+          <c:if test="${user != null}">
+          	<img alt="로그인얼굴" src="/team1/images/face_login.svg" width="80" /> <br />
+	          <p>
+	            ${nickname}(${id})님 <br>
+	            PLAY GROUND에 오신 걸<br> 
+	            환영합니다.
+	          </p>
+	          <ul>
+	            <li><a href="<c:url value="/mypage/main" />">마이페이지</a></li>
+	            <li><a href="<c:url value="/logout" />">로그아웃</a></li>
+	          </ul>
+          </c:if>
         </div>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
