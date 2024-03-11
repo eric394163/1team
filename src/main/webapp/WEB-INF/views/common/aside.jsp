@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,18 +93,22 @@ aside .d-flex {
 				<li class="nav-item"><a href="#" class="nav-link active"
 					aria-current="page"> 공지 게시판 </a></li>
 				<li><a href="#" class="nav-link text-white"> 전체 게시판 </a></li>
+				<c:forEach items="${category}" var="category">
 				<li class="drop-down"><a href="#"
-					class="nav-link text-white clearfix"> <span class="float-start">일반
-							카테고리</span> <span class="float-end">▽</span>
-				</a>
+					class="nav-link text-white clearfix">
+					<span class="float-start">${category.category_name}</span>
+					<span class="float-end">▽</span></a>
 					<ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav1">
-						<li style="padding-left: 35px;"><a href="#"
-							class="nav-link text-white">하위 게시판 1</a></li>
-						<li style="padding-left: 35px;"><a href="#"
-							class="nav-link text-white">하위 게시판 2</a></li>
-						<li style="padding-left: 35px;"><a href="#"
-							class="nav-link text-white">하위 게시판 3</a></li>
-					</ul></li>
+						<c:forEach items="${board}" var="board">
+						<c:if test="${category.category_id == board.board_category_num}">
+						<li style="padding-left: 35px;">
+							<a href="#" class="nav-link text-white">${board.board_name}</a>
+						</li>
+						</c:if>
+						</c:forEach>
+					</ul>
+				</li>
+				</c:forEach>
 			</ul>
 			<hr>
 			<div class="manage-btn">

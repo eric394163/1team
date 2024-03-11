@@ -9,6 +9,6 @@
 	</select>
 	<select id="selectBoardList"
 		resultType="kr.kh.app.model.vo.BoardVO">
-		select * from category
+		select * from board
 	</select>
 </mapper>
