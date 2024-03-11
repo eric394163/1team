@@ -17,7 +17,7 @@ public class CommonServiceImp implements CommonService{
 	private CommonDAO commonDao;
 	
 	public CommonServiceImp() {
-		String resource = "config/mybatis-config.xml";
+		String resource = "kr/kh/app/config/mybatis-config.xml";
 		
 		try {
 			InputStream inputStream = Resources.getResourceAsStream(resource);

@@ -55,21 +55,22 @@ public class UserServiceImp implements UserService {
 
     @Override
     public boolean signUp(SignUpDTO signUpDTO) {
-        if (signUpDTO == null ||
-                signUpDTO.getId() == null ||
-                signUpDTO.getPw==  null ||
-                signUpDTO.getEmail==  null) {
-            return false;
-        }
-        // 정규표현식 체크 : to do
-
-        try {
-            // 아이디가 중복되면 예외가 발생
-            return userDao.insertMember(signUpDTO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+//        if (signUpDTO == null ||
+//                signUpDTO.getId() == null ||
+//                signUpDTO.getPw==  null ||
+//                signUpDTO.getEmail==  null) {
+//            return false;
+//        }
+//        // 정규표현식 체크 : to do
+//
+//        try {
+//            // 아이디가 중복되면 예외가 발생
+//            return userDao.insertMember(signUpDTO);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+    	return false;
     }
 
 }
