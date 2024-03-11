@@ -6,9 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-<link rel="stylesheet" href="/team1/css/common.css">
-</style>
 </head>
 <body>
 	<footer>

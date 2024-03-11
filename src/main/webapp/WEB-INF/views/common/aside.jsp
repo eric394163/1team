@@ -6,8 +6,6 @@ prefix="c"%> <%@ page isELIgnored="false" %>
   <head>
     <meta charset="UTF-8" />
     <title>aside</title>
-    <link rel="stylesheet" href="/team1/css/common.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <aside>
