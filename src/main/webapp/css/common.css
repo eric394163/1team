@@ -13,6 +13,8 @@
   background-color: #fff;
   align-items: stretch;
 }
+.main-contents{ width: 920px; padding-top: 50px; }
+
 
 /* header±¸¿ª */
 header .navbar>.container-fluid {
@@ -31,6 +33,7 @@ footer p {
 }
 
 /* aside */
+aside{ width: 280px; }
 .manage-btn {
   border: 1px solid #fff;
 }
