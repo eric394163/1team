@@ -72,10 +72,6 @@
 					    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title">
 					 </div>
 					 <div class="mb-3 mt-3">
-					    <label for="writer" class="form-label">작성자 :</label>
-					    <input type="text" class="form-control" id="writer" name="writer" value = "${user.user_nickname }">
-					 </div>
-					 <div class="mb-3 mt-3">
 					    <label for="content" class="form-label">내용</label>
 					    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" ></textarea>
 					 </div>
