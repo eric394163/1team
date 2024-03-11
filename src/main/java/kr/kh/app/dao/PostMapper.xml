@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.app.dao.PostDAO">
+
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.post_id">
+		insert into post(post_board_num, post_title, post_content, post_date, post_user_id) 
+		values (#{post.post_board_num}, #{post.post_title}, #{post.post_content}, #{post.post_date}, #{post.post_user_id})
+	</insert>
+	
+	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board;
+	</select>
+
+</mapper>
