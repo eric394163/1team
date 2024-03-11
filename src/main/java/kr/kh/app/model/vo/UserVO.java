@@ -13,7 +13,7 @@ public class UserVO {
     private String user_nickname;
     private String user_email;
     private Date user_birth;
-    private Date user_stateDate;
+    private Date user_state_date;
     private String user_role;
     private String user_state;
 
