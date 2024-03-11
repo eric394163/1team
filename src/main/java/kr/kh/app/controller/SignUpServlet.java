@@ -19,7 +19,7 @@ public class SignUpServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/topnav/signup.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/topnav/signUp.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
