@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.UserDAO;
 import kr.kh.app.model.dto.LoginDTO;
+import kr.kh.app.model.dto.SignUpDTO;
 import kr.kh.app.model.vo.UserVO;
 
 public class UserServiceImp implements UserService {
@@ -50,6 +51,12 @@ public class UserServiceImp implements UserService {
             return user;
         }
         return null;
+    }
+
+    @Override
+    public boolean signUp(SignUpDTO signUpDTO) {
+        return false;
+
     }
 
 }
