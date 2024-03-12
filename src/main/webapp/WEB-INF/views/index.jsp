@@ -26,7 +26,10 @@ prefix="c"%>
           <div>
             <a href="<c:url value="/post/insert" />">게시글 쓰기</a>
             <br>
-            <a href="<c:url value="/post/sublist" />">특정게시물목록보기 - 일단 공지게시판목록으로 설정</a>
+            <c:url var="url" value="/post/sublist">
+				<c:param name="boNum" value="1" />
+			</c:url>
+			<a href="${url}">특정게시물목록보기 - 일단 공지게시판목록으로 설정</a>
           </div>
         </div>
       </div>

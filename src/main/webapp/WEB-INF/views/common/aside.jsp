@@ -46,7 +46,12 @@ prefix="c"%> <%@ page isELIgnored="false" %>
               공지 게시판
             </a>
           </li>
-          <li><a href="#" class="nav-link text-white"> 전체 게시판 </a></li>
+          <li>
+          	<c:url var="url" value="/post/sublist">
+				<c:param name="boNum" value="2" />
+			</c:url>
+			<a href="${url}" class="nav-link text-white">전체 게시판</a>
+          </li>
           <c:forEach items="${category}" var="category">
             <li class="drop-down">
               <a href="#" class="nav-link text-white clearfix">
