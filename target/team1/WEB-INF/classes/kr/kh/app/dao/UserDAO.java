@@ -9,6 +9,6 @@ public interface UserDAO {
 
     UserVO selectUser(@Param("user_id") String id);
 
-    boolean insertMember(SignUpDTO signUpDTO);
+    boolean insertMember(@Param("user") SignUpDTO signUpDTO);
 
 }

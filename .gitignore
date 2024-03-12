@@ -36,3 +36,4 @@ MANIFEST.MF
 *.lst
 
 *.properties
+/build/

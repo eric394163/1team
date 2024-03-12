@@ -14,6 +14,9 @@ prefix="c"%>
 <link rel="stylesheet" href="/team1/css/common.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Header</title>
 </head>
 
 <body>
@@ -23,6 +26,7 @@ prefix="c"%>
 				<h1>
 					<a class="navbar-brand" href="<c:url value="/" />"> <img alt="LOGO"
 						src="/team1/images/logo_blackversion.svg">
+
 					</a>
 				</h1>
 				<form class="d-flex">
@@ -30,10 +34,22 @@ prefix="c"%>
 						placeholder="검색어를 입력하세요" name="search" id="search">
 				</form>
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="<c:url value="/login" />">로그인</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="<c:url value="/signup" />">회원가입</a>
-					</li>
+					<c:if test="${user == null}">
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/login" />">로그인</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/signup" />">회원가입</a>
+						</li>
+					</c:if>
+					<c:if test="${user != null}">
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/mypage/main" />">마이페이지</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/logout" />">로그아웃</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</nav>

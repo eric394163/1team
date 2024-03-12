@@ -1,1 +1,12 @@
-<!-- ê²Œì‹œê¸€ìž‘ì„± íŽ˜ì´ì§€ -->
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title><!-- °Ô½Ã±ÛÀÛ¼º ÆäÀÌÁö --></title>
+</head>
+<body>
+
+</body>
+</html>
