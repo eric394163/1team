@@ -34,21 +34,16 @@ public class PostInsertServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 게시판 전체 가져옴
-		ArrayList<BoardVO> list = postService.getBoardList();
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/post/insert.jsp").forward(request, response);
+			// 게시판 전체 가져옴
+			ArrayList<BoardVO> list = postService.getBoardList();
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/WEB-INF/views/post/insert.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		UserVO user = (UserVO)session.getAttribute("user") ;
-		
-		
-		if (user == null) {
-			response.sendRedirect(request.getContextPath() + "/post/list");
-			return;
-		}
+	
 		
 		int post_board_num = Integer.parseInt(request.getParameter("board"));
 		String post_title = request.getParameter("title");

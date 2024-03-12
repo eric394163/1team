@@ -55,7 +55,11 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-	 
+		$('#content').summernote({
+		  placeholder: 'Hello Bootstrap 4',
+		  tabsize: 2,
+		  height: 400
+		});
 	</script>
 </body>
 </html>
