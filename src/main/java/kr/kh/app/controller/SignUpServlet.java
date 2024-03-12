@@ -17,8 +17,8 @@ public class SignUpServlet extends HttpServlet {
 
     UserService userService = new UserServiceImp();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	MainServlet.aside(request);
         request.getRequestDispatcher("/WEB-INF/views/topnav/signUp.jsp").forward(request, response);
     }
 

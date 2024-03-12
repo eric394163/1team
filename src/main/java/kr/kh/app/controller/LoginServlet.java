@@ -1,5 +1,7 @@
 package kr.kh.app.controller;
 
+import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +14,14 @@ import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
 
-import java.io.IOException;
-
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     UserService userService = new UserServiceImp();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	MainServlet.aside(request);
         request.getRequestDispatcher("/WEB-INF/views/topnav/login.jsp").forward(request, response);
     }
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.BoardVO;
+
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.pagination.PageMaker;
 import kr.kh.app.service.SubPostService;
@@ -20,10 +21,11 @@ public class SubPostListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SubPostService subPostService = new SubPostServiceImp();
     
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		MainServlet.aside(request);
 		
 		//게시판번호 : 주소표시줄에서 받아와야 함
-		Integer board_id = Integer.parseInt(request.getParameter("boNum"));; //클릭해서 넘어온 게시판, 예시가 공지사항이라 1
+		Integer board_id = Integer.parseInt(request.getParameter("boNum")); //클릭해서 넘어온 게시판, 예시가 공지사항이라 1
 		
 		//현재 게시판번호와 맞는 게시판명 가져오기
 		BoardVO board = subPostService.getSubBoard(board_id);
