@@ -55,7 +55,6 @@
 			<div class="main-contents">
 				<form action="<c:url value="/post/insert"/>" method = "post" enctype ="multipart/form-data" class="insert-form">
 					<h3>게시글 쓰기</h3> 
-					<a class="nav-link" href="/post/list">게시글 목록</a>
 					<hr>
 					<div class="mb-3 mt-3">
 					    <label for="board" class="form-label">게시판 선택</label>
