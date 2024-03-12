@@ -5,22 +5,9 @@ prefix="c"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
-    <style type="text/css">
-      .main-wrap {
-        background-color: #212529;
-      }
-
-      .inner-wrap {
-        width: 1440px;
-        max-width: 100%;
-        min-height: 1000px;
-        margin: 0 auto;
-        display: flex;
-        background-color: #fff;
-        align-items: stretch;
-      }
-    </style>
+    <title>PlayGround - 뮤직 커뮤니티</title>
+    <link rel="shortcut icon" href="/team1/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/team1/css/common.css">
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />

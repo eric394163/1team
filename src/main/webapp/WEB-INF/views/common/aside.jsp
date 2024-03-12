@@ -6,72 +6,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
   <head>
     <meta charset="UTF-8" />
     <title>aside</title>
-    <style type="text/css">
-      .manage-btn {
-        border: 1px solid #fff;
-      }
-
-      .manage-btn .nav-link {
-        display: block;
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        line-height: 50px;
-      }
-
-      #main-sub-nav1,
-      #main-sub-nav2 {
-        display: none;
-      }
-
-      .login-box {
-        border: 1px solid #fff;
-        padding: 20px;
-        text-align: center;
-      }
-
-      .login-box p {
-        padding-top: 10px;
-        font-size: 14px;
-      }
-
-      .login-box ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        width: 100%;
-        justify-content: center;
-      }
-
-      .login-box a {
-        display: block;
-        color: #fff;
-        text-decoration: none;
-        padding: 6px 0px;
-        width: 100px;
-        border: 1px solid #fff;
-      }
-
-      .login-box li:first-child a {
-        border-right: none;
-      }
-
-      .float-end.active {
-        transform: rotate(180deg);
-      }
-
-      aside .nav-pills .nav-link.active {
-        background-color: #fff;
-        color: #333;
-      }
-
-      aside .d-flex {
-        height: 100%;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-      }
-    </style>
+    <link rel="stylesheet" href="/team1/css/common.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
@@ -87,8 +22,8 @@ prefix="c"%> <%@ page isELIgnored="false" %>
             PLAY GROUND를 이용해 보세요
           </p>
           <ul>
-            <li><a href='<c:url value="/login" />'>로그인</a></li>
-            <li><a href='<c:url value="/signup" />'>회원가입</a></li>
+            <li><a href="<c:url value="/login" />">로그인</a></li>
+            <li><a href="<c:url value="/signup" />">회원가입</a></li>
           </ul>
         </div>
         <hr />
