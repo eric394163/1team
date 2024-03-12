@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* 테이블 스타일 */
+.table th, .table td{ 
+	text-align: center; /* 모든 셀 가운데 오게 처리 */
+} 
+.table td:nth-child(2){ /* 제목 내용 셀만 */
+	text-align: left; /* 왼쪽 정렬 처리 */
+}
+.table > tbody{ /* 테이블 맨 아래 선만 2px */
+	border-bottom: 2px solid #333;
+}
+/* 셀 폭 내용에 따라 바뀌지 않게 지정 */
+.table th:nth-child(1), .table td:nth-child(1){ width: 20%; }
+.table th:nth-child(2), .table td:nth-child(2){ width: 50%; }
+.table th:nth-child(3), .table td:nth-child(3){ width: 20%; }
+.table th:nth-child(4), .table td:nth-child(4){ width: 10%; }
+.table a{ color: #000; text-decoration: none; }
+.table a:hover{ text-decoration: underline; }
+.active>.page-link, .page-link.active{ background-color: #000; }
+.page-link{ color: #000; }
+
+/* 검색창 */
+#seachbox{ display: flex; justify-content: center; }
+#seachbox .input-group{ width: 500px; }
+#seachbox .input-group>.form-control, #seachbox .input-group>.form-floating, #seachbox .input-group>.form-select{ flex: none; }
+#search-select{ 
+	width: 20%; 
+	/* 기호처리 */
+	background-image: url(/team1/images/down_arrow.svg);
+	background-size: 15px;
+	background-position: calc(100% - 10px) center;
+	background-repeat: no-repeat;
+}
+#search-input{ width: 65%; }
+#search-btn{ width: 15%; }

@@ -13,4 +13,54 @@
 		select * from board;
 	</select>
 
+
+	<!-- 특정 게시글 목록관련 매퍼 -->
+	<resultMap type="kr.kh.app.model.vo.PostVO" id="PostMap">
+		<id property="post_id" column="post_id"/>
+		<result property="post_board_id" column="post_board_id"/>
+		<result property="post_title" column="post_title"/>
+		<result property="post_content" column="post_content"/>
+		<result property="post_date" column="post_date"/>
+		<result property="post_view" column="post_view"/>
+		<result property="post_upvotes" column="post_upvotes"/>
+		<collection property="board" ofType="kr.kh.app.model.vo.BoardVO"
+			column="post_board_id" select="selectBoard"/>
+	</resultMap>
+	<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board where board_id = #{post_board_id}
+	</select>
+	
+	<select id="selectSubBoard" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board where board_id = #{board_id};
+	</select>
+	<select id="selectSubTotalCount" resultType="int">
+		select count(*) 
+		from post
+		<if test='cri.type=="all"'>
+			where (post_title like concat('%', #{cri.search},'%') 
+				or post_user_id = #{cri.search}) and post_board_num = #{board_id}
+		</if>
+		<if test='cri.type=="title"'>
+			where post_title like concat('%', #{cri.search},'%') and post_board_num = #{board_id}
+		</if>
+		<if test='cri.type=="writer"'>
+			where post_user_id = #{cri.search} and post_board_num = #{board_id}
+		</if>
+	</select>
+	<select id="selectSubBoardList" resultMap="PostMap">
+		select * 
+		from post 
+		<if test='cri.type=="all"'>
+			where (post_title like concat('%', #{cri.search},'%') 
+				or post_user_id = #{cri.search}) and post_board_num = #{board_id}
+		</if>
+		<if test='cri.type=="title"'>
+			where post_title like concat('%', #{cri.search},'%') and post_board_num = #{board_id}
+		</if>
+		<if test='cri.type=="writer"'>
+			where post_user_id = #{cri.search} and post_board_num = #{board_id}
+		</if>
+		order by post_id desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
 </mapper>

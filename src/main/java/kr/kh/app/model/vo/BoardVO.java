@@ -9,5 +9,4 @@ public class BoardVO {
     private int board_id;
     private String board_name;
     private int board_category_num;
-
 }
