@@ -29,10 +29,11 @@ prefix="c"%>
 
 					</a>
 				</h1>
-				<form class="d-flex">
-					<input class="form-control me-2" type="text"
-						placeholder="검색어를 입력하세요" name="search" id="search">
+				<form class="d-flex" action="<c:url value='/searchList' />" method="get">
+					<input class="form-control me-2" type="text" placeholder="검색어를 입력하세요" name="totalsearch" id="totalsearch">
+					<button type="submit" class="btn btn-outline-success">검색</button>
 				</form>
+				
 				<ul class="navbar-nav">
 					<c:if test="${user == null}">
 						<li class="nav-item">
