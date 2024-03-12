@@ -12,10 +12,11 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.pagination.Criteria;
 
-public class PostServiceImp implements PostService{
+public class PostServiceImp implements PostService {
 	private PostDAO postDao;
-	
+
 	public PostServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
 
@@ -29,25 +30,23 @@ public class PostServiceImp implements PostService{
 		}
 	}
 
-
 	@Override
 	public ArrayList<BoardVO> getBoardList() {
 		return postDao.selectBoardList();
 	}
 
-
 	@Override
 	public boolean insertPost(PostVO post) {
-		if(post == null || !checkString(post.getPost_content()) || !checkString(post.getPost_title())) {
+		if (post == null || !checkString(post.getPost_content()) || !checkString(post.getPost_title())) {
 			return false;
 		}
 
 		boolean res = postDao.insertPost(post);
-		
-		if(!res) {
+
+		if (!res) {
 			return false;
 		}
-		
+
 		return res;
 	}
 
@@ -57,5 +56,7 @@ public class PostServiceImp implements PostService{
 		}
 		return true;
 	}
-	
+
+
+
 }
