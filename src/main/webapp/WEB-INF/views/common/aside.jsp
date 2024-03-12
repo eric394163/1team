@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c"%> <%@ page isELIgnored="false" %>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -41,29 +40,31 @@ prefix="c"%> <%@ page isELIgnored="false" %>
         </div>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
-         	<c:forEach items="${board}" var="board">
-         		<c:if test="${counts[board.board_category_num - 1] == 1}">
-         			<li class="nav-item">
-         				<c:url var="url" value="/post/sublist">
-							<c:param name="boNum" value="${board.board_id}" />
-						</c:url>
-         				<a href="${url}" class="nav-link text-white">${board.board_name}</a>
-         			</li>
-         		</c:if>
-         	</c:forEach>
          	<c:forEach items="${category}" var="category">
+         		<c:if test="${counts[category.category_id - 1] == 1}">
+         			<c:forEach items="${board}" var="board">
+         				<c:if test="${category.category_id == board.board_category_num}">
+		         			<li class="nav-item">
+		         				<c:url var="url" value="/post/sublist">
+								    <c:param name="boNum" value="${board.board_id}" />
+								</c:url>
+		         				<a href="${url}" class="nav-link text-white">${board.board_name}</a>
+		         			</li>
+		         		</c:if>
+         			</c:forEach>
+         		</c:if>
          		<c:if test="${counts[category.category_id - 1] != 1}">
          			<li class="drop-down">
          				<a href="#" class="nav-link text-white clearfix">
          					<span class="float-start">${category.category_name}</span>
 							<span class="float-end">▽</span>
          				</a>
-         				<ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav1">
+         				<ul>
          					<c:forEach items="${board}" var="board">
          						<c:if test="${category.category_id == board.board_category_num}">
-									<li style="padding-left: 35px;">
+									<li>
 										<c:url var="url" value="/post/sublist">
-											<c:param name="boNum" value="${board.board_id}" />
+										    <c:param name="boNum" value="${board.board_id}" />
 										</c:url>
 										<a href="${url}" class="nav-link text-white">${board.board_name}</a>
 									</li>
@@ -85,15 +86,16 @@ prefix="c"%> <%@ page isELIgnored="false" %>
         let is = $(this).next().is(":hidden");
 
         if (is) {
-          $(".drop-down .nav-link").next().stop().slideUp("fast");
-          $(".drop-down .nav-link")
+       	  $(".drop-down .nav-link")
             .children(".float-end")
             .removeClass("active");
-          $(this).next().stop().slideDown("fast");
+          $(".drop-down .nav-link").next().stop().slideUp("fast");
           $(this).children(".float-end").addClass("active");
+          $(this).next().stop().slideDown("fast");
+          
         } else {
-          $(this).next().stop().slideUp("fast");
           $(this).children(".float-end").removeClass("active");
+          $(this).next().stop().slideUp("fast");
         }
       });
     </script>

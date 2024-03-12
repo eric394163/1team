@@ -52,11 +52,8 @@ aside{ width: 280px; }
   text-align: center;
   line-height: 50px;
 }
-
-#main-sub-nav1,
-#main-sub-nav2 {
-  display: none;
-}
+/* 하위리스트 안보이게 처리 */
+aside .drop-down > ul{ display: none; list-style: none }
 
 .login-box {
   border: 1px solid #fff;
