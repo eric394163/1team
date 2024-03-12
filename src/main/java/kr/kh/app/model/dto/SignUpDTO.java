@@ -14,7 +14,7 @@ public class SignUpDTO { // UserVO 와 동일하면 VO로만 사용해도 됨, U
     private String pw;
     private String nickname;
     private String email;
-    private Date birth;
+    private String birth;
     private Date stateDate;
     private String role;
     private String state;
@@ -24,7 +24,7 @@ public class SignUpDTO { // UserVO 와 동일하면 VO로만 사용해도 됨, U
         this.pw = user_pw;
         this.nickname = user_nickname;
         this.email = user_email;
-        this.birth = new Date();
+        this.birth = user_birth;
     }
 
 }

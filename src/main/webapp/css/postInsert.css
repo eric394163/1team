@@ -1,0 +1,21 @@
+@charset "EUC-KR";
+.inner-wrap > .main-contents{
+	display: flex; justify-content: center;
+	align-items: flex-start;
+	padding-top: 50px;
+}
+
+form>div {
+	width: 100%;
+}
+
+.insert-form {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+hr {
+	width: 100%;
+}

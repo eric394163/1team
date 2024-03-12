@@ -13,9 +13,9 @@ import kr.kh.app.dao.CommonDAO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CategoryVO;
 
-public class CommonServiceImp implements CommonService{
+public class CommonServiceImp implements CommonService {
 	private CommonDAO commonDao;
-	
+
 	public CommonServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
 		
@@ -38,8 +38,5 @@ public class CommonServiceImp implements CommonService{
 	public ArrayList<BoardVO> getBoardList() {
 		return commonDao.selectBoardList();
 	}
-	
-	
-	
-	
+
 }
