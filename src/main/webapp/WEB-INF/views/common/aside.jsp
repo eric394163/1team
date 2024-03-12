@@ -90,14 +90,19 @@ aside .d-flex {
 			</div>
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
-				<li class="nav-item"><a href="#" class="nav-link active"
-					aria-current="page"> 공지 게시판 </a></li>
-				<li><a href="#" class="nav-link text-white"> 전체 게시판 </a></li>
-				<c:forEach items="${category}" var="category">
-				<li class="drop-down"><a href="#"
-					class="nav-link text-white clearfix">
-					<span class="float-start">${category.category_name}</span>
-					<span class="float-end">▽</span></a>
+				<c:forEach items="${board}" var="board">
+				<c:if test="${board.board_category_num == 1}">
+				<li class="nav-item">
+					<a href="#" class="nav-link text-white" aria-current="page">${board.board_name}</a>
+				</li>
+				</c:if>
+				</c:forEach>
+				<c:forEach items="${category}" var="category" begin="1">
+				<li class="drop-down">
+					<a href="#" class="nav-link text-white clearfix">
+						<span class="float-start">${category.category_name}</span>
+						<span class="float-end">▽</span>
+					</a>
 					<ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav1">
 						<c:forEach items="${board}" var="board">
 						<c:if test="${category.category_id == board.board_category_num}">
