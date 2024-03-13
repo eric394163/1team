@@ -41,6 +41,7 @@ prefix="c"%>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="post">
+					<c:if test="${post.post_board_num == board_id }">
 						<tr>
 							<td>[${board.board_name}]</td>
 							<td>
@@ -59,12 +60,13 @@ prefix="c"%>
 							</td>
 							<td>${post.post_view }</td>
 						</tr>
+					</c:if>
 					</c:forEach>
 					<c:if test="${list.size() == 0 }">
 						<tr>
-							<th colspan="5">
+							<td colspan="4">
 								<h3 class="text-center">등록된 게시글이 없습니다.</h3>
-							</th>
+							</td>
 						</tr>
 					</c:if>
 				</tbody>
@@ -85,6 +87,7 @@ prefix="c"%>
 				<c:if test="${pm.prev}">
 					<li class="page-item">
 						<c:url var="prevUrl" value="/post/sublist">
+							<c:param name="boNum" value="${board_id}" />
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${pm.startPage-1}" />
@@ -95,6 +98,7 @@ prefix="c"%>
 				<c:forEach begin="${pm.startPage}" end="${pm.endPage }" var="i">
 					<li class="page-item <c:if test="${pm.cri.page == i }">active</c:if>">
 						<c:url var="page" value="/post/sublist">
+							<c:param name="boNum" value="${board_id}" />
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${i}" />
@@ -105,6 +109,7 @@ prefix="c"%>
 				<c:if test="${pm.next }">
 					<li class="page-item">
 						<c:url var="nextUrl" value="/post/sublist">
+							<c:param name="boNum" value="${board_id}" />
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${pm.endPage+1}" />

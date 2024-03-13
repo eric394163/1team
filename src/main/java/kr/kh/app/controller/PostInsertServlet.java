@@ -33,7 +33,7 @@ public class PostInsertServlet extends HttpServlet {
 	private PostService postService = new PostServiceImp();
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		MainServlet.aside(request);
 		// 게시판 전체 가져옴
 		ArrayList<BoardVO> list = postService.getBoardList();
 		request.setAttribute("list", list);

@@ -33,6 +33,7 @@ public class MainServlet extends HttpServlet {
 		//카테고리 별 배열 처리
 		int[] counts = new int[categoryList.size()];
 		
+		
 		//카테고리별 개수를 구하기
 		for(int i=0;i<categoryList.size();i++) {
 			for(int j=0;j<boardList.size();j++) {
@@ -41,10 +42,19 @@ public class MainServlet extends HttpServlet {
 				}
 			}
 		}
+		
+		//파라미터 받기
+		Integer boNum;
+		try {
+			boNum = Integer.parseInt(request.getParameter("boNum"));
+		}catch(Exception e) {
+			boNum = 0;
+		}
 					
-		request.setAttribute("category", categoryList);//화면에 전송
-		request.setAttribute("board", boardList);//화면에 전송
+		request.setAttribute("categoryList", categoryList);//화면에 전송
+		request.setAttribute("boardList", boardList);//화면에 전송
 		request.setAttribute("counts", counts);//화면에 전송
+		request.setAttribute("boNum", boNum);//화면에 전송
 	}
 
 }

@@ -19,5 +19,5 @@ public interface PostDAO {
 
 	int selectSubTotalCount(@Param("cri")Criteria cri, @Param("board_id")int board_id);
 
-	ArrayList<BoardVO> selectSubBoardList(@Param("cri")Criteria cri, @Param("board_id")int board_id);
+	ArrayList<PostVO> selectSubPostList(@Param("cri")Criteria cri, @Param("board_id")int board_id);
 }

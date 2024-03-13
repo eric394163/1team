@@ -47,7 +47,7 @@
 			where post_user_id = #{cri.search} and post_board_num = #{board_id}
 		</if>
 	</select>
-	<select id="selectSubBoardList" resultMap="PostMap">
+	<select id="selectSubPostList" resultMap="PostMap">
 		select * 
 		from post 
 		<if test='cri.type=="all"'>

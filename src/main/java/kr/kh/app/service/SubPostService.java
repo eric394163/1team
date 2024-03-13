@@ -3,6 +3,7 @@ package kr.kh.app.service;
 import java.util.ArrayList;
 
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
 
 public interface SubPostService {
@@ -13,6 +14,6 @@ public interface SubPostService {
 	int getSubTotalCount(Criteria cri, int board_id);
 
 	//게시판번호에 맞는 게시글리스트 가져오는 서비스
-	ArrayList<BoardVO> getSubBoardList(Criteria cri, int board_id);
+	ArrayList<PostVO> getSubPostList(Criteria cri, int board_id);
 
 }

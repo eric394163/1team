@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.BoardVO;
-
+import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.pagination.PageMaker;
 import kr.kh.app.service.SubPostService;
@@ -25,19 +25,14 @@ public class SubPostListServlet extends HttpServlet {
 		MainServlet.aside(request);
 		
 		//게시판번호 : 주소표시줄에서 받아와야 함
-		Integer board_id;
-		try {
-			board_id = Integer.parseInt(request.getParameter("boNum")); //클릭해서 넘어온 게시판, 예시가 공지사항이라 1
-		}catch (Exception e) {
-			board_id = 0;
-			System.out.println("예외 싫어요.");
-		}
+		Integer board_id = Integer.parseInt(request.getParameter("boNum")); //클릭해서 넘어온 게시판, 예시가 공지사항이라 1
 		
 		//현재 게시판번호와 맞는 게시판명 가져오기
 		BoardVO board = subPostService.getSubBoard(board_id);
 		
 		//해당 게시판명
 		request.setAttribute("board", board);
+		request.setAttribute("board_id", board_id);
 		
 		//검색어와 검색 타입을 가져옴. 현재 페이지 정보도 가져옴
 		String search = request.getParameter("search");
@@ -60,7 +55,8 @@ public class SubPostListServlet extends HttpServlet {
 
 		
 		//현재 페이지 정보에 맞는 게시글 리스트를 가져옴
-		ArrayList<BoardVO> list = subPostService.getSubBoardList(cri, board_id); 
+		ArrayList<PostVO> list = subPostService.getSubPostList(cri, board_id); 
+		
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/WEB-INF/views/post/subList.jsp").forward(request, response);

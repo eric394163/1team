@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
 
 public class SubPostServiceImp implements SubPostService {
@@ -47,11 +48,11 @@ public class SubPostServiceImp implements SubPostService {
 	}
 
 	@Override
-	public ArrayList<BoardVO> getSubBoardList(Criteria cri, int board_id) {
+	public ArrayList<PostVO> getSubPostList(Criteria cri, int board_id) {
 		if(cri == null) {
 			cri = new Criteria();
 		}
-		return postDao.selectSubBoardList(cri, board_id);
+		return postDao.selectSubPostList(cri, board_id);
 	}
 
 }

@@ -40,15 +40,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix
         </div>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
-         	<c:forEach items="${category}" var="category">
+         	<c:forEach items="${categoryList}" var="category">
          		<c:if test="${counts[category.category_id - 1] == 1}">
-         			<c:forEach items="${board}" var="board">
+         			<c:forEach items="${boardList}" var="board">
          				<c:if test="${category.category_id == board.board_category_num}">
 		         			<li class="nav-item">
 		         				<c:url var="url" value="/post/sublist">
 								    <c:param name="boNum" value="${board.board_id}" />
+								    <c:param name="page" value="1" />
 								</c:url>
-		         				<a href="${url}" class="nav-link text-white">${board.board_name}</a>
+		         				<a href="${url}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
 		         			</li>
 		         		</c:if>
          			</c:forEach>
@@ -60,13 +61,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix
 							<span class="float-end">▽</span>
          				</a>
          				<ul>
-         					<c:forEach items="${board}" var="board">
+         					<c:forEach items="${boardList}" var="board">
          						<c:if test="${category.category_id == board.board_category_num}">
 									<li>
 										<c:url var="url" value="/post/sublist">
 										    <c:param name="boNum" value="${board.board_id}" />
+										    <c:param name="page" value="1" />
 										</c:url>
-										<a href="${url}" class="nav-link text-white">${board.board_name}</a>
+										<a href="${url}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
 									</li>
 								</c:if>
          					</c:forEach>
