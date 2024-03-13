@@ -12,13 +12,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main-wrap">
       <div class="inner-wrap">
         <jsp:include page="/WEB-INF/views/common/aside.jsp" />
         <div class="main-contents">
-          	<h1>${pm.cri.boNum }</h1>
+          	<h1>리스트</h1>
+          	<hr>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -31,25 +31,28 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="post">
-						<tr>
-							<td>${post.post_id}</td>
-							<td>${post.board.board_name}</td>
-							<td>
-								<c:url var="url" value="/board/detail">
-									<c:param name="num" value="${post.post_id}" />
-								</c:url>
-								<a href="${url}">${post.post_title}</a>
-							</td>
-							<td>
-								<c:url var="page" value="/board/list">
-									<c:param name="type" value="writer" />
-									<c:param name="search" value="${post.post_user_id}" />
-									<c:param name="page" value="1" />
-								</c:url>
-								<a href="${page}">${post.post_user_id}</a>
-							</td>
-							<td>${post.post_view}</td>
-						</tr>
+						<c:if test="${post.post_board_num == pm.cri.boNum }">
+							<tr>
+								<td>${post.post_id}</td>
+								<td>${post.board.board_name}</td>
+								<td>
+									<c:url var="url" value="/board/detail">
+										<c:param name="num" value="${post.post_id}" />
+									</c:url>
+									<a href="${url}">${post.post_title}</a>
+								</td>
+								<td>
+									<c:url var="page" value="/board/list">
+										<c:param name="type" value="writer" />
+										<c:param name="search" value="${post.post_user_id}" />
+										<c:param name="page" value="1" />
+										<c:param name="boNum" value="${post.board.board_id}" />
+									</c:url>
+									<a href="${page}">${post.post_user_id}</a>
+								</td>
+								<td>${post.post_view}</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 					<c:if test="${list.size() == 0 }">
 						<tr>
@@ -67,6 +70,7 @@
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${pm.startPage-1}" />
+							<c:param name="boNum" value="${post.board.board_id}" />
 						</c:url>
 						<a class="page-link" href="${prevUrl}">이전</a>
 					</li>
@@ -77,6 +81,7 @@
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${i}" />
+							<c:param name="boNum" value="${post.board.board_id}" />
 						</c:url>
 						<a class="page-link" href="${page}">${i}</a>
 					</li>
@@ -87,6 +92,7 @@
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${pm.endPage+1}" />
+							<c:param name="boNum" value="${post.board.board_id}" />
 						</c:url>
 						<a class="page-link" href="${nextUrl}">다음</a>
 					</li>
@@ -102,13 +108,13 @@
 						<option value="title" <c:if test='${pm.cri.type == "title" }'>selected</c:if>>제목</option>
 						<option value="writer" <c:if test='${pm.cri.type == "writer" }'>selected</c:if>>작성자</option>
 					</select>
-					<input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search }">
+					<input type="text" class="form-control" placeholder="검색어" name="search" value="${pm.cri.search}">
 					<button class="btn btn-outline-warning">검색</button>
 				</div>
 			</form>
         </div>
       </div>
     </div>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

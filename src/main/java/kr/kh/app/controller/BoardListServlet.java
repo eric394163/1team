@@ -28,19 +28,18 @@ public class BoardListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
 		ArrayList<BoardVO> boardList = commonService.getBoardList();
-		request.setAttribute("category", categoryList);//화면에 전송
-		request.setAttribute("board", boardList);//화면에 전송
+		request.setAttribute("categoryList", categoryList);//화면에 전송
+		request.setAttribute("boardList", boardList);//화면에 전송
 		//화면에서 보낸 게시글 번호를 가져옴
-		int boNum;
-		int page;
+		int boNum=0;
+		int page=1;
 		String search = request.getParameter("search");
 		String type = request.getParameter("type");
 		try {
 			boNum = Integer.parseInt(request.getParameter("boNum"));
 			page = Integer.parseInt(request.getParameter("page"));
-			System.out.println(boNum);
-			System.out.println(page);
 		}catch (Exception e) {
+			e.printStackTrace();
 			boNum = 0;
 			page = 1;
 		}

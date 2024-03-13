@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c"%> <%@ page isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -41,30 +41,32 @@ prefix="c"%> <%@ page isELIgnored="false" %>
         </div>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
-			<c:forEach items="${board}" var="board">
+			<c:forEach items="${boardList}" var="board">
 			<c:if test="${board.board_category_num == 1}">
 			<li class="nav-item">
-				<c:url var="url" value="/board/list">
+				<c:url var="url1" value="/board/list">
 					<c:param name="boNum" value="${board.board_id}" />
+					<c:param name="page" value="1" />
 				</c:url>
-				<a href="${url}" class="nav-link text-white">${board.board_name}</a>
+				<a href="${url1}" class="nav-link text-white">${board.board_name}</a>
 			</li>
 			</c:if>
 			</c:forEach>
-			<c:forEach items="${category}" var="category" begin="1">
+			<c:forEach items="${categoryList}" var="category" begin="1">
 			<li class="drop-down">
 				<a href="#" class="nav-link text-white clearfix">
 					<span class="float-start">${category.category_name}</span>
 					<span class="float-end">▽</span>
 				</a>
 				<ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav1">
-					<c:forEach items="${board}" var="board">
+					<c:forEach items="${boardList}" var="board">
 					<c:if test="${category.category_id == board.board_category_num}">
 					<li style="padding-left: 35px;">
-						<c:url var="url" value="/board/list">
+						<c:url var="url2" value="/board/list">
 							<c:param name="boNum" value="${board.board_id}" />
+							<c:param name="page" value="1" />
 						</c:url>
-						<a href="${url}" class="nav-link text-white">${board.board_name}</a>
+						<a href="${url2}" class="nav-link text-white">${board.board_name}</a>
 					</li>
 					</c:if>
 					</c:forEach>
