@@ -42,12 +42,12 @@
 					    <label for="content" class="form-label">내용</label>
 					    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" ></textarea>
 					 </div>
-					<!--  <div class="mb-3 mt-3">
+					<div class="mb-3 mt-3">
 					    <label for="content" class="form-label">첨부파일</label>
 					    <input type="file" class="form-control" name="file">
 					    <input type="file" class="form-control" name="file">
 			           	<input type="file" class="form-control" name="file">
-					 </div> -->
+					 </div>
 					 <button class="btn btn-outline-warning col-12">게시글 등록</button>
 				</form>				
 			</div>
