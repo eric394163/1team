@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.pagination.Criteria;
 
 public interface PostDAO {
 
@@ -13,6 +14,6 @@ public interface PostDAO {
 
 	boolean insertPost(@Param("post")PostVO post);
 
-	ArrayList<PostVO> selectTotalPostList();
+	ArrayList<PostVO> selectTotalPostList(@Param("cri") Criteria cri);
 
 }

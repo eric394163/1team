@@ -27,6 +27,40 @@ prefix="c"%>
           	<h3 class="all-posts">전체 게시글</h3>
             	<a class="post-insert-button" href="<c:url value="/post/insert" />">게시글 쓰기</a>
             <hr>
+            <table class="table table hover">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>게시판 이름</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="post">
+							<tr>
+								<td>${post.post_id}</td>
+								<td>${post.board.board_name}</td>
+								<td>
+									<c:url var="url" value="/post/detail">
+										<c:param name="num" value="${post.post_id}"/>
+									</c:url>
+									<a href="${url}">${post.post_title}</a>
+								</td>
+								<td>${post.post_user_id }</td>
+								<td>${post.post_view }</td>
+							</tr>
+						</c:forEach>
+						<c:if test="${list.size() == 0 }">
+							<tr>
+								<th colspan="5">
+									<h4 class="text-center">등록된 게시글이 없습니다.</h4>
+								</th>
+							</tr>
+						</c:if>
+					</tbody>
+				</table>
           </div>
         </div>
       </div>

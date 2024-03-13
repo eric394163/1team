@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.pagination.Criteria;
+import kr.kh.app.pagination.PageMaker;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;
 
@@ -20,9 +22,23 @@ public class PostListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 ArrayList<PostVO> list = postService.getTotalPostList();
+		int page;
+		
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		} catch(Exception e) {
+			page = 1;
+		}
+		
+		Criteria cri = new Criteria(page, 10);
+		
+		int totalCount = postService.getTotalCount(cri);
+		PageMaker pm = new PageMaker(5, cri, totalCount);
+		request.setAttribute("pm", pm);
+		
+		 ArrayList<PostVO> list = postService.getTotalPostList(cri);
 		 request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/post/list.jsp").forward(request, response);
+		 request.getRequestDispatcher("/WEB-INF/views/post/list.jsp").forward(request, response);
 	}
 
 }
