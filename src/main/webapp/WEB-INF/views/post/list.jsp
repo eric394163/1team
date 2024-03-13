@@ -21,20 +21,7 @@
 			<div class="main-contents">
 				<h2>게시글 리스트</h2>
 				<a class="nav-link" href="<c:url value="/post/insert"/>">게시글 쓰기</a>
-				<hr>
-				<form action="<c:url value="/post/list"/>" >
-					<div class="input-group">
-						<!-- 검색  -->
-						<%-- <select name="type" class="form-control">
-							<option value="all" <c:if test='${pm.cri.type == "all" }'>selected</c:if>>전체</option>
-							<option value="title" <c:if test='${pm.cri.type == "title" }'>selected</c:if>>제목</option>	
-							<option value="writer" <c:if test='${pm.cri.type == "writer" }'>selected</c:if>>작성자</option>
-						</select>
-						<input type="text" class="form-control" placeholder="검색어를 입력하세요" name="search" value='${pm.cri.search}'>
-						<button class="btn btn-outline-warning">검색</button> --%>
-					</div>
-				</form>
-				
+				<hr>				
 				<table class="table table hover">
 					<thead>
 						<tr>
