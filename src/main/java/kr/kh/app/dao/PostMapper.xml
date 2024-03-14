@@ -42,4 +42,11 @@
 		from post
 	</select>
 	
+	<select id="selectPost" resultMap="PostMap">
+		select * from post where post_id = #{num}
+	</select>
+	
+	<select id="selectFileByPost_id" resultType="kr.kh.app.model.vo.AttachVO">
+		select * from attach where attach_post_id = #{num}
+	</select>
 </mapper>

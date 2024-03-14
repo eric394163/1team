@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
@@ -17,5 +18,9 @@ public interface PostDAO {
 	ArrayList<PostVO> selectTotalPostList(@Param("cri") Criteria cri);
 
 	int selectTotalCount(@Param("cri") Criteria cri);
+
+	PostVO selectPost(@Param("num") int num);
+
+	ArrayList<AttachVO> selectFileByPost_id(@Param("num") int num);
 
 }
