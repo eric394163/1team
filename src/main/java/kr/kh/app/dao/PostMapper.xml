@@ -13,4 +13,13 @@
 		select * from board;
 	</select>
 
+	<insert id="insertFile">
+		insert into attach(attach_post_id, attach_link_check, attach_path)
+		values(#{attach.attach_post_id}, "0", #{attach.attach_path})
+	</insert>
+	
+	<insert id="insertLink">
+		insert into attach(attach_post_id, attach_link_check, attach_path)
+		values(#{attach.attach_post_id}, "1", #{attach.attach_path})
+	</insert>
 </mapper>

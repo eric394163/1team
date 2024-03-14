@@ -1,8 +1,11 @@
 package kr.kh.app.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import javax.servlet.http.Part;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -10,11 +13,14 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.PostDAO;
+import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.utils.FileUploadUtils;
 
 public class PostServiceImp implements PostService{
 	private PostDAO postDao;
+	private static String uploadPath = "D:\\musicfile";
 	
 	public PostServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
@@ -27,6 +33,11 @@ public class PostServiceImp implements PostService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		File file = new File(uploadPath);
+		if(!file.exists()) {
+			file.mkdirs(); 
+		}
 	}
 
 
@@ -37,7 +48,7 @@ public class PostServiceImp implements PostService{
 
 
 	@Override
-	public boolean insertPost(PostVO post) {
+	public boolean insertPost(PostVO post, ArrayList<Part> partList, AttachVO attach) {
 		if(post == null || !checkString(post.getPost_content()) || !checkString(post.getPost_title())) {
 			return false;
 		}
@@ -48,8 +59,49 @@ public class PostServiceImp implements PostService{
 			return false;
 		}
 		
+		if(partList == null || partList.size() == 0) {
+			return true;
+		}
+		
+		// 첨부파일 업로드
+		for (Part part : partList) {
+			uploadFile(part, post.getPost_id());
+		}
+		
+		if(attach == null || !checkString(attach.getAttach_path())) {
+			return true;
+		}
+		
+		// 링크 업로드
+		uploadLink(attach, post.getPost_id());
+		
 		return res;
 	}
+
+	private void uploadFile(Part part, int post_id) {
+		if(part == null || post_id == 0) {
+			return ;
+		}	
+		
+		String fileOriName = FileUploadUtils.getFileName(part);
+		if(fileOriName == null || fileOriName.length() == 0) {
+			return;
+		}
+		
+		String fileName = FileUploadUtils.upload(uploadPath, part);
+		AttachVO attachVo = new AttachVO(post_id, fileName);
+		postDao.insertFile(attachVo);
+		
+	}
+	
+	private void uploadLink(AttachVO attach, int post_id) {
+		if(attach == null || post_id == 0) {
+			return;
+		}
+		
+		postDao.insertLink(attach);
+	}
+
 
 	private boolean checkString(String str) {
 		if (str == null || str.length() == 0) {

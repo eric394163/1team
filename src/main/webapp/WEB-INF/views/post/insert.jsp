@@ -43,12 +43,16 @@
 					    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" ></textarea>
 					 </div>
 					<div class="mb-3 mt-3">
-					    <label for="content" class="form-label">첨부파일</label>
+					    <label for="file" class="form-label">첨부파일</label>
 					    <input type="file" class="form-control" name="file">
 					    <input type="file" class="form-control" name="file">
-			           	<input type="file" class="form-control" name="file">
+					    <input type="file" class="form-control" name="file">
 					 </div>
-					 <button class="btn btn-outline-warning col-12">게시글 등록</button>
+					 <div class="mb-3 mt-6">
+					    <label for="youtube" class="form-label">링크</label>
+					    <input type="text" class="form-control" name="youtube">
+					 </div>
+					 <button class="btn btn-outline-warning col-12 mb-3">게시글 등록</button>
 				</form>				
 			</div>
 		</div>

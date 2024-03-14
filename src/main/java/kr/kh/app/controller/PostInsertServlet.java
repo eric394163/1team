@@ -1,7 +1,6 @@
 package kr.kh.app.controller;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,8 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
-import kr.kh.app.model.dto.LoginDTO;
+import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.model.vo.UserVO;
@@ -53,7 +53,17 @@ public class PostInsertServlet extends HttpServlet {
 		
 		PostVO post = new PostVO(post_board_num, post_title, post_content, post_user_id, post_date);
 		
-		if(postService.insertPost(post)) {
+		// 첨부파일 가져오기
+		ArrayList<Part> partList = (ArrayList<Part>) request.getParts();
+		
+		//주소 가져오기
+		String link = request.getParameter("youtube");
+		AttachVO attach = new AttachVO(post_board_num, link);
+		
+		
+		// 서비스에게 게시글 객체를 주면서 등록하라고 시킴
+				
+		if(postService.insertPost(post, partList, attach)) {
 			response.sendRedirect(request.getContextPath() + "/post/list");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/post/insert");
