@@ -72,8 +72,10 @@ public class PostServiceImp implements PostService{
 
 	@Override
 	public int getTotalCount(Criteria cri) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalCount(cri);
 	}
 	
 }

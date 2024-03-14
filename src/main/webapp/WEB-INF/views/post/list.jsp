@@ -70,7 +70,7 @@
 					</tbody>
 				</table>
 				<ul class="pagination justify-content-center">
-				<c:if test="${pm.prev }">
+				<c:if test="${pm.prev}">
 					<li class="page-item">
 						<c:url var="prevUrl" value="/post/list">
 							<c:param name="type" value="${pm.cri.type}" />
@@ -90,7 +90,7 @@
 						<a class="page-link" href="${page }">${i}</a>
 					</li>
 				</c:forEach>
-				<c:if test="${pm.next }">
+				<c:if test="${pm.next}">
 					<li class="page-item">
 						<c:url var="nextUrl" value="/post/list">
 							<c:param name="type" value="${pm.cri.type}" />

@@ -37,5 +37,9 @@
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
+	<select id="selectTotalCount" resultType="int">
+		select count(*) 
+		from post
+	</select>
 	
 </mapper>
