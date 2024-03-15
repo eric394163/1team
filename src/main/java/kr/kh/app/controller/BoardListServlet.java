@@ -49,6 +49,7 @@ public class BoardListServlet extends HttpServlet {
 		//현재 게시판번호와 맞는 게시판명 가져오기
 		BoardVO board = boardService.getSubBoard(boNum);
 		
+		
 		//검색어, 검색 타입, 현재 페이지, 한 페이지 컨텐츠 개수를 이용하여 현재 페이지 정보 객체를 생성 
 		BoardListCriteria cri = new BoardListCriteria(page, 3, type, search, boNum);
 		//검색어, 검색타입에 맞는 전체 게시글 개수를 가져옴 

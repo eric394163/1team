@@ -47,6 +47,7 @@
 						<c:url var="url1" value="/board/list">
 							<c:param name="boNum" value="${board.board_id}" />
 							<c:param name="page" value="1" />
+							<c:param name="type" value="all" />
 						</c:url>
 						<a href="${url1}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
 					</li>
@@ -65,6 +66,7 @@
 								<c:url var="url2" value="/board/list">
 									<c:param name="boNum" value="${board.board_id}" />
 									<c:param name="page" value="1" />
+									<c:param name="type" value="all" />
 								</c:url>
 								<a href="${url2}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
 							</li>

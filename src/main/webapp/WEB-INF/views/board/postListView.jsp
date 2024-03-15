@@ -23,7 +23,6 @@
 	        <div class="main-contents">
 	          	<div class="h2_title_wrap">
 	        		<h2>${board.board_name }</h2>
-	        		${list }
 	        		<div class="title_btn">
 	        			<c:if test="${user != null}">
 	        				<button type="button" class="btn btn-outline-dark">게시판쓰기</button>
@@ -67,9 +66,7 @@
 						</c:forEach>
 						<c:if test="${list.size() == 0 }">
 							<tr>
-								<th colspan="5">
-									<h3 class="text-center">등록된 게시글이 없습니다.</h3>
-								</th>
+								<th colspan="5" class="text-center">등록된 게시글이 없습니다.</th>
 							</tr>
 						</c:if>
 					</tbody>
