@@ -18,22 +18,24 @@
 	</resultMap>
 	<select id="selectTotalCount" resultType="int">
 		SELECT count(*) 
-		FROM post 
+		FROM post
+		join board on board_id = post_board_num 
 		<if test='cri.type=="all"'>
 			where (post_title like concat('%', #{cri.search},'%') 
 				or post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="title"'>
-			where (post_title like concat('%', #{cri.search},'%')) and post_board_num = #{cri.boNum}
+			where post_title like concat('%', #{cri.search},'%') and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="writer"'>
-			where (post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
+			where post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
 		</if>
 	</select>
 	
-	<select id="selectBoardList" resultMap="PostMap">
+	<select id="selectBoardList" resultType="kr.kh.app.model.vo.PostVO">
 		SELECT * 
 		FROM post
+		join board on board_id = post_board_num
 		<if test='cri.type=="all"'>
 			where (post_title like concat('%', #{cri.search},'%') 
 				or post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
@@ -49,5 +51,9 @@
 	</select>
 	<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
 		select * from board where board_id = #{post_board_num}
+	</select>
+	
+	<select id="selectSubBoard" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board where board_id = #{board_id};
 	</select>
 </mapper>

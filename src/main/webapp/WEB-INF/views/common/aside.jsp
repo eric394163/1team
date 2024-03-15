@@ -42,15 +42,15 @@
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
 			<c:forEach items="${boardList}" var="board">
-			<c:if test="${board.board_category_num == 1}">
-			<li class="nav-item">
-				<c:url var="url1" value="/board/list">
-					<c:param name="boNum" value="${board.board_id}" />
-					<c:param name="page" value="1" />
-				</c:url>
-				<a href="${url1}" class="nav-link text-white">${board.board_name}</a>
-			</li>
-			</c:if>
+				<c:if test="${board.board_category_num == 1}">
+					<li class="nav-item">
+						<c:url var="url1" value="/board/list">
+							<c:param name="boNum" value="${board.board_id}" />
+							<c:param name="page" value="1" />
+						</c:url>
+						<a href="${url1}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
+					</li>
+				</c:if>
 			</c:forEach>
 			<c:forEach items="${categoryList}" var="category" begin="1">
 			<li class="drop-down">
@@ -58,17 +58,17 @@
 					<span class="float-start">${category.category_name}</span>
 					<span class="float-end">▽</span>
 				</a>
-				<ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav1">
+				<ul class="subnav">
 					<c:forEach items="${boardList}" var="board">
-					<c:if test="${category.category_id == board.board_category_num}">
-					<li style="padding-left: 35px;">
-						<c:url var="url2" value="/board/list">
-							<c:param name="boNum" value="${board.board_id}" />
-							<c:param name="page" value="1" />
-						</c:url>
-						<a href="${url2}" class="nav-link text-white">${board.board_name}</a>
-					</li>
-					</c:if>
+						<c:if test="${category.category_id == board.board_category_num}">
+							<li>
+								<c:url var="url2" value="/board/list">
+									<c:param name="boNum" value="${board.board_id}" />
+									<c:param name="page" value="1" />
+								</c:url>
+								<a href="${url2}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
+							</li>
+						</c:if>
 					</c:forEach>
 				</ul>
 			</li>
@@ -81,21 +81,29 @@
       </div>
     </aside>
     <script type="text/javascript">
-      $(".drop-down .nav-link").click(function () {
-        let is = $(this).next().is(":hidden");
-
-        if (is) {
-          $(".drop-down .nav-link").next().stop().slideUp("fast");
-          $(".drop-down .nav-link")
-            .children(".float-end")
-            .removeClass("active");
-          $(this).next().stop().slideDown("fast");
-          $(this).children(".float-end").addClass("active");
-        } else {
-          $(this).next().stop().slideUp("fast");
-          $(this).children(".float-end").removeClass("active");
-        }
-      });
+		//초기실행 - 드롭다운메뉴의 후손인 nav-link가 active클래스를 갖고 있다면 처음에 열려 있게 처리
+		$(".drop-down").each(function(index){
+			var has = $(this).find('.nav-link').hasClass('active');
+			if(has){
+				$(this).find(".float-end").addClass("active");
+				$(this).find('.subnav').stop().slideDown(0);
+			}
+		});
+    
+        //클릭이벤트
+		$(".drop-down .nav-link").click(function () {
+			let is = $(this).next().is(":hidden");
+		
+			if (is) {
+				$(".drop-down .nav-link").children(".float-end").removeClass("active");
+				$(".drop-down .nav-link").next().stop().slideUp("fast");
+				$(this).children(".float-end").addClass("active");
+				$(this).next().stop().slideDown("fast");
+			} else {
+				$(this).children(".float-end").removeClass("active");
+				$(this).next().stop().slideUp("fast");
+			}
+		});
     </script>
   </body>
 </html>
