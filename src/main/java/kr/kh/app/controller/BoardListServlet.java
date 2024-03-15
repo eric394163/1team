@@ -47,6 +47,7 @@ public class BoardListServlet extends HttpServlet {
 		BoardListCriteria cri = new BoardListCriteria(page, 3, type, search, boNum);
 		//검색어, 검색타입에 맞는 전체 게시글 개수를 가져옴 
 		int totalCount = boardService.getTotalCount(cri);
+		System.out.println(totalCount);
 		PageMaker pm = new PageMaker(5, cri, totalCount);
 		request.setAttribute("pm", pm);
 		//현재 페이지 정보에 맞는 게시글 리스트를 가져옴

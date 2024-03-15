@@ -20,11 +20,11 @@
 		SELECT count(*) 
 		FROM post 
 		<if test='cri.type=="all"'>
-			where (post_title like concat('%', #{cri.search},'%') 
+			where (post_title like concat('%', #{cri.search},'%')
 				or post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="title"'>
-			where (post_title like concat('%', #{cri.search},'%')) and post_board_num = #{cri.boNum}
+			where post_title like concat('%', #{cri.search},'%') and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="writer"'>
 			where (post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
@@ -35,11 +35,11 @@
 		SELECT * 
 		FROM post
 		<if test='cri.type=="all"'>
-			where (post_title like concat('%', #{cri.search},'%') 
+			where (post_title like concat('%', #{cri.search},'%')
 				or post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="title"'>
-			where (post_title like concat('%', #{cri.search},'%')) and post_board_num = #{cri.boNum}
+			where post_title like concat('%', #{cri.search},'%') and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="writer"'>
 			where (post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}

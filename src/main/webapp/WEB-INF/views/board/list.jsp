@@ -18,6 +18,7 @@
         <jsp:include page="/WEB-INF/views/common/aside.jsp" />
         <div class="main-contents">
           	<h1>리스트</h1>
+          	${list}
           	<hr>
 			<table class="table table-hover">
 				<thead>
@@ -102,8 +103,6 @@
 				<div class="input-group">
 					<select name="type" class="form-control">
 					
-						<c:if test='${pm.cri.type == "all" }'>selected</c:if>
-				
 						<option value="all" <c:if test='${pm.cri.type == "all" }'>selected</c:if>>제목+작성자</option>
 						<option value="title" <c:if test='${pm.cri.type == "title" }'>selected</c:if>>제목</option>
 						<option value="writer" <c:if test='${pm.cri.type == "writer" }'>selected</c:if>>작성자</option>
