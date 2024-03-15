@@ -2,6 +2,8 @@ package kr.kh.app.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.Part;
+
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
@@ -11,9 +13,9 @@ public interface PostService {
 
 	ArrayList<BoardVO> getBoardList();
 
-	boolean insertPost(PostVO post);
+	boolean insertPost(PostVO post, ArrayList<Part> partList, AttachVO attach);
 
-	ArrayList<PostVO> getTotalPostList(Criteria cri);	// 전체 게시글 조회
+	ArrayList<PostVO> getTotalPostList(Criteria cri); // 전체 게시글 조회
 
 	int getTotalCount(Criteria cri);
 
@@ -21,8 +23,8 @@ public interface PostService {
 
 	ArrayList<AttachVO> getFile(int num);
 
-    int getTotalPostCount(Criteria cri);
+	int getTotalPostCount(Criteria cri);
 
-    ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
-	
+	ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
+
 }

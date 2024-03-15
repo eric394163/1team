@@ -16,12 +16,13 @@ import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
 
-public class PostServiceImp implements PostService{
+public class PostServiceImp implements PostService {
 	private PostDAO postDao;
 	private static String uploadPath = "D:\\musicfile";
-	
+
 	public PostServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
 
@@ -33,75 +34,72 @@ public class PostServiceImp implements PostService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		File file = new File(uploadPath);
-		if(!file.exists()) {
-			file.mkdirs(); 
+		if (!file.exists()) {
+			file.mkdirs();
 		}
 	}
-
 
 	@Override
 	public ArrayList<BoardVO> getBoardList() {
 		return postDao.selectBoardList();
 	}
 
-
 	@Override
 	public boolean insertPost(PostVO post, ArrayList<Part> partList, AttachVO attach) {
-		if(post == null || !checkString(post.getPost_content()) || !checkString(post.getPost_title())) {
+		if (post == null || !checkString(post.getPost_content()) || !checkString(post.getPost_title())) {
 			return false;
 		}
 
 		boolean res = postDao.insertPost(post);
-		
-		if(!res) {
+
+		if (!res) {
 			return false;
 		}
-		
-		if(partList == null || partList.size() == 0) {
+
+		if (partList == null || partList.size() == 0) {
 			return true;
 		}
-		
+
 		// 첨부파일 업로드
 		for (Part part : partList) {
 			uploadFile(part, post.getPost_id());
 		}
-		
-		if(attach == null || !checkString(attach.getAttach_path())) {
+
+		if (attach == null || !checkString(attach.getAttach_path())) {
 			return true;
 		}
-		
+
 		// 링크 업로드
 		uploadLink(attach, post.getPost_id());
-		
+
 		return res;
 	}
 
 	private void uploadFile(Part part, int post_id) {
-		if(part == null || post_id == 0) {
-			return ;
-		}	
-		
-		String fileOriName = FileUploadUtils.getFileName(part);
-		if(fileOriName == null || fileOriName.length() == 0) {
+		if (part == null || post_id == 0) {
 			return;
 		}
-		
+
+		String fileOriName = FileUploadUtils.getFileName(part);
+		if (fileOriName == null || fileOriName.length() == 0) {
+			return;
+		}
+
 		String fileName = FileUploadUtils.upload(uploadPath, part);
 		AttachVO attachVo = new AttachVO(post_id, fileName);
 		postDao.insertFile(attachVo);
-		
-	}
-	
-	private void uploadLink(AttachVO attach, int post_id) {
-		if(attach == null || post_id == 0) {
-			return;
-		}
-		
-		postDao.insertLink(attach);
+
 	}
 
+	private void uploadLink(AttachVO attach, int post_id) {
+		if (attach == null || post_id == 0) {
+			return;
+		}
+
+		postDao.insertLink(attach);
+	}
 
 	private boolean checkString(String str) {
 		if (str == null || str.length() == 0) {
@@ -111,5 +109,47 @@ public class PostServiceImp implements PostService{
 	}
 
 
-	
+	@Override
+	public ArrayList<PostVO> getTotalSearchResultList(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalSearchResultList(cri);
+	}
+
+	@Override
+	public ArrayList<PostVO> getTotalPostList(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+
+		return postDao.selectTotalPostList(cri);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalCount(cri);
+	}
+
+	@Override
+	public PostVO getPost(int num) {
+		return postDao.selectPost(num);
+	}
+
+	@Override
+	public ArrayList<AttachVO> getFile(int num) {
+		return postDao.selectFileByPost_id(num);
+	}
+
+	@Override
+	public int getTotalPostCount(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalPostCount(cri);
+	}
+
 }
