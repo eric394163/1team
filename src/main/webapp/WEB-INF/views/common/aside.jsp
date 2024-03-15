@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Header</title>
-    <link rel="stylesheet" type="text/css" href="/team1/css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>aside</title>
   </head>
   <body>
     <aside>
@@ -16,66 +14,66 @@ prefix="c"%>
         style="width: 280px"
       >
         <div class="login-box">
-          <img alt="예시이미지" src="https://via.placeholder.com/80" />
-          <br />
-          <p>
-            로그인 후 더 편하게 <br />
-            PLAY GROUND를 이용해 보세요
-          </p>
-          <ul>
-            <li>
-              <a href="/team1/login">로그인</a>
-            </li>
-            <li>
-              <a href="/team1/signup">회원가입</a>
-            </li>
-          </ul>
+          <c:if test="${user == null}">
+          	<img alt="로그아웃얼굴" src="/team1/images/face_logout.svg" width="80" /> <br />
+	          <p>
+	            로그인 후 더 편하게 <br>
+	            PLAY GROUND를 <br>
+	            이용해 보세요
+	          </p>
+	          <ul>
+	            <li><a href="<c:url value="/login" />">로그인</a></li>
+	            <li><a href="<c:url value="/signup" />">회원가입</a></li>
+	          </ul>
+          </c:if>
+          <c:if test="${user != null}">
+          	<img alt="로그인얼굴" src="/team1/images/face_login.svg" width="80" /> <br />
+	          <p>
+	            ${nickname}(${id})님 <br>
+	            PLAY GROUND에 오신 걸<br> 
+	            환영합니다.
+	          </p>
+	          <ul>
+	            <li><a href="<c:url value="/mypage/main" />">마이페이지</a></li>
+	            <li><a href="<c:url value="/logout" />">로그아웃</a></li>
+	          </ul>
+          </c:if>
         </div>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-              공지 게시판
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link text-white"> 전체 게시판 </a>
-          </li>
-          <li class="drop-down">
-            <a href="#" class="nav-link text-white clearfix">
-              <span class="float-start">일반 카테고리</span>
-              <span class="float-end">▽</span>
-            </a>
-            <ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav1">
-              <li style="padding-left: 35px">
-                <a href="#" class="nav-link text-white">하위 게시판 1</a>
-              </li>
-              <li style="padding-left: 35px">
-                <a href="#" class="nav-link text-white">하위 게시판 2</a>
-              </li>
-              <li style="padding-left: 35px">
-                <a href="#" class="nav-link text-white">하위 게시판 3</a>
-              </li>
-            </ul>
-          </li>
-          <li class="drop-down">
-            <a href="#" class="nav-link text-white clearfix">
-              <span class="float-start">음악 카테고리</span>
-              <span class="float-end">▽</span>
-            </a>
-            <ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav2">
-              <li style="padding-left: 35px">
-                <a href="#" class="nav-link text-white">하위 게시판 1</a>
-              </li>
-              <li style="padding-left: 35px">
-                <a href="#" class="nav-link text-white">하위 게시판 2</a>
-              </li>
-              <li style="padding-left: 35px">
-                <a href="#" class="nav-link text-white">하위 게시판 3</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+			<c:forEach items="${boardList}" var="board">
+			<c:if test="${board.board_category_num == 1}">
+			<li class="nav-item">
+				<c:url var="url1" value="/board/list">
+					<c:param name="boNum" value="${board.board_id}" />
+					<c:param name="page" value="1" />
+				</c:url>
+				<a href="${url1}" class="nav-link text-white">${board.board_name}</a>
+			</li>
+			</c:if>
+			</c:forEach>
+			<c:forEach items="${categoryList}" var="category" begin="1">
+			<li class="drop-down">
+				<a href="#" class="nav-link text-white clearfix">
+					<span class="float-start">${category.category_name}</span>
+					<span class="float-end">▽</span>
+				</a>
+				<ul class="nav nav-pills flex-column mb-auto" id="main-sub-nav1">
+					<c:forEach items="${boardList}" var="board">
+					<c:if test="${category.category_id == board.board_category_num}">
+					<li style="padding-left: 35px;">
+						<c:url var="url2" value="/board/list">
+							<c:param name="boNum" value="${board.board_id}" />
+							<c:param name="page" value="1" />
+						</c:url>
+						<a href="${url2}" class="nav-link text-white">${board.board_name}</a>
+					</li>
+					</c:if>
+					</c:forEach>
+				</ul>
+			</li>
+			</c:forEach>
+		</ul>
         <hr />
         <div class="manage-btn">
           <a class="nav-link" href="#">관리자 페이지</a>

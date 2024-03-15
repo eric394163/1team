@@ -1,0 +1,100 @@
+@charset "EUC-KR";
+
+/* 傈眉 撇 备开 */
+.main-wrap {
+  background-color: #212529;
+}
+.inner-wrap {
+  width: 1200px;
+  max-width: 100%;
+  min-height: 1000px;
+  margin: 0 auto;
+  display: flex;
+  background-color: #fff;
+  align-items: stretch;
+}
+.main-contents{ width: 920px; padding-top: 50px; }
+
+
+/* header备开 */
+header .navbar>.container-fluid {
+	width: 1200px;
+	max-width: 100%;
+}
+
+.d-flex {
+	width: 50%;
+}
+
+/* footer备开 */
+footer p {
+	font-size: 12px;
+	color: #999;
+}
+
+/* aside */
+aside{ width: 280px; }
+.manage-btn {
+  border: 1px solid #fff;
+}
+
+.manage-btn .nav-link {
+  display: block;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+
+#main-sub-nav1,
+#main-sub-nav2 {
+  display: none;
+}
+
+.login-box {
+  border: 1px solid #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-box p {
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+.login-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.login-box a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 0px;
+  width: 100px;
+  border: 1px solid #fff;
+}
+
+.login-box li:first-child a {
+  border-right: none;
+}
+
+.float-end.active {
+  transform: rotate(180deg);
+}
+
+aside .nav-pills .nav-link.active {
+  background-color: #fff;
+  color: #333;
+}
+
+aside .d-flex {
+  height: 100%;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+} 

@@ -36,3 +36,8 @@ MANIFEST.MF
 *.lst
 
 *.properties
+/build/
+
+/target/
+
+/.vscode/
