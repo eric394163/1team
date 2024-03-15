@@ -59,15 +59,6 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public int getTotalPostCount(Criteria cri) {
-		if (cri == null) {
-			cri = new Criteria();
-		}
-		// cri 에있는 정보 = 페이지번호, 한페이지당 게시글수, 검색어
-		return postDao.selectTotalPostCount(cri);
-	}
-
-	@Override
 	public ArrayList<PostVO> getTotalSearchResultList(Criteria cri) {
 		if (cri == null) {
 			cri = new Criteria();
@@ -77,32 +68,37 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public ArrayList<PostVO> getTotalPostList(Criteria cri) {
-		if(cri == null) {
+		if (cri == null) {
 			cri = new Criteria();
 		}
-		
+
 		return postDao.selectTotalPostList(cri);
 	}
 
-
 	@Override
 	public int getTotalCount(Criteria cri) {
-		if(cri == null) {
+		if (cri == null) {
 			cri = new Criteria();
 		}
 		return postDao.selectTotalCount(cri);
 	}
-
 
 	@Override
 	public PostVO getPost(int num) {
 		return postDao.selectPost(num);
 	}
 
-
 	@Override
 	public ArrayList<AttachVO> getFile(int num) {
 		return postDao.selectFileByPost_id(num);
+	}
+
+	@Override
+	public int getTotalPostCount(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalPostCount(cri);
 	}
 
 }
