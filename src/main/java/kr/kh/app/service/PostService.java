@@ -12,5 +12,6 @@ public interface PostService {
 
 	boolean insertPost(PostVO post);
 
+	ArrayList<PostVO> getTotalPostList();	// 전체 게시글 조회
 	
 }

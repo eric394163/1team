@@ -23,8 +23,10 @@ prefix="c"%>
         <jsp:include page="/WEB-INF/views/common/aside.jsp" />
         <div class="main-contents">
           <!-- 메인페이지에서만 보이는 것 인클루드 -->
-          <div>
-            <a href="<c:url value="/post/insert" />">게시글 쓰기</a>
+          <div class="all-posts-list">
+          	<h3 class="all-posts">전체 게시글</h3>
+            	<a class="post-insert-button" href="<c:url value="/post/insert" />">게시글 쓰기</a>
+            <hr>
           </div>
         </div>
       </div>

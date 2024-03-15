@@ -2,15 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.app.dao.PostDAO">
 
+	<resultMap type="kr.kh.app.model.vo.PostVO" id="PostMap">
+		<id property="post_id" column="post_id"/>
+		<result property="post_board_num" column="post_board_num"/>
+		<result property="post_title" column="post_title"/>
+		<result property="post_content" column="post_content"/>
+		<result property="post_date" column="post_date"/>
+		<result property="post_view" column="post_view"/>
+		<result property="post_upvotes" column="post_upvotes"/>
+		<result property="post_reported" column="post_reported"/>
+		<result property="post_user_id" column="post_user_id"/>
+		<collection property="board" ofType="kr.kh.app.model.vo.BoardVO" column="post_board_num" select="selectBoard"></collection>
+	</resultMap>
 
-	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.post_id"> insert into
-		post(post_board_num, post_title, post_content, post_date, post_user_id) values
-		(#{post.post_board_num}, #{post.post_title}, #{post.post_content}, #{post.post_date},
-		#{post.post_user_id}) </insert>
-
-	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO"> select * from board; </select>
-
-
-
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.post_id">
+		insert into post(post_board_num, post_title, post_content, post_date, post_user_id) 
+		values (#{post.post_board_num}, #{post.post_title}, #{post.post_content}, #{post.post_date}, #{post.post_user_id})
+	</insert>
+	
+	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board;
+	</select>
 
 </mapper>

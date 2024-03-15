@@ -15,4 +15,6 @@ public interface PostDAO {
 	boolean insertPost(@Param("post") PostVO post);
 
 
+	ArrayList<PostVO> selectTotalPostList();
+
 }
