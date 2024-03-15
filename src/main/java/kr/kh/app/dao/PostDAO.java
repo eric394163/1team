@@ -27,4 +27,9 @@ public interface PostDAO {
 
 	ArrayList<AttachVO> selectFileByPost_id(@Param("num") int num);
 
+	void insertFile(@Param("attach")AttachVO attachVo);
+
+	void insertLink(@Param("attach")AttachVO attach);
+	
+	
 }

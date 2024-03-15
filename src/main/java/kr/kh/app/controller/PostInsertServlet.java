@@ -1,7 +1,6 @@
 package kr.kh.app.controller;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
+import kr.kh.app.model.dto.LoginDTO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.model.vo.UserVO;
@@ -32,22 +33,23 @@ public class PostInsertServlet extends HttpServlet {
 			throws ServletException, IOException {
 		MainServlet.commonAsideInfo(request);
 		
-		// 게시판 전체 가져옴
-		ArrayList<BoardVO> list = postService.getBoardList();
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/post/insert.jsp").forward(request, response);
+			// 게시판 전체 가져옴
+			ArrayList<BoardVO> list = postService.getBoardList();
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/WEB-INF/views/post/insert.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO) session.getAttribute("user");
-
+		UserVO user = (UserVO)session.getAttribute("user") ;
+		
+		
 		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/post/list");
 			return;
 		}
-
+		
 		int post_board_num = Integer.parseInt(request.getParameter("board"));
 		String post_title = request.getParameter("title");
 		String post_content = request.getParameter("content");
@@ -55,8 +57,8 @@ public class PostInsertServlet extends HttpServlet {
 		Date post_date = new Date();
 
 		PostVO post = new PostVO(post_board_num, post_title, post_content, post_user_id, post_date);
-
-		if (postService.insertPost(post)) {
+		
+		if(postService.insertPost(post)) {
 			response.sendRedirect(request.getContextPath() + "/post/list");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/post/insert");
