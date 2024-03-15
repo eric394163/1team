@@ -40,17 +40,17 @@ prefix="c"%>
               </tr>
             </thead>
             <tbody>
-              <c:forEach items="${list}" var="board">
+              <c:forEach items="${list}" var="post">
                 <tr>
-                  <td>${board.bo_num }</td>
-                  <td>${board.community.co_name}</td>
+                  <td>${post.post_id }</td>
+                  <td>${post.post_board_num}</td>
                   <td>
-                    <a href="">${board.bo_title}</a>
+                    <a href="">${post.post_title}</a>
                   </td>
                   <td>
-                    <a href="">${board.bo_me_id}</a>
+                    <a href="">${post.post_user_id}</a>
                   </td>
-                  <td>${board.bo_view }</td>
+                  <td>${post.post_view }</td>
                 </tr>
               </c:forEach>
             </tbody>

@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.pagination.Criteria;
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDao;
@@ -54,6 +55,23 @@ public class PostServiceImp implements PostService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int getTotalPostCount(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		// cri 에있는 정보 = 페이지번호, 한페이지당 게시글수, 검색어
+		return postDao.selectTotalPostCount(cri);
+	}
+
+	@Override
+	public ArrayList<PostVO> getTotalSearchResultList(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalSearchResultList(cri);
 	}
 
 }
