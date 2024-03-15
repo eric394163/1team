@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.PostDAO;
+import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
@@ -75,8 +76,33 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public ArrayList<PostVO> getTotalPostList() {
-		return postDao.selectTotalPostList();
+	public ArrayList<PostVO> getTotalPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		
+		return postDao.selectTotalPostList(cri);
+	}
+
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalCount(cri);
+	}
+
+
+	@Override
+	public PostVO getPost(int num) {
+		return postDao.selectPost(num);
+	}
+
+
+	@Override
+	public ArrayList<AttachVO> getFile(int num) {
+		return postDao.selectFileByPost_id(num);
 	}
 
 }

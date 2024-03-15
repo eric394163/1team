@@ -30,4 +30,27 @@
 		post where post_title like concat('%', #{cri.search},'%') ORDER BY post_id DESC LIMIT
 		#{cri.pageStart}, #{cri.perPageNum} </select>
 
+	<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board where board_id = #{post_board_num}
+	</select>
+	
+	<select id="selectTotalPostList" resultMap="PostMap">
+		select *
+		from post
+		order by post_id desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectTotalCount" resultType="int">
+		select count(*) 
+		from post
+	</select>
+	
+	<select id="selectPost" resultMap="PostMap">
+		select * from post where post_id = #{num}
+	</select>
+	
+	<select id="selectFileByPost_id" resultType="kr.kh.app.model.vo.AttachVO">
+		select * from attach where attach_post_id = #{num}
+	</select>
 </mapper>

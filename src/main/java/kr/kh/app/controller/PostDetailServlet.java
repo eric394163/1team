@@ -9,36 +9,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.PostVO;
-import kr.kh.app.pagination.Criteria;
-import kr.kh.app.pagination.PageMaker;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;
 
-@WebServlet("/post/list")
-public class PostListServlet extends HttpServlet {
+@WebServlet("/post/detail")
+public class PostDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PostService postService = new PostServiceImp();
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int num;
 		
-		int page;
-		
-		try {
-			page = Integer.parseInt(request.getParameter("page"));
-		} catch(Exception e) {
-			page = 1;
+		try {			
+			num = Integer.parseInt(request.getParameter("num"));
+		} catch (Exception e) {
+			num = 0;
 		}
 		
-		Criteria cri = new Criteria(page, 10);
+		PostVO post = postService.getPost(num);
+		request.setAttribute("post", post);
 		
-		int totalCount = postService.getTotalCount(cri);
-		PageMaker pm = new PageMaker(5, cri, totalCount);
-		request.setAttribute("pm", pm);
+		ArrayList<AttachVO> fileList = postService.getFile(num);
+		request.setAttribute("fileList", fileList);
 		
-		 ArrayList<PostVO> list = postService.getTotalPostList(cri);
-		 request.setAttribute("list", list);
-		 request.getRequestDispatcher("/WEB-INF/views/post/list.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/post/detail.jsp").forward(request, response);
 	}
+
 
 }
