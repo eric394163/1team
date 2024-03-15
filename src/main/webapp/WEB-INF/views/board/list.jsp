@@ -46,7 +46,7 @@
 										<c:param name="type" value="writer" />
 										<c:param name="search" value="${post.post_user_id}" />
 										<c:param name="page" value="1" />
-										<c:param name="boNum" value="${post.board.board_id}" />
+										<c:param name="boNum" value="${pm.cri.boNum}" />
 									</c:url>
 									<a href="${page}">${post.post_user_id}</a>
 								</td>
@@ -70,19 +70,19 @@
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${pm.startPage-1}" />
-							<c:param name="boNum" value="${post.board.board_id}" />
+							<c:param name="boNum" value="${pm.cri.boNum}" />
 						</c:url>
 						<a class="page-link" href="${prevUrl}">이전</a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pm.startPage}" end="${pm.endPage }" var="i">
-					<li class="page-item <c:if test="${pm.cri.page == i }">active</c:if>">
-						<c:url var="page" value="/board/list">
-							<c:param name="type" value="${pm.cri.type}" />
-							<c:param name="search" value="${pm.cri.search}" />
-							<c:param name="page" value="${i}" />
-							<c:param name="boNum" value="${post.board.board_id}" />
-						</c:url>
+					<c:url var="page" value="/board/list">
+						<c:param name="type" value="${pm.cri.type}" />
+						<c:param name="search" value="${pm.cri.search}" />
+						<c:param name="page" value="${i}" />
+						<c:param name="boNum" value="${pm.cri.boNum}" />
+					</c:url>
+					<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
 						<a class="page-link" href="${page}">${i}</a>
 					</li>
 				</c:forEach>
@@ -92,7 +92,7 @@
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${pm.endPage+1}" />
-							<c:param name="boNum" value="${post.board.board_id}" />
+							<c:param name="boNum" value="${pm.cri.boNum}" />
 						</c:url>
 						<a class="page-link" href="${nextUrl}">다음</a>
 					</li>
