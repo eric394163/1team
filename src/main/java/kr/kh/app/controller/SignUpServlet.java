@@ -31,8 +31,9 @@ public class SignUpServlet extends HttpServlet {
         String nickname = request.getParameter("nickname");
         String email = request.getParameter("email");
         String birth = request.getParameter("birth");
+        
 
-        System.out.println(id + " " + pw + " " + nickname + " " + email + " " + birth);
+
 
         SignUpDTO signUpDto = new SignUpDTO(id, pw, nickname, email, birth);
 
