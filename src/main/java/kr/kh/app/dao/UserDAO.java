@@ -11,4 +11,6 @@ public interface UserDAO {
 
     boolean insertMember(@Param("user") SignUpDTO signUpDTO);
 
+	UserVO selectFindUser(@Param("user_email")String email);
+
 }

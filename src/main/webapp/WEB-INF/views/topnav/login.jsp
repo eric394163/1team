@@ -49,6 +49,10 @@ prefix="c"%>
               <div class="form-actions">
                 <button type="submit">로그인</button>
               </div>
+              <div class="form-actions">
+                <a href="<c:url value="/findId"/>" class="btn btn-outline-primary col-5">아이디찾기</a>
+                <a href="#" class="btn btn-outline-primary col-5">비밀번호찾기</a>
+              </div>
             </form>
           </div>
         </div>

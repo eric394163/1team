@@ -6,4 +6,7 @@
     <insert id="insertMember"> INSERT INTO USER(user_id, user_pw, user_nickname, user_email,
         user_birth, user_state_date) VALUES(#{user.id},#{user.pw},#{user.nickname}, #{user.email},
         #{user.birth}, now()) </insert>
+	<select id="selectFindUser" resultType="kr.kh.app.model.vo.UserVO">
+		select * from user where user_email = #{user_email}
+	</select>
 </mapper>

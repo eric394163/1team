@@ -74,4 +74,12 @@ public class UserServiceImp implements UserService {
         }
     }
 
+	@Override
+	public UserVO getUser(String email) {
+		if(email == null) {
+			return null;
+		}
+		return userDao.selectFindUser(email);
+	}
+
 }

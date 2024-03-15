@@ -10,4 +10,6 @@ public interface UserService {
 
     boolean signUp(SignUpDTO signUpDTO);
 
+	UserVO getUser(String email);
+
 }
