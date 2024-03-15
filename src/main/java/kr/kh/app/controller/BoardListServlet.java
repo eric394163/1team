@@ -26,6 +26,8 @@ public class BoardListServlet extends HttpServlet {
 	private CommonService commonService = new CommonServiceImp();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MainServlet.commonAsideInfo(request);
+		
 		ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
 		ArrayList<BoardVO> boardList = commonService.getBoardList();
 		request.setAttribute("categoryList", categoryList);//화면에 전송

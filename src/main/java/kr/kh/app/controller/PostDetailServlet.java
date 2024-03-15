@@ -20,6 +20,7 @@ public class PostDetailServlet extends HttpServlet {
 	private PostService postService = new PostServiceImp();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MainServlet.commonAsideInfo(request);
 		int num;
 		
 		try {			

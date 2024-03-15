@@ -22,6 +22,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	MainServlet.commonAsideInfo(request);
         request.getRequestDispatcher("/WEB-INF/views/topnav/login.jsp").forward(request, response);
     }
 

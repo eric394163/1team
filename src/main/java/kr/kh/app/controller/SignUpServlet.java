@@ -19,11 +19,13 @@ public class SignUpServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	MainServlet.commonAsideInfo(request);
         request.getRequestDispatcher("/WEB-INF/views/topnav/signUp.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
         String nickname = request.getParameter("nickname");

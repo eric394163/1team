@@ -22,7 +22,8 @@ public class TotalSearchList extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
+	  MainServlet.commonAsideInfo(request);
+	  
     String totalSearch = request.getParameter("totalsearch");
 
     System.out.println("total :" + totalSearch);
