@@ -21,37 +21,37 @@
 		<div class="main-wrap">
 			<div class="inner-wrap">
 			<jsp:include page="/WEB-INF/views/common/aside.jsp" />
-			<div class="main-contents">
-				<form action="<c:url value="/post/insert"/>" method = "post" enctype ="multipart/form-data" class="insert-form">
-					<h3>게시글 쓰기</h3> 
-					<a class="nav-link" href="/post/list">게시글 목록</a>
-					<hr>
-					<div class="mb-3 mt-3">
-					    <label for="board" class="form-label">게시판 선택</label>
-					    <select class="form-control" id="board" name="board" required="required">
-						    <option value="" selected disabled hidden>게시판을 선택해주세요.</option>
-					    	<c:forEach items="${list}" var="board">
-								<option value="${board.board_id}">${board.board_name}</option>
-					    	</c:forEach>
-					    </select>
-					</div>
-					<div class="mb-3 mt-3">
-					    <label for="title" class="form-label">제목</label>
-					    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title">
-					 </div>
-					 <div class="mb-3 mt-3">
-					    <label for="content" class="form-label">내용</label>
-					    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" ></textarea>
-					 </div>
-					<!--  <div class="mb-3 mt-3">
-					    <label for="content" class="form-label">첨부파일</label>
-					    <input type="file" class="form-control" name="file">
-					    <input type="file" class="form-control" name="file">
-			           	<input type="file" class="form-control" name="file">
-					 </div> -->
-					 <button class="btn btn-outline-warning col-12">게시글 등록</button>
-				</form>				
-			</div>
+				<div class="main-contents">
+					<form action="<c:url value="/post/insert"/>" method = "post" enctype ="multipart/form-data" class="insert-form">
+						<h3>게시글 쓰기</h3> 
+						<a class="nav-link" href="<c:url value="/post/list"/>">게시글 목록</a>
+						<hr>
+						<div class="mb-3 mt-3">
+						    <label for="board" class="form-label">게시판 선택</label>
+						    <select class="form-control" id="board" name="board" required="required">
+							    <option value="" selected disabled hidden>게시판을 선택해주세요.</option>
+						    	<c:forEach items="${list}" var="board">
+									<option value="${board.board_id}">${board.board_name}</option>
+						    	</c:forEach>
+						    </select>
+						</div>
+						<div class="mb-3 mt-3">
+						    <label for="title" class="form-label">제목</label>
+						    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title">
+						 </div>
+						 <div class="mb-3 mt-3">
+						    <label for="content" class="form-label">내용</label>
+						    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" ></textarea>
+						 </div>
+						<!--  <div class="mb-3 mt-3">
+						    <label for="content" class="form-label">첨부파일</label>
+						    <input type="file" class="form-control" name="file">
+						    <input type="file" class="form-control" name="file">
+				           	<input type="file" class="form-control" name="file">
+						 </div> -->
+						 <button class="btn btn-outline-warning col-12">게시글 등록</button>
+					</form>				
+				</div>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

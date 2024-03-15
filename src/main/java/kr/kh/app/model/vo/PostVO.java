@@ -27,4 +27,5 @@ public class PostVO {
     	this.post_user_id = post_user_id;
     	this.post_date = post_date;
     }
+
 }

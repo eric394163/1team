@@ -57,5 +57,11 @@ public class PostServiceImp implements PostService{
 		}
 		return true;
 	}
+
+
+	@Override
+	public ArrayList<PostVO> getTotalPostList() {
+		return postDao.selectTotalPostList();
+	}
 	
 }
