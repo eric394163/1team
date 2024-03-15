@@ -41,6 +41,11 @@
 						    <input type="text" class="form-control" id="view" name="view" value = "${post.post_view}" readonly>
 						 </div>
 						 <div class="mb-3 mt-3">
+						    <!-- <label for="view" class="form-label">추천수 :</label> -->
+								<button class="btn btn-outline-success btn-up col=6">추천(${post.upvotes})</button>
+								<button class="btn btn-outline-success btn-down col=6">비추천(${post.downvotes})</button>
+						 </div>
+						 <div class="mb-3 mt-3">
 						    <label for="date" class="form-label">작성일</label>
 						    <input type="text" class="form-control" id="date" name="date" value = "${post.post_date}" readonly>
 						 </div>
@@ -50,11 +55,19 @@
 						 </div>
 						<div class="mb-3 mt-3">
 						    <label for="file" class="form-label">첨부파일</label>
-						    	<c:if test="${attach.attach_link_check == 0}">
-							    	<c:forEach items="${fileList}" var="file">
-							    		<a href="<c:url value="/download?filename=${attach.attach_path}" />" class="form-control" download="${attach.attach_path}">${attach.attach_path}</a>
-							    	</c:forEach>
-						    	</c:if>
+						    <c:choose>
+								<c:when test="">
+									<a href="<c:url value=""/>"></a>
+								</c:when>
+								<c:otherwise>
+									<div>첨부파일 없음</div>
+								</c:otherwise>
+							</c:choose>
+					    	<c:if test="${attach.attach_link_check == 0}">
+						    	<c:forEach items="${fileList}" var="file">
+						    		<a href="<c:url value="/download?filename=${attach.attach_path}" />" class="form-control" download="${attach.attach_path}">${attach.attach_path}</a>
+						    	</c:forEach>
+					    	</c:if>
 						 </div>
 						 <div class="mb-3 mt-6">
 						    <label for="youtube" class="form-label">링크</label>

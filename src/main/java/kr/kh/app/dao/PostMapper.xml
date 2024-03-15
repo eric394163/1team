@@ -35,10 +35,26 @@
 	</select>
 	
 	<select id="selectTotalPostList" resultMap="PostMap">
-		select *
-		from post
-		order by post_id desc
-		limit #{cri.pageStart}, #{cri.perPageNum}
+		SELECT 
+		    post.*,
+		    board_name,
+		    SUM(CASE
+		        WHEN upvote = 1 THEN 1
+		        ELSE 0
+		    END) as upvotes,
+		    SUM(CASE
+		        WHEN upvote = - 1 THEN 1
+		        ELSE 0
+		    END) as downvotes
+		FROM
+		    post
+		        JOIN
+		    board ON post_board_num = board_id
+		        LEFT JOIN
+		    upvote ON post.post_id = upvote.post_id
+		GROUP BY post_id
+		ORDER BY post_id desc
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
 	<select id="selectTotalCount" resultType="int">
