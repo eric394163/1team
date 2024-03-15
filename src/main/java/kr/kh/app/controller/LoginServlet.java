@@ -53,6 +53,6 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("url", "/login");
 
 		}
-		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 	}
 }
