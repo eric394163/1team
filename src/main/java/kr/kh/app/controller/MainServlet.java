@@ -22,11 +22,11 @@ import kr.kh.app.service.PostServiceImp;
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CommonService commonService = new CommonServiceImp();
+	private static CommonService commonService = new CommonServiceImp();
 	private PostService postService = new PostServiceImp();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+		throws ServletException, IOException {
 		int page;
 
 		try {
@@ -41,13 +41,16 @@ public class MainServlet extends HttpServlet {
 		PageMaker pm = new PageMaker(5, cri, totalCount);
 		request.setAttribute("pm", pm);
 
-		ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
-		ArrayList<BoardVO> boardList = commonService.getBoardList();
+		commonAsideInfo(request);
 		ArrayList<PostVO> list = postService.getTotalPostList(cri);
-		request.setAttribute("category", categoryList);// 화면에 전송
-		request.setAttribute("board", boardList);// 화면에 전송
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 	}
 
+	public static void commonAsideInfo(HttpServletRequest request) {
+		ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
+		ArrayList<BoardVO> boardList = commonService.getBoardList();
+		request.setAttribute("categoryList", categoryList);// 화면에 전송
+		request.setAttribute("boardList", boardList);// 화면에 전송
+	}
 }
