@@ -78,6 +78,10 @@
 						    	</c:if>
 						 </div>
 						 <a href="<c:url value="/post/list" />" class="btn btn-outline-dark">목록으로</a>
+						 <c:if test="${post.post_user_id == user.user_id}">
+							 <a href="<c:url value="/post/update?num=${post.post_id}"/>" class="btn btn-outline-danger">수정</a>
+							 <a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
+						 </c:if>
 					</div>
 				</c:when>
 				<c:otherwise>
