@@ -58,6 +58,7 @@ public class PostServiceImp implements PostService {
 		return true;
 	}
 
+
 	@Override
 	public ArrayList<PostVO> getTotalSearchResultList(Criteria cri) {
 		if (cri == null) {
