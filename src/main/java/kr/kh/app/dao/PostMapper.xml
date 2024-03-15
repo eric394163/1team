@@ -15,13 +15,19 @@
 		<collection property="board" ofType="kr.kh.app.model.vo.BoardVO" column="post_board_num" select="selectBoard"></collection>
 	</resultMap>
 
-	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.post_id">
-		insert into post(post_board_num, post_title, post_content, post_date, post_user_id) 
-		values (#{post.post_board_num}, #{post.post_title}, #{post.post_content}, #{post.post_date}, #{post.post_user_id})
-	</insert>
-	
-	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO">
-		select * from board;
-	</select>
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.post_id"> insert into
+		post(post_board_num, post_title, post_content, post_date, post_user_id) values
+		(#{post.post_board_num}, #{post.post_title}, #{post.post_content}, #{post.post_date},
+		#{post.post_user_id}) </insert>
+
+	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO"> select * from board; </select>
+
+
+	<select id="selectTotalPostCount" resultType="int"> SELECT count(*) FROM post where post_content
+		like concat('%', #{cri.search},'%') </select>
+
+	<select id="selectTotalSearchResultList" resultType="kr.kh.app.model.vo.PostVO"> SELECT * FROM
+		post where post_title like concat('%', #{cri.search},'%') ORDER BY post_id DESC LIMIT
+		#{cri.pageStart}, #{cri.perPageNum} </select>
 
 </mapper>

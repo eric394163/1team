@@ -29,7 +29,32 @@ prefix="c"%>
         <jsp:include page="/WEB-INF/views/common/aside.jsp" />
         <div class="main-contents">
           <!-- 메인페이지에서만 보이는 것 인클루드 -->
-        
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>게시판</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach items="${list}" var="post">
+                <tr>
+                  <td>${post.post_id }</td>
+                  <td>${post.post_board_num}</td>
+                  <td>
+                    <a href="">${post.post_title}</a>
+                  </td>
+                  <td>
+                    <a href="">${post.post_user_id}</a>
+                  </td>
+                  <td>${post.post_view }</td>
+                </tr>
+              </c:forEach>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
