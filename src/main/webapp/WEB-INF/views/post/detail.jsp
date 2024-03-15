@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +29,17 @@
 						    <label for="community" class="form-label">게시판</label>
 						    <input type="text" class="form-control" id="community" name="community" readonly value="${post.board.board_name}">
 						</div>	
-						<div class="mb-3 mt-3">
-						    <label for="title" class="form-label">제목</label>
-						    <input type="text" class="form-control" id="title" name="title" readonly value="${post.post_title}">
-						 </div>
 						 <div class="mb-3 mt-3">
 						    <label for="writer" class="form-label">작성자</label>
 						    <input type="text" class="form-control" id="writer" name="writer" value = "${post.post_user_id}" readonly>
+						 </div>
+						 <div class="mb-3 mt-3">
+						    <label for="date" class="form-label">작성일</label>
+						    <fmt:formatDate value="${post.post_date}" pattern="yyyy-MM-dd" /> 
+						 </div>
+						<div class="mb-3 mt-3">
+						    <label for="title" class="form-label">제목</label>
+						    <input type="text" class="form-control" id="title" name="title" readonly value="${post.post_title}">
 						 </div>
 						 <div class="mb-3 mt-3">
 						    <label for="view" class="form-label">조회수 :</label>
@@ -45,10 +50,7 @@
 								<button class="btn btn-outline-success btn-up col=6">추천(${post.upvotes})</button>
 								<button class="btn btn-outline-success btn-down col=6">비추천(${post.downvotes})</button>
 						 </div>
-						 <div class="mb-3 mt-3">
-						    <label for="date" class="form-label">작성일</label>
-						    <input type="text" class="form-control" id="date" name="date" value = "${post.post_date}" readonly>
-						 </div>
+						 
 						 <div class="mb-3 mt-3">
 						    <label for="content" class="form-label">내용</label>
 						    <div class="form-control" style="min-height : 300px;">${post.post_content}</div>
