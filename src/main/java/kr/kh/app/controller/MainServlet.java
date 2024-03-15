@@ -1,6 +1,8 @@
 package kr.kh.app.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +19,6 @@ import kr.kh.app.service.CommonServiceImp;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;
 
-import kr.kh.app.model.vo.UserVO;
-
-//테스트용
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,6 +27,26 @@ public class MainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		int page;
+
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		} catch (Exception e) {
+			page = 1;
+		}
+
+		Criteria cri = new Criteria(page, 10);
+
+		int totalCount = postService.getTotalCount(cri);
+		PageMaker pm = new PageMaker(5, cri, totalCount);
+		request.setAttribute("pm", pm);
+
+		ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
+		ArrayList<BoardVO> boardList = commonService.getBoardList();
+		ArrayList<PostVO> list = postService.getTotalPostList(cri);
+		request.setAttribute("category", categoryList);// 화면에 전송
+		request.setAttribute("board", boardList);// 화면에 전송
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 	}
 
