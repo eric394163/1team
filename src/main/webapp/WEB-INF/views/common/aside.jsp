@@ -55,7 +55,7 @@
 			</c:forEach>
 			<c:forEach items="${categoryList}" var="category" begin="1">
 			<li class="drop-down">
-				<a href="#" class="nav-link text-white clearfix">
+				<a href="#drop" class="nav-link text-white clearfix">
 					<span class="float-start">${category.category_name}</span>
 					<span class="float-end">▽</span>
 				</a>
@@ -76,10 +76,12 @@
 			</li>
 			</c:forEach>
 		</ul>
-        <hr />
-        <div class="manage-btn">
-          <a class="nav-link" href="#">관리자 페이지</a>
-        </div>
+		<c:if test="${user != null && (user.user_role == '관리자' || user_role == '운영자')}">
+        	<hr />
+	        <div class="manage-btn">
+        		<a class="nav-link" href="#">관리자 페이지</a>
+	        </div>
+        </c:if>
       </div>
     </aside>
     <script type="text/javascript">

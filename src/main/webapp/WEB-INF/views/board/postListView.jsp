@@ -44,7 +44,7 @@
 							<c:if test="${post.post_board_num == pm.cri.boNum }">
 								<tr>
 									<td>${post.post_id}</td>
-									<td>${post.board.board_name}</td>
+									<td>${board.board_name}</td>
 									<td>
 										<c:url var="url" value="/board/detail">
 											<c:param name="num" value="${post.post_id}" />
@@ -84,12 +84,12 @@
 						</li>
 					</c:if>
 					<c:forEach begin="${pm.startPage}" end="${pm.endPage }" var="i">
-							<c:url var="page" value="/board/list">
-								<c:param name="type" value="${pm.cri.type}" />
-								<c:param name="search" value="${pm.cri.search}" />
-								<c:param name="page" value="${i}" />
-								<c:param name="boNum" value="${pm.cri.boNum}" />
-							</c:url>
+						<c:url var="page" value="/board/list">
+							<c:param name="type" value="${pm.cri.type}" />
+							<c:param name="search" value="${pm.cri.search}" />
+							<c:param name="page" value="${i}" />
+							<c:param name="boNum" value="${pm.cri.boNum}" />
+						</c:url>
 						<li class="page-item <c:if test="${pm.cri.page == i }">active</c:if>">
 							<a class="page-link" href="${page}">${i}</a>
 						</li>
@@ -109,14 +109,13 @@
 				<form action="<c:url value="/board/list"/>" class="mb-3 mt-3" id="seachbox">
 					<div class="input-group">
 						<select name="type" class="form-control" id="search-select">
-						
 							<c:if test='${pm.cri.type == "all" }'>selected</c:if>
-					
 							<option value="all" <c:if test='${pm.cri.type == "all" }'>selected</c:if>>제목+작성자</option>
 							<option value="title" <c:if test='${pm.cri.type == "title" }'>selected</c:if>>제목</option>
 							<option value="writer" <c:if test='${pm.cri.type == "writer" }'>selected</c:if>>작성자</option>
 						</select>
 						<input type="text" class="form-control" id="search-input" placeholder="검색어" name="search" value="${pm.cri.search}">
+						<input type="hidden" name="boNum" value="${pm.cri.boNum}">
 						<button class="btn btn-dark col-2" id="search-btn">검색</button>
 					</div>
 				</form>
