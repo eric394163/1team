@@ -67,8 +67,7 @@
 							    <label for="youtube" class="form-label">링크</label>
 							    		<c:forEach items="${fileList}" var="file">
 							    		<c:if test="${file.attach_link_check == 1}">
-							    			<input type="text" class="form-control" name="youtube" value="${file.attach_path}">
-							    			<a href="<c:url value="/download?filename=${file.attach_path}" />" class="form-control">${file.attach_path}</a> 
+							    			<a href="<c:url value="${file.attach_path}" />" class="form-control">${file.attach_path}</a> 
 							    		</c:if>
 						    		</c:forEach>
 							 </div>
