@@ -63,7 +63,7 @@ public class UserServiceImp implements UserService {
 
 		CheckErrAndMsg checkErrAndMsg = new CheckErrAndMsg();
 
-		ArrayList<String> msgList = new ArrayList<String>();
+		ArrayList<String> msgList = new ArrayList<String>(); // 메세지 스트링 메이커를 위한 리스트 
 
 		if (signUpDTO == null ||
 				signUpDTO.getId() == null ||
@@ -112,3 +112,4 @@ public class UserServiceImp implements UserService {
 
 	}
 }
+
