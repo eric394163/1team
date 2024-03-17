@@ -45,7 +45,7 @@
 					</c:if>
 					<c:if test="${user != null}">
 						<li class="nav-item">
-							<a class="nav-link" href="<c:url value="/mypage/main" />">마이페이지</a>
+							<a class="nav-link" href="<c:url value="/mypage/postlist" />">마이페이지</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="<c:url value="/logout" />">로그아웃</a>

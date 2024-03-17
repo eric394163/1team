@@ -5,7 +5,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>PlayGround - 마이페이지 - 회원 탈퇴</title>
+    <title>PlayGround - 마이페이지 - 좋아요 누른 게시글 확인</title>
     <link rel="shortcut icon" href="/team1/images/favicon.png" type="image/png">
 	<!-- 부트스트랩5 css/js -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 			<div class="main-contents">
 				<!-- 내가 쓴 글 확인 게시글만들기 -->
 				<div class="h2_title_wrap"><!-- 타이틀영역 -->
-	        		<h2>마이페이지 - 회원 탈퇴</h2>
+	        		<h2>마이페이지 - 좋아요 누른 게시글 확인</h2>
 	        	</div>
 			</div>
 		</div>
