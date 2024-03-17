@@ -28,7 +28,7 @@
 			where post_title like concat('%', #{cri.search},'%') and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="writer"'>
-			where post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
+			where post_user_id = #{cri.search} and post_board_num = #{cri.boNum}
 		</if>
 	</select>
 	
@@ -44,7 +44,7 @@
 			where (post_title like concat('%', #{cri.search},'%')) and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="writer"'>
-			where (post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
+			where post_user_id = #{cri.search} and post_board_num = #{cri.boNum}
 		</if>
 		ORDER BY post_id DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
