@@ -109,7 +109,7 @@ prefix="c" %>
           rules: {
             id: {
               required: true,
-              regex: /^\w{6,13}$/,
+              regex: /^\w{6,12}$/,
             },
             email: {
               required: true,
@@ -134,7 +134,7 @@ prefix="c" %>
             id: {
               required: "필수 항목입니다.",
               regex:
-                "아이디는 6~13자의 영문 대소문자와 숫자로만 구성해야 합니다.",
+                "아이디는 6~12자의 영문 대소문자와 숫자로만 구성해야 합니다.",
             },
             email: {
               required: "필수 항목입니다.",

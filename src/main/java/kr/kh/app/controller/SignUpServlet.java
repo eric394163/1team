@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.kh.app.model.dto.SignUpDTO;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
+import kr.kh.app.utils.NullCheck;
 
 import java.io.IOException;
 
@@ -17,23 +18,22 @@ public class SignUpServlet extends HttpServlet {
 
     UserService userService = new UserServiceImp();
 
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	MainServlet.commonAsideInfo(request);
+        MainServlet.commonAsideInfo(request);
         request.getRequestDispatcher("/WEB-INF/views/topnav/signUp.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	
+
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
         String nickname = request.getParameter("nickname");
         String email = request.getParameter("email");
         String birth = request.getParameter("birth");
-        
-
-
 
         SignUpDTO signUpDto = new SignUpDTO(id, pw, nickname, email, birth);
 
