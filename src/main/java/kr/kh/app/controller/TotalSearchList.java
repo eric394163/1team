@@ -47,9 +47,10 @@ public class TotalSearchList extends HttpServlet {
     request.setAttribute("pm", pm);
 
     ArrayList<PostVO> list = postService.getTotalSearchResultList(cri);
-    request.setAttribute("list", list);
 
-    System.out.println(list.size());
+    request.setAttribute("list", list);
+    
+
 
     request.getRequestDispatcher("/WEB-INF/views/main/searchList.jsp").forward(request, response);
   }

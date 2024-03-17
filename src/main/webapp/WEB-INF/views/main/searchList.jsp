@@ -43,9 +43,12 @@ prefix="c"%>
               <c:forEach items="${list}" var="post">
                 <tr>
                   <td>${post.post_id }</td>
-                  <td>${post.post_board_num}</td>
+                  <td>${post.post_board_name}</td>
                   <td>
-                    <a href="">${post.post_title}</a>
+                    <c:url var="url" value="/post/detail">
+                      <c:param name="num" value="${post.post_id}" />
+                    </c:url>
+                    <a href="${url}">${post.post_title}</a>
                   </td>
                   <td>
                     <a href="">${post.post_user_id}</a>
@@ -55,6 +58,42 @@ prefix="c"%>
               </c:forEach>
             </tbody>
           </table>
+
+          <!-- 부트스트랩을 이용하여 페이지네이션 링크를 중앙 정렬된 리스트로 만듭니다. -->
+          <ul class="pagination justify-content-center">
+            <!-- pm.prev의 값이 true일 경우에만 내부 코드를 실행합니다. 이는 "이전" 페이지 그룹으로 이동할 수 있는지 여부를 확인하는 조건입니다. -->
+            <c:if test="${pm.prev}">
+              <c:url value="/totalSearchList" var="searchListurl">
+                <c:param name="page" value="${pm.startPage - 1}" />
+                <c:param name="totalsearch" value="${pm.cri.search}" />
+              </c:url>
+              <li class="page-item">
+                <a class="page-link" href="${searchListurl}">이전</a>
+              </li>
+            </c:if>
+
+            <c:forEach begin="${pm.startPage }" end="${pm.endPage}" var="i">
+              <c:url value="/totalSearchList" var="searchListurl">
+                <c:param name="page" value="${i}" />
+                <c:param name="totalsearch" value="${pm.cri.search}" />
+              </c:url>
+              <li
+                class="page-item <c:if test='${pm.cri.page == i}'>active</c:if>"
+              >
+                <a class="page-link" href="${searchListurl}">${i}</a>
+              </li>
+            </c:forEach>
+
+            <c:if test="${pm.next}">
+              <c:url value="/totalSearchList" var="searchListurl">
+                <c:param name="page" value="${pm.endPage + 1}" />
+                <c:param name="totalsearch" value="${pm.cri.search}" />
+              </c:url>
+              <li class="page-item">
+                <a class="page-link" href="${searchListurl}">다음</a>
+              </li>
+            </c:if>
+          </ul>
         </div>
       </div>
     </div>
