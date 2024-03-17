@@ -19,7 +19,7 @@
 		<div class="inner-wrap">
 			<jsp:include page="/WEB-INF/views/admin/aside.jsp" />
 			<div class="main-contents">
-				<!-- 내가 쓴 글 확인 게시글만들기 -->
+				<!-- 내용채우기 -->
 				<div class="h2_title_wrap"><!-- 타이틀영역 -->
 	        		<h2>관리자페이지 - 카테고리 등록</h2>
 	        	</div>

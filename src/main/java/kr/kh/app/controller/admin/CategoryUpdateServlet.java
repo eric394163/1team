@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//관리자페이지 - 카테고리 등록 서블릿
-@WebServlet("/admin/categoryinsert")
-public class CategoryInsertServlet extends HttpServlet {
+//관리자페이지 - 카테고리 수정/삭제 서블릿
+@WebServlet("/admin/categoryupdate")
+public class CategoryUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/admin/categoryInsert.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/categoryUpdate.jsp").forward(request, response);
 	}
 }

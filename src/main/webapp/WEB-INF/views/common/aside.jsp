@@ -79,7 +79,7 @@
 		<c:if test="${user != null && (user.user_role == '관리자' || user_role == '운영자')}">
         	<hr />
 	        <div class="manage-btn">
-        		<a class="nav-link" href="#">관리자 페이지</a>
+        		<a class="nav-link" href="<c:url value="/admin/categoryinsert" />">관리자 페이지</a>
 	        </div>
         </c:if>
       </div>
