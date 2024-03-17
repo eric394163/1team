@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import kr.kh.app.model.dto.SignUpDTO;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
-import kr.kh.app.utils.NullCheck;
-
 import java.io.IOException;
 
 @WebServlet("/signup")
@@ -17,8 +15,6 @@ public class SignUpServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     UserService userService = new UserServiceImp();
-
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,10 +34,17 @@ public class SignUpServlet extends HttpServlet {
         SignUpDTO signUpDto = new SignUpDTO(id, pw, nickname, email, birth);
 
         if (userService.signUp(signUpDto)) {
-            response.sendRedirect(request.getContextPath() + "/");
+
+            request.setAttribute("msg", "회원가입 성공");
+            // 화면에 url로 board/list를 전송
+            request.setAttribute("url", "/");
+
         } else {
-            System.out.println("회원가입 실패");
-            doGet(request, response);
+            request.setAttribute("msg", "회원가입 실패");
+            // 화면에 url로 board/list를 전송
+            request.setAttribute("url", "/signup");
         }
+
+        request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
     }
 }
