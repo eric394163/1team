@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//마이페이지 - 내가 쓴 글 확인 서블릿
+//마이페이지 - 내가 댓글 쓴 게시글 확인 서블릿
 @WebServlet("/mypage/commentlist")
 public class MyCommentListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
