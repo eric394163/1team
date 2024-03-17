@@ -13,7 +13,7 @@ prefix="c"%>
        		<h2>전체게시글</h2>
        		<div class="title_btn">
        			<c:if test="${user != null}">
-       				<button type="button" class="btn btn-outline-dark">게시판쓰기</button>
+       				<a href="<c:url value="post/list" />" class="btn btn-outline-dark">게시판쓰기</a>
        			</c:if>
        		</div>
        	</div>
