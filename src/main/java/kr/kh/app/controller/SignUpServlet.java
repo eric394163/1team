@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import kr.kh.app.model.dto.SignUpDTO;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
+import kr.kh.app.utils.CheckErrAndMsg;
+
 import java.io.IOException;
 
 @WebServlet("/signup")
@@ -33,17 +35,28 @@ public class SignUpServlet extends HttpServlet {
 
         SignUpDTO signUpDto = new SignUpDTO(id, pw, nickname, email, birth);
 
-        if (userService.signUp(signUpDto)) {
+        CheckErrAndMsg checkErrAndMsg = userService.signUp(signUpDto);
 
-            request.setAttribute("msg", "회원가입 성공");
-            // 화면에 url로 board/list를 전송
+        System.out.println("checkErrAndMsg: " + checkErrAndMsg);
+
+        if (checkErrAndMsg.isTrueOrFalse()) {
+            request.setAttribute("msg", checkErrAndMsg.getMsg());
             request.setAttribute("url", "/");
-
         } else {
-            request.setAttribute("msg", "회원가입 실패");
-            // 화면에 url로 board/list를 전송
+            request.setAttribute("msg", checkErrAndMsg.getMsg());
             request.setAttribute("url", "/signup");
         }
+        // if (userService.signUp(signUpDto)) {
+
+        // request.setAttribute("msg", "회원가입 성공");
+
+        // request.setAttribute("url", "/");
+
+        // } else {
+        // request.setAttribute("msg", "회원가입 실패");
+
+        // request.setAttribute("url", "/signup");
+        // }
 
         request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
     }

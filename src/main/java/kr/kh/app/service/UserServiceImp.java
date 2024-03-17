@@ -2,6 +2,7 @@ package kr.kh.app.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +13,7 @@ import kr.kh.app.dao.UserDAO;
 import kr.kh.app.model.dto.LoginDTO;
 import kr.kh.app.model.dto.SignUpDTO;
 import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.utils.CheckErrAndMsg;
 import kr.kh.app.utils.NullCheck;
 
 public class UserServiceImp implements UserService {
@@ -57,7 +59,11 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public boolean signUp(SignUpDTO signUpDTO) {
+	public CheckErrAndMsg signUp(SignUpDTO signUpDTO) {
+
+		CheckErrAndMsg checkErrAndMsg = new CheckErrAndMsg();
+
+		ArrayList<String> msgList = new ArrayList<String>();
 
 		if (signUpDTO == null ||
 				signUpDTO.getId() == null ||
@@ -69,22 +75,40 @@ public class UserServiceImp implements UserService {
 				signUpDTO.getNickname() == null ||
 				!signUpDTO.getNickname().matches("^[a-zA-Z0-9가-힣_]{2,10}$") ||
 				signUpDTO.getBirth() == null) {
-			return false;
+			return null;
 		}
 
-		if (userDao.selectUserById(signUpDTO.getId()) != null ||
-				userDao.selectUserByEmail(signUpDTO.getEmail()) != null ||
-				userDao.selectUserByNickname(signUpDTO.getNickname()) != null) {
-			return false; // 중복되는 경우
+		if (userDao.selectUserById(signUpDTO.getId()) != null) {
+			checkErrAndMsg.setMsg("아이디가 중복됩니다.");
+			msgList.add("아이디");
+			checkErrAndMsg.setTrueOrFalse(false);
+			return checkErrAndMsg;
+		}
+		if (userDao.selectUserByEmail(signUpDTO.getEmail()) != null) {
+			checkErrAndMsg.setMsg("이메일이 중복됩니다.");
+			checkErrAndMsg.setTrueOrFalse(false);
+			return checkErrAndMsg;
+		}
+		if (userDao.selectUserByNickname(signUpDTO.getNickname()) != null) {
+			checkErrAndMsg.setMsg("닉네임이 중복됩니다.");
+			checkErrAndMsg.setTrueOrFalse(false);
+			return checkErrAndMsg;
 		}
 
 		try {
-			// 아이디 닉네임 이메일 중복체크
-			return userDao.insertMember(signUpDTO);
+			if (userDao.insertMember(signUpDTO)) {
+				checkErrAndMsg.setTrueOrFalse(true);
+				checkErrAndMsg.setMsg("회원가입 성공");
+				return checkErrAndMsg;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
-		}
-	}
+			checkErrAndMsg.setTrueOrFalse(false);
+			checkErrAndMsg.setMsg("회원가입 실패");
+			return checkErrAndMsg;
 
+		}
+		return null;
+
+	}
 }
