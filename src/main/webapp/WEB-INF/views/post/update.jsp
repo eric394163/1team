@@ -35,11 +35,11 @@
 					</div>
 					<div class="mb-3 mt-3">
 					    <label for="title" class="form-label">제목</label>
-					    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title">
+					    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title" value="${post.post_title}">
 					 </div>
 					 <div class="mb-3 mt-3">
 					    <label for="content" class="form-label">내용</label>
-					    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" ></textarea>
+					    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" >${post.post_content}</textarea>
 					 </div>
 					<div class="mb-3 mt-3">
 					    <label for="file" class="form-label">첨부파일</label>
@@ -54,7 +54,7 @@
 					 </div>
 					 <div class="mb-3 mt-6">
 					    <label for="youtube" class="form-label">링크</label>
-					    <input type="text" class="form-control" name="youtube">
+					    <input type="text" class="form-control" name="youtube" value="${attach.attach_path }">
 					 </div>
 					 <button class="btn btn-outline-warning col-12 mb-3">게시글 수정</button>
 				</form>				
@@ -63,6 +63,53 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
+		let btnDel = document.querySelectorAll(".btn-del");
+		let attachment = document.querySelector("#attachment");
+		
+		btnDel.forEach((element) => {
+			element.onclick = function(e) {
+				e.preventDefault();
+				
+				// input hidden 으로 삭제할 첨부파일 번호를 추가
+				let num = this.getAttribute("data-target");
+				let str = `<input type="hidden" name="fi_num" value="\${num}">`;
+				let inputHidden = createElement('input', null, {
+					'type' : 'hidden',
+					'name' : 'fi_num',
+					'value' : `\${num}`
+				})
+				attachment.prepend(inputHidden);
+				
+				// span 태그를 삭제
+				this.parentElement.remove();
+				
+				// input file 추가
+				let inputFile = createElement('input', null, {
+					'type' : 'file',
+					'name' : 'file',
+					'class' : 'form-control'
+				});
+				attachment.append(inputFile);
+			}
+		});
+		
+		function createElement(tagName, text, attrs) {
+			let element = document.createElement(tagName);
+			if(text) {
+				let textNode = document.createTextNode(text);
+				element.append(textNode);
+			}
+			if(!attrs) {
+				return element;
+			}
+			for (key in attrs) {
+				let attr = document.createAttribute(key);
+				attr.value= attrs[key];
+				element.setAttributeNode(attr);
+			}
+			return element;
+		}
+		
 		$('#content').summernote({
 		  placeholder: 'Hello Bootstrap 4',
 		  tabsize: 2,

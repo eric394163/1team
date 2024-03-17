@@ -30,4 +30,11 @@ public class PostVO {
     	this.post_date = post_date;
     }
 
+	public PostVO(int post_id, String post_title, String post_content, int post_board_num) {
+		this.post_id = post_id;
+		this.post_title = post_title;
+		this.post_content = post_content;
+		this.post_board_num = post_board_num;
+	}
+
 }
