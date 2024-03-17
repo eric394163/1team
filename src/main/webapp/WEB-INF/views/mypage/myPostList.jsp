@@ -19,7 +19,7 @@
 		<div class="inner-wrap">
 			<jsp:include page="/WEB-INF/views/mypage/aside.jsp" />
 			<div class="main-contents">
-				<!-- 내가 쓴 글 확인 게시글만들기 -->
+				<!-- 내용채우기 -->
 				<div class="h2_title_wrap"><!-- 타이틀영역 -->
 	        		<h2>마이페이지 - 내가 쓴 게시글 확인</h2>
 	        	</div>
