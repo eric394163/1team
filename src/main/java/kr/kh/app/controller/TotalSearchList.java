@@ -22,11 +22,17 @@ public class TotalSearchList extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-	  MainServlet.commonAsideInfo(request);
-	  
+    MainServlet.commonAsideInfo(request);
+
     String totalSearch = request.getParameter("totalsearch");
 
-    System.out.println("total :" + totalSearch);
+    if (totalSearch == null || totalSearch.equals("")) {
+
+      request.setAttribute("msg", "검색어가 없습니다.");
+      request.setAttribute("url", "/");
+      request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+    }
+
     int page;
 
     try {
@@ -49,8 +55,6 @@ public class TotalSearchList extends HttpServlet {
     ArrayList<PostVO> list = postService.getTotalSearchResultList(cri);
 
     request.setAttribute("list", list);
-    
-
 
     request.getRequestDispatcher("/WEB-INF/views/main/searchList.jsp").forward(request, response);
   }
