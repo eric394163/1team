@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//마이페이지 - 내가 쓴 글 확인 서블릿
+//마이페이지 - 나의 정보수정 서블릿
 @WebServlet("/mypage/signupdate")
 public class SignUpdageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

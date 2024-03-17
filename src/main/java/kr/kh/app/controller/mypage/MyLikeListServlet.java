@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//마이페이지 - 내가 쓴 글 확인 서블릿
+//마이페이지 - 좋아요 누른 게시글 확인
 @WebServlet("/mypage/postlist")
 public class MyLikeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
