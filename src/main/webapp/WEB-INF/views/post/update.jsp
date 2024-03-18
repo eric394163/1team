@@ -28,7 +28,7 @@
 					    <label for="board" class="form-label">게시판 선택</label>
 					    <select class="form-control" id="board" name="board" required="required">
 					    	<c:forEach items="${list}" var="board">
-								<option value="${post.board.board_name}">${post.board.board_name}</option>
+								<option value="${{board.board_id}}">${post.board.board_name}</option>
 					    	</c:forEach>
 					    </select>
 					</div>
