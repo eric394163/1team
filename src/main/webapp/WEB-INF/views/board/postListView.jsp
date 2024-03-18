@@ -25,7 +25,7 @@
 	        		<h2>${board.board_name }</h2>
 	        		<div class="title_btn">
 	        			<c:if test="${user != null}">
-	        				<button type="button" class="btn btn-outline-dark">게시판쓰기</button>
+	        				<a href="<c:url value="/post/insert" />" class="btn btn-outline-dark">게시판쓰기</a>
 	        			</c:if>
 	        		</div>
 	        	</div>
@@ -108,6 +108,8 @@
 				</ul>
 				<form action="<c:url value="/board/list"/>" class="mb-3 mt-3" id="seachbox">
 					<div class="input-group">
+						<input type="hidden" name="boNum" value="${pm.cri.boNum}">
+						<input type="hidden" name="page" value="1">
 						<select name="type" class="form-control" id="search-select">
 							<c:if test='${pm.cri.type == "all" }'>selected</c:if>
 							<option value="all" <c:if test='${pm.cri.type == "all" }'>selected</c:if>>제목+작성자</option>
@@ -115,7 +117,6 @@
 							<option value="writer" <c:if test='${pm.cri.type == "writer" }'>selected</c:if>>작성자</option>
 						</select>
 						<input type="text" class="form-control" id="search-input" placeholder="검색어" name="search" value="${pm.cri.search}">
-						<input type="hidden" name="boNum" value="${pm.cri.boNum}">
 						<button class="btn btn-dark col-2" id="search-btn">검색</button>
 					</div>
 				</form>
