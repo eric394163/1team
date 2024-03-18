@@ -8,6 +8,6 @@ public interface UserService {
 
     UserVO login(LoginDTO loginDTO);
 
-    boolean signUp(SignUpDTO signUpDTO);
+    boolean signUp(SignUpDTO signUpDTO) throws Exception;
 
 }

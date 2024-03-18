@@ -11,4 +11,10 @@ public interface UserDAO {
 
     boolean insertMember(@Param("user") SignUpDTO signUpDTO);
 
+    UserVO selectUserById(@Param("id") String id);
+
+    UserVO selectUserByEmail(@Param("email") String email);
+
+    UserVO selectUserByNickname(@Param("nickname") String nickname);
+
 }
