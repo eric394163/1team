@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.kh.app.model.dto.SignUpDTO;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
-import kr.kh.app.utils.CheckErrAndMsg;
+// import kr.kh.app.utils.CheckErrAndMsg;
 
 import java.io.IOException;
 
@@ -35,28 +35,35 @@ public class SignUpServlet extends HttpServlet {
 
         SignUpDTO signUpDto = new SignUpDTO(id, pw, nickname, email, birth);
 
-        CheckErrAndMsg checkErrAndMsg = userService.signUp(signUpDto);
+        // CheckErrAndMsg checkErrAndMsg = userService.signUp(signUpDto);
 
-        System.out.println("checkErrAndMsg: " + checkErrAndMsg);
+        // System.out.println("checkErrAndMsg: " + checkErrAndMsg);
 
-        if (checkErrAndMsg.isTrueOrFalse()) {
-            request.setAttribute("msg", checkErrAndMsg.getMsg());
-            request.setAttribute("url", "/");
-        } else {
-            request.setAttribute("msg", checkErrAndMsg.getMsg());
-            request.setAttribute("url", "/signup");
-        }
-        // if (userService.signUp(signUpDto)) {
+        // // 밑에 try catch로 감까서 e.getMessage()
 
-        // request.setAttribute("msg", "회원가입 성공");
-
+        // if (checkErrAndMsg.isTrueOrFalse()) {
+        // request.setAttribute("msg", checkErrAndMsg.getMsg());
         // request.setAttribute("url", "/");
-
         // } else {
-        // request.setAttribute("msg", "회원가입 실패");
-
+        // request.setAttribute("msg", checkErrAndMsg.getMsg());
         // request.setAttribute("url", "/signup");
         // }
+        try {
+            if (userService.signUp(signUpDto)) {
+
+                request.setAttribute("msg", "회원가입 성공");
+
+                request.setAttribute("url", "/");
+
+            } else {
+                request.setAttribute("msg", "회원가입 실패");
+
+            }
+        } catch (Exception e) {
+            String msg = e.getMessage();
+            request.setAttribute("msg", msg);
+            request.setAttribute("url", "/signup");
+        }
 
         request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
     }

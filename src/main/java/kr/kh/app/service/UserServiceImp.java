@@ -59,11 +59,11 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public CheckErrAndMsg signUp(SignUpDTO signUpDTO) {
+	public boolean signUp(SignUpDTO signUpDTO) throws Exception {
 
-		CheckErrAndMsg checkErrAndMsg = new CheckErrAndMsg();
+		// CheckErrAndMsg checkErrAndMsg = new CheckErrAndMsg();
 
-		ArrayList<String> msgList = new ArrayList<String>(); // 메세지 스트링 메이커를 위한 리스트 
+		// ArrayList<String> msgList = new ArrayList<String>(); // 메세지 스트링 메이커를 위한 리스트
 
 		if (signUpDTO == null ||
 				signUpDTO.getId() == null ||
@@ -75,41 +75,48 @@ public class UserServiceImp implements UserService {
 				signUpDTO.getNickname() == null ||
 				!signUpDTO.getNickname().matches("^[a-zA-Z0-9가-힣_]{2,10}$") ||
 				signUpDTO.getBirth() == null) {
-			return null;
-		}
+			// return null;
+			return false;
+		} // 메서드로 따로 빼기
+
+		// return 대신에 throw new Exception("아이디가 중복됩니다.");
+
+		// 밑에 객체 없애고
 
 		if (userDao.selectUserById(signUpDTO.getId()) != null) {
-			checkErrAndMsg.setMsg("아이디가 중복됩니다.");
-			msgList.add("아이디");
-			checkErrAndMsg.setTrueOrFalse(false);
-			return checkErrAndMsg;
+			// checkErrAndMsg.setMsg("아이디가 중복됩니다.");
+			// // msgList.add("아이디");
+			// checkErrAndMsg.setTrueOrFalse(false);
+			// return checkErrAndMsg;
+			throw new Exception("아이디가 중복됩니다.");
 		}
 		if (userDao.selectUserByEmail(signUpDTO.getEmail()) != null) {
-			checkErrAndMsg.setMsg("이메일이 중복됩니다.");
-			checkErrAndMsg.setTrueOrFalse(false);
-			return checkErrAndMsg;
+			// checkErrAndMsg.setMsg("이메일이 중복됩니다.");
+			// checkErrAndMsg.setTrueOrFalse(false);
+			// return checkErrAndMsg;
+			throw new Exception("이메일이 중복됩니다.");
 		}
 		if (userDao.selectUserByNickname(signUpDTO.getNickname()) != null) {
-			checkErrAndMsg.setMsg("닉네임이 중복됩니다.");
-			checkErrAndMsg.setTrueOrFalse(false);
-			return checkErrAndMsg;
+			// checkErrAndMsg.setMsg("닉네임이 중복됩니다.");
+			// checkErrAndMsg.setTrueOrFalse(false);
+			// return checkErrAndMsg;
+			throw new Exception("닉네임이 중복됩니다.");
 		}
 
 		try {
 			if (userDao.insertMember(signUpDTO)) {
-				checkErrAndMsg.setTrueOrFalse(true);
-				checkErrAndMsg.setMsg("회원가입 성공");
-				return checkErrAndMsg;
+				// checkErrAndMsg.setTrueOrFalse(true);
+				// checkErrAndMsg.setMsg("회원가입 성공");
+				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			checkErrAndMsg.setTrueOrFalse(false);
-			checkErrAndMsg.setMsg("회원가입 실패");
-			return checkErrAndMsg;
+			// checkErrAndMsg.setTrueOrFalse(false);
+			// checkErrAndMsg.setMsg("회원가입 실패");
+			return false;
 
 		}
-		return null;
+		return false;
 
 	}
 }
-

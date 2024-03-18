@@ -127,6 +127,8 @@ prefix="c" %>
               regex: /^[a-zA-Z0-9가-힣_]{2,10}$/,
             },
             birth: {
+              //오늘 날짜 이전 선택 불가
+              max: new Date().toISOString().split("T")[0],
               required: true,
             },
           },
@@ -154,6 +156,7 @@ prefix="c" %>
                 "닉네임은 2~10자의 영문 대소문자, 숫자, 한글, 밑줄(_)로만 구성해야 합니다.",
             },
             birth: {
+              max: "오늘 날짜 이전으로 선택해주세요.",
               required: "필수 항목입니다.",
             },
           },
