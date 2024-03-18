@@ -5,7 +5,7 @@ prefix="c"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>로그인</title>
+    <title>PlayGround - 로그인</title>
     <link rel="shortcut icon" href="/team1/images/favicon.png" type="image/png">
 	<!-- 부트스트랩5 css/js -->
 	<link
