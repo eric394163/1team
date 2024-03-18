@@ -96,7 +96,7 @@ public class PostUpdateServlet extends HttpServlet {
 			}
 		}
 		
-		boolean res = postService.updateBoard(board, user, nums, fileList);
+		boolean res = postService.updateBoard(post, user, nums, fileList);
 		
 		if(res) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");
@@ -105,7 +105,7 @@ public class PostUpdateServlet extends HttpServlet {
 			request.setAttribute("msg", "게시글을 수정하지 못했습니다.");
 		}
 		request.setAttribute("url", "post/detail?num="+num);
-		request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 		
 	}
 

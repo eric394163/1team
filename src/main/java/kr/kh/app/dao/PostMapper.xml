@@ -78,4 +78,21 @@
 		insert into attach(attach_post_id, attach_link_check, attach_path)
 		values(#{attach.attach_post_id}, "1", #{attach.attach_path})
 	</insert>
+	
+	<delete id="deleteFile">
+		delete from attach where attach_num = #{attach_num}
+	</delete>
+	
+	<select id="selectFile" resultType="kr.kh.app.model.vo.AttachVO">
+		select * from attach where attach_num = #{attach_num}
+	</select>
+	
+	<update id="updatePost">
+		update post set
+			post_title = #{post.post_title}
+			post_content = #{post.post_content}
+			post_board_num = #{post.post_board.num}
+		where
+			post_id = #{post.post_id}
+	</update>
 </mapper>

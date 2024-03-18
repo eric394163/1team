@@ -28,7 +28,9 @@
 					    <label for="board" class="form-label">게시판 선택</label>
 					    <select class="form-control" id="board" name="board" required="required">
 					    	<c:forEach items="${list}" var="board">
-								<option value="${{board.board_id}}">${post.board.board_name}</option>
+								<option value="${board.board_id}" 
+									<c:if test="${board.board_category_num == category.category_id}">selected</c:if>>
+								</option>
 					    	</c:forEach>
 					    </select>
 					</div>
@@ -40,11 +42,14 @@
 					    <label for="content" class="form-label">내용</label>
 					    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" >${post.post_content}</textarea>
 					 </div>
-					<div class="mb-3 mt-3">
+					<div class="mb-3 mt-3 box-attachment">
 					    <label for="file" class="form-label" id="attachment">첨부파일</label>
 					    <c:forEach items="${fileList}" var="file">
 					    	<c:if test="${file.attach_link_check == 0}">
-			 					 <a href="<c:url value="/download?filename=${file.attach_path}" />" id="btnDel" class="form-control btn-del" data-target="${file.attach_path}">X</a>
+					    		<div class="form-control">
+						    		<span>${file.attach_path}</span>
+				 					 <a href="#" id="btnDel" class="btn-del" data-num="${file.attach_path}">&times;</a>
+					    		</div>
 					 		 </c:if>
 					    </c:forEach>
 					    <c:forEach begin="1" end="${3 - fileList.size()}">
@@ -67,52 +72,12 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-		let btnDel = document.querySelectorAll(".btn-del");
-		let attachment = document.querySelector("#attachment");
-		
-		btnDel.forEach((element) => {
-			element.onclick = function(e) {
-				e.preventDefault();
-				
-				// input hidden 으로 삭제할 첨부파일 번호를 추가
-				let num = this.getAttribute("data-target");
-				let str = `<input type="hidden" name="fi_num" value="\${num}">`;
-				let inputHidden = createElement('input', null, {
-					'type' : 'hidden',
-					'name' : 'fi_num',
-					'value' : `\${num}`
-				})
-				attachment.prepend(inputHidden);
-				
-				// span 태그를 삭제
-				this.parentElement.remove();
-				
-				// input file 추가
-				let inputFile = createElement('input', null, {
-					'type' : 'file',
-					'name' : 'file',
-					'class' : 'form-control'
-				});
-				attachment.append(inputFile);
-			}
-		});
-		
-		function createElement(tagName, text, attrs) {
-			let element = document.createElement(tagName);
-			if(text) {
-				let textNode = document.createTextNode(text);
-				element.append(textNode);
-			}
-			if(!attrs) {
-				return element;
-			}
-			for (key in attrs) {
-				let attr = document.createAttribute(key);
-				attr.value= attrs[key];
-				element.setAttributeNode(attr);
-			}
-			return element;
-		}
+	 	$(".btn-del").click(function() {
+			let num = $(this).data("num");
+			$(this).parents(".box-attachment").prepend(`<input type="hidden" name="delNums" value="\${num}">`);
+			$(this).parents(".box-attachment").append(`<input type="file" class="form-control" name="file">`);
+			$(this).parent().remove();
+		})
 		
 		$('#content').summernote({
 		  placeholder: 'Hello Bootstrap 4',

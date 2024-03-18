@@ -154,8 +154,46 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public boolean updateBoard(int board, UserVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
-		return false;
+	public boolean updateBoard(PostVO post, UserVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
+		if(post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
+			return false;
+		}
+		
+		if(user == null) {
+			return false;
+		}
+		
+		PostVO dbPost = postDao.selectPost(post.getPost_id());
+		
+		if(dbPost == null || !dbPost.getPost_user_id().equals(user.getUser_id())) {
+			return false;
+		}
+		
+		for(Part file : fileList) {
+			uploadFile(file, post.getPost_id());
+		}
+		
+		for(int attach_num : nums) {
+			AttachVO attachVo = postDao.selectFile(attach_num);
+			deleteFile(attachVo);
+		}
+		
+		return postDao.updatePost(post);
 	}
+
+	private void deleteFile(AttachVO fileVo) {
+		if(fileVo == null) {
+			return;
+		}
+		
+		File file = new File(uploadPath + fileVo.getAttach_path().replace('/', File.separatorChar));
+		
+		if(file.exists()) {
+			file.delete();
+		}
+		postDao.deleteFile(fileVo.getAttach_num());
+		
+	}
+
 
 }

@@ -28,6 +28,6 @@ public interface PostService {
 
 	ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
 
-	boolean updateBoard(int board, UserVO user, ArrayList<Integer> nums, ArrayList<Part> fileList);
+	boolean updateBoard(PostVO post, UserVO user, ArrayList<Integer> nums, ArrayList<Part> fileList);
 
 }
