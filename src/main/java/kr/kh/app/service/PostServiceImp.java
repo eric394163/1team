@@ -16,6 +16,7 @@ import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
 
@@ -150,6 +151,11 @@ public class PostServiceImp implements PostService {
 			cri = new Criteria();
 		}
 		return postDao.selectTotalPostCount(cri);
+	}
+
+	@Override
+	public boolean updateBoard(int board, UserVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
+		return false;
 	}
 
 }
