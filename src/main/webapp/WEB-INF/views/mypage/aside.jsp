@@ -41,40 +41,20 @@
         </div>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
-			<c:forEach items="${boardList}" var="board">
-				<c:if test="${board.board_category_num == 1}">
-					<li class="nav-item">
-						<c:url var="url1" value="/board/list">
-							<c:param name="boNum" value="${board.board_id}" />
-							<c:param name="page" value="1" />
-							<c:param name="type" value="all" />
-						</c:url>
-						<a href="${url1}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
-					</li>
-				</c:if>
-			</c:forEach>
-			<c:forEach items="${categoryList}" var="category" begin="1">
 			<li class="drop-down">
 				<a href="#drop" class="nav-link text-white clearfix">
-					<span class="float-start">${category.category_name}</span>
+					<span class="float-start">나의 활동내역</span>
 					<span class="float-end">▽</span>
 				</a>
 				<ul class="subnav">
-					<c:forEach items="${boardList}" var="board">
-						<c:if test="${category.category_id == board.board_category_num}">
-							<li>
-								<c:url var="url2" value="/board/list">
-									<c:param name="boNum" value="${board.board_id}" />
-									<c:param name="page" value="1" />
-									<c:param name="type" value="all" />
-								</c:url>
-								<a href="${url2}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
-							</li>
-						</c:if>
-					</c:forEach>
+					<li><a href="<c:url value="/mypage/postlist" />" class="nav-link text-white">내가 쓴 글 확인</a></li>
+					<li><a href="<c:url value="/mypage/commentlist" />" class="nav-link text-white">내가 댓글 쓴 글 확인</a></li>
+					<li><a href="<c:url value="/mypage/likelist" />" class="nav-link text-white">좋아요 누른 글 확인</a></li>
 				</ul>
 			</li>
-			</c:forEach>
+			<li class="nav-item"><a href="<c:url value="/mypage/signupdate" />" class="nav-link text-white">나의 정보수정</a></li>
+			<li class="nav-item"><a href="<c:url value="/mypage/blocklist" />" class="nav-link text-white">내가 차단한 목록보기</a></li>
+			<li class="nav-item"><a href="<c:url value="/mypage/deleteid" />" class="nav-link text-white">회원 탈퇴</a></li>
 		</ul>
 		<c:if test="${user != null && (user.user_role == '관리자' || user_role == '운영자')}">
         	<hr />
@@ -85,6 +65,36 @@
       </div>
     </aside>
     <script type="text/javascript">
+    	//주소 담는 변수
+    	let url = location.href;
+    	
+    	if(url.indexOf('postlist') != -1){ //주소에 postlist를 갖고 있다면(=내가 쓴 글 확인 페이지라면)
+    		//첫번째 li태그의 a태그에 active 처리
+    		$('.subnav li').eq(0).find('a').removeClass('text-white');
+    		$('.subnav li').eq(0).find('a').addClass('active');
+    	}else if(url.indexOf('commentlist') != -1){ //주소에 commentlist를 갖고 있다면(=내가 댓글 쓴 글 확인 페이지라면)
+    		//두번째 li태그의 a태그에 active 처리
+    		$('.subnav li').eq(1).find('a').removeClass('text-white');
+    		$('.subnav li').eq(1).find('a').addClass('active');
+    	}else if(url.indexOf('likelist') != -1){ //주소에 likelist를 갖고 있다면(=좋아요 누른 글 확인 페이지라면)
+    		//세번째 li태그의 a태그에 active 처리
+    		$('.subnav li').eq(2).find('a').removeClass('text-white');
+    		$('.subnav li').eq(2).find('a').addClass('active');
+    	}else if(url.indexOf('signupdate') != -1){ //주소에 signupdate를 갖고 있다면(=나의 정보수정 페이지라면)
+    		//해당 a태그에 active 처리
+    		$('.nav-pills .nav-item').eq(0).find('a').removeClass('text-white');
+    		$('.nav-pills .nav-item').eq(0).find('a').addClass('active');
+    	}else if(url.indexOf('blocklist') != -1){ //주소에 blocklist를 갖고 있다면(=내가 차단한 목록보기 페이지라면)
+    		//해당 a태그에 active 처리
+    		$('.nav-pills .nav-item').eq(1).find('a').removeClass('text-white');
+    		$('.nav-pills .nav-item').eq(1).find('a').addClass('active');
+    	}else if(url.indexOf('deleteid') != -1){ //주소에 blocklist를 갖고 있다면(=내가 차단한 목록보기 페이지라면)
+    		//해당 a태그에 active 처리
+    		$('.nav-pills .nav-item').eq(2).find('a').removeClass('text-white');
+    		$('.nav-pills .nav-item').eq(2).find('a').addClass('active');
+    	}
+    
+    
 		//초기실행 - 드롭다운메뉴의 후손인 nav-link가 active클래스를 갖고 있다면 처음에 열려 있게 처리
 		$(".drop-down").each(function(index){
 			var has = $(this).find('.nav-link').hasClass('active');

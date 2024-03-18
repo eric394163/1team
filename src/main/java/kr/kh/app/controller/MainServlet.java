@@ -34,6 +34,8 @@ public class MainServlet extends HttpServlet {
 		} catch (Exception e) {
 			page = 1;
 		}
+		
+		
 
 		Criteria cri = new Criteria(page, 10);
 
@@ -48,9 +50,18 @@ public class MainServlet extends HttpServlet {
 	}
 
 	public static void commonAsideInfo(HttpServletRequest request) {
+		//파라미터 받기
+		Integer boNum;
+		try {
+			boNum = Integer.parseInt(request.getParameter("boNum"));
+		}catch(Exception e) {
+			boNum = 0;
+		}
+		
 		ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
 		ArrayList<BoardVO> boardList = commonService.getBoardList();
 		request.setAttribute("categoryList", categoryList);// 화면에 전송
 		request.setAttribute("boardList", boardList);// 화면에 전송
+		request.setAttribute("boNum", boNum);// 화면에 전송
 	}
 }

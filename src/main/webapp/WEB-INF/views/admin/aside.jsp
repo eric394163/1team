@@ -41,50 +41,66 @@
         </div>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
-			<c:forEach items="${boardList}" var="board">
-				<c:if test="${board.board_category_num == 1}">
-					<li class="nav-item">
-						<c:url var="url1" value="/board/list">
-							<c:param name="boNum" value="${board.board_id}" />
-							<c:param name="page" value="1" />
-							<c:param name="type" value="all" />
-						</c:url>
-						<a href="${url1}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
-					</li>
-				</c:if>
-			</c:forEach>
-			<c:forEach items="${categoryList}" var="category" begin="1">
 			<li class="drop-down">
 				<a href="#drop" class="nav-link text-white clearfix">
-					<span class="float-start">${category.category_name}</span>
+					<span class="float-start">카테고리관리</span>
 					<span class="float-end">▽</span>
 				</a>
 				<ul class="subnav">
-					<c:forEach items="${boardList}" var="board">
-						<c:if test="${category.category_id == board.board_category_num}">
-							<li>
-								<c:url var="url2" value="/board/list">
-									<c:param name="boNum" value="${board.board_id}" />
-									<c:param name="page" value="1" />
-									<c:param name="type" value="all" />
-								</c:url>
-								<a href="${url2}" class="${boNum == board.board_id ? 'nav-link active' : 'nav-link text-white'}">${board.board_name}</a>
-							</li>
-						</c:if>
-					</c:forEach>
+					<li class="categoryinsert"><a href="<c:url value="/admin/categoryinsert" />" class="nav-link text-white">카테고리 등록</a></li>
+					<li class="categoryupdate"><a href="<c:url value="/admin/categoryupdate" />" class="nav-link text-white">카테고리 수정/삭제</a></li>
 				</ul>
 			</li>
-			</c:forEach>
+			<li class="drop-down">
+				<a href="#drop" class="nav-link text-white clearfix">
+					<span class="float-start">게시판관리</span>
+					<span class="float-end">▽</span>
+				</a>
+				<ul class="subnav">
+					<li class="boardinsert"><a href="<c:url value="/admin/boardinsert" />" class="nav-link text-white">게시판 등록</a></li>
+					<li class="boardupdat"><a href="<c:url value="/admin/boardupdate" />" class="nav-link text-white">게시판 수정/삭제</a></li>
+					<li class="boardreport"><a href="<c:url value="/admin/boardreport" />" class="nav-link text-white">신고게시판</a></li>
+				</ul>
+			</li>
+			<li class="drop-down">
+				<a href="#drop" class="nav-link text-white clearfix">
+					<span class="float-start">게시글관리</span>
+					<span class="float-end">▽</span>
+				</a>
+				<ul class="subnav">
+					<li class="postdelete"><a href="<c:url value="/admin/postdelete" />" class="nav-link text-white">게시글 삭제</a></li>
+				</ul>
+			</li>
+			<li class="drop-down">
+				<a href="#drop" class="nav-link text-white clearfix">
+					<span class="float-start">유저관리</span>
+					<span class="float-end">▽</span>
+				</a>
+				<ul class="subnav">
+					<li class="usermanage"><a href="<c:url value="/admin/usermanage" />" class="nav-link text-white">운영자 관리</a></li>
+					<li class="userblock"><a href="<c:url value="/admin/userblock" />" class="nav-link text-white">회원 탈퇴</a></li>
+				</ul>
+			</li>
 		</ul>
-		<c:if test="${user != null && (user.user_role == '관리자' || user_role == '운영자')}">
-        	<hr />
-	        <div class="manage-btn">
-        		<a class="nav-link" href="<c:url value="/admin/categoryinsert" />">관리자 페이지</a>
-	        </div>
-        </c:if>
       </div>
     </aside>
     <script type="text/javascript">
+    	//주소 담는 변수
+    	let url = location.href;
+    	
+    	//초기실행 - 드롭다운메뉴의 후손인 subnav의 li가 갖은 클래스로 주소와 같은지 확인 후 같으면 a태그에 클래스 처리
+		$(".drop-down .subnav li").each(function(index){
+			//클래스명 담는 변수
+			let className = $(this).attr("class");
+			
+			//클래스명과 같은 주소라면
+			if(url.indexOf(className) != -1){ 
+	    		$(this).find('a').removeClass('text-white');
+	    		$(this).find('a').addClass('active');
+	    	}
+		});
+    	
+    
 		//초기실행 - 드롭다운메뉴의 후손인 nav-link가 active클래스를 갖고 있다면 처음에 열려 있게 처리
 		$(".drop-down").each(function(index){
 			var has = $(this).find('.nav-link').hasClass('active');

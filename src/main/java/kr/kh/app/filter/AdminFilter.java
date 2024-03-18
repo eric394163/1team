@@ -14,11 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import kr.kh.app.model.vo.UserVO;
 
 @WebFilter({
-	"/post/insert",
-	"/mypage/postlist", "/mypage/commentlist", "/mypage/likelist",
-	"/mypage/signupdate", "/mypage/blocklist", "/mypage/deleteid"
+	"/admin/categoryinsert", "/admin/categoryupdate", "/admin/boardinsert", "/admin/boardupdate",
+	"/admin/boardreport", "/admin/postdelete", "/admin/usermanage", "/admin/userblock"
 })
-public class MemberFilter extends HttpFilter implements Filter {
+public class AdminFilter extends HttpFilter implements Filter {
 	
 	private static final long serialVersionUID = 1L;
        
@@ -31,6 +30,13 @@ public class MemberFilter extends HttpFilter implements Filter {
 			request.setAttribute("url", "login");
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 			return;			
+		}
+		
+		if(user != null && user.getUser_role() == "사용자") {
+			request.setAttribute("msg", "관리자/운영자만 접속할 수 있는 서비스입니다.");
+			request.setAttribute("url", "");
+			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+			return;		
 		}
 		
 		chain.doFilter(request, response);

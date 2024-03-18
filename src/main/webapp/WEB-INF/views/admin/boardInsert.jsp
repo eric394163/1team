@@ -5,7 +5,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>PlayGround - 마이페이지 - 내가 쓴 글 확인</title>
+    <title>PlayGround - 관리자페이지 - 게시판 등록</title>
     <link rel="shortcut icon" href="/team1/images/favicon.png" type="image/png">
 	<!-- 부트스트랩5 css/js -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,11 +17,11 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main-wrap">
 		<div class="inner-wrap">
-			<jsp:include page="/WEB-INF/views/mypage/aside.jsp" />
+			<jsp:include page="/WEB-INF/views/admin/aside.jsp" />
 			<div class="main-contents">
 				<!-- 내용채우기 -->
 				<div class="h2_title_wrap"><!-- 타이틀영역 -->
-	        		<h2>마이페이지 - 내가 쓴 게시글 확인</h2>
+	        		<h2>관리자페이지 - 게시판 등록</h2>
 	        	</div>
 			</div>
 		</div>

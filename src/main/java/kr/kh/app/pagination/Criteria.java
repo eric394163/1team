@@ -36,6 +36,5 @@ public class Criteria {
 		this.page = page;
 		this.perPageNum = perPageNum;
 		this.search = search;
-
 	}
 }
