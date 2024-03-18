@@ -46,7 +46,7 @@
 									<td>${post.post_id}</td>
 									<td>${board.board_name}</td>
 									<td>
-										<c:url var="url" value="/board/detail">
+										<c:url var="url" value="/post/detail">
 											<c:param name="num" value="${post.post_id}" />
 										</c:url>
 										<a href="${url}">${post.post_title}</a>
