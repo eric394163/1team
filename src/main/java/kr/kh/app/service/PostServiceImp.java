@@ -16,6 +16,7 @@ import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
 
@@ -150,6 +151,40 @@ public class PostServiceImp implements PostService {
 			cri = new Criteria();
 		}
 		return postDao.selectTotalPostCount(cri);
+	}
+
+	@Override
+	public boolean deletePost(int num, UserVO user) {
+		if(user == null) {
+			return false;
+		}
+		
+		PostVO post = postDao.selectPost(num);
+		
+		if(post == null || !post.getPost_user_id().equals(user.getUser_id())) {
+			return false;
+		}
+		
+		ArrayList<AttachVO> fileList = postDao.selectFileByPost_id(num);
+		for (AttachVO file : fileList) {
+			deleteFile(file);
+		}
+		
+		return postDao.deletePost(num);
+	}
+
+	private void deleteFile(AttachVO fileVo) {
+		if(fileVo == null) {
+			return;
+		}
+		
+		File file = new File(uploadPath + fileVo.getAttach_path().replace('/', File.separatorChar));
+		
+		if(file.exists()) {
+			file.delete();
+		}
+		postDao.deleteFile(fileVo.getAttach_num());
+		
 	}
 
 }

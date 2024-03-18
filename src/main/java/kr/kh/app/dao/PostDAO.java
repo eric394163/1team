@@ -30,6 +30,10 @@ public interface PostDAO {
 	void insertFile(@Param("attach")AttachVO attachVo);
 
 	void insertLink(@Param("attach")AttachVO attach);
+
+	boolean deletePost(@Param("num")int num);
+
+	void deleteFile(@Param("attach_num")int attach_num);
 	
 	
 }

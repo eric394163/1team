@@ -50,34 +50,33 @@
 								<button class="btn btn-outline-success btn-up col=6">추천(${post.upvotes})</button>
 								<button class="btn btn-outline-success btn-down col=6">비추천(${post.downvotes})</button>
 						 </div>
-						 
 						 <div class="mb-3 mt-3">
 						    <label for="content" class="form-label">내용</label>
 						    <div class="form-control" style="min-height : 300px;">${post.post_content}</div>
 						 </div>
-						<div class="mb-3 mt-3">
-						    <label for="file" class="form-label">첨부파일</label>
-						    <c:choose>
-								<c:when test="">
-									<a href="<c:url value=""/>"></a>
-								</c:when>
-								<c:otherwise>
-									<div>첨부파일 없음</div>
-								</c:otherwise>
-							</c:choose>
-					    	<c:if test="${attach.attach_link_check == 0}">
-						    	<c:forEach items="${fileList}" var="file">
-						    		<a href="<c:url value="/download?filename=${attach.attach_path}" />" class="form-control" download="${attach.attach_path}">${attach.attach_path}</a>
-						    	</c:forEach>
-					    	</c:if>
-						 </div>
-						 <div class="mb-3 mt-6">
-						    <label for="youtube" class="form-label">링크</label>
-						    	<c:if test="${attach.attach_link_check == 1}">
-							    	<a href="<c:url value="${attach.attach_path}" />"></a>
-						    	</c:if>
-						 </div>
+						 <c:if test="${fileList != null && fileList.size() != 0}">
+						 	 <div class="mb-3 mt-3">
+						 		 <label for="file" class="form-label">첨부파일</label>
+						 			 <c:forEach items="${fileList}" var="file">
+								 		 <c:if test="${file.attach_link_check == 0}">
+						 					 <a href="<c:url value="/download?filename=${file.attach_path}" />" class="form-control" download="${file.attach_path}">${file.attach_path}</a>
+								 		 </c:if>
+						 			 </c:forEach>
+						 	 </div>
+							 <div class="mb-3 mt-6">
+							    <label for="youtube" class="form-label">링크</label>
+							    		<c:forEach items="${fileList}" var="file">
+							    		<c:if test="${file.attach_link_check == 1}">
+							    			<a href="<c:url value="${file.attach_path}" />" class="form-control">${file.attach_path}</a> 
+							    		</c:if>
+						    		</c:forEach>
+							 </div>
+						 </c:if>
 						 <a href="<c:url value="/post/list" />" class="btn btn-outline-dark">목록으로</a>
+						 <c:if test="${post.post_user_id == user.user_id}">
+							 <a href="<c:url value="/post/update?num=${post.post_id}"/>" class="btn btn-outline-danger">수정</a>
+							 <a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
+						 </c:if>
 					</div>
 				</c:when>
 				<c:otherwise>

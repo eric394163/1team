@@ -7,6 +7,7 @@ import javax.servlet.http.Part;
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.Criteria;
 
 public interface PostService {
@@ -26,5 +27,7 @@ public interface PostService {
 	int getTotalPostCount(Criteria cri);
 
 	ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
+
+	boolean deletePost(int num, UserVO user);
 
 }
