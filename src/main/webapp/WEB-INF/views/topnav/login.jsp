@@ -12,7 +12,7 @@ prefix="c"%>
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 		rel="stylesheet">
 	<link rel="stylesheet" href="/team1/css/common.css">
-	<link rel="stylesheet" href="/team1/css/style.css">
+	<link rel="stylesheet" href="/team1/css/loginStyle.css">
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,15 +24,19 @@ prefix="c"%>
         <jsp:include page="/WEB-INF/views/common/aside.jsp" />
         <!-- 로그인 폼 추가 -->
         <div class="main-contents">
-          <div class="login-form">
+          <div class="login-form login">
+            <div class="login_title_wrap">
+            	<h2>PLAY GROUND 로그인</h2>
+            </div>
+            <p>로그인 후 더 편하게 PLAY GROUND를 이용해 보세요.</p>
             <form action="<%=request.getContextPath()%>/login" method="post">
               <div class="form-group">
                 <label for="username">아이디:</label>
                 <input
                   type="text"
                   id="id"
-                  placeholder="아이디"
                   name="id"
+                  class="form-control"
                   required
                 />
               </div>
@@ -41,14 +45,18 @@ prefix="c"%>
                 <input
                   type="password"
                   id="pw"
-                  placeholder="비밀번호"
                   name="pw"
+                  class="form-control"
                   required
                 />
               </div>
-              <div class="form-actions">
-                <button type="submit">로그인</button>
+              <div class="form-actions login">
+                <button type="submit" class="btn btn-dark">로그인</button>
               </div>
+              <ul class="bottom-text">
+              	<li><a href="<c:url value="/findId"/>">아이디찾기</a></li>
+              	<li><a href="<c:url value="/findPw"/>">비밀번호찾기</a></li>
+              </ul>
             </form>
           </div>
         </div>

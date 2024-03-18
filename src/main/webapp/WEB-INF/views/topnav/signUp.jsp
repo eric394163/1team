@@ -12,7 +12,7 @@ prefix="c" %>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/team1/css/common.css" />
-    <link rel="stylesheet" href="/team1/css/style.css" />
+    <link rel="stylesheet" href="/team1/css/loginStyle.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- jQuery Validation  -->
@@ -26,7 +26,10 @@ prefix="c" %>
         <jsp:include page="/WEB-INF/views/common/aside.jsp" />
         <div class="main-contents">
           <div class="login-form">
-            <h2>회원가입</h2>
+            <div class="login_title_wrap">
+            	<h2>PLAY GROUND 회원가입</h2>
+            </div>
+            <p>** 모든 입력창은 작성해줘야 합니다.</p>
             <form
               action="<%=request.getContextPath()%>/signup"
               method="post"
@@ -94,7 +97,7 @@ prefix="c" %>
               </div>
 
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary">가입하기</button>
+                <button type="submit" class="btn btn-dark">가입하기</button>
               </div>
             </form>
           </div>
@@ -127,7 +130,7 @@ prefix="c" %>
               regex: /^[a-zA-Z0-9가-힣_]{2,10}$/,
             },
             birth: {
-              //오늘 날짜 이전 선택 불가
+              //오늘 날짜 이후 선택 불가
               max: new Date().toISOString().split("T")[0],
               required: true,
             },
