@@ -7,15 +7,24 @@
 .table td:nth-child(3){ /* 제목 내용 셀만 */
 	text-align: left; /* 왼쪽 정렬 처리 */
 }
+.table td:nth-child(3) a{ /* 글자가 길면 잘리게 처리 */
+	/* 영역줘야 글자줄임 가능 */
+	display: block; width: 340px; max-width: 100%; height: 21px;
+	
+	/* 글자줄임 공식 */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .table > tbody{ /* 테이블 맨 아래 선만 2px */
 	border-bottom: 2px solid #333;
 }
 /* 셀 폭 내용에 따라 바뀌지 않게 지정 */
-.table th:nth-child(1), .table td:nth-child(1){ width: 10%; }
-.table th:nth-child(2), .table td:nth-child(2){ width: 15%; }
-.table th:nth-child(3), .table td:nth-child(3){ width: 50%; }
-.table th:nth-child(4), .table td:nth-child(4){ width: 15%; }
-.table th:nth-child(5), .table td:nth-child(5){ width: 10%; }
+.table th:nth-child(1), .table td:nth-child(1){ width: 80px; }
+.table th:nth-child(2), .table td:nth-child(2){ width: 150px; }
+.table th:nth-child(3), .table td:nth-child(3){ width: 360px; }
+.table th:nth-child(4), .table td:nth-child(4){ width: 110px; }
+.table th:nth-child(5), .table td:nth-child(5){ width: 80px; }
 .table a{ color: #000; text-decoration: none; }
 .table a:hover{ text-decoration: underline; }
 
@@ -37,3 +46,22 @@
 }
 #search-input{ width: 60%; }
 #search-btn{ width: 15%; }
+
+
+/* 인기게시글 */
+.popular-list{ width: 100%; margin-bottom: 80px; }
+.popular-list ul{ 
+	list-style: none; padding: 0; margin: 0; margin-bottom: 10px;
+	display: flex;
+}
+.popular-list li{ margin-right: 10px; }
+.popular-list a{
+	display: inline-block; padding: 6px 30px;
+	border: 2px solid #999; color: #999;
+	border-radius: 50px; text-decoration: none; 
+	font-weight: bold;
+}
+.popular-list a.active{
+	border: 2px solid #000; color: #000;
+}
+.popular-list .like-area{ display: none; }
