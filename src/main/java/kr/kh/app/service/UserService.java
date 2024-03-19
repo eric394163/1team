@@ -12,4 +12,6 @@ public interface UserService {
 
 	String checkId(String id);
 
+	boolean updateSignUp(SignUpDTO signUpDto) throws Exception;
+
 }

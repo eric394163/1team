@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+body{ background-color: #212529; }
+
 /* 전체 틀 구역 */
 .main-wrap {
   min-width: 1200px;

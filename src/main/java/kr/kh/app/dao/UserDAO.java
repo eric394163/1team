@@ -17,4 +17,6 @@ public interface UserDAO {
 
     UserVO selectUserByNickname(@Param("nickname") String nickname);
 
+	boolean updateUser(@Param("user")SignUpDTO signUpDTO);
+
 }

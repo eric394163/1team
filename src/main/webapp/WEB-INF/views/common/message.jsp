@@ -5,10 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	body{ background-color: #212529; }
-</style>
+<title>PlayGround - 경고창</title>
 </head>
 <body>
 	<script type="text/javascript">

@@ -121,4 +121,49 @@ public class UserServiceImp implements UserService {
 		UserVO user = userDao.selectUser(id);
 		return user == null ? "1" : "";
 	}
+
+	@Override
+	public boolean updateSignUp(SignUpDTO signUpDTO) throws Exception {
+		if (signUpDTO == null ||
+				signUpDTO.getId() == null ||
+				!signUpDTO.getId().matches("^\\w{6,12}$") ||
+				signUpDTO.getPw() == null ||
+				!signUpDTO.getPw().matches("^[a-zA-Z0-9!@#]{6,15}$") ||
+				signUpDTO.getEmail() == null ||
+				!signUpDTO.getEmail().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$") ||
+				signUpDTO.getNickname() == null ||
+				!signUpDTO.getNickname().matches("^[a-zA-Z0-9가-힣_]{2,10}$") ||
+				signUpDTO.getBirth() == null) {
+			return false;
+		} 
+		UserVO user = userDao.selectUser(signUpDTO.getId());
+		System.out.println(signUpDTO.getId());
+
+		if(!user.getUser_id().equals(signUpDTO.getId() )) {
+			if (userDao.selectUserById(signUpDTO.getId()) != null) {
+				throw new Exception("아이디가 중복됩니다.");
+			}
+		}
+		if(!user.getUser_email().equals(signUpDTO.getEmail())) {
+			if (userDao.selectUserByEmail(signUpDTO.getEmail()) != null) {
+				throw new Exception("이메일이 중복됩니다.");
+			}
+		}
+		if(!user.getUser_nickname().equals(signUpDTO.getNickname())) {
+			if (userDao.selectUserByNickname(signUpDTO.getNickname()) != null) {
+				throw new Exception("닉네임이 중복됩니다.");
+			}
+		}
+
+		try {
+			if (userDao.updateUser(signUpDTO)) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+
+		}
+		return false;
+	}
 }
