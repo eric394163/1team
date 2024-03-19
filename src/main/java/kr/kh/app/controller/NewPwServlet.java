@@ -17,8 +17,8 @@ import kr.kh.app.service.CommonServiceImp;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
 
-@WebServlet("/findId")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/newPw")
+public class NewPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private UserService userService = new UserServiceImp();
@@ -29,19 +29,31 @@ public class FindIdServlet extends HttpServlet {
 		ArrayList<BoardVO> boardList = commonService.getBoardList();
 		request.setAttribute("category", categoryList);//화면에 전송
 		request.setAttribute("board", boardList);//화면에 전송
-		request.getRequestDispatcher("/WEB-INF/views/topnav/findId.jsp").forward(request, response);
+		String id = request.getParameter("id");
+		request.setAttribute("id", id);
+		request.getRequestDispatcher("/WEB-INF/views/topnav/newPw.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String birth = request.getParameter("birth");
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String pw2 = request.getParameter("pw2");
 		
-		UserVO user = userService.getUser(email,birth);
+		UserVO user = userService.getUser(id);
 		if(user == null) {
-			request.setAttribute("msg", "등록된 정보가 없습니다.");
-			request.setAttribute("url", "/findId");
-		} else {
-			request.setAttribute("msg", "아이디 : " + user.getUser_id());
+			request.setAttribute("msg", "등록된 아이디가 없습니다.");
+			request.setAttribute("url", "/findPw");
+		} else if(!pw.equals(pw2)) {
+			request.setAttribute("msg", "비밀번호와 비밀번호확인이 다릅니다");
+			request.setAttribute("url", "/findPw");
+		}
+		user.setUser_pw(pw);
+		boolean res = userService.updateUserPw(user);
+		if(!res) {
+			request.setAttribute("msg", "비밀번호 변경에 실패했습니다.");
+			request.setAttribute("url", "/findPw");
+		}else {
+			request.setAttribute("msg", "비밀번호가 변경되었습니다.");
 			request.setAttribute("url", "/login");
 		}
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);

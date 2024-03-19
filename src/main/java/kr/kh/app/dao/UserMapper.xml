@@ -7,6 +7,9 @@
         user_birth, user_state_date) VALUES(#{user.id},#{user.pw},#{user.nickname}, #{user.email},
         #{user.birth}, now()) </insert>
 	<select id="selectFindUser" resultType="kr.kh.app.model.vo.UserVO">
-		select * from user where user_email = #{user_email}
+		select * from user where user_email = #{user_email} and user_birth = #{user_birth}
 	</select>
+	<update id="updateUserPw">
+		update user set user_pw = #{user.user_pw} where user_id = #{user.user_id}
+	</update>
 </mapper>

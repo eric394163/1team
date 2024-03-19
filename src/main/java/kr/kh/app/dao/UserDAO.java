@@ -11,6 +11,8 @@ public interface UserDAO {
 
     boolean insertMember(@Param("user") SignUpDTO signUpDTO);
 
-	UserVO selectFindUser(@Param("user_email")String email);
+	UserVO selectFindUser(@Param("user_email")String email,@Param("user_birth") String birth);
+
+	boolean updateUserPw(@Param("user")UserVO user);
 
 }

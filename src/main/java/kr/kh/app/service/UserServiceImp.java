@@ -29,6 +29,10 @@ public class UserServiceImp implements UserService {
         }
     }
 
+    private boolean checkString(String str) {
+		return str != null && str.length() != 0;
+	}
+    
     @Override
     public UserVO login(LoginDTO loginDTO) {
         if (loginDTO == null) {
@@ -75,11 +79,26 @@ public class UserServiceImp implements UserService {
     }
 
 	@Override
-	public UserVO getUser(String email) {
-		if(email == null) {
+	public UserVO getUser(String email, String birth) {
+		if(!checkString(email) || !checkString(birth)) {
 			return null;
 		}
-		return userDao.selectFindUser(email);
+		return userDao.selectFindUser(email, birth);
 	}
+
+	@Override
+	public UserVO getUser(String id) {
+		if(!checkString(id)) return null;
+		return userDao.selectUser(id);
+	}
+
+	@Override
+	public boolean updateUserPw(UserVO user) {
+		if(user == null || 
+			!checkString(user.getUser_id()) ||
+			!checkString(user.getUser_pw())) return false;
+		return userDao.updateUserPw(user);
+	}
+
 
 }

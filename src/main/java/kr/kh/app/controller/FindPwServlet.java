@@ -17,8 +17,8 @@ import kr.kh.app.service.CommonServiceImp;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
 
-@WebServlet("/findId")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/findPw")
+public class FindPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private UserService userService = new UserServiceImp();
@@ -29,20 +29,24 @@ public class FindIdServlet extends HttpServlet {
 		ArrayList<BoardVO> boardList = commonService.getBoardList();
 		request.setAttribute("category", categoryList);//화면에 전송
 		request.setAttribute("board", boardList);//화면에 전송
-		request.getRequestDispatcher("/WEB-INF/views/topnav/findId.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/topnav/findPw.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
 		String email = request.getParameter("email");
 		String birth = request.getParameter("birth");
 		
-		UserVO user = userService.getUser(email,birth);
+		UserVO user = userService.getUser(id);
 		if(user == null) {
-			request.setAttribute("msg", "등록된 정보가 없습니다.");
-			request.setAttribute("url", "/findId");
+			request.setAttribute("msg", "등록된 아이디가 없습니다.");
+			request.setAttribute("url", "/findPw");
+		} else if(!email.equals(user.getUser_email()) || !birth.equals(user.transDate())) {
+			request.setAttribute("msg", "입력한 정보가 등록된 정보와 다릅니다.");
+			request.setAttribute("url", "/findPw");
 		} else {
-			request.setAttribute("msg", "아이디 : " + user.getUser_id());
-			request.setAttribute("url", "/login");
+			request.setAttribute("msg", "새 비밀번호를 설정해주세요.");
+			request.setAttribute("url", "/newPw?id=" + id);
 		}
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 	}

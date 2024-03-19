@@ -12,6 +12,8 @@ prefix="c"%>
 <link rel="stylesheet" href="/team1/css/common.css">
 <link rel="stylesheet" href="/team1/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery Validation  -->
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
 </head>
@@ -24,16 +26,16 @@ prefix="c"%>
 				<h1>아이디 찾기</h1>
 				<hr>
 				<div class="login-form">
-					<form action="<c:url value="/findId"/>" method="post">
+					<form action="<c:url value="/findId"/>" method="post" id="find-id">
 						<div class="form-group">
 							<label for="email">이메일:</label>
-							<input type="text" id="email" placeholder="이메일" name="email">
-							<label class="error-email" class="error text-danger" for="email"></label>
+							<input type="text" class="form-control" id="email" placeholder="이메일" name="email">
+							<label class="email-error" class="error text-danger" for="email"></label>
 						</div>
 						<div class="form-group">
 							<label for="birth">생년월일:</label>
-							<input type="text" id="birth" placeholder="yyyy-MM-dd" name="birth">
-							<label class="error-birth" class="error text-danger" for="birth"></label>
+							<input type="text" class="form-control" id="birth" placeholder="yyyy-MM-dd" name="birth">
+							<label class="birth-error" class="error text-danger" for="birth"></label>
 						</div>
 						<div class="form-actions">
 							<button class="btn btn-outline-success">아이디 찾기</button>
@@ -45,36 +47,38 @@ prefix="c"%>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script type="text/javascript">
-		$("form").validate({
-			rules : {
-				birth : {
-					required : true,
-					regex : /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/
-				},
-				email : {
-					required : true,
-					email : true
+		$(document).ready(function(){
+			$("#find-id").validate({
+				rules : {
+					email : {
+						required : true,
+						email : true
+					},
+					birth : {
+						required : true,
+						regex : /(^\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/
+					}
+				}, 
+				messages : {
+					email : {
+						required : "필수 항목입니다.",
+						email : "이메일 형식이 아닙니다."
+					},
+					birth : {
+						required : "필수 항목입니다.",
+						regex : "yyyy-MM-dd형식으로 입력해야 합니다."
+					}
 				}
-			}, 
-			messages : {
-				birth : {
-					required : "필수 항목입니다.",
-					regex : "yyyy-MM-dd형식으로 입력해야 합니다."
-				},
-				me_email : {
-					required : "필수 항목입니다.",
-					email : "이메일 형식이 아닙니다."
-				}
-			}
+			});
+			$.validator.addMethod(
+					"regex",
+					function (value, element, regexp){
+						var re= new RegExp(regexp);
+						return this.optional(element) || re.test(value);
+					},
+					"정규표현식에 맞지 않습니다."
+			)
 		});
-		$.validator.addMethod(
-				"regex",
-				function (value, element, regexp){
-					var re= new RegExp(regexp);
-					return this.optional(element) || re.test(value);
-				},
-				"정규표현식에 맞지 않습니다."
-		)
 </script>
 </body>
 </html>

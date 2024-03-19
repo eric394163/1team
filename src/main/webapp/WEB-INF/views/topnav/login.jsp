@@ -13,8 +13,7 @@ prefix="c"%>
 		rel="stylesheet">
 	<link rel="stylesheet" href="/team1/css/common.css">
 	<link rel="stylesheet" href="/team1/css/style.css">
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
@@ -51,7 +50,7 @@ prefix="c"%>
               </div>
               <div class="form-actions">
                 <a href="<c:url value="/findId"/>" class="btn btn-outline-primary col-5">아이디찾기</a>
-                <a href="#" class="btn btn-outline-primary col-5">비밀번호찾기</a>
+                <a href="<c:url value="/findPw"/>" class="btn btn-outline-primary col-5">비밀번호찾기</a>
               </div>
             </form>
           </div>
