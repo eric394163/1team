@@ -26,11 +26,9 @@
 					<hr>
 					<div class="mb-3 mt-3">
 					    <label for="board" class="form-label">게시판 선택</label>
-					    <select class="form-control" id="board" name="board" required="required">
+					    <select class="form-control" id="board" name="board">
 					    	<c:forEach items="${list}" var="board">
-								<option value="${board.board_id}" 
-									<c:if test="${board.board_category_num == category.category_id}">selected</c:if>>
-								</option>
+								<option value="${board.board_id}"  <c:if test="${post.post_board_num == board.board_id}">selected</c:if>>${board.board_name}</option>
 					    	</c:forEach>
 					    </select>
 					</div>
@@ -66,6 +64,7 @@
 				    		</c:forEach>
 					 </div>					 
 					 <button class="btn btn-outline-warning col-12 mb-3">게시글 수정</button>
+					 <a href="<c:url value="/post/list" />" class="btn btn-outline-dark">목록으로</a>
 				</form>				
 			</div>
 		</div>
@@ -75,12 +74,12 @@
 	 	$(".btn-del").click(function() {
 			let num = $(this).data("num");
 			$(this).parents(".box-attachment").prepend(`<input type="hidden" name="delNums" value="\${num}">`);
-			$(this).parents(".box-attachment").append(`<input type="file" class="form-control" name="file">`);
+			$(this).parents(".box-attachment").append(`<input type="file" name="file" class="form-control">`);
 			$(this).parent().remove();
 		})
 		
 		$('#content').summernote({
-		  placeholder: 'Hello Bootstrap 4',
+		  placeholder: '내용을 입력하세요.',
 		  tabsize: 2,
 		  height: 400
 		});

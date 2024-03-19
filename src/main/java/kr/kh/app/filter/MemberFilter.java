@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import kr.kh.app.model.vo.UserVO;
 
-@WebFilter("/post/insert")
+@WebFilter({"/post/insert", "/post/update", "/post/delete"})
 public class MemberFilter extends HttpFilter implements Filter {
 	
 	private static final long serialVersionUID = 1L;

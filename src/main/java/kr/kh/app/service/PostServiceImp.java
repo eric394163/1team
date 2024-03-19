@@ -154,7 +154,7 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public boolean updateBoard(PostVO post, UserVO user, ArrayList<Integer> nums, ArrayList<Part> fileList) {
+	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList) {
 		if(post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
 			return false;
 		}
@@ -169,14 +169,22 @@ public class PostServiceImp implements PostService {
 			return false;
 		}
 		
+		if(nums != null) {
+			for(String numStr : nums) {
+				try {
+					int num = Integer.parseInt(numStr);
+					AttachVO attachVo = postDao.selectFile(num);
+					deleteFile(attachVo);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		for(Part file : fileList) {
 			uploadFile(file, post.getPost_id());
 		}
 		
-		for(int attach_num : nums) {
-			AttachVO attachVo = postDao.selectFile(attach_num);
-			deleteFile(attachVo);
-		}
 		
 		return postDao.updatePost(post);
 	}

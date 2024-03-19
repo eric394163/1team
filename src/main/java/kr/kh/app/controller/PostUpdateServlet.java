@@ -65,46 +65,38 @@ public class PostUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO user = (UserVO)request.getSession().getAttribute("user");
 		
-		int num, board;
+		int num, post_board_num;
 		
 		try {
 			num = Integer.parseInt(request.getParameter("num"));
-			board = Integer.parseInt(request.getParameter("board"));
+			post_board_num = Integer.parseInt(request.getParameter("board"));
 		} catch(Exception e) {
 			num = 0;
-			board = 0;
+			post_board_num = 0;
 		}
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
-		PostVO post = new PostVO(num, title, content, board);
+//		PostVO post = new PostVO(num, title, content, board_id);
+		PostVO post = new PostVO(title, content, post_board_num);
+		post.setPost_id(num);
 		
 		ArrayList<Part> fileList = (ArrayList<Part>)request.getParts();
-		
-		String numsStr [] = request.getParameterValues("fi_num");
-		ArrayList<Integer> nums = new ArrayList<Integer>();
-		
-		if (numsStr != null) {
-			for (String numStr : numsStr) {
-				try {
-					int fi_num = Integer.parseInt(numStr);
-					nums.add(fi_num);
-				} catch (Exception e) {
-
-				}
-			}
-		}
+		String [] nums = request.getParameterValues("fi_num");
+		System.out.println(nums);
 		
 		boolean res = postService.updateBoard(post, user, nums, fileList);
+		System.out.println(res);
 		
 		if(res) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");
+			request.setAttribute("url", "post/detail?num="+num);
 		}
 		else {
 			request.setAttribute("msg", "게시글을 수정하지 못했습니다.");
+			request.setAttribute("url", "post/detail");
 		}
-		request.setAttribute("url", "post/detail?num="+num);
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 		
 	}
