@@ -30,6 +30,10 @@ public interface PostDAO {
 	void insertFile(@Param("attach")AttachVO attachVo);
 
 	void insertLink(@Param("attach")AttachVO attach);
+
+	ArrayList<PostVO> selectTotalPopularViewPostList(@Param("cri") Criteria cri);
+
+	ArrayList<PostVO> selectTotalPopularLikePostList(@Param("cri") Criteria cri);
 	
 	
 }

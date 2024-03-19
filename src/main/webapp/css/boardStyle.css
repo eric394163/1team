@@ -50,18 +50,18 @@
 
 /* 인기게시글 */
 .popular-list{ width: 100%; margin-bottom: 80px; }
-.popular-list ul{ 
+.popular-list .btn-area{ 
 	list-style: none; padding: 0; margin: 0; margin-bottom: 10px;
 	display: flex;
 }
-.popular-list li{ margin-right: 10px; }
-.popular-list a{
+.popular-list .btn-area li{ margin-right: 10px; }
+.popular-list .btn-area a{
 	display: inline-block; padding: 6px 30px;
 	border: 2px solid #999; color: #999;
 	border-radius: 50px; text-decoration: none; 
 	font-weight: bold;
 }
-.popular-list a.active{
+.popular-list .btn-area a.active{
 	border: 2px solid #000; color: #000;
 }
 .popular-list .like-area{ display: none; }
