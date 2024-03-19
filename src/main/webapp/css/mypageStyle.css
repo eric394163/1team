@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/* 회원탈퇴 */
+.explain-box{
+	width: calc(100% - 100px); 
+	margin: 0 auto 30px; padding: 50px;
+	border: 1px solid #212529;
+}
+.explain-box h3{
+	font-weight: bold; font-size: 20px;
+	text-align: center; margin-bottom: 20px;
+}
+.explain-box li{
+	line-height: 40px;
+}
+.explain-box li .title{
+	font-weight: bold;
+}
+.explain-box li .title::before{
+	content: url("/team1/images/favicon.png");
+	position: relative; top: 8px; margin-right: 5px;
+}
+.explain-box .check-area{
+	text-align: center;
+}
+.explain-box .check-area label{ 
+	font-size: 14px; 
+	position: relative; top: -2px;
+}
+.btn-area{
+	text-align: center;
+}
