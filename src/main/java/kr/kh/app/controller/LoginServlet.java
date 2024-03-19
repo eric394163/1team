@@ -33,7 +33,6 @@ public class LoginServlet extends HttpServlet {
 		LoginDTO loginDTO = new LoginDTO(id, pw);
 		UserVO user = userService.login(loginDTO);
 
-		System.out.println(user);
 		if (user != null) {
 			// 세션에 회원 정보를 저장하여 로그인 유지
 			String nickname = user.getUser_nickname();
@@ -44,13 +43,13 @@ public class LoginServlet extends HttpServlet {
 
 			request.setAttribute("msg", "로그인 성공");
 			// 화면에 url로 board/list를 전송
-			request.setAttribute("url", "/");
+			request.setAttribute("url", "");
 
 		} else {
 
 			request.setAttribute("msg", "로그인 실패");
 			// 화면에 url로 board/list를 전송
-			request.setAttribute("url", "/login");
+			request.setAttribute("url", "login");
 
 		}
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);

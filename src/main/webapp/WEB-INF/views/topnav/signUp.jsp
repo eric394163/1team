@@ -32,7 +32,7 @@ prefix="c" %>
             <form
               action="<%=request.getContextPath()%>/signup"
               method="post"
-              id="signupForm" // form id 확인 
+              id="signupForm" 
             >
               <div class="form-group">
                 <label for="id">아이디:</label>
@@ -43,6 +43,7 @@ prefix="c" %>
                   name="id"
                   required
                 />
+                <label id="id-error2" class="error"></label>          
               </div>
               <div class="form-group">
                 <label for="email">이메일:</label>
@@ -110,8 +111,8 @@ prefix="c" %>
         $("#signupForm").validate({ // form id 확인 
           rules: {
             id: {
-              required: true,
-              regex: /^\w{6,12}$/,
+              required: true
+              //regex: /^\w{6,12}$/,
             },
             email: {
               required: true,
@@ -136,9 +137,8 @@ prefix="c" %>
           },
           messages: {
             id: {
-              required: "필수 항목입니다.",
-              regex:
-                "아이디는 6~12자의 영문 대소문자와 숫자로만 구성해야 합니다.",
+              required: "필수 항목입니다."
+              //regex: "아이디는 6~12자의 영문 대소문자와 숫자로만 구성해야 합니다.",
             },
             email: {
               required: "필수 항목입니다.",
@@ -151,6 +151,7 @@ prefix="c" %>
             },
             confirmPassword: {
               equalTo: "입력하신 비밀번호와 일치해야 합니다.",
+              required: "필수 항목입니다.",
             },
             nickname: {
               required: "필수 항목입니다.",
@@ -170,9 +171,63 @@ prefix="c" %>
             var re = new RegExp(regexp);
             return this.optional(element) || re.test(value);
           },
-          "Please check your input."
+          "정규표현식에 맞지 않습니다."
         );
       });
+    </script>
+    
+    <script type="text/javascript">
+	    let flag = false;
+		$('[name=id]').on('input',function(){
+			$('#id-error2').text("");
+			$('#id-error2').hide();
+			
+			let id = $(this).val();
+	
+			if(id == ''){
+				$('#id-error2').text('아이디를 입력하세요.');
+				$('#id-error2').css('color','red');
+				$('#id-error2').show();
+				return;
+			}
+			let idRegex = /^\w{6,12}$/;
+			if(!idRegex.test(id)){
+				$('#id-error2').text('아이디는 6~12자의 영문 대소문자와 숫자로만 구성해야 합니다.');
+				$('#id-error2').css('color','red');
+				$('#id-error2').show();
+				return;
+			}
+			
+			if(id)
+			
+			$.ajax({ //제이쿼리에서 제공하는 비동기 통신
+				url: '<c:url value="/id/check"/>',
+				method: 'get',
+				async: true, //동기/비동기 선택, true: 비동기, false: 동기
+				data: {
+					'id': id
+				},
+				success: function(data){
+					if(data && id){
+						$('#id-error2').text('사용 가능한 아이디입니다.');
+						$('#id-error2').css('color','green');
+						$('#id-error2').show();
+						flag = true;
+					}else{
+						$('#id-error2').text('이미 사용중인 아이디입니다.');
+						$('#id-error2').css('color','red');
+						$('#id-error2').show();
+					}
+				},
+				error: function(a,b,c){
+					console.log('예외 발생');
+				}
+			}); 
+		});
+		
+		$('[name=id]').change(function(){
+			flag = false;
+		});
     </script>
   </body>
 </html>

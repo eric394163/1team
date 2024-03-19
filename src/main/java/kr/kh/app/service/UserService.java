@@ -10,4 +10,6 @@ public interface UserService {
 
     boolean signUp(SignUpDTO signUpDTO) throws Exception;
 
+	String checkId(String id);
+
 }

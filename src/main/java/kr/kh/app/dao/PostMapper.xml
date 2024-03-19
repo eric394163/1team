@@ -23,8 +23,9 @@
 	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO"> select * from board; </select>
 
 
-	<select id="selectTotalPostCount" resultType="int"> SELECT count(*) FROM post where post_content
-		like concat('%', #{cri.search},'%') </select>
+	<select id="selectTotalPostCount" resultType="int"> SELECT count(*) FROM post 
+		JOIN board ON board_id = post_board_num
+		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%')</select>
 
 	<select id="selectTotalSearchResultList" resultType="kr.kh.app.model.vo.PostVO"> 
 		SELECT post.* , board_name As post_board_name

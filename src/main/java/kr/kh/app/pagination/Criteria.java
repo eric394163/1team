@@ -33,8 +33,8 @@ public class Criteria {
 	}
 
 	public Criteria(int page, int perPageNum, String search) {
-		this.page = page;
-		this.perPageNum = perPageNum;
-		this.search = search;
+		this(page,perPageNum);
+		this.search = search == null ? "" : search;
+		
 	}
 }

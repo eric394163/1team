@@ -41,12 +41,10 @@ public class TotalSearchList extends HttpServlet {
       page = 1;
     }
 
-    Criteria cri = new Criteria(page, 10, totalSearch);
+    Criteria cri = new Criteria(page, 3, totalSearch);
 
     // 검색된 게시글 전체 수
     int totalCount = postService.getTotalPostCount(cri);
-
-    System.out.println("total count : " + totalCount);
 
     PageMaker pm = new PageMaker(5, cri, totalCount);
 

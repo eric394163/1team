@@ -37,14 +37,11 @@ public class UserServiceImp implements UserService {
 	@Override
 	public UserVO login(LoginDTO loginDTO) {
 		if (loginDTO == null) {
-			System.out.println("loginDTO is null");
 			return null;
 		}
 		// 아이디를 주고 회원 정보를 요청
 		String id = loginDTO.getId();
-		System.out.println("id: " + id);
 		UserVO user = userDao.selectUser(id);
-		System.out.println("user: " + user);
 
 		if (user == null) {
 			System.out.println("user is null");
@@ -52,7 +49,6 @@ public class UserServiceImp implements UserService {
 		}
 		// 비번이 같은지 확인
 		if (user.getUser_pw().equals(loginDTO.getPw())) {
-			System.out.println("login success");
 			return user;
 		}
 		return null;
@@ -118,5 +114,11 @@ public class UserServiceImp implements UserService {
 		}
 		return false;
 
+	}
+
+	@Override
+	public String checkId(String id) {
+		UserVO user = userDao.selectUser(id);
+		return user == null ? "1" : "";
 	}
 }
