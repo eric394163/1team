@@ -35,8 +35,7 @@ public class MainServlet extends HttpServlet {
 			page = 1;
 		}
 		
-		
-
+	
 		Criteria cri = new Criteria(page, 10);
 
 		int totalCount = postService.getTotalCount(cri);

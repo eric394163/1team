@@ -29,7 +29,7 @@
           <c:if test="${user != null}">
           	<img alt="로그인얼굴" src="/team1/images/face_login.svg" width="80" /> <br />
 	          <p>
-	            ${nickname}(${id})님 <br>
+	            ${user.user_nickname}(${user.user_id})님 <br>
 	            PLAY GROUND에 오신 걸<br> 
 	            환영합니다.
 	          </p>
