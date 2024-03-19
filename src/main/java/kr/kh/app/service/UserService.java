@@ -14,4 +14,7 @@ public interface UserService {
 
 	boolean updateSignUp(SignUpDTO signUpDto) throws Exception;
 
+
+	void deleteCommentByUser(UserVO user);
+
 }

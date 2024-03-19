@@ -60,28 +60,15 @@
 			let dropChk = $('#drop-chk').prop('checked');
 			
 			if(dropChk){
-				//user/delete로 보내서 회원 탈퇴(회원정보 수정 => 이메일기록만 남기고 다른 데이터 UUID로 변경) & 회원 게시글, 댓글 삭제
+				//user/delete로 보내서 회원 탈퇴(회원정보 수정 => 이메일기록만 남기고 다른 데이터 UUID로 변경,글자수는자름) & 회원 게시글, 댓글 삭제
 				let q = confirm("정말로 탈퇴하시겠습니까?");
 				let id = '${user.user_id}';
 				
 				if(q){ //확인버튼 눌렀다면
-					$.ajax({ //제이쿼리에서 제공하는 비동기 통신
-						url: '<c:url value="/user/delete"/>',
-						method: 'get',
-						async: true,
-						data: {
-							'id': id
-						},
-						success: function(data){
-							console.log(data.id);
-						},
-						error: function(a,b,c){
-							console.log('예외 발생');
-						}
-					}); 
+					location.href = `<c:url value="/user/delete"/>`;
 				}else{ //취소버튼 눌렀다면
 					alert('좋은 선택입니다. Play Ground서비스를 다시 이용하세요.');
-					location.href = <c:url value="/" />;
+					location.href = `<c:url value="/" />`;
 				}
 			}else{
 				alert('안내사항에 동의해주세요.');
