@@ -57,6 +57,9 @@ public class PostUpdateServlet extends HttpServlet {
 		ArrayList<AttachVO> fileList = postService.getFile(num);
 		request.setAttribute("fileList", fileList);
 		
+		AttachVO link = postService.getLink(num);
+		request.setAttribute("link", link);
+		
 		ArrayList<BoardVO> list = postService.getBoardList();
 		
 		request.setAttribute("list", list);
@@ -79,7 +82,6 @@ public class PostUpdateServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
-//		PostVO post = new PostVO(num, title, content, board_id);
 		PostVO post = new PostVO(title, content, board_num);
 		post.setPost_id(num);
 		System.out.println(post);
@@ -90,7 +92,9 @@ public class PostUpdateServlet extends HttpServlet {
 			for(String tmp : nums)
 				System.out.println(tmp);
 		
-		boolean res = postService.updateBoard(post, user, nums, fileList);
+		String link = request.getParameter("youtube");
+		
+		boolean res = postService.updateBoard(post, user, nums, fileList, link);
 		System.out.println(res);
 		
 		if(res) {

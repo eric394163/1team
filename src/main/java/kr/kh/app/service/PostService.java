@@ -24,10 +24,13 @@ public interface PostService {
 
 	ArrayList<AttachVO> getFile(int num);
 
+	AttachVO getLink(int num);
+	
 	int getTotalPostCount(Criteria cri);
 
 	ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
 
-	boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList);
+	boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, String link);
+
 
 }

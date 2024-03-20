@@ -27,6 +27,8 @@ public interface PostDAO {
 
 	ArrayList<AttachVO> selectFileByPost_id(@Param("num") int num);
 
+	AttachVO selectLinkByPost_id(@Param("num")int num);
+
 	void insertFile(@Param("attach")AttachVO attachVo);
 
 	void insertLink(@Param("attach")AttachVO attach);
@@ -35,7 +37,8 @@ public interface PostDAO {
 
 	void deleteFile(@Param("attach_num")int attach_num);
 
-	boolean updatePost(@Param("post")PostVO post);
+	boolean updatePost(@Param("post")PostVO post, @Param("link")String link);
+
 	
 	
 }

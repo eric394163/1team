@@ -58,11 +58,12 @@
 					 
 					 <div class="mb-3 mt-6">
 					    <label for="youtube" class="form-label">링크</label>
-					    	<c:forEach items="${fileList}" var="file">
-					    		<c:if test="${file.attach_link_check == 1}">
-								    <input type="text" class="form-control" name="youtube" value="${file.attach_path }">
-					    		</c:if>
-				    		</c:forEach>
+			    		<c:if test="${link.attach_link_check == 1}">
+						    <input type="text" class="form-control" name="youtube" value="${link.attach_path }">
+			    		</c:if>
+			    		<c:if test="${link.attach_link_check != 1 && link.attach_path == null}">
+						    <input type="text" class="form-control" name="youtube">
+			    		</c:if>
 					 </div>					 
 					 <button class="btn btn-outline-warning col-12 mb-3">게시글 수정</button>
 					 <a href="<c:url value="/post/list" />" class="btn btn-outline-dark">목록으로</a>

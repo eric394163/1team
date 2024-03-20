@@ -146,6 +146,11 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+	public AttachVO getLink(int num) {
+		return postDao.selectLinkByPost_id(num);
+	}
+	
+	@Override
 	public int getTotalPostCount(Criteria cri) {
 		if (cri == null) {
 			cri = new Criteria();
@@ -154,7 +159,7 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList) {
+	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, String link) {
 		if(post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
 			return false;
 		}
@@ -185,8 +190,7 @@ public class PostServiceImp implements PostService {
 			uploadFile(file, post.getPost_id());
 		}
 		
-		
-		return postDao.updatePost(post);
+		return postDao.updatePost(post, link);
 	}
 
 	private void deleteFile(AttachVO fileVo) {
@@ -202,6 +206,8 @@ public class PostServiceImp implements PostService {
 		postDao.deleteFile(fileVo.getAttach_num());
 		
 	}
+
+	
 
 
 }
