@@ -141,6 +141,7 @@
 		//user 비번 맞는지 확인 후 검정박스 없애기
 		$('#user-confirm-btn').click(function(){
 			let user_pw = '${user.user_pw}';
+			
 			let form_pw = $('#user-confirm-pass').val();
 			
 			if(form_pw == ''){
