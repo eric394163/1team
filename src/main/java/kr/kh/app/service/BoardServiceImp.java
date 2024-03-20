@@ -10,8 +10,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.BoardDAO;
+import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.BoardListCriteria;
+import kr.kh.app.pagination.Criteria;
 
 public class BoardServiceImp implements BoardService{
 
@@ -31,7 +33,7 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public int getTotalCount(BoardListCriteria cri) {
+	public int getTotalCount(Criteria cri) {
 		if(cri == null) {
 			cri = new BoardListCriteria();
 		}
@@ -39,10 +41,16 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public ArrayList<PostVO> getBoardList(BoardListCriteria cri) {
+	public ArrayList<PostVO> getBoardList(Criteria cri) {
 		if(cri == null) {
 			cri = new BoardListCriteria();
 		}
 		return boardDao.selectBoardList(cri);
+	}
+
+	//클릭해서 넘어온 게시판번호의 게시명을 가져올 서비스 명령
+	@Override
+	public BoardVO getSubBoard(int board_id) {
+		return boardDao.selectSubBoard(board_id);
 	}
 }

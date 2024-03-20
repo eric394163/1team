@@ -8,44 +8,57 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.kh.app.model.dto.LoginDTO;
+import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CategoryVO;
 import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.service.CommonService;
+import kr.kh.app.service.CommonServiceImp;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
     UserService userService = new UserServiceImp();
+    private CommonService commonService = new CommonServiceImp();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
+		ArrayList<BoardVO> boardList = commonService.getBoardList();
+		request.setAttribute("category", categoryList);//화면에 전송
+		request.setAttribute("board", boardList);//화면에 전송
         request.getRequestDispatcher("/WEB-INF/views/topnav/login.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-	        String id = request.getParameter("id");
-	        String pw = request.getParameter("pw");
-	        System.out.println(id + " " + pw);
-	        LoginDTO loginDTO = new LoginDTO(id, pw);
-	        System.out.println(loginDTO);
-	        UserVO user = userService.login(loginDTO);
-	        
-	        System.out.println(user);
-	        if (user != null) {
-	            // 세션에 회원 정보를 저장하여 로그인 유지
-				String nickname= user.getUser_nickname();
-	            HttpSession session = request.getSession();// request에 있는 세션을 가져옴
-	            session.setAttribute("user", user);// 세션에 user라는 이름으로 회원 정보를 저장
-	            session.setAttribute("id", id);// 세션에 id라는 이름으로 회원 id를 저장
-	            session.setAttribute("nickname", nickname);// 세션에 nickname라는 이름으로 회원 nickname정보를 저장
-	            response.sendRedirect(request.getContextPath() + "/");
-	        } else {
-	            System.out.println("로그인 실패");
-	            doGet(request, response);
-	        }
-	    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		LoginDTO loginDTO = new LoginDTO(id, pw);
+		UserVO user = userService.login(loginDTO);
+
+		if (user != null) {
+			// 세션에 회원 정보를 저장하여 로그인 유지
+			String nickname = user.getUser_nickname();
+			HttpSession session = request.getSession();// request에 있는 세션을 가져옴
+			session.setAttribute("user", user);// 세션에 user라는 이름으로 회원 정보를 저장
+
+			request.setAttribute("msg", "로그인 성공");
+			// 화면에 url로 board/list를 전송
+			request.setAttribute("url", "");
+
+		} else {
+
+			request.setAttribute("msg", "로그인 실패");
+			// 화면에 url로 board/list를 전송
+			request.setAttribute("url", "login");
+
+		}
+		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+	}
 }
