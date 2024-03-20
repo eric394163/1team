@@ -48,7 +48,7 @@ prefix="c" %>
               <div class="form-group">
                 <label for="email">이메일:</label>
                 <input
-                  type="email"
+                  type="text"
                   class="form-control"
                   id="email"
                   name="email"
@@ -117,7 +117,7 @@ prefix="c" %>
             },
             email: {
               required: true,
-              email: true,
+              //regex: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
             },
             pw: {
               required: true,
@@ -125,6 +125,7 @@ prefix="c" %>
             },
             confirmPassword: {
               equalTo: "#pw",
+              required: true,
             },
             nickname: {
               required: true,
@@ -143,7 +144,7 @@ prefix="c" %>
             },
             email: {
               required: "필수 항목입니다.",
-              email: "올바른 이메일 주소를 입력해주세요.",
+              //email: "올바른 이메일 주소를 입력해주세요.",
             },
             pw: {
               required: "필수 항목입니다.",
@@ -209,6 +210,7 @@ prefix="c" %>
 					'id': id
 				},
 				success: function(data){
+					console.log(data);
 					if(data && id){
 						$('#id-error2').text('사용 가능한 아이디입니다.');
 						$('#id-error2').css('color','green');
@@ -247,6 +249,7 @@ prefix="c" %>
 				return;
 			}
 
+
 			
 			$.ajax({ //제이쿼리에서 제공하는 비동기 통신
 				url: '<c:url value="/email/check"/>',
@@ -257,10 +260,19 @@ prefix="c" %>
 				},
 				success: function(data){
 					if(data && email){
-						$('#id-error3').text('사용 가능한 이메일입니다.');
-						$('#id-error3').css('color','green');
-						$('#id-error3').show();
-						flag = true;
+						// 이메일 정규식 검사 추가
+			            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+			            if (emailRegex.test(email)) {
+			                $('#id-error3').text('사용 가능한 이메일입니다.');
+			                $('#id-error3').css('color', 'green');
+			                $('#id-error3').show();
+			                flag2 = true;
+			            } else {
+			                $('#id-error3').text('올바른 형식의 이메일을 입력하세요.');
+			                $('#id-error3').css('color', 'red');
+			                $('#id-error3').show();
+			            }
+						flag2 = true;
 					}else{
 						$('#id-error3').text('이미 사용중인 이메일입니다.');
 						$('#id-error3').css('color','red');

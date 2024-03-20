@@ -211,7 +211,7 @@ public class UserServiceImp implements UserService {
 	@Override
 	public String checkEmail(String email) {
 		UserVO user = userDao.selectUserByEmail(email);
-		return email == null ? "1" : "";
+		return user == null ? "1" : "";
 	}
 
 	public int getTotalBlockedUserCount(Criteria cri) {
