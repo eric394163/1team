@@ -12,7 +12,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.app.dao.UserDAO;
 import kr.kh.app.model.dto.LoginDTO;
 import kr.kh.app.model.dto.SignUpDTO;
+import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.CheckErrAndMsg;
 import kr.kh.app.utils.NullCheck;
 
@@ -118,5 +120,21 @@ public class UserServiceImp implements UserService {
 		}
 		return false;
 
+	}
+
+	@Override
+	public int getTotalBlockedUserCount(Criteria cri) {
+		if (cri == null) {
+			return 0;
+		}
+		return userDao.selectTotalBlockedUserCount(cri);
+	}
+
+	@Override
+	public ArrayList<BlockedVO> getBlockedUserList(Criteria cri) {
+		if (cri == null) {
+			return null;
+		}
+		return userDao.selectBlockedUserList(cri);
 	}
 }
