@@ -18,6 +18,16 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
   </head>
   <body>
+  	<div class="user-confirm-box">
+  		<div class="user-confirm">
+  			<h2>회원 비밀번호 확인</h2>
+  			<p>비밀번호를 입력해야 회원정보를 수정할 수 있습니다.</p>
+  			<div class="form-group">
+  				<input type="password" class="form-control" id="user-confirm-pass" />
+  				<button type="button" class="btn btn-dark" id="user-confirm-btn">확인</button>
+  			</div>
+  		</div>
+  	</div>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main-wrap">
 		<div class="inner-wrap">
@@ -126,6 +136,36 @@
 	          },
 	          "정규표현식에 맞지 않습니다."
 	        );
+		});
+		
+		
+		if(${passConfirm} == 1){
+			$('.user-confirm-box').hide();
+		}
+		
+		
+		//user 비번 맞는지 확인 후 검정박스 없애기
+		$('#user-confirm-btn').click(function(){
+			let user_pw = '${user.user_pw}';
+			
+			let form_pw = $('#user-confirm-pass').val();
+			
+			if(form_pw == ''){
+				alert('비밀번호를 입력해주세요.');
+			}else{
+				if(user_pw == form_pw){
+					alert('맞는 비번입니다. 회원정보를 수정하세요.');
+					$('.user-confirm-box').hide();
+					<% session.setAttribute("passConfirm", "1"); %>
+				}else{
+					alert('비밀번호가 틀립니다. 다시 입력해주세요.');
+					let q = confirm('계속하시겠습니까?');
+					if(!q){
+						location.href = <c:url value="/" />;
+					}
+				}
+			}
+			flag = true;
 		});
 	</script>
   </body>
