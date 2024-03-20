@@ -15,6 +15,7 @@ import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CategoryVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
+import kr.kh.app.pagination.DateCriteria;
 import kr.kh.app.pagination.PageMaker;
 import kr.kh.app.service.CommonService;
 import kr.kh.app.service.CommonServiceImp;
@@ -54,20 +55,17 @@ public class MainServlet extends HttpServlet {
 		request.setAttribute("list", list);
 
 		// 조회수가 높은 게시글 리스트
-		Criteria popularViewCri = new Criteria(page, 10, today, weekAgo);
+		Criteria popularViewCri = new DateCriteria( page, 10, today, weekAgo);
 
 		ArrayList<PostVO> popularViewPostList = postService.getPopularViewPostList(popularViewCri);
 
-		System.out.println("popularViewPostList : " + popularViewPostList);
 
 		request.setAttribute("popularViewPostList", popularViewPostList);
 
 		// 좋아요가 높은 게시글 리스트
-		Criteria popularLikeCri = new Criteria(page, 10, today, weekAgo);
+		Criteria popularLikeCri = new DateCriteria(page, 10, today, weekAgo);
 
 		ArrayList<PostVO> popularLikePostList = postService.getPopularLikePostList(popularLikeCri);
-
-		System.out.println("popularLikePostList : " + popularLikePostList);
 
 		request.setAttribute("popularLikePostList", popularLikePostList);
 

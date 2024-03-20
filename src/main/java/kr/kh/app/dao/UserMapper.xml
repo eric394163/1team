@@ -15,4 +15,18 @@
     <insert id="insertMember"> INSERT INTO USER(user_id, user_pw,
         user_nickname,user_email, user_birth, user_state_date) VALUES(#{user.id},
         #{user.pw},#{user.nickname}, #{user.email}, #{user.birth}, now()) </insert>
+
+    <select id="selectTotalBlockedUserCount" resultType="int">
+        SELECT COUNT(*) 
+        FROM blocked 
+        WHERE blocking_user_id = #{cri.blocking_user_id}
+    </select>
+    <select id="selectBlockedUserList" resultType="kr.kh.app.model.vo.BlockedVO">
+        SELECT * 
+        FROM blocked 
+        WHERE blocking_user_id = #{cri.blocking_user_id}
+        ORDER BY blocked_id DESC
+        LIMIT #{cri.pageStart}, #{cri.perPageNum}
+        
+    </select>
 </mapper>

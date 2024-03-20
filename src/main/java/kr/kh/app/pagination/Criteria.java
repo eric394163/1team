@@ -1,6 +1,5 @@
 package kr.kh.app.pagination;
 
-import java.time.LocalDate;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +14,8 @@ public class Criteria {
 	private String search = ""; // 검색어 : 기본값 - 빈문자열=> 전체 검색
 	private String type = "all"; // 검색 타입 : 기본값 - 전체검색
 
-	 private LocalDate startDate;  
-    private LocalDate endDate;  
+
+
 
 	public Criteria(int page) {
 		this.page = page;
@@ -42,9 +41,4 @@ public class Criteria {
 		this.search = search == null ? "" : search;
 	}
 
-	public Criteria(int page, int perPageNum, LocalDate startDate, LocalDate endDate) {
-        this(page, perPageNum);
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
 }
