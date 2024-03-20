@@ -27,8 +27,8 @@ public class FindIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
 		ArrayList<BoardVO> boardList = commonService.getBoardList();
-		request.setAttribute("category", categoryList);//화면에 전송
-		request.setAttribute("board", boardList);//화면에 전송
+		request.setAttribute("categoryList", categoryList);//화면에 전송
+		request.setAttribute("boardList", boardList);//화면에 전송
 		request.getRequestDispatcher("/WEB-INF/views/topnav/findId.jsp").forward(request, response);
 	}
 
