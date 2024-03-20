@@ -32,5 +32,8 @@ public interface PostService {
 
 	boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, AttachVO attach);
 
+    ArrayList<PostVO> getPopularViewPostList(Criteria cri);
+
+	ArrayList<PostVO> getPopularLikePostList(Criteria popularLikeCri);
 
 }

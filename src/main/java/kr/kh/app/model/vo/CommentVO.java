@@ -13,5 +13,10 @@ public class CommentVO {
     private int comment_post_num;
     private String comment_content;
     private Date comment_date;
-
+    
+    
+	public CommentVO(String comment_user_id) {
+		this.comment_user_id = comment_user_id;
+	}
+  
 }

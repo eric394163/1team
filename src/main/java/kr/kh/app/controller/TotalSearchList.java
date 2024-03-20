@@ -22,11 +22,17 @@ public class TotalSearchList extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-	  MainServlet.commonAsideInfo(request);
-	  
+    MainServlet.commonAsideInfo(request);
+
     String totalSearch = request.getParameter("totalsearch");
 
-    System.out.println("total :" + totalSearch);
+    if (totalSearch == null || totalSearch.equals("")) {
+
+      request.setAttribute("msg", "검색어가 없습니다.");
+      request.setAttribute("url", "/");
+      request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+    }
+
     int page;
 
     try {
@@ -35,21 +41,18 @@ public class TotalSearchList extends HttpServlet {
       page = 1;
     }
 
-    Criteria cri = new Criteria(page, 10, totalSearch);
+    Criteria cri = new Criteria(page, 3, totalSearch);
 
     // 검색된 게시글 전체 수
     int totalCount = postService.getTotalPostCount(cri);
-
-    System.out.println("total count : " + totalCount);
 
     PageMaker pm = new PageMaker(5, cri, totalCount);
 
     request.setAttribute("pm", pm);
 
     ArrayList<PostVO> list = postService.getTotalSearchResultList(cri);
-    request.setAttribute("list", list);
 
-    System.out.println(list.size());
+    request.setAttribute("list", list);
 
     request.getRequestDispatcher("/WEB-INF/views/main/searchList.jsp").forward(request, response);
   }

@@ -1,32 +1,69 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
-/* ��ü Ʋ ���� */
+body{ background-color: #212529; }
+
+/* 전체 틀 구역 */
 .main-wrap {
+  min-width: 1200px;
   background-color: #212529;
 }
 .inner-wrap {
   width: 1200px;
-  max-width: 100%;
   min-height: 1000px;
   margin: 0 auto;
   display: flex;
   background-color: #fff;
   align-items: stretch;
 }
-.main-contents{ width: 920px; padding-top: 50px; }
+.main-contents{ width: 920px; padding: 50px; }
+.main-contents .h2_title_wrap{ 
+	display: flex; /* 버튼과 텍스트 수평나열처리 */ justify-content: space-between; align-items: center;
+	padding-bottom: 10px; border-bottom: 2px solid #212529; margin-bottom: 30px; /* 여백/테두리 */
+}
+.main-contents h2{
+	font-size: 24px; font-weight: bold; color: #212529; /* 글자설정 */
+}
 
 
-/* header���� */
+/* header구역 */
+header{
+	width: 100%; min-width: 1200px;
+}
+header h1{ width: 200px; }
 header .navbar>.container-fluid {
 	width: 1200px;
-	max-width: 100%;
+}
+header .navbar-nav{ width: 200px; justify-content: flex-end; }
+header .navbar-nav a{ font-size: 14px; color: #999; }
+header .navbar-nav li{ position: relative; } 
+header .navbar-nav li:first-child::after{ /* 선처리 */
+	content: '|'; color: #999; font-size: 12px;
+	position: absolute; right: -1px; top: 50%; transform: translateY(calc(-50% - 1px));
+}
+header .d-flex {
+	width: calc(100% - 400px); justify-content: center;
 }
 
-.d-flex {
-	width: 50%;
+/* header 검색구역 */
+#totalsearch{ 
+	width: 500px; border-radius: 5px 0 0 5px;
+	border: none;
 }
+#totalsearch::placeholder{ color: #999; }
+#totalsearch-btn{ 
+	color: #ededed; border-color: #ededed; padding: 6px 8px;
+	border-radius: 0 5px 5px 0; border-left: none;
+}
+#totalsearch-btn:hover{
+	background-color: #212529; color: #ededed; border-color: #ededed;
+	border-radius: 0 5px 5px 0; border-left: none;
+}
+#totalsearch-btn img{ width: 24px; }
 
-/* footer���� */
+/* footer구역 */
+footer{
+	width: 100%; min-width: 1200px;
+}
 footer p {
 	font-size: 12px;
 	color: #999;
@@ -45,11 +82,8 @@ aside{ width: 280px; }
   text-align: center;
   line-height: 50px;
 }
-
-#main-sub-nav1,
-#main-sub-nav2 {
-  display: none;
-}
+/* 하위리스트 안보이게 처리 */
+aside .drop-down > ul{ display: none; list-style: none }
 
 .login-box {
   border: 1px solid #fff;
