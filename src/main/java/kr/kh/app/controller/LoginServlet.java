@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 
 			request.setAttribute("msg", "로그인 성공");
 			// 화면에 url로 board/list를 전송
-			request.setAttribute("url", "");
+			request.setAttribute("url", "/");
 
 		} else {
 

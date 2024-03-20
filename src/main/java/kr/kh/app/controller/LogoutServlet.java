@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getSession().removeAttribute("user");
 		request.setAttribute("msg", "로그아웃 되었습니다.");
-		request.setAttribute("url", "");
+		request.setAttribute("url", "/");
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 	}
 }
