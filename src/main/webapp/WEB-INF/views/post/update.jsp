@@ -25,6 +25,7 @@
 					<h3>게시글 수정</h3> 
 					<hr>
 					<div class="mb-3 mt-3">
+						<input type="hidden" name="num" value="${post.post_id }">
 					    <label for="board" class="form-label">게시판 선택</label>
 					    <select class="form-control" id="board" name="board">
 					    	<c:forEach items="${list}" var="board">
@@ -46,7 +47,7 @@
 					    	<c:if test="${file.attach_link_check == 0}">
 					    		<div class="form-control">
 						    		<span>${file.attach_path}</span>
-				 					 <a href="#" id="btnDel" class="btn-del" data-num="${file.attach_path}">&times;</a>
+				 					 <a href="#" id="btnDel" class="btn-del" data-target="${file.attach_num}">&times;</a>
 					    		</div>
 					 		 </c:if>
 					    </c:forEach>
@@ -71,12 +72,18 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-	 	$(".btn-del").click(function() {
-			let num = $(this).data("num");
-			$(this).parents(".box-attachment").prepend(`<input type="hidden" name="delNums" value="\${num}">`);
-			$(this).parents(".box-attachment").append(`<input type="file" name="file" class="form-control">`);
+		$(".btn-del").click(function() {
+			
+			let attach_num = $(this).data("target");
+			
+			let inputFile = '<input type="file" class="form-control" name="file">';
+			$("#attachment").append(inputFile);
+			
+			let inputHidden = `<input type="hidden" name="attach_num" value="\${attach_num}">`;
+			$("#attachment").prepend(inputHidden);
+			
 			$(this).parent().remove();
-		})
+		});
 		
 		$('#content').summernote({
 		  placeholder: '내용을 입력하세요.',

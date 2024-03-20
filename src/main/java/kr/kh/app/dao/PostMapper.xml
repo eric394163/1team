@@ -89,9 +89,9 @@
 	
 	<update id="updatePost">
 		update post set
-			post_title = #{post.post_title}
-			post_content = #{post.post_content}
-			post_board_num = #{post.post_board.num}
+			post_title = #{post.post_title},
+			post_content = #{post.post_content},
+			post_board_num = #{post.post_board_num}
 		where
 			post_id = #{post.post_id}
 	</update>

@@ -2,6 +2,7 @@ package kr.kh.app.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -65,26 +66,29 @@ public class PostUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO user = (UserVO)request.getSession().getAttribute("user");
 		
-		int num, post_board_num;
+		int num, board_num;
 		
 		try {
 			num = Integer.parseInt(request.getParameter("num"));
-			post_board_num = Integer.parseInt(request.getParameter("board"));
+			board_num = Integer.parseInt(request.getParameter("board"));
 		} catch(Exception e) {
 			num = 0;
-			post_board_num = 0;
+			board_num = 0;
 		}
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
 //		PostVO post = new PostVO(num, title, content, board_id);
-		PostVO post = new PostVO(title, content, post_board_num);
+		PostVO post = new PostVO(title, content, board_num);
 		post.setPost_id(num);
+		System.out.println(post);
 		
 		ArrayList<Part> fileList = (ArrayList<Part>)request.getParts();
-		String [] nums = request.getParameterValues("fi_num");
-		System.out.println(nums);
+		String [] nums = request.getParameterValues("attach_num");
+		if(nums != null)
+			for(String tmp : nums)
+				System.out.println(tmp);
 		
 		boolean res = postService.updateBoard(post, user, nums, fileList);
 		System.out.println(res);
