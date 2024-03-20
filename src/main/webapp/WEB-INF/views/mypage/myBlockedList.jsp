@@ -88,9 +88,46 @@
 	
 	<script type="text/javascript">
 		//모두체크를 체크하면, 클래스가 block-chk가 모두 체크, 그렇지 않으면 미체크
-		//prop() : 태그의 속성을 컨트롤하는 메서드
-		//게터 - prop('checked') : true/false로 얻어오는 게터
-		//세터 - prop('checked', true/false) : true/false로 변경하는 세터
+		$('#all-chk').change(function(){
+			//prop() : 태그의 속성을 컨트롤하는 메서드
+			//게터 - prop('checked') : true/false로 얻어오는 게터
+			let allChk = $(this).prop('checked');
+			
+			if(allChk){ //모두체크
+				//세터 - prop('checked', true/false) : true/false로 변경하는 세터
+				$('.block-chk').prop('checked', true);
+			}else{ //모두미체크
+				$('.block-chk').prop('checked', false);
+			}
+		});
+		
+		
+		
+		//일반체크가 하나라도 체크가 안되어 있다면 모두체크도 해제, 다체크되었다면 체크
+		$('.block-chk').change(function(){
+			//일반체크 체크안된 숫자 담는 변수
+			let noneChkCount = 0;
+			
+			//전부 확인
+			$('.block-chk').each(function(index){
+				//각각 확인
+				let chk = $(this).prop('checked');
+				
+				if(!chk){ //체크되었지 않다면?
+					noneChkCount++; //숫자 1증가
+				}
+			});
+			
+			//하나라도 체크가 안되어 있다면
+			if(noneChkCount > 0){
+				//모두체크 미체크
+				$('#all-chk').prop('checked', false);
+			}else{ //다 체크되어 있다면
+				//모두체크 체크
+				$('#all-chk').prop('checked', true);
+			}
+		});
+		
 		
 	</script>
   </body>
