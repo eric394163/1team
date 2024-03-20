@@ -125,8 +125,6 @@ public class UserServiceImp implements UserService {
 	@Override
 	public boolean updateSignUp(SignUpDTO signUpDTO) throws Exception {
 		if (signUpDTO == null ||
-				signUpDTO.getId() == null ||
-				!signUpDTO.getId().matches("^\\w{6,12}$") ||
 				signUpDTO.getPw() == null ||
 				!signUpDTO.getPw().matches("^[a-zA-Z0-9!@#]{6,15}$") ||
 				signUpDTO.getEmail() == null ||
