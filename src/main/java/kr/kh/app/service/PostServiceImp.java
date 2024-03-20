@@ -190,6 +190,7 @@ public class PostServiceImp implements PostService {
 		PostVO dbPost = postDao.selectPost(post.getPost_id());
 
 		if (dbPost == null || !dbPost.getPost_user_id().equals(user.getUser_id())) {
+
 			return false;
 		}
 

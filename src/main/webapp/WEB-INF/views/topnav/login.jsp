@@ -58,6 +58,10 @@ prefix="c"%>
               	<li><a href="<c:url value="/findPw"/>">비밀번호찾기</a></li>
               </ul>
             </form>
+            <div class="bottom-img-box">
+            	<img alt=""배경" src="<c:url value="/images/rock_icon.svg" />" width="300">
+            	<p>즐길 준비 되었는가?</p>
+            </div>
           </div>
         </div>
       </div>

@@ -101,6 +101,10 @@ prefix="c" %>
                 <button type="submit" class="btn btn-dark">가입하기</button>
               </div>
             </form>
+            <div class="bottom-img-box">
+            	<img alt="배경" src="<c:url value="/images/rock_gesture_icon.svg" />" width="200">
+            	<p>즐길 준비 되었는가?</p>
+            </div>
           </div>
         </div>
       </div>
