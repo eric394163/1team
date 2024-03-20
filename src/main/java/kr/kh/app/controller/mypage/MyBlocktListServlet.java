@@ -40,6 +40,7 @@ public class MyBlocktListServlet extends HttpServlet {
 		UserVO user = (UserVO) session.getAttribute("user");
 
 		String blocking_user_id = user.getUser_id();
+		 
 
 		int page;
 
@@ -54,6 +55,7 @@ public class MyBlocktListServlet extends HttpServlet {
 		int totalCount = userService.getTotalBlockedUserCount(cri);
 
 		ArrayList<BlockedVO> list = userService.getBlockedUserList(cri);
+		
 
 		request.setAttribute("list", list);
 
