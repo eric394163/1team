@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 			String nickname = user.getUser_nickname();
 			HttpSession session = request.getSession();// request에 있는 세션을 가져옴
 			session.setAttribute("user", user);// 세션에 user라는 이름으로 회원 정보를 저장
+			session.setAttribute("passConfirm", "0");// 회원정보 수정에서만 쓰는 세션
 
 			request.setAttribute("msg", "로그인 성공");
 			// 화면에 url로 board/list를 전송

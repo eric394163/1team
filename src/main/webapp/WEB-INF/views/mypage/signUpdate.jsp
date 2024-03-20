@@ -138,6 +138,12 @@
 	        );
 		});
 		
+		
+		if(${passConfirm} == 1){
+			$('.user-confirm-box').hide();
+		}
+		
+		
 		//user 비번 맞는지 확인 후 검정박스 없애기
 		$('#user-confirm-btn').click(function(){
 			let user_pw = '${user.user_pw}';
@@ -150,6 +156,7 @@
 				if(user_pw == form_pw){
 					alert('맞는 비번입니다. 회원정보를 수정하세요.');
 					$('.user-confirm-box').hide();
+					<% session.setAttribute("passConfirm", "1"); %>
 				}else{
 					alert('비밀번호가 틀립니다. 다시 입력해주세요.');
 					let q = confirm('계속하시겠습니까?');
@@ -158,6 +165,7 @@
 					}
 				}
 			}
+			flag = true;
 		});
 	</script>
   </body>
