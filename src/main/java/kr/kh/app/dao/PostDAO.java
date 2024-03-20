@@ -37,7 +37,7 @@ public interface PostDAO {
 
 	void deleteFile(@Param("attach_num")int attach_num);
 
-	boolean updatePost(@Param("post")PostVO post, @Param("link")String link);
+	boolean updatePost(@Param("post")PostVO post, @Param("attach")AttachVO attach);
 
 	
 	

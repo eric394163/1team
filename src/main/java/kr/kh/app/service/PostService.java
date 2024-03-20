@@ -30,7 +30,7 @@ public interface PostService {
 
 	ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
 
-	boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, String link);
+	boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, AttachVO attach);
 
 
 }

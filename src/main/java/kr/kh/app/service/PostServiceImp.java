@@ -159,16 +159,20 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, String link) {
+	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, AttachVO attach) {
+		
+		System.out.println("postService: " + user);
+		
 		if(post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
 			return false;
 		}
 		
-		if(user == null) {
+		if(user == null){
 			return false;
 		}
 		
 		PostVO dbPost = postDao.selectPost(post.getPost_id());
+		System.out.println(dbPost);
 		
 		if(dbPost == null || !dbPost.getPost_user_id().equals(user.getUser_id())) {
 			return false;
@@ -190,7 +194,9 @@ public class PostServiceImp implements PostService {
 			uploadFile(file, post.getPost_id());
 		}
 		
-		return postDao.updatePost(post, link);
+		boolean res = postDao.updatePost(post, attach);
+		
+		return res;
 	}
 
 	private void deleteFile(AttachVO fileVo) {

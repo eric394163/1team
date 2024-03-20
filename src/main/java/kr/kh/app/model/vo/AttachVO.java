@@ -15,4 +15,10 @@ public class AttachVO {
     	this.attach_post_id = attach_post_id;
     	this.attach_path = attach_path;
     }
+
+	public AttachVO(int attach_post_id, int attach_link_check, String youtube) {
+		this.attach_post_id = attach_post_id;
+		this.attach_link_check = attach_link_check;
+		this.attach_path = youtube;
+	}
 }

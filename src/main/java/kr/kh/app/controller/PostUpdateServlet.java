@@ -68,7 +68,7 @@ public class PostUpdateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO user = (UserVO)request.getSession().getAttribute("user");
-		
+		System.out.println(user);
 		int num, board_num;
 		
 		try {
@@ -78,6 +78,8 @@ public class PostUpdateServlet extends HttpServlet {
 			num = 0;
 			board_num = 0;
 		}
+		
+		System.out.println("update 서비스임플 게시글 번호: " + num);
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -92,9 +94,13 @@ public class PostUpdateServlet extends HttpServlet {
 			for(String tmp : nums)
 				System.out.println(tmp);
 		
-		String link = request.getParameter("youtube");
+		String link = request.getParameter("link");
+		System.out.println("서비스 임플 link 가져오는지" + link);
+		AttachVO attach = new AttachVO(num, 1, link);
+		attach.setAttach_post_id(num);
 		
-		boolean res = postService.updateBoard(post, user, nums, fileList, link);
+		
+		boolean res = postService.updateBoard(post, user, nums, fileList, attach);
 		System.out.println(res);
 		
 		if(res) {
@@ -103,7 +109,7 @@ public class PostUpdateServlet extends HttpServlet {
 		}
 		else {
 			request.setAttribute("msg", "게시글을 수정하지 못했습니다.");
-			request.setAttribute("url", "post/detail");
+			request.setAttribute("url", "post/detail?num="+num);
 		}
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 		

@@ -99,10 +99,10 @@
 			post.post_title = #{post.post_title},
 			post.post_content = #{post.post_content},
 			post.post_board_num = #{post.post_board_num},
-			attach.attach_path = #{link}
+			attach.attach_path = #{attach.attach_path}
 		where
 			post.post_id = #{post.post_id} and
-			attach.attach_post_id = #{post.post_id} and
+			attach.attach_post_id = #{attach.attach_post_id} and
 			attach.attach_link_check = 1
 	</update>
 </mapper>
