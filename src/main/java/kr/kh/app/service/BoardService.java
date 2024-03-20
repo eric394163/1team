@@ -15,4 +15,8 @@ public interface BoardService {
 	//클릭해서 넘어온 게시판번호의 게시명을 가져올 서비스
 	BoardVO getSubBoard(int boNum);
 
+	int getCommentPostCount(Criteria cri);
+
+	ArrayList<PostVO> getCommentPostList(Criteria cri);
+
 }
