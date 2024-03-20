@@ -30,4 +30,6 @@ public interface UserDAO {
 
     ArrayList<BlockedVO> selectBlockedUserList(@Param("cri") Criteria cri);
 
+	boolean updateDropUser(@Param("user")UserVO dropUser, @Param("id")String user_id);
+
 }

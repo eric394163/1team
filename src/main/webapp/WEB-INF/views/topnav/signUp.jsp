@@ -54,6 +54,7 @@ prefix="c" %>
                   name="email"
                   required
                 />
+                <label id="id-error3" class="error"></label> 
               </div>
               <div class="form-group">
                 <label for="pw">비밀번호:</label>
@@ -176,8 +177,9 @@ prefix="c" %>
       });
     </script>
     
+    <!-- 아이디 중복관련 -->
     <script type="text/javascript">
-	    let flag = false;
+	    let flag1 = false;
 		$('[name=id]').on('input',function(){
 			$('#id-error2').text("");
 			$('#id-error2').hide();
@@ -197,8 +199,7 @@ prefix="c" %>
 				$('#id-error2').show();
 				return;
 			}
-			
-			if(id)
+		
 			
 			$.ajax({ //제이쿼리에서 제공하는 비동기 통신
 				url: '<c:url value="/id/check"/>',
@@ -226,7 +227,54 @@ prefix="c" %>
 		});
 		
 		$('[name=id]').change(function(){
-			flag = false;
+			flag1 = false;
+		});
+    </script>
+    
+    <!-- 이메일 중복관련 -->
+    <script type="text/javascript">
+	    let flag2 = false;
+		$('[name=email]').on('input',function(){
+			$('#id-error3').text("");
+			$('#id-error3').hide();
+			
+			let email = $(this).val();
+	
+			if(email == ''){
+				$('#id-error3').text('이메일을 입력하세요.');
+				$('#id-error3').css('color','red');
+				$('#id-error3').show();
+				return;
+			}
+
+			
+			$.ajax({ //제이쿼리에서 제공하는 비동기 통신
+				url: '<c:url value="/email/check"/>',
+				method: 'get',
+				async: true, //동기/비동기 선택, true: 비동기, false: 동기
+				data: {
+					'email': email
+				},
+				success: function(data){
+					if(data && email){
+						$('#id-error3').text('사용 가능한 이메일입니다.');
+						$('#id-error3').css('color','green');
+						$('#id-error3').show();
+						flag = true;
+					}else{
+						$('#id-error3').text('이미 사용중인 이메일입니다.');
+						$('#id-error3').css('color','red');
+						$('#id-error3').show();
+					}
+				},
+				error: function(a,b,c){
+					console.log('예외 발생');
+				}
+			}); 
+		});
+		
+		$('[name=email]').change(function(){
+			flag2 = false;
 		});
     </script>
   </body>

@@ -27,4 +27,8 @@ public interface UserService {
 
 	boolean updateUserPw(UserVO user);
 
+	boolean updateDropUser(UserVO dropUser, String user_id);
+
+	String checkEmail(String email);
+
 }
