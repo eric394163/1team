@@ -45,15 +45,22 @@ public class BoardListServlet extends HttpServlet {
 			boNum = 0;
 			page = 1;
 		}
+		
+		//현재 게시판번호와 맞는 게시판명 가져오기
+		BoardVO board = boardService.getSubBoard(boNum);
+		
+		
 		//검색어, 검색 타입, 현재 페이지, 한 페이지 컨텐츠 개수를 이용하여 현재 페이지 정보 객체를 생성 
-		BoardListCriteria cri = new BoardListCriteria(page, 2, type, search, boNum);
+		BoardListCriteria cri = new BoardListCriteria(page, 3, type, search, boNum);
 		//검색어, 검색타입에 맞는 전체 게시글 개수를 가져옴 
 		int totalCount = boardService.getTotalCount(cri);
+		System.out.println(totalCount);
 		PageMaker pm = new PageMaker(5, cri, totalCount);
 		request.setAttribute("pm", pm);
 		//현재 페이지 정보에 맞는 게시글 리스트를 가져옴
 		ArrayList<PostVO> list = boardService.getBoardList(cri);
 		request.setAttribute("list", list);//화면에 전송
-		request.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(request, response);
+		request.setAttribute("board", board);//화면에 전송
+		request.getRequestDispatcher("/WEB-INF/views/board/postListView.jsp").forward(request, response);
 	}
 }

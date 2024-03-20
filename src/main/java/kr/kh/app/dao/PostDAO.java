@@ -39,6 +39,9 @@ public interface PostDAO {
 
 	boolean updatePost(@Param("post")PostVO post, @Param("link")String link);
 
+	ArrayList<PostVO> selectTotalPopularViewPostList(@Param("cri") Criteria cri);
+
+	ArrayList<PostVO> selectTotalPopularLikePostList(@Param("cri") Criteria cri);
 	
 	
 }

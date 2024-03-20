@@ -1,4 +1,4 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 .inner-wrap > .main-contents{
 	display: flex; justify-content: center;
 	align-items: flex-start;

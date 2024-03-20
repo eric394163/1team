@@ -1,7 +1,9 @@
 package kr.kh.app.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CategoryVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
+import kr.kh.app.pagination.DateCriteria;
 import kr.kh.app.pagination.PageMaker;
 import kr.kh.app.service.CommonService;
 import kr.kh.app.service.CommonServiceImp;
@@ -26,14 +29,22 @@ public class MainServlet extends HttpServlet {
 	private PostService postService = new PostServiceImp();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+			throws ServletException, IOException {
 		int page;
+
+		LocalDate today = LocalDate.now();
+		LocalDate weekAgo = today.minusDays(7);
+
+		System.out.println("today : " + today);
+		System.out.println("weekAgo : " + weekAgo);
 
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
 		} catch (Exception e) {
 			page = 1;
 		}
+		
+	
 
 		Criteria cri = new Criteria(page, 10);
 
@@ -44,13 +55,39 @@ public class MainServlet extends HttpServlet {
 		commonAsideInfo(request);
 		ArrayList<PostVO> list = postService.getTotalPostList(cri);
 		request.setAttribute("list", list);
+
+		// 조회수가 높은 게시글 리스트
+		Criteria popularViewCri = new DateCriteria( page, 10, today, weekAgo);
+
+		ArrayList<PostVO> popularViewPostList = postService.getPopularViewPostList(popularViewCri);
+
+
+		request.setAttribute("popularViewPostList", popularViewPostList);
+
+		// 좋아요가 높은 게시글 리스트
+		Criteria popularLikeCri = new DateCriteria(page, 10, today, weekAgo);
+
+		ArrayList<PostVO> popularLikePostList = postService.getPopularLikePostList(popularLikeCri);
+
+		request.setAttribute("popularLikePostList", popularLikePostList);
+
 		request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 	}
 
 	public static void commonAsideInfo(HttpServletRequest request) {
+		// 파라미터 받기
+		Integer boNum;
+		try {
+			boNum = Integer.parseInt(request.getParameter("boNum"));
+		} catch (Exception e) {
+			boNum = 0;
+		}
+
 		ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
 		ArrayList<BoardVO> boardList = commonService.getBoardList();
 		request.setAttribute("categoryList", categoryList);// 화면에 전송
 		request.setAttribute("boardList", boardList);// 화면에 전송
+		request.setAttribute("boNum", boNum);// 화면에 전송
+
 	}
 }
