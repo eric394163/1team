@@ -27,13 +27,22 @@ public interface PostDAO {
 
 	ArrayList<AttachVO> selectFileByPost_id(@Param("num") int num);
 
-	void insertFile(@Param("attach")AttachVO attachVo);
+	AttachVO selectLinkByPost_id(@Param("num") int num);
 
-	void insertLink(@Param("attach")AttachVO attach);
+	void insertFile(@Param("attach") AttachVO attachVo);
 
-	boolean deletePost(@Param("num")int num);
+	void insertLink(@Param("attach") AttachVO attach);
 
-	void deleteFile(@Param("attach_num")int attach_num);
-	
-	
+	boolean deletePost(@Param("num") int num);
+
+	void deleteFile(@Param("attach_num") int attach_num);
+
+	AttachVO selectFile(@Param("attach_num") int attach_num);
+
+	boolean updatePost(@Param("post") PostVO post, @Param("link") String link);
+
+	ArrayList<PostVO> selectTotalPopularViewPostList(@Param("cri") Criteria cri);
+
+	ArrayList<PostVO> selectTotalPopularLikePostList(@Param("cri") Criteria cri);
+
 }

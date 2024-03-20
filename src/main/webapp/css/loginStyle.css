@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+/* 로그인/회원가입 타이틀 */
+.main-contents .login_title_wrap{
+	padding-bottom: 10px; margin-bottom: 30px; 
+	border-bottom: 2px solid #212529; text-align: center; /* 글자 가운데 처리 */
+}
+
+/* 회원가입 */
+.main-contents .login-form{
+	width: 560px; margin: 0 auto; 
+}
+.main-contents .login-form p{
+	margin-bottom: 30px; 
+	font-size: 14px; text-align: center;
+}
+.main-contents .form-group{
+	position: relative;
+	margin-bottom: 20px; padding: 0 50px;
+	display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+}
+
+.main-contents .form-group label:first-child{ width: 140px; }
+.main-contents .form-group label.error{
+	padding: 5px 10px 0 150px;
+	font-size: 12px; color: red;
+}
+.main-contents .form-group .form-control{
+	width: 320px;
+}
+.main-contents .form-actions{
+	display: flex; justify-content: center; 
+	margin-top: 50px; padding: 0 50px;
+}
+.main-contents .form-actions .btn{
+	display: block; width: 100%; padding: 10px;
+}
+
+/* 로그인 */
+.main-contents .login-form.login .form-group{ padding: 0 80px; }
+.main-contents .login-form.login .form-group .form-control{ width: 260px; }
+.main-contents .form-actions.login{ padding: 0 80px; margin-bottom: 30px; }
+.main-contents .bottom-text{/* 하단 텍스트 */
+	list-style: none; padding: 0; margin: 0;
+	display: flex; justify-content: center;
+}
+.main-contents .bottom-text li{ margin: 0 10px; }
+.main-contents .bottom-text li:first-child::after{ /* 가운데 선 */
+	content: '|'; font-size: 14px; color: #212529;
+	position: relative; left: 10px; top: -1px;
+}
+.main-contents .bottom-text a{ color: #212529; text-decoration: none; }
+
+
+/* 아이디찾기 */
+/* 비밀번호찾기 */
+
+/* 회원정보수정 */
+.user-confirm-box{ /* 사용자 비번 확인 용 검은 배경 */
+	position: fixed; left: 0; top: 0; z-index: 1000;
+	width: 100%; height: 100%;
+	background-color: rgba(0,0,0,0.7);
+}
+.user-confirm{ /* 사용자 비번 확인 용 박스 */
+	position: absolute; 
+	left: 0; right: 0; top: 0; bottom: 0;
+	width: 500px; height: 200px; 
+	margin: auto; padding: 40px 30px;
+	background-color: #fff; 
+}
+.user-confirm h2{
+	font-size: 24px; font-weight: bold; color: #212529; text-align: center;
+	padding-bottom: 10px; border-bottom: 2px solid #212529; margin-bottom: 6px; /* 여백/테두리 */
+}
+.user-confirm p{
+	font-size: 14px; text-align: center;
+}
+.user-confirm-box .form-group{
+	display: flex; justify-content: space-between;
+}
+.user-confirm-box .form-control{
+	width: 370px;
+}
+.login-form input[readonly="readonly"]{ background-color: #ededed; }

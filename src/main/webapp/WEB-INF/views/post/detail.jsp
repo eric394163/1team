@@ -56,20 +56,20 @@
 						 </div>
 						 <c:if test="${fileList != null && fileList.size() != 0}">
 						 	 <div class="mb-3 mt-3">
-						 		 <label for="file" class="form-label">첨부파일</label>
+							 		 <label for="file" class="form-label">첨부파일</label>
 						 			 <c:forEach items="${fileList}" var="file">
 								 		 <c:if test="${file.attach_link_check == 0}">
 						 					 <a href="<c:url value="/download?filename=${file.attach_path}" />" class="form-control" download="${file.attach_path}">${file.attach_path}</a>
 								 		 </c:if>
 						 			 </c:forEach>
 						 	 </div>
+						 </c:if>
+						 <c:if test="${link != null && link != ''}">
 							 <div class="mb-3 mt-6">
-							    <label for="youtube" class="form-label">링크</label>
-							    		<c:forEach items="${fileList}" var="file">
-							    		<c:if test="${file.attach_link_check == 1}">
-							    			<a href="<c:url value="${file.attach_path}" />" class="form-control">${file.attach_path}</a> 
-							    		</c:if>
-						    		</c:forEach>
+						    		<c:if test="${link.attach_link_check == 1}">
+									    <label for="youtube" class="form-label">링크</label>
+						    			<a href="<c:url value="${link.attach_path}" />" class="form-control">${link.attach_path}</a> 
+						    		</c:if>
 							 </div>
 						 </c:if>
 						 <a href="<c:url value="/post/list" />" class="btn btn-outline-dark">목록으로</a>

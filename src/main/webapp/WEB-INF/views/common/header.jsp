@@ -24,23 +24,32 @@
 			<div class="container-fluid">
 				<h1>
 					<a class="navbar-brand" href="/team1/"> 
-						<img
-						alt="LOGO"
-						src="http://playground.dothome.co.kr/logo_blackversion.svg">
+						<img alt="LOGO" src="/team1/images/logo_blackversion.svg">
 					</a>
 				</h1>
-				<form class="d-flex" action="<c:url value='/totalSearchList' />" method="get">
-					<input class="form-control me-2" type="text" placeholder="검색어를 입력하세요" name="totalsearch" id="totalsearch">
-					<button type="submit" class="btn btn-outline-success">검색</button>
+				<form class="d-flex" action="<c:url value='/totalSearchList?' />" method="get">
+					<input class="form-control" type="text" placeholder="검색어를 입력하세요" name="totalsearch" id="totalsearch">
+					<input type="hidden" name="page" value="1">
+					<button type="submit" class="btn btn-outline-dark" id="totalsearch-btn"><img alt="검색" src="/team1/images/search_icon.svg"></button>
 				</form>
 				
 				<ul class="navbar-nav">
-					<li class="nav-item"> 
-						<a class="nav-link" href="/team1/login">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/team1/signup">회원가입</a>
-					</li>
+					<c:if test="${user == null}">
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/login" />">로그인</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/signup" />">회원가입</a>
+						</li>
+					</c:if>
+					<c:if test="${user != null}">
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/mypage/postlist" />">마이페이지</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<c:url value="/logout" />">로그아웃</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</nav>

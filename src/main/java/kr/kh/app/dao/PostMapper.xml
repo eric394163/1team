@@ -23,12 +23,19 @@
 	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO"> select * from board; </select>
 
 
-	<select id="selectTotalPostCount" resultType="int"> SELECT count(*) FROM post where post_content
-		like concat('%', #{cri.search},'%') </select>
+	<select id="selectTotalPostCount" resultType="int"> 
+		SELECT count(*) FROM post 
+		JOIN board ON board_id = post_board_num
+		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%') </select>
 
-	<select id="selectTotalSearchResultList" resultType="kr.kh.app.model.vo.PostVO"> SELECT * FROM
-		post where post_title like concat('%', #{cri.search},'%') ORDER BY post_id DESC LIMIT
+	<select id="selectTotalSearchResultList" resultType="kr.kh.app.model.vo.PostVO"> 
+		SELECT post.* , board_name As post_board_name
+		FROM post 
+		JOIN board ON board_id = post_board_num
+		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%')
+		ORDER BY post_id DESC LIMIT
 		#{cri.pageStart}, #{cri.perPageNum} </select>
+
 
 	<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
 		select * from board where board_id = #{post_board_num}
@@ -66,9 +73,16 @@
 		select * from post where post_id = #{num}
 	</select>
 	
-	<select id="selectFileByPost_id" resultType="kr.kh.app.model.vo.AttachVO">
-		select * from attach where attach_post_id = #{num}
+	<!-- 첨부파일 불러오기 -->
+	<select id="selectFileByPost_id" resultType="kr.kh.app.model.vo.AttachVO"> 
+		select * from attach where attach_post_id = #{num} and attach_link_check = 0
 	</select>
+	
+	<!-- 링크 불러오기 -->
+	<select id="selectLinkByPost_id" resultType="kr.kh.app.model.vo.AttachVO"> 
+		select * from attach where attach_post_id = #{num} and attach_link_check = 1
+	</select>
+	
 	<insert id="insertFile">
 		insert into attach(attach_post_id, attach_link_check, attach_path)
 		values(#{attach.attach_post_id}, "0", #{attach.attach_path})
@@ -86,4 +100,48 @@
 	<delete id="deleteFile">
 		delete from attach where attach_num = #{attach_num}
 	</delete>
+	
+	<select id="selectFile" resultType="kr.kh.app.model.vo.AttachVO">
+		select * from attach where attach_num = #{attach_num}
+	</select>
+	
+	<update id="updatePost">
+		update post as post, attach as attach set
+			post.post_title = #{post.post_title},
+			post.post_content = #{post.post_content},
+			post.post_board_num = #{post.post_board_num},
+			attach.attach_path = #{link}
+		where
+			post.post_id = #{post.post_id} and
+			attach.attach_post_id = #{post.post_id} and
+			attach.attach_link_check = 1
+	</update>
+
+
+
+	<select id="selectTotalPopularViewPostList" resultType="kr.kh.app.model.vo.PostVO">
+		SELECT 
+			post.*,
+			board_name
+		FROM
+			post
+				JOIN
+			board ON post.post_board_num = board.board_id
+		WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
+
+		ORDER BY post_view desc
+	</select>
+
+
+	<select id="selectTotalPopularLikePostList" resultType="kr.kh.app.model.vo.PostVO">
+		SELECT 
+			post.*,
+			board_name
+		FROM
+			post
+				JOIN
+			board ON post.post_board_num = board.board_id
+			WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
+		ORDER BY post_upvotes desc
+	</select>
 </mapper>

@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PlayGround - 경고창</title>
 </head>
 <body>
 	<script type="text/javascript">
-		let msg = '${msg}';
-		if(msg != ''){
-			alert(msg);
-		}
-		location.href = '<c:url value="/${url}"/>';
+		<c:if test="${msg != null}">
+			alert('${msg}');
+		</c:if>
+		location.href = '<c:url value="${url}"/>'
 	</script>
 </body>
 </html>

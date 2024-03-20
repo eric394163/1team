@@ -24,10 +24,17 @@ public interface PostService {
 
 	ArrayList<AttachVO> getFile(int num);
 
+	AttachVO getLink(int num);
+	
 	int getTotalPostCount(Criteria cri);
 
 	ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
 
 	boolean deletePost(int num, UserVO user);
+	boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, String link);
+
+    ArrayList<PostVO> getPopularViewPostList(Criteria cri);
+
+	ArrayList<PostVO> getPopularLikePostList(Criteria popularLikeCri);
 
 }
