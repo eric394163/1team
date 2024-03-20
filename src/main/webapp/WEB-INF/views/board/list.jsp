@@ -18,6 +18,7 @@
         <jsp:include page="/WEB-INF/views/common/aside.jsp" />
         <div class="main-contents">
           	<h1>리스트</h1>
+          	${list}
           	<hr>
 			<table class="table table-hover">
 				<thead>
@@ -46,7 +47,7 @@
 										<c:param name="type" value="writer" />
 										<c:param name="search" value="${post.post_user_id}" />
 										<c:param name="page" value="1" />
-										<c:param name="boNum" value="${post.board.board_id}" />
+										<c:param name="boNum" value="${pm.cri.boNum}" />
 									</c:url>
 									<a href="${page}">${post.post_user_id}</a>
 								</td>
@@ -70,19 +71,19 @@
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${pm.startPage-1}" />
-							<c:param name="boNum" value="${post.board.board_id}" />
+							<c:param name="boNum" value="${pm.cri.boNum}" />
 						</c:url>
 						<a class="page-link" href="${prevUrl}">이전</a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pm.startPage}" end="${pm.endPage }" var="i">
-					<li class="page-item <c:if test="${pm.cri.page == i }">active</c:if>">
-						<c:url var="page" value="/board/list">
-							<c:param name="type" value="${pm.cri.type}" />
-							<c:param name="search" value="${pm.cri.search}" />
-							<c:param name="page" value="${i}" />
-							<c:param name="boNum" value="${post.board.board_id}" />
-						</c:url>
+					<c:url var="page" value="/board/list">
+						<c:param name="type" value="${pm.cri.type}" />
+						<c:param name="search" value="${pm.cri.search}" />
+						<c:param name="page" value="${i}" />
+						<c:param name="boNum" value="${pm.cri.boNum}" />
+					</c:url>
+					<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
 						<a class="page-link" href="${page}">${i}</a>
 					</li>
 				</c:forEach>
@@ -92,7 +93,7 @@
 							<c:param name="type" value="${pm.cri.type}" />
 							<c:param name="search" value="${pm.cri.search}" />
 							<c:param name="page" value="${pm.endPage+1}" />
-							<c:param name="boNum" value="${post.board.board_id}" />
+							<c:param name="boNum" value="${pm.cri.boNum}" />
 						</c:url>
 						<a class="page-link" href="${nextUrl}">다음</a>
 					</li>
@@ -102,8 +103,6 @@
 				<div class="input-group">
 					<select name="type" class="form-control">
 					
-						<c:if test='${pm.cri.type == "all" }'>selected</c:if>
-				
 						<option value="all" <c:if test='${pm.cri.type == "all" }'>selected</c:if>>제목+작성자</option>
 						<option value="title" <c:if test='${pm.cri.type == "title" }'>selected</c:if>>제목</option>
 						<option value="writer" <c:if test='${pm.cri.type == "writer" }'>selected</c:if>>작성자</option>

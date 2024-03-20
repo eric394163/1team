@@ -21,7 +21,7 @@
 		FROM post
 		join board on board_id = post_board_num 
 		<if test='cri.type=="all"'>
-			where (post_title like concat('%', #{cri.search},'%') 
+			where (post_title like concat('%', #{cri.search},'%')
 				or post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="title"'>
@@ -40,11 +40,11 @@
 		FROM post
 		join board on board_id = post_board_num
 		<if test='cri.type=="all"'>
-			where (post_title like concat('%', #{cri.search},'%') 
+			where (post_title like concat('%', #{cri.search},'%')
 				or post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="title"'>
-			where (post_title like concat('%', #{cri.search},'%')) and post_board_num = #{cri.boNum}
+			where post_title like concat('%', #{cri.search},'%') and post_board_num = #{cri.boNum}
 		</if>
 		<if test='cri.type=="writer"'>
 			where post_user_id = #{cri.search} and post_board_num = #{cri.boNum}
