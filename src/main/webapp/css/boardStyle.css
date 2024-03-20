@@ -50,18 +50,35 @@
 
 /* 인기게시글 */
 .popular-list{ width: 100%; margin-bottom: 80px; }
-.popular-list ul{ 
+.popular-list .btn-area{ 
 	list-style: none; padding: 0; margin: 0; margin-bottom: 10px;
 	display: flex;
 }
-.popular-list li{ margin-right: 10px; }
-.popular-list a{
+.popular-list .btn-area li{ margin-right: 10px; }
+.popular-list .btn-area a{
 	display: inline-block; padding: 6px 30px;
 	border: 2px solid #999; color: #999;
 	border-radius: 50px; text-decoration: none; 
 	font-weight: bold;
 }
-.popular-list a.active{
+.popular-list .btn-area a.active{
 	border: 2px solid #000; color: #000;
 }
 .popular-list .like-area{ display: none; }
+
+
+/* 마이페이지 - 내가 차단한 목록 */
+.all-check-area{
+	display: flex; 
+	justify-content: flex-end; align-items: center;
+	margin-bottom: 10px; padding: 0 10px;
+}
+.table.block-table td{ vertical-align: middle; text-align: center; }
+.table.block-table tr td:last-child{ text-align: right; }
+.table.block-table td:nth-child(1), .table.block-table th:nth-child(1){ width: 60px; }
+.table.block-table td:nth-child(2), .table.block-table th:nth-child(2){ width: 60px; }
+.table.block-table td:nth-child(3), .table.block-table th:nth-child(3){ width: 150px; }
+.table.block-table td:nth-child(4), .table.block-table th:nth-child(4){ width: 550px; }
+
+
+

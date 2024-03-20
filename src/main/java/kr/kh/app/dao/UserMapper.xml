@@ -20,4 +20,18 @@
     	update user set user_pw = #{user.pw}, user_email = #{user.email}, user_nickname = #{user.nickname}, user_birth = #{user.birth}
     	where user_id = #{user.id}
     </update>
+
+    <select id="selectTotalBlockedUserCount" resultType="int">
+        SELECT COUNT(*) 
+        FROM blocked 
+        WHERE blocking_user_id = #{cri.blocking_user_id}
+    </select>
+    <select id="selectBlockedUserList" resultType="kr.kh.app.model.vo.BlockedVO">
+        SELECT * 
+        FROM blocked 
+        WHERE blocking_user_id = #{cri.blocking_user_id}
+        ORDER BY blocked_id DESC
+        LIMIT #{cri.pageStart}, #{cri.perPageNum}
+        
+    </select>
 </mapper>
