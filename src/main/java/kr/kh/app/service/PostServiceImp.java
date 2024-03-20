@@ -152,4 +152,23 @@ public class PostServiceImp implements PostService {
 		return postDao.selectTotalPostCount(cri);
 	}
 
+	// 조회수 인기 게시글 리스트 조회 
+	@Override
+	public ArrayList<PostVO> getPopularViewPostList(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		System.out.println("cri : " + cri);
+		return postDao.selectTotalPopularViewPostList(cri);
+		
+	}
+
+	@Override
+	public ArrayList<PostVO> getPopularLikePostList(Criteria cri) {
+		if (cri== null) {
+			cri = new Criteria();
+		}
+		return postDao.selectTotalPopularLikePostList(cri);
+	}
+
 }

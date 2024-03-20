@@ -27,4 +27,8 @@ public interface PostService {
 
 	ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
 
+    ArrayList<PostVO> getPopularViewPostList(Criteria cri);
+
+	ArrayList<PostVO> getPopularLikePostList(Criteria popularLikeCri);
+
 }

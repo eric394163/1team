@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.app.dao.UserDAO">
-    <select id="selectUser" resultType="kr.kh.app.model.vo.UserVO"> SELECT * FROM USER
-        WHERE user_id = #{user_id} </select>
+    <select id="selectUser" resultType="kr.kh.app.model.vo.UserVO"> SELECT * FROM USER WHERE user_id
+        = #{user_id} </select>
+    <insert id="insertMember"> INSERT INTO USER(user_id, user_pw, user_nickname, user_email,
+        user_birth, user_state_date) VALUES(#{user.id},#{user.pw},#{user.nickname}, #{user.email},
+        #{user.birth}, now()) </insert>
+	<select id="selectFindUser" resultType="kr.kh.app.model.vo.UserVO">
+		select * from user where user_email = #{user_email} and user_birth = #{user_birth}
+	</select>
+	<update id="updateUserPw">
+		update user set user_pw = #{user.user_pw} where user_id = #{user.user_id}
+	</update>
     <select id="selectUserById" resultType="kr.kh.app.model.vo.UserVO"> SELECT * FROM USER
         WHERE user_id = #{id} </select>
 
@@ -12,9 +21,7 @@
     <select id="selectUserByNickname" resultType="kr.kh.app.model.vo.UserVO"> SELECT *
         FROM USER WHERE user_nickname = #{nickname} </select>
 
-    <insert id="insertMember"> INSERT INTO USER(user_id, user_pw,
-        user_nickname,user_email, user_birth, user_state_date) VALUES(#{user.id},
-        #{user.pw},#{user.nickname}, #{user.email}, #{user.birth}, now()) </insert>
+
         
     <update id="updateUser">
     	update user set user_pw = #{user.pw}, user_email = #{user.email}, user_nickname = #{user.nickname}, user_birth = #{user.birth}
@@ -25,4 +32,18 @@
     	update user set user_id = #{user.user_id}, user_pw = #{user.user_pw}, user_email = #{user.user_email}, user_state_date = #{user.user_state_date}, user_state = #{user.user_state}
     	where user_id = #{id}
     </update>
+
+    <select id="selectTotalBlockedUserCount" resultType="int">
+        SELECT COUNT(*) 
+        FROM blocked 
+        WHERE blocking_user_id = #{cri.blocking_user_id}
+    </select>
+    <select id="selectBlockedUserList" resultType="kr.kh.app.model.vo.BlockedVO">
+        SELECT * 
+        FROM blocked 
+        WHERE blocking_user_id = #{cri.blocking_user_id}
+        ORDER BY blocked_id DESC
+        LIMIT #{cri.pageStart}, #{cri.perPageNum}
+        
+    </select>
 </mapper>

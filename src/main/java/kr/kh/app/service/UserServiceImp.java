@@ -12,7 +12,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.app.dao.UserDAO;
 import kr.kh.app.model.dto.LoginDTO;
 import kr.kh.app.model.dto.SignUpDTO;
+import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.CheckErrAndMsg;
 import kr.kh.app.utils.NullCheck;
 
@@ -64,6 +66,9 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public boolean signUp(SignUpDTO signUpDTO) throws Exception {
+
+	
+
 
 		// CheckErrAndMsg checkErrAndMsg = new CheckErrAndMsg();
 
@@ -122,6 +127,28 @@ public class UserServiceImp implements UserService {
 		}
 		return false;
 
+	}
+
+	@Override
+	public UserVO getUser(String email, String birth) {
+		if(!checkString(email) || !checkString(birth)) {
+			return null;
+		}
+		return userDao.selectFindUser(email, birth);
+	}
+
+	@Override
+	public UserVO getUser(String id) {
+		if(!checkString(id)) return null;
+		return userDao.selectUser(id);
+	}
+
+	@Override
+	public boolean updateUserPw(UserVO user) {
+		if(user == null || 
+			!checkString(user.getUser_id()) ||
+			!checkString(user.getUser_pw())) return false;
+		return userDao.updateUserPw(user);
 	}
 
 	@Override
@@ -187,4 +214,18 @@ public class UserServiceImp implements UserService {
 		return email == null ? "1" : "";
 	}
 
+	public int getTotalBlockedUserCount(Criteria cri) {
+		if (cri == null) {
+			return 0;
+		}
+		return userDao.selectTotalBlockedUserCount(cri);
+	}
+
+	@Override
+	public ArrayList<BlockedVO> getBlockedUserList(Criteria cri) {
+		if (cri == null) {
+			return null;
+		}
+		return userDao.selectBlockedUserList(cri);
+	}
 }

@@ -23,9 +23,10 @@
 	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO"> select * from board; </select>
 
 
-	<select id="selectTotalPostCount" resultType="int"> SELECT count(*) FROM post 
+	<select id="selectTotalPostCount" resultType="int"> 
+		SELECT count(*) FROM post 
 		JOIN board ON board_id = post_board_num
-		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%')</select>
+		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%') </select>
 
 	<select id="selectTotalSearchResultList" resultType="kr.kh.app.model.vo.PostVO"> 
 		SELECT post.* , board_name As post_board_name
@@ -84,4 +85,32 @@
 		insert into attach(attach_post_id, attach_link_check, attach_path)
 		values(#{attach.attach_post_id}, "1", #{attach.attach_path})
 	</insert>
+
+
+
+	<select id="selectTotalPopularViewPostList" resultType="kr.kh.app.model.vo.PostVO">
+		SELECT 
+			post.*,
+			board_name
+		FROM
+			post
+				JOIN
+			board ON post.post_board_num = board.board_id
+		WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
+
+		ORDER BY post_view desc
+	</select>
+
+
+	<select id="selectTotalPopularLikePostList" resultType="kr.kh.app.model.vo.PostVO">
+		SELECT 
+			post.*,
+			board_name
+		FROM
+			post
+				JOIN
+			board ON post.post_board_num = board.board_id
+			WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
+		ORDER BY post_upvotes desc
+	</select>
 </mapper>
