@@ -15,6 +15,11 @@
     <insert id="insertMember"> INSERT INTO USER(user_id, user_pw,
         user_nickname,user_email, user_birth, user_state_date) VALUES(#{user.id},
         #{user.pw},#{user.nickname}, #{user.email}, #{user.birth}, now()) </insert>
+        
+    <update id="updateUser">
+    	update user set user_pw = #{user.pw}, user_email = #{user.email}, user_nickname = #{user.nickname}, user_birth = #{user.birth}
+    	where user_id = #{user.id}
+    </update>
 
     <select id="selectTotalBlockedUserCount" resultType="int">
         SELECT COUNT(*) 

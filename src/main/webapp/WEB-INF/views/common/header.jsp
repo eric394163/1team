@@ -24,14 +24,13 @@
 			<div class="container-fluid">
 				<h1>
 					<a class="navbar-brand" href="/team1/"> 
-						<img
-						alt="LOGO"
-						src="http://playground.dothome.co.kr/logo_blackversion.svg">
+						<img alt="LOGO" src="/team1/images/logo_blackversion.svg">
 					</a>
 				</h1>
-				<form class="d-flex" action="<c:url value='/totalSearchList' />" method="get">
-					<input class="form-control me-2" type="text" placeholder="검색어를 입력하세요" name="totalsearch" id="totalsearch">
-					<button type="submit" class="btn btn-outline-success">검색</button>
+				<form class="d-flex" action="<c:url value='/totalSearchList?' />" method="get">
+					<input class="form-control" type="text" placeholder="검색어를 입력하세요" name="totalsearch" id="totalsearch">
+					<input type="hidden" name="page" value="1">
+					<button type="submit" class="btn btn-outline-dark" id="totalsearch-btn"><img alt="검색" src="/team1/images/search_icon.svg"></button>
 				</form>
 				
 				<ul class="navbar-nav">

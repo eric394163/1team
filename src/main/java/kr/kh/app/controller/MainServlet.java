@@ -43,6 +43,8 @@ public class MainServlet extends HttpServlet {
 		} catch (Exception e) {
 			page = 1;
 		}
+		
+	
 
 		Criteria cri = new Criteria(page, 10);
 

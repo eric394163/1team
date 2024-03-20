@@ -19,6 +19,7 @@ prefix="c"%>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/team1/css/common.css" />
+    <link rel="stylesheet" href="/team1/css/boardStyle.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
@@ -28,14 +29,11 @@ prefix="c"%>
       <div class="inner-wrap">
         <jsp:include page="/WEB-INF/views/common/aside.jsp" />
         <div class="main-contents">
-          <h1>"${pm.cri.search}" 의 검색 결과</h1>
-          <c:if test="${empty list}">
-            <p>검색 결과가 없습니다.</p>
-          </c:if>
-
-          <c:if test="${not empty list}">
-            <table class="table table-hover">
-              <thead>
+          <div class="h2_title_wrap">	
+          	<h2>"${pm.cri.search}" 의 검색 결과</h2>
+          </div>
+            <table class="table">
+              <thead class="table-dark">
                 <tr>
                   <th>번호</th>
                   <th>게시판</th>
@@ -45,22 +43,29 @@ prefix="c"%>
                 </tr>
               </thead>
               <tbody>
-                <c:forEach items="${list}" var="post">
-                  <tr>
-                    <td>${post.post_id }</td>
-                    <td>${post.post_board_name}</td>
-                    <td>
-                      <c:url var="url" value="/post/detail">
-                        <c:param name="num" value="${post.post_id}" />
-                      </c:url>
-                      <a href="${url}">${post.post_title}</a>
-                    </td>
-                    <td>
-                      <a href="">${post.post_user_id}</a>
-                    </td>
-                    <td>${post.post_view }</td>
-                  </tr>
-                </c:forEach>
+                <c:if test="${not empty list}">
+	                <c:forEach items="${list}" var="post">
+	                  <tr>
+	                    <td>${post.post_id }</td>
+	                    <td>${post.post_board_name}</td>
+	                    <td>
+	                      <c:url var="url" value="/post/detail">
+	                        <c:param name="num" value="${post.post_id}" />
+	                      </c:url>
+	                      <a href="${url}">${post.post_title}</a>
+	                    </td>
+	                    <td>
+	                      <a href="">${post.post_user_id}</a>
+	                    </td>
+	                    <td>${post.post_view }</td>
+	                  </tr>
+	                </c:forEach>
+                </c:if>
+                <c:if test="${empty list}">
+		            <tr>
+						<th colspan="5" class="text-center">등록된 게시글이 없습니다.</th>
+					</tr>
+		        </c:if>
               </tbody>
             </table>
 
@@ -99,7 +104,7 @@ prefix="c"%>
                 </li>
               </c:if>
             </ul>
-          </c:if>
+          
         </div>
       </div>
     </div>

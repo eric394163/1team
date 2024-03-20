@@ -34,20 +34,6 @@ public class SignUpServlet extends HttpServlet {
         String birth = request.getParameter("birth");
 
         SignUpDTO signUpDto = new SignUpDTO(id, pw, nickname, email, birth);
-
-        // CheckErrAndMsg checkErrAndMsg = userService.signUp(signUpDto);
-
-        // System.out.println("checkErrAndMsg: " + checkErrAndMsg);
-
-        // // 밑에 try catch로 감까서 e.getMessage()
-
-        // if (checkErrAndMsg.isTrueOrFalse()) {
-        // request.setAttribute("msg", checkErrAndMsg.getMsg());
-        // request.setAttribute("url", "/");
-        // } else {
-        // request.setAttribute("msg", checkErrAndMsg.getMsg());
-        // request.setAttribute("url", "/signup");
-        // }
         try {
             if (userService.signUp(signUpDto)) {
 

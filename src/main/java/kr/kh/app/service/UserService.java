@@ -14,6 +14,9 @@ public interface UserService {
 
     boolean signUp(SignUpDTO signUpDTO) throws Exception;
 
+	String checkId(String id);
+
+	boolean updateSignUp(SignUpDTO signUpDto) throws Exception;
     int getTotalBlockedUserCount(Criteria cri);
 
     ArrayList<BlockedVO> getBlockedUserList(Criteria cri);

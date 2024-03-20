@@ -44,9 +44,7 @@ prefix="c"%>
 				</c:forEach>
 				<c:if test="${list.size() == 0 }">
 					<tr>
-						<th colspan="5">
-							<h4 class="text-center">등록된 게시글이 없습니다.</h4>
-						</th>
+						<th colspan="5" class="text-center">등록된 게시글이 없습니다.</th>
 					</tr>
 				</c:if>
 			</tbody>
