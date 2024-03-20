@@ -26,16 +26,13 @@ public class SignUpServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
-		ArrayList<BoardVO> boardList = commonService.getBoardList();
-		request.setAttribute("category", categoryList);//화면에 전송
-		request.setAttribute("board", boardList);//화면에 전송
+    	MainServlet.commonAsideInfo(request);
         request.getRequestDispatcher("/WEB-INF/views/topnav/signUp.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+    	
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
         String nickname = request.getParameter("nickname");
