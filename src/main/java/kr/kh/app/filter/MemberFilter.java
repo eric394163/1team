@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import kr.kh.app.model.vo.UserVO;
 
 @WebFilter({
-	"/post/insert",
+	"/post/insert", "/post/update", "/post/delete",
 	"/mypage/postlist", "/mypage/commentlist", "/mypage/likelist",
 	"/mypage/signupdate", "/mypage/blocklist", "/mypage/deleteid"
 })

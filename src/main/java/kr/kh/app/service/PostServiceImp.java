@@ -16,6 +16,7 @@ import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
 
@@ -145,12 +146,68 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+	public AttachVO getLink(int num) {
+		return postDao.selectLinkByPost_id(num);
+	}
+	
+	@Override
 	public int getTotalPostCount(Criteria cri) {
 		if (cri == null) {
 			cri = new Criteria();
 		}
 		return postDao.selectTotalPostCount(cri);
 	}
+
+	@Override
+	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, String link) {
+		if(post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
+			return false;
+		}
+		
+		if(user == null) {
+			return false;
+		}
+		
+		PostVO dbPost = postDao.selectPost(post.getPost_id());
+		
+		if(dbPost == null || !dbPost.getPost_user_id().equals(user.getUser_id())) {
+			return false;
+		}
+		
+		if(nums != null) {
+			for(String numStr : nums) {
+				try {
+					int num = Integer.parseInt(numStr);
+					AttachVO attachVo = postDao.selectFile(num);
+					deleteFile(attachVo);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		for(Part file : fileList) {
+			uploadFile(file, post.getPost_id());
+		}
+		
+		return postDao.updatePost(post, link);
+	}
+
+	private void deleteFile(AttachVO fileVo) {
+		if(fileVo == null) {
+			return;
+		}
+		
+		File file = new File(uploadPath + fileVo.getAttach_path().replace('/', File.separatorChar));
+		
+		if(file.exists()) {
+			file.delete();
+		}
+		postDao.deleteFile(fileVo.getAttach_num());
+		
+	}
+
+	
 
 	// 조회수 인기 게시글 리스트 조회 
 	@Override

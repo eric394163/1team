@@ -73,9 +73,16 @@
 		select * from post where post_id = #{num}
 	</select>
 	
-	<select id="selectFileByPost_id" resultType="kr.kh.app.model.vo.AttachVO">
-		select * from attach where attach_post_id = #{num}
+	<!-- 첨부파일 불러오기 -->
+	<select id="selectFileByPost_id" resultType="kr.kh.app.model.vo.AttachVO"> 
+		select * from attach where attach_post_id = #{num} and attach_link_check = 0
 	</select>
+	
+	<!-- 링크 불러오기 -->
+	<select id="selectLinkByPost_id" resultType="kr.kh.app.model.vo.AttachVO"> 
+		select * from attach where attach_post_id = #{num} and attach_link_check = 1
+	</select>
+	
 	<insert id="insertFile">
 		insert into attach(attach_post_id, attach_link_check, attach_path)
 		values(#{attach.attach_post_id}, "0", #{attach.attach_path})
@@ -85,6 +92,26 @@
 		insert into attach(attach_post_id, attach_link_check, attach_path)
 		values(#{attach.attach_post_id}, "1", #{attach.attach_path})
 	</insert>
+	
+	<delete id="deleteFile">
+		delete from attach where attach_num = #{attach_num}
+	</delete>
+	
+	<select id="selectFile" resultType="kr.kh.app.model.vo.AttachVO">
+		select * from attach where attach_num = #{attach_num}
+	</select>
+	
+	<update id="updatePost">
+		update post as post, attach as attach set
+			post.post_title = #{post.post_title},
+			post.post_content = #{post.post_content},
+			post.post_board_num = #{post.post_board_num},
+			attach.attach_path = #{link}
+		where
+			post.post_id = #{post.post_id} and
+			attach.attach_post_id = #{post.post_id} and
+			attach.attach_link_check = 1
+	</update>
 
 
 

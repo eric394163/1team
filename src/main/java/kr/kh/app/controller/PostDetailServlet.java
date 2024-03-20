@@ -35,6 +35,9 @@ public class PostDetailServlet extends HttpServlet {
 		ArrayList<AttachVO> fileList = postService.getFile(num);
 		request.setAttribute("fileList", fileList);
 		
+		AttachVO link = postService.getLink(num);
+		request.setAttribute("link", link);
+		
 		request.getRequestDispatcher("/WEB-INF/views/post/detail.jsp").forward(request, response);
 	}
 
