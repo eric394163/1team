@@ -21,4 +21,12 @@ public class UserVO {
 		this.user_id = id;
 		this.user_pw = pw;
 	}
+    
+    public UserVO(String id, String pw, String email, Date state_date, String state) {
+		this.user_id = id;
+		this.user_pw = pw;
+		this.user_email = email;
+		this.user_state_date = state_date;
+		this.user_state = state;
+	}
 }

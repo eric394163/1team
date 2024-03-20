@@ -14,7 +14,8 @@ public interface UserService {
 
 	boolean updateSignUp(SignUpDTO signUpDto) throws Exception;
 
+	boolean updateDropUser(UserVO dropUser, String user_id);
 
-	void deleteCommentByUser(UserVO user);
+	String checkEmail(String email);
 
 }

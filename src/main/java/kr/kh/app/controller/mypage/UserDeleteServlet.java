@@ -1,6 +1,9 @@
 package kr.kh.app.controller.mypage;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,16 +26,36 @@ public class UserDeleteServlet extends HttpServlet {
 		UserVO user = (UserVO) httpServletRequest.getSession().getAttribute("user");
 		
 		//유저이메일, 아이디 기록
+		String user_id = user.getUser_id();
 		String user_email = user.getUser_email();
 		
-		//해당유저의 댓글 모두 삭제
-		userService.deleteCommentByUser(user);
-		
-		//해당유저의 게시글 모두 삭제
-		
 		//해당유저 데이터 변경, UUID를 통한 아이디,비번,닉넴으로 변경, 상태변경
+		String uuid = UUID.randomUUID().toString().substring(0, 11);
 		
-		//메인페이지로 이동
+		//혹시나 동일한 uuid가 들어가는 것을 방지 : id와 이메일은 중복X
+		while(true) {
+			if(user.getUser_id().equals(uuid)) {
+				uuid = UUID.randomUUID().toString().substring(0, 11);
+			}else {
+				break;
+			}
+		}
+		//상태가 변화는 오늘 날짜
+		Date today = new Date();
+		
+		UserVO dropUser = new UserVO(uuid, uuid, user_email, today, "탈퇴중");
+		
+		if(userService.updateDropUser(dropUser, user_id)) {
+			request.getSession().removeAttribute("user");
+			request.setAttribute("msg", "PlayGround를 회원탈퇴하였습니다.");
+            request.setAttribute("url", "");
+		}else {
+			request.setAttribute("msg", "PlayGround를 회원탈퇴하지 못했습니다.");
+            request.setAttribute("url", "");
+		}
+		
+		//탈퇴메시지처리
+		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 	}
 
 }

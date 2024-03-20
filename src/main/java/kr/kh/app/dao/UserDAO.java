@@ -19,4 +19,6 @@ public interface UserDAO {
 
 	boolean updateUser(@Param("user")SignUpDTO signUpDTO);
 
+	boolean updateDropUser(@Param("user")UserVO dropUser, @Param("id")String user_id);
+
 }

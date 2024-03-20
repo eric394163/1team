@@ -33,6 +33,14 @@ public class UserServiceImp implements UserService {
 			e.printStackTrace();
 		}
 	}
+	
+	//문자열 체크
+	private boolean checkString(String str) {
+		if(str == null || str.length() == 0) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public UserVO login(LoginDTO loginDTO) {
@@ -164,4 +172,19 @@ public class UserServiceImp implements UserService {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean updateDropUser(UserVO dropUser, String user_id) {
+		if(dropUser == null || !checkString(user_id)) {
+			return false;
+		}
+		return userDao.updateDropUser(dropUser, user_id);
+	}
+
+	@Override
+	public String checkEmail(String email) {
+		UserVO user = userDao.selectUserByEmail(email);
+		return email == null ? "1" : "";
+	}
+
 }

@@ -20,4 +20,9 @@
     	update user set user_pw = #{user.pw}, user_email = #{user.email}, user_nickname = #{user.nickname}, user_birth = #{user.birth}
     	where user_id = #{user.id}
     </update>
+    
+    <update id="updateDropUser">
+    	update user set user_id = #{user.user_id}, user_pw = #{user.user_pw}, user_email = #{user.user_email}, user_state_date = #{user.user_state_date}, user_state = #{user.user_state}
+    	where user_id = #{id}
+    </update>
 </mapper>
