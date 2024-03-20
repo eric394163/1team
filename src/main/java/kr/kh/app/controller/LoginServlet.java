@@ -8,23 +8,32 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.kh.app.model.dto.LoginDTO;
+import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CategoryVO;
 import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.service.CommonService;
+import kr.kh.app.service.CommonServiceImp;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	UserService userService = new UserServiceImp();
+    UserService userService = new UserServiceImp();
+    private CommonService commonService = new CommonServiceImp();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		MainServlet.commonAsideInfo(request);
-		request.getRequestDispatcher("/WEB-INF/views/topnav/login.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    	ArrayList<CategoryVO> categoryList = commonService.getCategoryList();
+		ArrayList<BoardVO> boardList = commonService.getBoardList();
+		request.setAttribute("category", categoryList);//화면에 전송
+		request.setAttribute("board", boardList);//화면에 전송
+        request.getRequestDispatcher("/WEB-INF/views/topnav/login.jsp").forward(request, response);
+    }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

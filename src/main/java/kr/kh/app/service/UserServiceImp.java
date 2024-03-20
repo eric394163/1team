@@ -35,6 +35,10 @@ public class UserServiceImp implements UserService {
 			e.printStackTrace();
 		}
 	}
+	private boolean checkString(String str) {
+		return str != null && str.length() != 0;
+	}
+    
 
 	@Override
 	public UserVO login(LoginDTO loginDTO) {
@@ -58,6 +62,9 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public boolean signUp(SignUpDTO signUpDTO) throws Exception {
+
+	
+
 
 		// CheckErrAndMsg checkErrAndMsg = new CheckErrAndMsg();
 
@@ -116,6 +123,28 @@ public class UserServiceImp implements UserService {
 		}
 		return false;
 
+	}
+
+	@Override
+	public UserVO getUser(String email, String birth) {
+		if(!checkString(email) || !checkString(birth)) {
+			return null;
+		}
+		return userDao.selectFindUser(email, birth);
+	}
+
+	@Override
+	public UserVO getUser(String id) {
+		if(!checkString(id)) return null;
+		return userDao.selectUser(id);
+	}
+
+	@Override
+	public boolean updateUserPw(UserVO user) {
+		if(user == null || 
+			!checkString(user.getUser_id()) ||
+			!checkString(user.getUser_pw())) return false;
+		return userDao.updateUserPw(user);
 	}
 
 	@Override

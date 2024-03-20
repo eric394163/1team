@@ -23,27 +23,23 @@ prefix="c"%>
 		<div class="inner-wrap">
 			<jsp:include page="/WEB-INF/views/common/aside.jsp" />
 			<div class="main-contents">
-				<h1>비밀번호 찾기</h1>
+				<h1>새 비밀번호</h1>
 				<hr>
 				<div class="login-form">
-					<form action="<c:url value="/findPw"/>" method="post" id="find-pw">
+					<form action="<c:url value="/newPw"/>" method="post" id="new-pw">
+						<input type="hidden" name="id" value="${id}">
 						<div class="form-group">
-							<label for="email">아이디:</label>
-							<input type="text" class="form-control" id="id" placeholder="아이디" name="id">
-							<label class="id-error" class="error text-danger" for="id"></label>
+							<label for="pw">비밀번호:</label>
+							<input type="text" class="form-control" id="pw" placeholder="비밀번호" name="pw">
+							<label class="pw-error" class="error text-danger" for="pw"></label>
 						</div>
 						<div class="form-group">
-							<label for="email">이메일:</label>
-							<input type="text" class="form-control" id="email" placeholder="이메일" name="email">
-							<label class="email-error" class="error text-danger" for="email"></label>
-						</div>
-						<div class="form-group">
-							<label for="birth">생년월일:</label>
-							<input type="text" class="form-control" id="birth" placeholder="yyyy-MM-dd" name="birth">
-							<label class="birth-error" class="error text-danger" for="birth"></label>
+							<label for="pw2">비밀번호 확인:</label>
+							<input type="text" class="form-control" id="pw2" placeholder="비밀번호 확인" name="pw2">
+							<label class="pw2-error" class="error text-danger" for="pw2"></label>
 						</div>
 						<div class="form-actions">
-							<button class="btn btn-outline-success">비밀번호 찾기</button>
+							<button class="btn btn-outline-success">비밀번호 변경</button>
 						</div>
 					</form>
 				</div>
@@ -53,33 +49,23 @@ prefix="c"%>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#find-pw").validate({
+			$("#new-pw").validate({
 				rules : {
-					id : {
-						required : true,
-						regex : /^\w{6,13}$/
+					pw : {
+						required: true,
+			            regex: /^[a-zA-Z0-9!@#]{6,15}$/
 					},
-					email : {
-						required : true,
-						email : true
-					},
-					birth : {
-						required : true,
-						regex : /(^\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/
+					pw2 : {
+						equalTo : pw
 					}
 				}, 
 				messages : {
-					id : {
-						required : "필수 항목입니다.",
-						regex : "아이디는 숫자 영문 6~13자입니다."
+					pw : {
+						required: "필수 항목입니다.",
+			            regex: "비밀번호는 6~15자의 영문 대소문자, 숫자, 특수문자(!@#)로만 구성해야 합니다."
 					},
-					email : {
-						required : "필수 항목입니다.",
-						email : "이메일 형식이 아닙니다."
-					},
-					birth : {
-						required : "필수 항목입니다.",
-						regex : "yyyy-MM-dd형식으로 입력해야 합니다."
+					pw2 : {
+						equalTo : "입력하신 비밀번호와 일치해야 합니다."
 					}
 				}
 			});

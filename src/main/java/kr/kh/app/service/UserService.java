@@ -21,4 +21,10 @@ public interface UserService {
 
     ArrayList<BlockedVO> getBlockedUserList(Criteria cri);
 
+	UserVO getUser(String email, String birth);
+
+	UserVO getUser(String id);
+
+	boolean updateUserPw(UserVO user);
+
 }
