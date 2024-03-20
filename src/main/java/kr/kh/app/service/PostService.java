@@ -30,6 +30,7 @@ public interface PostService {
 
 	ArrayList<PostVO> getTotalSearchResultList(Criteria cri);
 
+	boolean deletePost(int num, UserVO user);
 	boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, String link);
 
     ArrayList<PostVO> getPopularViewPostList(Criteria cri);

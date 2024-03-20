@@ -109,7 +109,6 @@ public class PostServiceImp implements PostService {
 		return true;
 	}
 
-
 	@Override
 	public ArrayList<PostVO> getTotalSearchResultList(Criteria cri) {
 		if (cri == null) {
@@ -149,7 +148,7 @@ public class PostServiceImp implements PostService {
 	public AttachVO getLink(int num) {
 		return postDao.selectLinkByPost_id(num);
 	}
-	
+
 	@Override
 	public int getTotalPostCount(Criteria cri) {
 		if (cri == null) {
@@ -159,57 +158,75 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+	public boolean deletePost(int num, UserVO user) {
+		if (user == null) {
+			return false;
+		}
+
+		PostVO post = postDao.selectPost(num);
+
+		if (post == null || !post.getPost_user_id().equals(user.getUser_id())) {
+			return false;
+		}
+
+		ArrayList<AttachVO> fileList = postDao.selectFileByPost_id(num);
+		for (AttachVO file : fileList) {
+			deleteFile(file);
+		}
+
+		return postDao.deletePost(num);
+	}
+
+	@Override
 	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, String link) {
-		if(post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
+		if (post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
 			return false;
 		}
-		
-		if(user == null) {
+
+		if (user == null) {
 			return false;
 		}
-		
+
 		PostVO dbPost = postDao.selectPost(post.getPost_id());
-		
-		if(dbPost == null || !dbPost.getPost_user_id().equals(user.getUser_id())) {
+
+		if (dbPost == null || !dbPost.getPost_user_id().equals(user.getUser_id())) {
 			return false;
 		}
-		
-		if(nums != null) {
-			for(String numStr : nums) {
+
+		if (nums != null) {
+			for (String numStr : nums) {
 				try {
 					int num = Integer.parseInt(numStr);
 					AttachVO attachVo = postDao.selectFile(num);
 					deleteFile(attachVo);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
-		for(Part file : fileList) {
+
+		for (Part file : fileList) {
 			uploadFile(file, post.getPost_id());
 		}
-		
+
 		return postDao.updatePost(post, link);
 	}
 
 	private void deleteFile(AttachVO fileVo) {
-		if(fileVo == null) {
+		if (fileVo == null) {
 			return;
 		}
-		
+
 		File file = new File(uploadPath + fileVo.getAttach_path().replace('/', File.separatorChar));
-		
-		if(file.exists()) {
+
+		if (file.exists()) {
 			file.delete();
 		}
 		postDao.deleteFile(fileVo.getAttach_num());
-		
+
 	}
 
-	
-
-	// 조회수 인기 게시글 리스트 조회 
+	// 조회수 인기 게시글 리스트 조회
 	@Override
 	public ArrayList<PostVO> getPopularViewPostList(Criteria cri) {
 		if (cri == null) {
@@ -217,12 +234,12 @@ public class PostServiceImp implements PostService {
 		}
 		System.out.println("cri : " + cri);
 		return postDao.selectTotalPopularViewPostList(cri);
-		
+
 	}
 
 	@Override
 	public ArrayList<PostVO> getPopularLikePostList(Criteria cri) {
-		if (cri== null) {
+		if (cri == null) {
 			cri = new Criteria();
 		}
 		return postDao.selectTotalPopularLikePostList(cri);
