@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserVO {
-    private String user_id;
+	private String user_id;
     private String user_pw;
     private String user_nickname;
     private String user_email;
@@ -23,4 +23,8 @@ public class UserVO {
     	String str = format.format(user_birth);
     	return str;
     }
+    public UserVO(String id, String pw) {
+		this.user_id = id;
+		this.user_pw = pw;
+	}
 }

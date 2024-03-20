@@ -12,6 +12,7 @@ import kr.kh.app.service.CommonService;
 import kr.kh.app.service.CommonServiceImp;
 import kr.kh.app.service.UserService;
 import kr.kh.app.service.UserServiceImp;
+// import kr.kh.app.utils.CheckErrAndMsg;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,21 +35,31 @@ public class SignUpServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
         String nickname = request.getParameter("nickname");
         String email = request.getParameter("email");
         String birth = request.getParameter("birth");
 
-        System.out.println(id + " " + pw + " " + nickname + " " + email + " " + birth);
-
         SignUpDTO signUpDto = new SignUpDTO(id, pw, nickname, email, birth);
+        try {
+            if (userService.signUp(signUpDto)) {
 
-        if (userService.signUp(signUpDto)) {
-            response.sendRedirect(request.getContextPath() + "/");
-        } else {
-            System.out.println("회원가입 실패");
-            doGet(request, response);
+                request.setAttribute("msg", "회원가입 성공");
+
+                request.setAttribute("url", "/");
+
+            } else {
+                request.setAttribute("msg", "회원가입 실패");
+
+            }
+        } catch (Exception e) {
+            String msg = e.getMessage();
+            request.setAttribute("msg", msg);
+            request.setAttribute("url", "/signup");
         }
+
+        request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
     }
 }

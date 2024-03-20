@@ -12,4 +12,33 @@
 	<update id="updateUserPw">
 		update user set user_pw = #{user.user_pw} where user_id = #{user.user_id}
 	</update>
+    <select id="selectUserById" resultType="kr.kh.app.model.vo.UserVO"> SELECT * FROM USER
+        WHERE user_id = #{id} </select>
+
+    <select id="selectUserByEmail" resultType="kr.kh.app.model.vo.UserVO"> SELECT * FROM
+        USER WHERE user_email = #{email} </select>
+
+    <select id="selectUserByNickname" resultType="kr.kh.app.model.vo.UserVO"> SELECT *
+        FROM USER WHERE user_nickname = #{nickname} </select>
+
+
+        
+    <update id="updateUser">
+    	update user set user_pw = #{user.pw}, user_email = #{user.email}, user_nickname = #{user.nickname}, user_birth = #{user.birth}
+    	where user_id = #{user.id}
+    </update>
+
+    <select id="selectTotalBlockedUserCount" resultType="int">
+        SELECT COUNT(*) 
+        FROM blocked 
+        WHERE blocking_user_id = #{cri.blocking_user_id}
+    </select>
+    <select id="selectBlockedUserList" resultType="kr.kh.app.model.vo.BlockedVO">
+        SELECT * 
+        FROM blocked 
+        WHERE blocking_user_id = #{cri.blocking_user_id}
+        ORDER BY blocked_id DESC
+        LIMIT #{cri.pageStart}, #{cri.perPageNum}
+        
+    </select>
 </mapper>

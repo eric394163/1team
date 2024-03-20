@@ -24,7 +24,6 @@
 			<div class="main-contents">
 				<form action="<c:url value="/post/insert"/>" method = "post" enctype ="multipart/form-data" class="insert-form">
 					<h3>게시글 쓰기</h3> 
-					<a class="nav-link" href="/post/list">게시글 목록</a>
 					<hr>
 					<div class="mb-3 mt-3">
 					    <label for="board" class="form-label">게시판 선택</label>
@@ -43,20 +42,28 @@
 					    <label for="content" class="form-label">내용</label>
 					    <textarea rows="10" class="form-control" id="content" placeholder="내용을 입력하세요" name="content" ></textarea>
 					 </div>
-					<!--  <div class="mb-3 mt-3">
-					    <label for="content" class="form-label">첨부파일</label>
+					<div class="mb-3 mt-3">
+					    <label for="file" class="form-label">첨부파일</label>
 					    <input type="file" class="form-control" name="file">
 					    <input type="file" class="form-control" name="file">
-			           	<input type="file" class="form-control" name="file">
-					 </div> -->
-					 <button class="btn btn-outline-warning col-12">게시글 등록</button>
+					    <input type="file" class="form-control" name="file">
+					 </div>
+					 <div class="mb-3 mt-6">
+					    <label for="youtube" class="form-label">링크</label>
+					    <input type="text" class="form-control" name="youtube">
+					 </div>
+					 <button class="btn btn-outline-warning col-12 mb-3">게시글 등록</button>
 				</form>				
 			</div>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-	 
+		$('#content').summernote({
+		  placeholder: 'Hello Bootstrap 4',
+		  tabsize: 2,
+		  height: 400
+		});
 	</script>
 </body>
 </html>

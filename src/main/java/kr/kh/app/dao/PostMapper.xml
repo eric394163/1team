@@ -1,16 +1,116 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.app.dao.PostDAO">
 
-	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.post_id">
-		insert into post(post_board_num, post_title, post_content, post_date, post_user_id) 
-		values (#{post.post_board_num}, #{post.post_title}, #{post.post_content}, #{post.post_date}, #{post.post_user_id})
+	<resultMap type="kr.kh.app.model.vo.PostVO" id="PostMap">
+		<id property="post_id" column="post_id"/>
+		<result property="post_board_num" column="post_board_num"/>
+		<result property="post_title" column="post_title"/>
+		<result property="post_content" column="post_content"/>
+		<result property="post_date" column="post_date"/>
+		<result property="post_view" column="post_view"/>
+		<result property="post_upvotes" column="post_upvotes"/>
+		<result property="post_reported" column="post_reported"/>
+		<result property="post_user_id" column="post_user_id"/>
+		<collection property="board" ofType="kr.kh.app.model.vo.BoardVO" column="post_board_num" select="selectBoard"></collection>
+	</resultMap>
+
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.post_id"> insert into
+		post(post_board_num, post_title, post_content, post_date, post_user_id) values
+		(#{post.post_board_num}, #{post.post_title}, #{post.post_content}, #{post.post_date},
+		#{post.post_user_id}) </insert>
+
+	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO"> select * from board; </select>
+
+
+	<select id="selectTotalPostCount" resultType="int"> 
+		SELECT count(*) FROM post 
+		JOIN board ON board_id = post_board_num
+		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%') </select>
+
+	<select id="selectTotalSearchResultList" resultType="kr.kh.app.model.vo.PostVO"> 
+		SELECT post.* , board_name As post_board_name
+		FROM post 
+		JOIN board ON board_id = post_board_num
+		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%')
+		ORDER BY post_id DESC LIMIT
+		#{cri.pageStart}, #{cri.perPageNum} </select>
+
+
+	<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board where board_id = #{post_board_num}
+	</select>
+	
+	<select id="selectTotalPostList" resultMap="PostMap">
+		SELECT 
+		    post.*,
+		    board_name,
+		    SUM(CASE
+		        WHEN upvote = 1 THEN 1
+		        ELSE 0
+		    END) as upvotes,
+		    SUM(CASE
+		        WHEN upvote = - 1 THEN 1
+		        ELSE 0
+		    END) as downvotes
+		FROM
+		    post
+		        JOIN
+		    board ON post_board_num = board_id
+		        LEFT JOIN
+		    upvote ON post.post_id = upvote.post_id
+		GROUP BY post_id
+		ORDER BY post_id desc
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectTotalCount" resultType="int">
+		select count(*) 
+		from post
+	</select>
+	
+	<select id="selectPost" resultMap="PostMap">
+		select * from post where post_id = #{num}
+	</select>
+	
+	<select id="selectFileByPost_id" resultType="kr.kh.app.model.vo.AttachVO">
+		select * from attach where attach_post_id = #{num}
+	</select>
+	<insert id="insertFile">
+		insert into attach(attach_post_id, attach_link_check, attach_path)
+		values(#{attach.attach_post_id}, "0", #{attach.attach_path})
 	</insert>
 	
-	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO">
-		select * from board;
+	<insert id="insertLink">
+		insert into attach(attach_post_id, attach_link_check, attach_path)
+		values(#{attach.attach_post_id}, "1", #{attach.attach_path})
+	</insert>
+
+
+
+	<select id="selectTotalPopularViewPostList" resultType="kr.kh.app.model.vo.PostVO">
+		SELECT 
+			post.*,
+			board_name
+		FROM
+			post
+				JOIN
+			board ON post.post_board_num = board.board_id
+		WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
+
+		ORDER BY post_view desc
 	</select>
 
+
+	<select id="selectTotalPopularLikePostList" resultType="kr.kh.app.model.vo.PostVO">
+		SELECT 
+			post.*,
+			board_name
+		FROM
+			post
+				JOIN
+			board ON post.post_board_num = board.board_id
+			WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
+		ORDER BY post_upvotes desc
+	</select>
 </mapper>
