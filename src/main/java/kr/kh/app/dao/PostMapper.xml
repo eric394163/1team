@@ -13,6 +13,7 @@
 		<result property="post_reported" column="post_reported"/>
 		<result property="post_user_id" column="post_user_id"/>
 		<collection property="board" ofType="kr.kh.app.model.vo.BoardVO" column="post_board_num" select="selectBoard"></collection>
+		<collection property="user" ofType="kr.kh.app.model.vo.UserVO" column="post_user_id" select="selectUser"></collection>
 	</resultMap>
 
 	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.post_id"> insert into
@@ -39,6 +40,10 @@
 
 	<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
 		select * from board where board_id = #{post_board_num}
+	</select>
+	
+	<select id="selectUser" resultType="kr.kh.app.model.vo.UserVO">
+		select * from user where user_id = #{post_user_id}
 	</select>
 	
 	<select id="selectTotalPostList" resultMap="PostMap">

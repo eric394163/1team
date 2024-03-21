@@ -20,6 +20,7 @@ public class PostVO {
     private String post_user_id;
     private String post_board_name;
     private BoardVO board;
+    private UserVO user;
     private int upvotes;
     private int downvotes;
 
