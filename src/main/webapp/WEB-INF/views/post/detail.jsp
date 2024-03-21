@@ -67,7 +67,7 @@
 						 <c:if test="${link != null && link != ''}">
 							 <div class="mb-3 mt-6">
 						    		<c:if test="${link.attach_link_check == 1}">
-									    <label for="youtube" class="form-label">링크</label>
+									    <label for="link" class="form-label">링크</label>
 						    			<a href="<c:url value="${link.attach_path}" />" class="form-control">${link.attach_path}</a> 
 						    		</c:if>
 							 </div>

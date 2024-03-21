@@ -37,12 +37,22 @@ public interface PostDAO {
 
 	void deleteFile(@Param("attach_num") int attach_num);
 
+	boolean deleteLink(@Param("attach") AttachVO attachVo);
+	
+	boolean updatePost(@Param("post")PostVO post);
+
 	AttachVO selectFile(@Param("attach_num") int attach_num);
 
-	boolean updatePost(@Param("post") PostVO post, @Param("link") String link);
+	AttachVO selectLink(@Param("num") int num);
 
 	ArrayList<PostVO> selectTotalPopularViewPostList(@Param("cri") Criteria cri);
 
 	ArrayList<PostVO> selectTotalPopularLikePostList(@Param("cri") Criteria cri);
+
+	boolean updateAttach(@Param("attach")AttachVO attach);
+
+	AttachVO selectAttachPath(@Param("attach_post_id") int attach_post_id);
+
+
 
 }

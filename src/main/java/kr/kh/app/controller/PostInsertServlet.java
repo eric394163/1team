@@ -55,7 +55,7 @@ public class PostInsertServlet extends HttpServlet {
 		ArrayList<Part> partList = (ArrayList<Part>) request.getParts();
 
 		// 주소 가져오기
-		String link = request.getParameter("youtube");
+		String link = request.getParameter("link");
 		AttachVO attach = new AttachVO(post_board_num, link);
 
 		// 서비스에게 게시글 객체를 주면서 등록하라고 시킴
