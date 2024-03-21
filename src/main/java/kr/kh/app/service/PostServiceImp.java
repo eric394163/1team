@@ -109,7 +109,6 @@ public class PostServiceImp implements PostService {
 		return true;
 	}
 
-
 	@Override
 	public ArrayList<PostVO> getTotalSearchResultList(Criteria cri) {
 		if (cri == null) {
@@ -149,7 +148,7 @@ public class PostServiceImp implements PostService {
 	public AttachVO getLink(int num) {
 		return postDao.selectLinkByPost_id(num);
 	}
-	
+
 	@Override
 	public int getTotalPostCount(Criteria cri) {
 		if (cri == null) {
@@ -166,7 +165,7 @@ public class PostServiceImp implements PostService {
 		if(post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
 			return false;
 		}
-		
+
 		if(user == null){
 			return false;
 		}
@@ -198,24 +197,23 @@ public class PostServiceImp implements PostService {
 		
 		return res;
 	}
+		
 
 	private void deleteFile(AttachVO fileVo) {
-		if(fileVo == null) {
+		if (fileVo == null) {
 			return;
 		}
-		
+
 		File file = new File(uploadPath + fileVo.getAttach_path().replace('/', File.separatorChar));
-		
-		if(file.exists()) {
+
+		if (file.exists()) {
 			file.delete();
 		}
 		postDao.deleteFile(fileVo.getAttach_num());
-		
+
 	}
 
-	
-
-	// 조회수 인기 게시글 리스트 조회 
+	// 조회수 인기 게시글 리스트 조회
 	@Override
 	public ArrayList<PostVO> getPopularViewPostList(Criteria cri) {
 		if (cri == null) {
@@ -223,12 +221,12 @@ public class PostServiceImp implements PostService {
 		}
 		System.out.println("cri : " + cri);
 		return postDao.selectTotalPopularViewPostList(cri);
-		
+
 	}
 
 	@Override
 	public ArrayList<PostVO> getPopularLikePostList(Criteria cri) {
-		if (cri== null) {
+		if (cri == null) {
 			cri = new Criteria();
 		}
 		return postDao.selectTotalPopularLikePostList(cri);

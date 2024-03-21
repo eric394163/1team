@@ -93,6 +93,10 @@
 		values(#{attach.attach_post_id}, "1", #{attach.attach_path})
 	</insert>
 	
+	<delete id="deletePost">
+		delete from post where post_id = #{num}
+	</delete>
+	
 	<delete id="deleteFile">
 		delete from attach where attach_num = #{attach_num}
 	</delete>
