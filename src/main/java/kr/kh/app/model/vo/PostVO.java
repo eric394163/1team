@@ -18,10 +18,8 @@ public class PostVO {
     private int post_upvotes;
     private int post_reported;
     private String post_user_id;
-    private String post_board_name;
     private BoardVO board;
-    private int upvotes;
-    private int downvotes;
+    private UserVO user;
 
     public PostVO(int post_board_num, String post_title, String post_content, String post_user_id, Date post_date) {
         this.post_board_num = post_board_num;

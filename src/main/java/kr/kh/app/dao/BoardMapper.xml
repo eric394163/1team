@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.app.dao.BoardDAO">
-	<resultMap type="kr.kh.app.model.vo.PostVO" id="PostMap">
+	<resultMap type="kr.kh.app.model.vo.PostVO" id="PostMap1">
 		<id property="post_id" column="post_id"/>
 		<result property="post_board_num" column="post_board_num"/>
 		<result property="post_title" column="post_title"/>
@@ -13,13 +13,12 @@
 		<result property="post_upvotes" column="post_upvotes"/>
 		<result property="post_reported" column="post_reported"/>
 		<result property="post_user_id" column="post_user_id"/>
-		<collection property="board" ofType="kr.kh.app.model.vo.BoardVO"
-			column="post_board_num" select="selectBoard"/>
+		<collection property="board" ofType="kr.kh.app.model.vo.BoardVO" column="post_board_num" select="selectBoard"/>
+		<collection property="user" ofType="kr.kh.app.model.vo.UserVO" column="post_user_id" select="selectUser"/>
 	</resultMap>
 	<select id="selectTotalCount" resultType="int">
 		SELECT count(*) 
 		FROM post
-		join board on board_id = post_board_num 
 		<if test='cri.type=="all"'>
 			where (post_title like concat('%', #{cri.search},'%')
 				or post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
@@ -35,10 +34,9 @@
 		</if>
 	</select>
 	
-	<select id="selectBoardList" resultType="kr.kh.app.model.vo.PostVO">
+	<select id="selectBoardList" resultMap="PostMap1">
 		SELECT * 
 		FROM post
-		join board on board_id = post_board_num
 		<if test='cri.type=="all"'>
 			where (post_title like concat('%', #{cri.search},'%')
 				or post_user_id = #{cri.search}) and post_board_num = #{cri.boNum}
@@ -56,7 +54,11 @@
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
-		select * from board where board_id = #{post_board_num}
+		select * from board where board_id = #{board_id}
+	</select>
+	
+	<select id="selectUser" resultType="kr.kh.app.model.vo.UserVO">
+		select * from user where user_id = #{user_id}
 	</select>
 	
 	<select id="selectSubBoard" resultType="kr.kh.app.model.vo.BoardVO">
