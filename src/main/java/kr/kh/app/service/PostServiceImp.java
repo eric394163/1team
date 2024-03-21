@@ -19,6 +19,7 @@ import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
+import lombok.Data;
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDao;
@@ -41,6 +42,61 @@ public class PostServiceImp implements PostService {
 			file.mkdirs();
 		}
 	}
+
+	private void uploadFile(Part part, int post_id) {
+		if (part == null || post_id == 0) {
+			return;
+		}
+
+		String fileOriName = FileUploadUtils.getFileName(part);
+		if (fileOriName == null || fileOriName.length() == 0) {
+			return;
+		}
+
+		String fileName = FileUploadUtils.upload(uploadPath, part);
+		AttachVO attachVo = new AttachVO(post_id, fileName);
+		postDao.insertFile(attachVo);
+
+	}
+
+	private void uploadLink(AttachVO attach, int post_id) {
+		if (attach == null || post_id == 0) {
+			return;
+		}
+
+		postDao.insertLink(attach);
+	}
+
+	private boolean checkString(String str) {
+		if (str == null || str.length() == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	private void deleteFile(AttachVO fileVo) {
+		if (fileVo == null) {
+			return;
+		}
+
+		File file = new File(uploadPath + fileVo.getAttach_path().replace('/', File.separatorChar));
+
+		if (file.exists()) {
+			file.delete();
+		}
+		postDao.deleteFile(fileVo.getAttach_num());
+
+	}
+
+
+//	 private void deleteLink(AttachVO attachVo) { 
+//		 if (attachVo == null) { 
+//			 return;
+//	 }
+//	 
+//		 postDao.deleteLink(attachVo.getAttach_num()); 
+//	 }
+	 
 
 	@Override
 	public ArrayList<BoardVO> getBoardList() {
@@ -76,37 +132,6 @@ public class PostServiceImp implements PostService {
 		uploadLink(attach, post.getPost_id());
 
 		return res;
-	}
-
-	private void uploadFile(Part part, int post_id) {
-		if (part == null || post_id == 0) {
-			return;
-		}
-
-		String fileOriName = FileUploadUtils.getFileName(part);
-		if (fileOriName == null || fileOriName.length() == 0) {
-			return;
-		}
-
-		String fileName = FileUploadUtils.upload(uploadPath, part);
-		AttachVO attachVo = new AttachVO(post_id, fileName);
-		postDao.insertFile(attachVo);
-
-	}
-
-	private void uploadLink(AttachVO attach, int post_id) {
-		if (attach == null || post_id == 0) {
-			return;
-		}
-
-		postDao.insertLink(attach);
-	}
-
-	private boolean checkString(String str) {
-		if (str == null || str.length() == 0) {
-			return false;
-		}
-		return true;
 	}
 
 	@Override
@@ -158,59 +183,98 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList, AttachVO attach) {
-		
+	public boolean updateBoard(PostVO post, UserVO user, String[] nums, ArrayList<Part> fileList) {
+
 		System.out.println("postService: " + user);
-		
-		if(post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
+
+		if (post == null || !checkString(post.getPost_title()) || !checkString(post.getPost_content())) {
 			return false;
 		}
 
-		if(user == null){
+		if (user == null) {
 			return false;
 		}
-		
+
 		PostVO dbPost = postDao.selectPost(post.getPost_id());
 		System.out.println(dbPost);
-		
-		if(dbPost == null || !dbPost.getPost_user_id().equals(user.getUser_id())) {
+
+		if (dbPost == null || !dbPost.getPost_user_id().equals(user.getUser_id())) {
 			return false;
 		}
-		
-		if(nums != null) {
-			for(String numStr : nums) {
+
+		if (nums != null) {
+			for (String numStr : nums) {
 				try {
 					int num = Integer.parseInt(numStr);
 					AttachVO attachVo = postDao.selectFile(num);
 					deleteFile(attachVo);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
-		for(Part file : fileList) {
-			uploadFile(file, post.getPost_id());
+
+		if (fileList != null) {
+			for (Part file : fileList) {
+				uploadFile(file, post.getPost_id());
+			}
 		}
-		
-		boolean res = postDao.updatePost(post, attach);
-		
+
+		boolean res = postDao.updatePost(post);
+
 		return res;
 	}
-		
 
-	private void deleteFile(AttachVO fileVo) {
-		if (fileVo == null) {
-			return;
+	@Override
+	public boolean updateAttach(PostVO post, UserVO user, String link, AttachVO attach) {
+		if (post == null) {
+			return false;
 		}
 
-		File file = new File(uploadPath + fileVo.getAttach_path().replace('/', File.separatorChar));
-
-		if (file.exists()) {
-			file.delete();
+		if (user == null) {
+			return false;
 		}
-		postDao.deleteFile(fileVo.getAttach_num());
 
+		if (link != null) {
+			System.out.println("으으앙아아아아악");
+			try {
+				int attach_post_id = attach.getAttach_post_id();
+				
+				 AttachVO attachVo = postDao.selectAttachPath(attach_post_id); 
+
+				postDao.deleteLink(attachVo); 
+
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+
+		uploadLink(attach, attach.getAttach_post_id());
+
+		return true;
+	}
+
+	@Override
+	public boolean deletePost(int num, UserVO user) {
+		if (user == null) {
+			return false;
+		}
+
+		PostVO post = postDao.selectPost(num);
+
+		if (post == null || !post.getPost_user_id().equals(user.getUser_id())) {
+			return false;
+		}
+
+		ArrayList<AttachVO> fileList = postDao.selectFileByPost_id(num);
+		for (AttachVO file : fileList) {
+			deleteFile(file);
+		}
+
+		return postDao.deletePost(num);
 	}
 
 	// 조회수 인기 게시글 리스트 조회

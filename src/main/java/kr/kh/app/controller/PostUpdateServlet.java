@@ -94,16 +94,18 @@ public class PostUpdateServlet extends HttpServlet {
 			for(String tmp : nums)
 				System.out.println(tmp);
 		
-		String link = request.getParameter("link");
-		System.out.println("서비스 임플 link 가져오는지" + link);
-		AttachVO attach = new AttachVO(num, 1, link);
+		String before_link = request.getParameter("link");
+		System.out.println("서비스 임플 link 가져오는지" + before_link);
+		AttachVO attach = new AttachVO(num, 1, before_link);
 		attach.setAttach_post_id(num);
 		
 		
-		boolean res = postService.updateBoard(post, user, nums, fileList, attach);
-		System.out.println(res);
+		boolean res1 = postService.updateBoard(post, user, nums, fileList);
+		boolean res2 = postService.updateAttach(post, user, before_link, attach);
+		System.out.println(res1);
+		System.out.println("포스트 업데이트 서블릿 res2 확인 : " + res2);
 		
-		if(res) {
+		if(res1 && res2) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");
 			request.setAttribute("url", "post/detail?num="+num);
 		}
