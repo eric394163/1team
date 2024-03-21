@@ -13,5 +13,4 @@ public class CategoryVO {
 	public CategoryVO(String category_name) {
 		this.category_name = category_name;
 	}
-	
 }

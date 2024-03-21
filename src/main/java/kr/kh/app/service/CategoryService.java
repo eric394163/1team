@@ -10,4 +10,7 @@ public interface CategoryService {
 
 	boolean insertCategory(CategoryVO category) throws Exception;
 
+	boolean deleteCategory(CategoryVO category);
+
+
 }

@@ -13,4 +13,7 @@
 		insert into category(category_name)
 		value(#{category.category_name})
 	</insert>
+	<delete id="deleteCategory">
+		delete from category where category_name = #{category.category_name}
+	</delete>
 </mapper>

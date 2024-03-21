@@ -1,7 +1,6 @@
 package kr.kh.app.controller.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,11 +19,22 @@ public class CategoryDeleteServlet extends HttpServlet {
 	
 	private CategoryService categoryService = new CategoryServiceImp();
     
-	protected void doGet(HttpServletRequest request, HttpServletResponse response){
-		String category_num = request.getParameter("categoryNum");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+		String category_name = request.getParameter("categoryName");
+		CategoryVO category = new CategoryVO(category_name);
+		System.out.println(category);
 		
-		CategoryVO category = new CategoryVO(category_num);
+		boolean res = categoryService.deleteCategory(category);
 		
-		//boolean res = categoryService.deleteCategory();
+		if(res) {
+			request.setAttribute("msg", "카테고리 삭제를 성공하였습니다.");
+            request.setAttribute("url", "/admin/categoryupdate");
+		}else {
+			request.setAttribute("msg", "카테고리 삭제를 실패하였습니다.");
+            request.setAttribute("url", "/admin/categoryupdate");
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 	}
 }

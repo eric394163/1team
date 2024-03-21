@@ -43,7 +43,7 @@
 	        					<div class="right-box">
 	        						<a href="#update" class="category-update"><img src="<c:url value="/images/write_icon.svg" />" alt="수정아이콘" width="20"></a>
 	        						<c:url value="/admin/categorydelete" var="url">
-	        							<c:param name="categoryNum" value="${category.category_id}" />
+	        							<c:param name="categoryName" value="${category.category_name}" />
 	        						</c:url>
 		        					<a href="${url}" class="category-delete"><img src="<c:url value="/images/trash_icon.svg" />" alt="삭제아이콘" width="20"></a>
 	        					</div>

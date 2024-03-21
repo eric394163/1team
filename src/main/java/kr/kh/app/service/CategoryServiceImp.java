@@ -51,4 +51,12 @@ public class CategoryServiceImp implements CategoryService {
 		}
 		return categoryDao.insertCategory(category);
 	}
+
+	@Override
+	public boolean deleteCategory(CategoryVO category) {
+		if(category == null) {
+			return false;
+		}
+		return categoryDao.deleteCategory(category);
+	}
 }

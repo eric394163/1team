@@ -14,5 +14,7 @@ public interface CategoryDAO {
 
 	boolean insertCategory(@Param("category")CategoryVO category);
 
+	boolean deleteCategory(@Param("category")CategoryVO category);
+
 
 }
