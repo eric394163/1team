@@ -32,4 +32,6 @@ public interface UserDAO {
 
 	boolean updateDropUser(@Param("user")UserVO dropUser, @Param("id")String user_id);
 
+    boolean deleteBlockedUser(@Param("user") String blocked_user_id);
+
 }

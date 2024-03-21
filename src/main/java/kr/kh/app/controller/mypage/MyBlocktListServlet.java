@@ -65,4 +65,5 @@ public class MyBlocktListServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/mypage/myBlockedList.jsp").forward(request, response);
 
 	}
+
 }

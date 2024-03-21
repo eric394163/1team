@@ -53,7 +53,11 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                   <td>${user.blocked_id}</td>
                   <td>${user.blocked_user_id}</td>
                   <td>
-                    <button type="button" class="btn btn-outline-dark">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark unblock-btn"
+                      id="${user.blocked_user_id}"
+                    >
                       차단해제
                     </button>
                   </td>
@@ -146,13 +150,15 @@ prefix="c"%> <%@ page isELIgnored="false" %>
         }
       });
     </script>
-
+    <!--하나 차단 해제-->
     <script type="text/javascript">
       $(document).ready(function () {
         $(".unblock-btn").on("click", function () {
-          var userId = $(this).data("user-id");
+          var userId = $(this).attr("id"); //클릭한 버튼의 id값을 가져옴
+
+          console.log(userId);
           $.ajax({
-            url: "<c:url value='/mypage/delete'/>", // 실제 서버 엔드포인트로 변경
+            url: "<c:url value='/mypage/Unblock'/>",
             type: "POST",
             data: { blockedUserId: userId },
             success: function (response) {
@@ -163,6 +169,46 @@ prefix="c"%> <%@ page isELIgnored="false" %>
               alert("사용자 차단 해제 에러.");
             },
           });
+        });
+      });
+    </script>
+    <!--선택 차단 해제-->
+    <script type="text/javascript">
+      $(document).ready(function () {
+        // 선택 차단 해제 버튼 클릭 이벤트
+        $(".all-check-area button").click(function () {
+          // 체크된 모든 사용자의 ID를 저장할 배열
+          var userIds = [];
+
+          // 체크된 모든 사용자의 ID 수집
+          $(".block-chk:checked").each(function () {
+            var userId = $(this).closest("tr").find(".unblock-btn").attr("id");
+            userIds.push(userId);
+          });
+
+          // 아무것도 선택 안 함
+          if (userIds.length === 0) {
+            alert("선택된 사용자가 없습니다.");
+            return;
+          }
+
+          // 체크된 모든 사용자에 대해 차단 해제 요청
+          userIds.forEach(function (userId) {
+            $.ajax({
+              url: "<c:url value='/mypage/Unblock'/>", 
+              type: "POST",
+              data: { blockedUserId: userId },
+              success: function (response) {
+            
+              },
+              error: function (xhr, status, error) {
+                
+              },
+            });
+          });
+
+          alert("선택된 사용자들의 차단을 해제합니다.");
+          location.reload();
         });
       });
     </script>

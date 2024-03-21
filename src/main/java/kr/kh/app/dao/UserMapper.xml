@@ -46,4 +46,11 @@
         LIMIT #{cri.pageStart}, #{cri.perPageNum}
         
     </select>
+
+
+    <delete id="deleteBlockedUser">
+        DELETE 
+        FROM blocked 
+        WHERE blocked_user_id = #{user}
+    </delete>
 </mapper>
