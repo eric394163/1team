@@ -31,7 +31,7 @@ public class PostInsertServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		MainServlet.commonAsideInfo(request);
 		// 게시판 전체 가져옴
 		ArrayList<BoardVO> list = postService.getBoardList();
 		request.setAttribute("list", list);

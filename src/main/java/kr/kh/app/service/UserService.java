@@ -31,4 +31,6 @@ public interface UserService {
 
 	String checkEmail(String email);
 
+    boolean unblockUser(BlockedVO blocked);
+
 }

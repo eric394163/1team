@@ -10,7 +10,7 @@ prefix="c"%>
   <body>
   	<div class="popular-list">
   		<div class="h2_title_wrap">
-       		<h2>인기게시글</h2>
+       		<h2>주간인기게시글</h2>
        	</div>
   		<ul class="btn-area">
   			<li><a href="#view" class="active">조회수</a></li>

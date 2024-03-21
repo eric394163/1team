@@ -16,7 +16,7 @@ import kr.kh.app.pagination.PageMaker;
 import kr.kh.app.service.BoardService;
 import kr.kh.app.service.BoardServiceImp;
 
-//마이페이지 - 좋아요 누른 게시글 확인 서블릿
+//마이페이지 - 내가쓴 게시글 확인 서블릿
 @WebServlet("/mypage/postlist")
 public class MyLikeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

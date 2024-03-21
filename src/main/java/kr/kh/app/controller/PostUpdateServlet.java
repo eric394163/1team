@@ -95,7 +95,6 @@ public class PostUpdateServlet extends HttpServlet {
 		String link = request.getParameter("youtube");
 		
 		boolean res = postService.updateBoard(post, user, nums, fileList, link);
-		System.out.println(res);
 		
 		if(res) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");
