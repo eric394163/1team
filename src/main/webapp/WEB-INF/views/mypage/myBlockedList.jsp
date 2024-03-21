@@ -56,7 +56,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                     <button
                       type="button"
                       class="btn btn-outline-dark unblock-btn"
-                      id="${user.blocked_user_id}"
+                      data-id="${user.blocked_user_id}"
                     >
                       차단해제
                     </button>
@@ -154,7 +154,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
     <script type="text/javascript">
       $(document).ready(function () {
         $(".unblock-btn").on("click", function () {
-          var userId = $(this).attr("id"); //클릭한 버튼의 id값을 가져옴
+          var userId = $(this).data("id"); //클릭한 버튼의 id값을 가져옴
 
           console.log(userId);
           $.ajax({
@@ -182,7 +182,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
 
           // 체크된 모든 사용자의 ID 수집
           $(".block-chk:checked").each(function () {
-            var userId = $(this).closest("tr").find(".unblock-btn").attr("id");
+            var userId = $(this).closest("tr").find(".unblock-btn").data("id");
             userIds.push(userId);
           });
 
