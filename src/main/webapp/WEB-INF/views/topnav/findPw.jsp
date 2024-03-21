@@ -5,7 +5,7 @@ prefix="c"%>
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>아이디 찾기</title>
+<title>PlayGround - 아이디 찾기</title>
 <link rel="shortcut icon" href="/team1/images/favicon.png" type="image/png">
 <!-- 부트스트랩5 css/js -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

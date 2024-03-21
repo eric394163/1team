@@ -22,5 +22,6 @@
     <mapper resource="kr/kh/app/dao/CommonMapper.xml" />
     <mapper resource="kr/kh/app/dao/UserMapper.xml" />
     <mapper resource="kr/kh/app/dao/BoardMapper.xml" />
+    <mapper resource="kr/kh/app/dao/CategoryMapper.xml" />
   </mappers>
 </configuration>

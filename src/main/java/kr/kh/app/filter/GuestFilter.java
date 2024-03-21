@@ -26,7 +26,7 @@ public class GuestFilter extends HttpFilter implements Filter {
 		//회원 정보가 있으면 로그인한 회원이 이용할 수 없는 서비스입니다.라고 알림 후 메인페이지 로딩
 		if(user != null) {
 			request.setAttribute("msg", "로그인한 회원이 이용할 수 없는 서비스입니다.");
-			request.setAttribute("url", "");
+			request.setAttribute("url", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 			return;
 		}

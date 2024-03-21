@@ -59,7 +59,7 @@
 				<ul class="subnav">
 					<li class="boardinsert"><a href="<c:url value="/admin/boardinsert" />" class="nav-link text-white">게시판 등록</a></li>
 					<li class="boardupdat"><a href="<c:url value="/admin/boardupdate" />" class="nav-link text-white">게시판 수정/삭제</a></li>
-					<li class="boardreport"><a href="<c:url value="/admin/boardreport" />" class="nav-link text-white">신고게시판</a></li>
+					
 				</ul>
 			</li>
 			<li class="drop-down">
@@ -69,6 +69,7 @@
 				</a>
 				<ul class="subnav">
 					<li class="postdelete"><a href="<c:url value="/admin/postdelete" />" class="nav-link text-white">게시글 삭제</a></li>
+					<li class="boardreport"><a href="<c:url value="/admin/boardreport" />" class="nav-link text-white">신고게시판</a></li>
 				</ul>
 			</li>
 			<li class="drop-down">
@@ -78,7 +79,7 @@
 				</a>
 				<ul class="subnav">
 					<li class="usermanage"><a href="<c:url value="/admin/usermanage" />" class="nav-link text-white">운영자 관리</a></li>
-					<li class="userblock"><a href="<c:url value="/admin/userblock" />" class="nav-link text-white">회원 탈퇴</a></li>
+					<li class="userblock"><a href="<c:url value="/admin/userblock" />" class="nav-link text-white">회원 관리</a></li>
 				</ul>
 			</li>
 		</ul>
