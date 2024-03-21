@@ -99,10 +99,7 @@ public class PostUpdateServlet extends HttpServlet {
 		AttachVO attach = new AttachVO(num, 1, before_link);
 		attach.setAttach_post_id(num);
 		
-<<<<<<< HEAD
-		boolean res = postService.updateBoard(post, user, nums, fileList, link);
-=======
->>>>>>> 0ebf7c60366d089e3539a030fcf6d3371fd1b746
+		// boolean res = postService.updateBoard(post, user, nums, fileList, link);
 		
 		boolean res1 = postService.updateBoard(post, user, nums, fileList);
 		boolean res2 = postService.updateAttach(post, user, before_link, attach);
