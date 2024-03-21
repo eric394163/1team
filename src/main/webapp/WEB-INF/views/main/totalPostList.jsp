@@ -38,7 +38,7 @@ prefix="c"%>
 							</c:url>
 							<a href="${url}">${post.post_title}</a>
 						</td>
-						<td>${post.post_user_id }</td>
+						<td>${post.user.user_nickname}</td>
 						<td>${post.post_view }</td>
 					</tr>
 				</c:forEach>

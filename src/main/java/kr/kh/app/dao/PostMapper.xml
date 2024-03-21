@@ -43,7 +43,7 @@
 	</select>
 	
 	<select id="selectUser" resultType="kr.kh.app.model.vo.UserVO">
-		select * from user where user_id = #{post_user_id}
+		select * from user where user_id = #{user_id}
 	</select>
 	
 	<select id="selectTotalPostList" resultMap="PostMap">
