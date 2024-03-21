@@ -86,10 +86,22 @@
 			`post`
 				on post_id = comment_post_num
 		where
-			comment_user_id = 'asd123'
+			comment_user_id = #{cri.search}
 		group by
 			post_id
 		ORDER BY post_id DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="selectLikePostCount" resultType="int">
+		select count(*) from upvote where user_id = #{cri.search} and upvote = 1
+	</select>
+	<select id="selectLikePostList" resultType="kr.kh.app.model.vo.PostVO">
+		select a.*
+		from
+			post as a
+				join
+			upvote as b
+				on a.post_id = b.post_id
+		where user_id = #{cri.search} and upvote = 1
 	</select>
 </mapper>

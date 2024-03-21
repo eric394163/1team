@@ -69,4 +69,20 @@ public class BoardServiceImp implements BoardService{
 		}
 		return boardDao.selectCommentPostList(cri);
 	}
+
+	@Override
+	public int getLikePostCount(Criteria cri) {
+		if(cri == null) {
+			cri = new BoardListCriteria();
+		}
+		return boardDao.selectLikePostCount(cri);
+	}
+
+	@Override
+	public ArrayList<PostVO> getLikePostList(Criteria cri) {
+		if(cri == null) {
+			cri = new BoardListCriteria();
+		}
+		return boardDao.selectLikePostList(cri);
+	}
 }
