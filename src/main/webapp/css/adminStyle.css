@@ -59,6 +59,9 @@
 .category-list.category-update input[readonly]{
 	border: none; background-color: transparent;
 }
+.category-list.category-update input[tabindex="-1"]{
+	outline: none;
+}
 .category-list.category-update button.btn-dark{
 	display: none; /* 처음엔 안보이게 처리 */
 	height: 35px; font-size: 14px;

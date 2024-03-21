@@ -33,11 +33,12 @@
 		        		</p>
 	        		</div>
 	        		<ul class="category-list category-update">
-	        			<c:forEach items="${categoryList}" var="category" begin="0" varStatus="status">
+	        			<c:forEach items="${categoryList}" var="category" begin="1" varStatus="status">
 	        				<li>
-	        					<form action="<c:url value="/admin/categoryupdate" />" class="left-box">
-		        					<span class="category-num">${status.index + 1}</span>
-		        					<input type="text" class="category-name" name="category_name" value="${category.category_name}" readonly>
+	        					<form action="<c:url value="/admin/categoryupdate" />" class="left-box"  method="post">
+		        					<span class="category-num">${status.index}</span>
+		        					<input type="text" class="category-name" name="category_name" value="${category.category_name}" tabindex="-1" readonly>
+		        					<input type="hidden" value="${category.category_id}" name="category_id">
 		        					<button type="submit" class="btn btn-dark">수정</button>
 	        					</form>
 	        					<div class="right-box">
@@ -61,6 +62,8 @@
 		$('.category-update').click(function(){
 			//해당 input태그 - readonly속성 추가
 			$(this).parents('li').find('.category-name').prop('readonly', false);
+			//초점받게 처리
+			$(this).parents('li').find('.category-name').attr('tabindex','0');
 			
 			//해당 버튼 보이게 처리
 			$(this).parents('li').find('.btn-dark').show();

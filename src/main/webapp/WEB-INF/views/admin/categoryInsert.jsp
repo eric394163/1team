@@ -27,9 +27,9 @@
 	        	<div class="admin-box">
 	        		<h3>▣ 기존 카테고리 리스트</h3>
 	        		<ul class="category-list">
-	        			<c:forEach items="${categoryList}" var="category" begin="0" varStatus="status">
+	        			<c:forEach items="${categoryList}" var="category" begin="1" varStatus="status">
 	        				<li>
-	        					<span class="category-num">${status.index + 1}</span>
+	        					<span class="category-num">${status.index}</span>
 	        					<span class="category-name">${category.category_name}</span>
 	        				</li>
 	        			</c:forEach>

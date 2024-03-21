@@ -26,4 +26,30 @@ public class CategoryUpdateServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/WEB-INF/views/admin/categoryUpdate.jsp").forward(request, response);
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+		//수정한 카테고리 이름 받기
+		String category_name = request.getParameter("category_name");
+		int category_id = Integer.parseInt(request.getParameter("category_id"));
+		CategoryVO category = new CategoryVO(category_id, category_name);
+		System.out.println(category);
+		
+		try {
+			boolean res = categoryService.updateCategory(category);
+			if(res) {
+				request.setAttribute("msg", "카테고리 수정을 성공하였습니다.");
+	            request.setAttribute("url", "/admin/categoryupdate");
+			}else {
+				request.setAttribute("msg", "카테고리 수정을 성공하지 못했습니다.");
+	            request.setAttribute("url", "/admin/categoryupdate");
+			}
+		}catch (Exception e) {
+			String msg = e.getMessage();
+            request.setAttribute("msg", msg);
+            request.setAttribute("url", "/admin/categoryupdate");
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+	}
 }

@@ -16,4 +16,8 @@
 	<delete id="deleteCategory">
 		delete from category where category_name = #{category.category_name}
 	</delete>
+	<update id="updateCategory">
+		update category set category_name = #{category.category_name}
+		where category_id = #{category.category_id}
+	</update>
 </mapper>

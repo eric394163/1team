@@ -59,4 +59,15 @@ public class CategoryServiceImp implements CategoryService {
 		}
 		return categoryDao.deleteCategory(category);
 	}
+
+	@Override
+	public boolean updateCategory(CategoryVO category) throws Exception {
+		if(category == null || !checkString(category.getCategory_name())) {
+			return false;
+		}
+		if (categoryDao.selectCategoryByName(category.getCategory_name()) != null) {
+			throw new Exception("카테고리가 중복됩니다.");
+		}
+		return categoryDao.updateCategory(category);
+	}
 }

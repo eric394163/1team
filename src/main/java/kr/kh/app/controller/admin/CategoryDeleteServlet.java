@@ -23,8 +23,7 @@ public class CategoryDeleteServlet extends HttpServlet {
             throws ServletException, IOException {
 		String category_name = request.getParameter("categoryName");
 		CategoryVO category = new CategoryVO(category_name);
-		System.out.println(category);
-		
+
 		boolean res = categoryService.deleteCategory(category);
 		
 		if(res) {
