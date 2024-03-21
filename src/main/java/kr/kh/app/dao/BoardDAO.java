@@ -20,4 +20,8 @@ public interface BoardDAO {
 
 	ArrayList<PostVO> selectCommentPostList(@Param("cri")Criteria cri);
 
+	int selectLikePostCount(@Param("cri")Criteria cri);
+
+	ArrayList<PostVO> selectLikePostList(@Param("cri")Criteria cri);
+
 }

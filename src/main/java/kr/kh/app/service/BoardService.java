@@ -19,4 +19,8 @@ public interface BoardService {
 
 	ArrayList<PostVO> getCommentPostList(Criteria cri);
 
+	int getLikePostCount(Criteria cri);
+
+	ArrayList<PostVO> getLikePostList(Criteria cri);
+
 }
