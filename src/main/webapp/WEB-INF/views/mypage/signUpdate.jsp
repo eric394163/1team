@@ -163,9 +163,9 @@
 					if(!q){
 						location.href = <c:url value="/" />;
 					}
+					<% session.setAttribute("passConfirm", "0"); %>
 				}
 			}
-			flag = true;
 		});
 	</script>
   </body>
