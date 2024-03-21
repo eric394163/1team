@@ -49,21 +49,11 @@
 	<select id="selectTotalPostList" resultMap="PostMap">
 		SELECT 
 		    post.*,
-		    board_name,
-		    SUM(CASE
-		        WHEN upvote = 1 THEN 1
-		        ELSE 0
-		    END) as upvotes,
-		    SUM(CASE
-		        WHEN upvote = - 1 THEN 1
-		        ELSE 0
-		    END) as downvotes
+		    board_name
 		FROM
 		    post
 		        JOIN
 		    board ON post_board_num = board_id
-		        LEFT JOIN
-		    upvote ON post.post_id = upvote.post_id
 		GROUP BY post_id
 		ORDER BY post_id desc
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
