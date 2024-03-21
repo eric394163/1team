@@ -230,8 +230,8 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public boolean unblockUser(String blocked_user_id) {
-		return userDao.deleteBlockedUser(blocked_user_id);
+	public boolean unblockUser(BlockedVO blocked) {
+		return userDao.deleteBlockedUser(blocked);
 	}
 
 

@@ -27,6 +27,9 @@ public class Unblock extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 사용자 ID를 요청에서 받아옴
+		UserVO user = (UserVO) request.getSession().getAttribute("user");
+
+		String blocking_user_id = user.getUser_id();
 
 		String blocked_user_id = request.getParameter("blockedUserId");
 
@@ -37,8 +40,10 @@ public class Unblock extends HttpServlet {
 			return;
 		}
 
+		BlockedVO blocked = new BlockedVO(blocking_user_id, blocked_user_id);
+
 		// 차단 해제 처리
-		boolean isUnblocked = userService.unblockUser(blocked_user_id);
+		boolean isUnblocked = userService.unblockUser(blocked);
 
 		System.out.println("isUnblocked: " + isUnblocked);
 
