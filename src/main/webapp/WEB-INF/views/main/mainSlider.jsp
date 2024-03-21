@@ -9,5 +9,6 @@ prefix="c"%>
 </head>
 <body>
 	<h2 style="margin-bottom: 100px;">메인이미지</h2>
+	
 </body>
 </html>

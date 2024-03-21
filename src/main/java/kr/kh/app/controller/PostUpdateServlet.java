@@ -68,7 +68,7 @@ public class PostUpdateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO user = (UserVO)request.getSession().getAttribute("user");
-		
+		System.out.println(user);
 		int num, board_num;
 		
 		try {
@@ -78,6 +78,8 @@ public class PostUpdateServlet extends HttpServlet {
 			num = 0;
 			board_num = 0;
 		}
+		
+		System.out.println("update 서비스임플 게시글 번호: " + num);
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -92,17 +94,28 @@ public class PostUpdateServlet extends HttpServlet {
 			for(String tmp : nums)
 				System.out.println(tmp);
 		
-		String link = request.getParameter("youtube");
+		String before_link = request.getParameter("link");
+		System.out.println("서비스 임플 link 가져오는지" + before_link);
+		AttachVO attach = new AttachVO(num, 1, before_link);
+		attach.setAttach_post_id(num);
 		
+<<<<<<< HEAD
 		boolean res = postService.updateBoard(post, user, nums, fileList, link);
+=======
+>>>>>>> 0ebf7c60366d089e3539a030fcf6d3371fd1b746
 		
-		if(res) {
+		boolean res1 = postService.updateBoard(post, user, nums, fileList);
+		boolean res2 = postService.updateAttach(post, user, before_link, attach);
+		System.out.println(res1);
+		System.out.println("포스트 업데이트 서블릿 res2 확인 : " + res2);
+		
+		if(res1 && res2) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");
 			request.setAttribute("url", "post/detail?num="+num);
 		}
 		else {
 			request.setAttribute("msg", "게시글을 수정하지 못했습니다.");
-			request.setAttribute("url", "post/detail");
+			request.setAttribute("url", "post/detail?num="+num);
 		}
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 		

@@ -103,26 +103,37 @@
 	</delete>
 	
 	<delete id="deleteFile">
-		delete from attach where attach_num = #{attach_num}
+		delete from attach where attach_num = #{attach_num} and attach_link_check = 0
+	</delete>
+	
+	<delete id="deleteLink">
+		delete from attach where attach_post_id = #{attach.attach_post_id} and attach_link_check =1;
 	</delete>
 	
 	<select id="selectFile" resultType="kr.kh.app.model.vo.AttachVO">
-		select * from attach where attach_num = #{attach_num}
+		select * from attach where attach_num = #{attach_num} and attach_link_check = 0
+	</select>
+	
+	<select id="selectLink" resultType="kr.kh.app.model.vo.AttachVO">
+		select * from attach where attach_num = #{num} and attach_link_check = 1 
 	</select>
 	
 	<update id="updatePost">
-		update post as post, attach as attach set
-			post.post_title = #{post.post_title},
-			post.post_content = #{post.post_content},
-			post.post_board_num = #{post.post_board_num},
-			attach.attach_path = #{link}
+		update post set
+			post_title = #{post.post_title},
+			post_content = #{post.post_content},
+			post_board_num = #{post.post_board_num}
 		where
-			post.post_id = #{post.post_id} and
-			attach.attach_post_id = #{post.post_id} and
-			attach.attach_link_check = 1
+			post_id = #{post.post_id}
 	</update>
-
-
+	
+	<update id="updateAttach">
+	    update attach set
+	        attach_path = #{attach.attach_path},
+	        attach_link_check = 1
+	    where
+	        attach_post_id = #{attach.attach_post_id} and attach_link_check = 1
+	</update>
 
 	<select id="selectTotalPopularViewPostList" resultType="kr.kh.app.model.vo.PostVO">
 		SELECT 
@@ -149,5 +160,12 @@
 			WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
 		ORDER BY post_upvotes desc
 		LIMIT 10
+	</select>
+	
+	
+	
+	<select id="selectAttachPath" resultType="kr.kh.app.model.vo.AttachVO">
+			select * from attach
+			where attach_post_id = #{attach_post_id} and attach_link_check = 1
 	</select>
 </mapper>

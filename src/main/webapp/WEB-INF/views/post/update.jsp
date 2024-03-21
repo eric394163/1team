@@ -57,12 +57,9 @@
 					 </div>
 					 
 					 <div class="mb-3 mt-6">
-					    <label for="youtube" class="form-label">링크</label>
-			    		<c:if test="${link.attach_link_check == 1}">
-						    <input type="text" class="form-control" name="youtube" value="${link.attach_path }">
-			    		</c:if>
-			    		<c:if test="${link.attach_link_check != 1 && link.attach_path == null}">
-						    <input type="text" class="form-control" name="youtube">
+					    <label for="link" class="form-label">링크</label>
+			    		<c:if test="${link.attach_link_check != 0}">
+						    <input type="text" class="form-control" name="link" value="${link.attach_path }">
 			    		</c:if>
 					 </div>					 
 					 <button class="btn btn-outline-warning col-12 mb-3">게시글 수정</button>
