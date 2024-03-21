@@ -32,11 +32,11 @@ public class MainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int page;
 
-		LocalDate today = LocalDate.now();
-		LocalDate weekAgo = today.minusDays(7);
+		LocalDate today = LocalDate.now(); 
+		LocalDate tomorrow = today.plusDays(1);
 
-		System.out.println("today : " + today);
-		System.out.println("weekAgo : " + weekAgo);
+		LocalDate weekAgo = today.minusDays(8);
+
 
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
@@ -57,7 +57,7 @@ public class MainServlet extends HttpServlet {
 		request.setAttribute("list", list);
 
 		// 조회수가 높은 게시글 리스트
-		Criteria popularViewCri = new DateCriteria( page, 10, today, weekAgo);
+		Criteria popularViewCri = new DateCriteria( page, 10, tomorrow, weekAgo);
 
 		ArrayList<PostVO> popularViewPostList = postService.getPopularViewPostList(popularViewCri);
 
@@ -65,7 +65,7 @@ public class MainServlet extends HttpServlet {
 		request.setAttribute("popularViewPostList", popularViewPostList);
 
 		// 좋아요가 높은 게시글 리스트
-		Criteria popularLikeCri = new DateCriteria(page, 10, today, weekAgo);
+		Criteria popularLikeCri = new DateCriteria(page, 10, tomorrow, weekAgo);
 
 		ArrayList<PostVO> popularLikePostList = postService.getPopularLikePostList(popularLikeCri);
 

@@ -128,8 +128,8 @@
 				JOIN
 			board ON post.post_board_num = board.board_id
 		WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
-
 		ORDER BY post_view desc
+		LIMIT 10
 	</select>
 
 
@@ -143,5 +143,6 @@
 			board ON post.post_board_num = board.board_id
 			WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
 		ORDER BY post_upvotes desc
+		LIMIT 10
 	</select>
 </mapper>
