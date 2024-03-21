@@ -53,4 +53,20 @@ public class BoardServiceImp implements BoardService{
 	public BoardVO getSubBoard(int board_id) {
 		return boardDao.selectSubBoard(board_id);
 	}
+
+	@Override
+	public int getCommentPostCount(Criteria cri) {
+		if(cri == null) {
+			cri = new BoardListCriteria();
+		}
+		return boardDao.selectCommentPostCount(cri);
+	}
+
+	@Override
+	public ArrayList<PostVO> getCommentPostList(Criteria cri) {
+		if(cri == null) {
+			cri = new BoardListCriteria();
+		}
+		return boardDao.selectCommentPostList(cri);
+	}
 }

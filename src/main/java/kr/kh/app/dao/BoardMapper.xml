@@ -62,4 +62,34 @@
 	<select id="selectSubBoard" resultType="kr.kh.app.model.vo.BoardVO">
 		select * from board where board_id = #{board_id};
 	</select>
+	
+	<select id="selectCommentPostCount" resultType="int">
+		SELECT 
+			count(post_id)
+		FROM(
+		select post_id 
+		from
+			`comment`
+				join
+			`post`
+				on post_id = comment_post_num
+		where
+			comment_user_id = #{cri.search}
+		group by
+			post_id) a
+	</select>
+	<select id="selectCommentPostList" resultType="kr.kh.app.model.vo.PostVO">
+		select `post`.*
+		from
+			`comment`
+				join
+			`post`
+				on post_id = comment_post_num
+		where
+			comment_user_id = 'asd123'
+		group by
+			post_id
+		ORDER BY post_id DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
 </mapper>
