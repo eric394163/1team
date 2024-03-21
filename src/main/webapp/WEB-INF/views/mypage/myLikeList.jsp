@@ -37,7 +37,7 @@
 						<c:forEach items="${myList}" var="post">
 							<tr>
 								<td>${post.post_id}</td>
-								<td>${board.board_name}</td>
+								<td>${post.board.board_name}</td>
 								<td>
 									<c:url var="url" value="/post/detail">
 										<c:param name="num" value="${post.post_id}" />
