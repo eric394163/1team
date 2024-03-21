@@ -14,16 +14,17 @@ import kr.kh.app.service.CategoryService;
 import kr.kh.app.service.CategoryServiceImp;
 
 //관리자페이지 - 카테고리 수정/삭제 서블릿
-@WebServlet("/admin/categoryupdate")
-public class CategoryUpdateServlet extends HttpServlet {
+@WebServlet("/admin/categorydelete")
+public class CategoryDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private CategoryService categoryService = new CategoryServiceImp();
     
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<CategoryVO> categoryList = categoryService.getCategoryList(); //카테고리 리스트 불러오기
-		request.setAttribute("categoryList", categoryList);//화면에 전송
+	protected void doGet(HttpServletRequest request, HttpServletResponse response){
+		String category_num = request.getParameter("categoryNum");
 		
-		request.getRequestDispatcher("/WEB-INF/views/admin/categoryUpdate.jsp").forward(request, response);
+		CategoryVO category = new CategoryVO(category_num);
+		
+		//boolean res = categoryService.deleteCategory();
 	}
 }

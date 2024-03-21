@@ -28,7 +28,7 @@ public class MemberFilter extends HttpFilter implements Filter {
 		
 		if (user == null) {
 			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
-			request.setAttribute("url", "login");
+			request.setAttribute("url", "/login");
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 			return;			
 		}

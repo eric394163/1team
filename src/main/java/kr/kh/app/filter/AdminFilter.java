@@ -27,14 +27,14 @@ public class AdminFilter extends HttpFilter implements Filter {
 		
 		if (user == null) {
 			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
-			request.setAttribute("url", "login");
+			request.setAttribute("url", "/login");
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 			return;			
 		}
 		
 		if(user != null && user.getUser_role() == "사용자") {
 			request.setAttribute("msg", "관리자/운영자만 접속할 수 있는 서비스입니다.");
-			request.setAttribute("url", "");
+			request.setAttribute("url", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 			return;		
 		}
