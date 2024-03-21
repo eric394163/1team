@@ -8,13 +8,15 @@ prefix="c"%>
     <title>PlayGround - 뮤직 커뮤니티</title>
   </head>
   <body>
-    <h1>조회수 순으로 게시글 정렬</h1>
-    <c:forEach items="${popularViewPostList}" var="post">  
-    <!--"${posts}" 는 컨트롤러에서 보낸 값을 post로 받아오고 post. 으로 컨트롤러에서 보낸 값 사용  -->
-        <li class="post-item">
-            <span> 게시글 제목: ${post.post_title}</span>,
-            <span> 조회수: ${post.post_view}</span>
-        </li>
-    </c:forEach>
+  	<ul class="list-box">
+	    <c:forEach items="${popularViewPostList}" var="post" begin="0" end="10" varStatus="status">  
+	    <!--"${posts}" 는 컨트롤러에서 보낸 값을 post로 받아오고 post. 으로 컨트롤러에서 보낸 값 사용  -->
+	        <li>
+	        	<span>${status.index + 1}</span>
+	            <span><a href="<c:url value="/post/detail?num=${post.post_id}" />">${post.post_title}</a></span>
+	            <span><img src="/team1/images/eye_icon.svg" alt="조회수" width="16">${post.post_view}</span>
+	        </li>
+	    </c:forEach>
+    </ul>
   </body>
 </html>

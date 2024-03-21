@@ -25,6 +25,11 @@ public class UserDeleteServlet extends HttpServlet {
 		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
 		UserVO user = (UserVO) httpServletRequest.getSession().getAttribute("user");
 		
+		if (user == null) {
+	        response.sendRedirect(request.getContextPath() + "/");
+	        return;
+	    }
+		
 		//유저이메일, 아이디 기록
 		String user_id = user.getUser_id();
 		String user_email = user.getUser_email();
