@@ -47,8 +47,8 @@
 						 </div>
 						 <div class="mb-3 mt-3">
 						    <!-- <label for="view" class="form-label">추천수 :</label> -->
-								<button class="btn btn-outline-success btn-up col=6">추천(${post.upvotes})</button>
-								<button class="btn btn-outline-success btn-down col=6">비추천(${post.downvotes})</button>
+								<button class="btn btn-outline-success btn-up col=6">추천</button>
+								<button class="btn btn-outline-success btn-down col=6">비추천</button>
 						 </div>
 						 <div class="mb-3 mt-3">
 						    <label for="content" class="form-label">내용</label>
