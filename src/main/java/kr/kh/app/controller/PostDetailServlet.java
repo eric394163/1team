@@ -40,6 +40,10 @@ public class PostDetailServlet extends HttpServlet {
 		AttachVO link = postService.getLink(num);
 		request.setAttribute("link", link);
 		
+		//page정보 파라미터에서 받아오기
+		String page = request.getParameter("page");
+		request.setAttribute("page", page);
+		
 		request.getRequestDispatcher("/WEB-INF/views/post/detail.jsp").forward(request, response);
 	}
 
