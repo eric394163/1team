@@ -8,6 +8,7 @@ import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.ReportVO;
 import kr.kh.app.model.vo.UpvoteVO;
 import kr.kh.app.pagination.Criteria;
 
@@ -81,5 +82,9 @@ public interface PostDAO {
 	boolean updatePostUpvotePlus(@Param("num")int post_id);
 
 	boolean updatePostUpvoteMinus(@Param("num")int post_id);
+
+	int selectPostReportedListCount(@Param("cri") Criteria cri);
+
+	ArrayList<ReportVO> selectPostReportedList(@Param("cri") Criteria cri);
 
 }
