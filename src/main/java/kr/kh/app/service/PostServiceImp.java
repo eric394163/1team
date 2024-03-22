@@ -332,6 +332,21 @@ public class PostServiceImp implements PostService {
 	}
 	
 	
+	public int getReportedPostCount(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectReportedPostCount(cri);
+	}
+
+	@Override
+	public ArrayList<PostVO> getReportedPostList(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectReportedPostList(cri);
+	}
+	
 	public boolean insertComment(CommentVO comment) {
 		if( comment == null || 
 				!checkString(comment.getComment_content())) {

@@ -156,6 +156,28 @@
 			select * from attach
 			where attach_post_id = #{attach_post_id} and attach_link_check = 1
 	</select>
+
+
+	<select id="selectReportedPostCount" resultType="int"> 
+		select count(*) from post where post_reported > 9 
+	</select>
+	
+	<select id="selectReportedPostList" resultType="kr.kh.app.model.vo.PostVO">
+
+		SELECT 
+			post.*,
+			board.board_name,
+			report.report_date
+		FROM
+			post
+			JOIN board ON post.post_board_num = board.board_id
+			JOIN report ON post.post_id = report.report_post_id
+		WHERE post.post_reported > 9
+		ORDER BY report.report_date DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+
+	</select>
+
 	
 	<insert id="insertLike">
 		insert into upvote(post_id, user_id, upvote) 

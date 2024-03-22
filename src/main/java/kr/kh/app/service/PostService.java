@@ -45,6 +45,9 @@ public interface PostService {
 	int like(int post_id, int upvote, UserVO user);
 
 	boolean updatePostView(int num);
+    int getReportedPostCount(Criteria cri);
+
+	ArrayList<PostVO> getReportedPostList(Criteria cri);
 	boolean insertComment(CommentVO comment);
 
 	ArrayList<CommentVO> getCommentList(Criteria cri);
