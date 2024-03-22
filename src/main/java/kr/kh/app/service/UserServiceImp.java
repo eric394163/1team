@@ -234,5 +234,23 @@ public class UserServiceImp implements UserService {
 		return userDao.deleteBlockedUser(blocked);
 	}
 
+	@Override
+	public ArrayList<UserVO> getTotalUserList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		
+		return userDao.selectTotalUserList(cri);
+	}
+
+	@Override
+	public int getTotalUserCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		
+		return userDao.selectTotalUserCount(cri);
+	}
+
 
 }
