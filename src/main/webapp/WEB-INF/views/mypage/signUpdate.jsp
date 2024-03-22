@@ -26,6 +26,7 @@
   				<input type="password" class="form-control" id="user-confirm-pass" />
   				<button type="button" class="btn btn-dark" id="user-confirm-btn">확인</button>
   			</div>
+  			<a href="#close" class="close_btn"><img src="<c:url value="/images/close_icon.svg" />" alt="닫기아이콘" width="30"></a>
   		</div>
   	</div>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -165,6 +166,14 @@
 					}
 					<% session.setAttribute("passConfirm", "0"); %>
 				}
+			}
+		});
+		
+		//닫기 아이콘 클릭
+		$('.close_btn').click(function(){
+			let q = confirm("현재 창을 닫으시겠습니다. 닫으면 메인페이지로 이동합니다.");
+			if(q){
+				location.href = <c:url value="/" />;
 			}
 		});
 	</script>

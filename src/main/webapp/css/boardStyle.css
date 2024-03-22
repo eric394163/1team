@@ -109,6 +109,12 @@
 .list-box li a:hover{
 	text-decoration: underline;
 }
+.list-box li img{
+	position: relative; top: -1px;
+}
+.list-box li img.like{
+	top: -2px;
+}
 
 /* 마이페이지 - 내가 차단한 목록 */
 .all-check-area{
@@ -124,4 +130,50 @@
 .table.block-table td:nth-child(4), .table.block-table th:nth-child(4){ width: 550px; }
 
 
-
+/* 게시글 쓰기 */
+.form-row{
+	display: flex; align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
+	position: relative;;
+}
+.form-row.content{
+	align-items: flex-start;
+}
+.form-row .icon{
+	position: absolute;
+	right: 15px; top: 50%; transform: translateY(-50%);
+}
+.form-row label{
+	width: 120px; font-weight: bold; font-size: 16px;
+}
+.form-row .second-box{
+	width: 680px;
+}
+.form-row .second-box.file{
+	margin-bottom: 10px;
+}
+.form-row .file-link-all{
+	width: 680px;
+}
+.form-row .file-link-all .form-control{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+.form-row .file-link-all .form-control span{
+	width: 550px; height: 25px;
+	line-height: 25px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.form-row .note-editor.note-frame{
+	width: 680px; 
+}
+.note-modal-content{ overflow: hidden; padding-bottom: 20px; }
+.form-row.last{ margin-top: 30px; }
+.form-row .btn-dark{
+	width: 100%; padding: 10px;
+}

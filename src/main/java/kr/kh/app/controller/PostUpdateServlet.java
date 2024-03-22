@@ -49,7 +49,7 @@ public class PostUpdateServlet extends HttpServlet {
 		
 		if(post == null || user == null || !post.getPost_user_id().equals(user.getUser_id())) {
 			request.setAttribute("msg", "작성자가 아닙니다.");
-			request.setAttribute("url", "post/detail?num="+num);
+			request.setAttribute("url", "/post/detail?num="+num);
 			request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
 			return;
 		}
@@ -106,11 +106,11 @@ public class PostUpdateServlet extends HttpServlet {
 		
 		if(res1 && res2) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");
-			request.setAttribute("url", "post/detail?num="+num);
+			request.setAttribute("url", "/post/detail?num="+num);
 		}
 		else {
 			request.setAttribute("msg", "게시글을 수정하지 못했습니다.");
-			request.setAttribute("url", "post/detail?num="+num);
+			request.setAttribute("url", "/post/detail?num="+num);
 		}
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 		
