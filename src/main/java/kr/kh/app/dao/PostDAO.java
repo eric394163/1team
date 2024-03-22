@@ -62,4 +62,8 @@ public interface PostDAO {
 
 	boolean updatePostView(@Param("num")int num);
 
+	boolean updatePostUpvotePlus(@Param("num")int post_id);
+
+	boolean updatePostUpvoteMinus(@Param("num")int post_id);
+
 }

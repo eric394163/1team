@@ -173,4 +173,20 @@
 	<update id="updatePostView">
 		update post set post_view = post_view + 1 where post_id = #{num}
 	</update>
+	
+	<update id="updatePostUpvotePlus">
+		update post post
+		inner join upvote upvote
+		on post.post_id = upvote.post_id
+	    set post_upvotes = post_upvotes + 1 
+		where post.post_id = #{num} and upvote.upvote = 1;
+	</update>
+	
+	<update id="updatePostUpvoteMinus">
+		update post post
+		inner join upvote upvote
+		on post.post_id = upvote.post_id
+	    set post_upvotes = post_upvotes - 1 
+		where post.post_id = #{num} and upvote.upvote = 0;
+	</update>
 </mapper>

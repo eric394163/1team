@@ -237,7 +237,6 @@ public class PostServiceImp implements PostService {
 		}
 
 		if (link != null) {
-			System.out.println("으으앙아아아아악");
 			try {
 				int attach_post_id = attach.getAttach_post_id();
 				
@@ -308,14 +307,19 @@ public class PostServiceImp implements PostService {
 		if(like == null) {
 			like = new UpvoteVO(post_id, user.getUser_id(), upvote);
 			postDao.insertLike(like);
+			postDao.updatePostUpvotePlus(post_id);
 			return upvote;
 		} else {
 			if(upvote == like.getUpvote()) {
 				like.setUpvote(0);
+				postDao.updateLike(like);
+				postDao.updatePostUpvoteMinus(post_id);
 			} else {
 				like.setUpvote(upvote);
+				postDao.updateLike(like);
+				postDao.updatePostUpvotePlus(post_id);
 			}
-			postDao.updateLike(like);
+			
 			return like.getUpvote();
 		}
 	}
@@ -324,19 +328,6 @@ public class PostServiceImp implements PostService {
 	public boolean updatePostView(int num) {
 		return postDao.updatePostView(num);
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

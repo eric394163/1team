@@ -141,6 +141,7 @@
 				default :
 					alert('좋아요를 취소했습니다.');
 				}
+				getRecommend();
 			},
 			error : function(jqXHR, textStatus, errorThrown){
 				
@@ -149,7 +150,7 @@
 		});	// ajax end
 		
 	});
-	
+
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
