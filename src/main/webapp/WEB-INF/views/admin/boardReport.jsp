@@ -30,7 +30,6 @@ prefix="c"%> <%@ page isELIgnored="false" %>
           <div class="h2_title_wrap">
             <!-- 타이틀영역 -->
             <h2>관리자페이지 - 신고게시판</h2>
-            ${list}
             <table class="table">
               <thead class="table-dark">
                 <tr>
@@ -46,14 +45,12 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                     <tr>
                       <td>${post.board_name}</td>
                       <td>
-                        <c:url var="url" value="/admin/boardReportDetail">
-                          <c:param name="num" value="${post.post_id}" />
+                        <c:url var="url" value="/admin/boardReportedList">
+                          <c:param name="reportedPostId" value="${post.post_id}" />
                         </c:url>
                         <a href="${url}">${post.post_title}</a>
                       </td>
-                      <td>
-                        <a href="">${post.post_user_id}</a>
-                      </td>
+                      <td>${post.post_user_id}</td>
                       <td>${post.post_reported }</td>
                     </tr>
                   </c:forEach>
@@ -75,7 +72,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                 <c:url value="/admin/boardReport" var="listurl">
                   <c:param name="page" value="${pm.startPage - 1}" />
                   <!-- <c:param name="totalsearch" value="${pm.cri.search}" /> -->
-				  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
+                  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
                 </c:url>
                 <li class="page-item">
                   <a class="page-link" href="${listurl}">이전</a>
@@ -86,7 +83,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                 <c:url value="/admin/boardReport" var="listurl">
                   <c:param name="page" value="${i}" />
                   <!-- <c:param name="totalsearch" value="${pm.cri.search}" /> -->
-				  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
+                  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
                 </c:url>
                 <li
                   class="page-item <c:if test='${pm.cri.page == i}'>active</c:if>"
@@ -99,7 +96,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                 <c:url value="/admin/boardReport" var="listurl">
                   <c:param name="page" value="${pm.endPage + 1}" />
                   <!-- <c:param name="totalsearch" value="${pm.cri.search}" /> -->
-				  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
+                  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
                 </c:url>
                 <li class="page-item">
                   <a class="page-link" href="${listurl}">다음</a>
