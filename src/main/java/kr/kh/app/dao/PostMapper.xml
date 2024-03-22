@@ -239,5 +239,16 @@
 	<update id="updateComment">
 		update comment set comment_content = #{co.comment_content} where comment_id = #{co.comment_id}
 	</update>
+
+
+	<select id="selectPostReportedListCount" resultType="int">
+		select count(*) from report where report_post_id = #{cri.reportedPostId}
+	</select>
+	
+	<select id="selectPostReportedList" resultType="kr.kh.app.model.vo.ReportVO">
+		select * from report where report_post_id = #{cri.reportedPostId}
+		order by report_date desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
 	
 </mapper>
