@@ -13,4 +13,11 @@ public class BoardListCriteria extends Criteria {
 		super(page, perPageNum, search, type);
 		this.boNum = boNum;
 	}
+
+	@Override
+	public String toString() {
+		return "BoardListCriteria [boNum=" + boNum + ","+super.toString()+"]";
+	}
+	
+	
 }
