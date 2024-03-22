@@ -23,36 +23,45 @@
 		<div class="main-contents">
 			<c:choose>
 				<c:when test="${post != null }">
-					<h1>게시글 상세</h1>
 					<div>
 						<div class="mb-3 mt-3">
 						    <label for="community" class="form-label">게시판</label>
 						    <input type="text" class="form-control" id="community" name="community" readonly value="${post.board.board_name}">
+						    <!-- <div id="community" name="community" readonly value="${post.board.board_name}">${post.board.board_name}</div> -->
 						</div>	
+						<div class="mb-3 mt-3">
+							<a href="<c:url value="/post/list"/>">게시글 목록</a>
+						</div>
 						 <div class="mb-3 mt-3">
 						    <label for="writer" class="form-label">작성자</label>
 						    <input type="text" class="form-control" id="writer" name="writer" value = "${post.post_user_id}" readonly>
+						    <!-- <div id="writer" name="writer" value = "${post.post_user_id}" readonly>작성자 ${post.post_user_id}</div> -->
 						 </div>
 						 <div class="mb-3 mt-3">
 						    <label for="date" class="form-label">작성일</label>
 						    <fmt:formatDate value="${post.post_date}" pattern="yyyy-MM-dd" /> 
+						 </div>
+						 <div class="mb-3 mt-3">
+						    <label for="view" class="form-label">조회수 </label>
+						    <input type="text" class="form-control" id="view" name="view" value = "${post.post_view}" readonly>
+						    <!--<div type="text" id="view" name="view" value = "${post.post_view}" readonly>조회수 ${post.post_view}</div>-->
 						 </div>
 						<div class="mb-3 mt-3">
 						    <label for="title" class="form-label">제목</label>
 						    <input type="text" class="form-control" id="title" name="title" readonly value="${post.post_title}">
 						 </div>
 						 <div class="mb-3 mt-3">
-						    <label for="view" class="form-label">조회수 :</label>
-						    <input type="text" class="form-control" id="view" name="view" value = "${post.post_view}" readonly>
+								<div>신고 수 ${post.post_reported}</div>
 						 </div>
 						 <div class="mb-3 mt-3">
-						    <!-- <label for="view" class="form-label">추천수 :</label> -->
-								<button class="btn btn-outline-success btn-up col=6">추천</button>
-								<button class="btn btn-outline-success btn-down col=6">비추천</button>
+								<div>좋아요 수 ${post.post_upvotes}</div>
 						 </div>
 						 <div class="mb-3 mt-3">
 						    <label for="content" class="form-label">내용</label>
 						    <div class="form-control" style="min-height : 300px;">${post.post_content}</div>
+						 </div>
+						 <div class="mb-3 mt-3">
+								<button type="button" id="btnUp" data-state="1" class="btn btn-outline-success btn-up col=6">좋아요</button>
 						 </div>
 						 <c:if test="${fileList != null && fileList.size() != 0}">
 						 	 <div class="mb-3 mt-3">
@@ -86,6 +95,63 @@
 		</div>
 	</div>
 </div>
+
+<!-- 좋아요 -->
+<script type="text/javascript">
+	function checkLogin() {
+		// 로그인 했을 때
+		if('${user.user_id}' != '') {
+			return true;
+		}
+		
+		// 로그인 안 했을 때
+		if(confirm("로그인이 필요한 기능입니다. \n로그인 페이지로 이동하시겠습니까?")) {
+			location.href = '<c:url value="/login"/>';
+		}
+		return false;
+	}
+
+	$(".btn-up").click(function() {
+		if(!checkLogin()) {
+			return;
+			
+		}
+		
+		let upvote = $(this).data('state');
+		let postId = '${post.post_id}';
+		let like = {
+				upvote : upvote,
+				postId : postId
+		}
+		console.log(like);
+		$.ajax({
+			async : true,
+			url : '<c:url value="/upvote/check"/>', 
+			type : 'post', 
+			data : like, 
+			dataType : "json", 
+			success : function(data) {
+				switch(data) {
+				case 1:
+					alert('좋아요를 눌렀습니다.');
+					break;
+				case 0 :
+					alert('좋아요를 취소했습니다.');
+					break;
+				default :
+					alert('좋아요를 취소했습니다.');
+				}
+			},
+			error : function(jqXHR, textStatus, errorThrown){
+				
+			}
+			
+		});	// ajax end
+		
+	});
+	
+</script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

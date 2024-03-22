@@ -29,6 +29,8 @@ public class PostDetailServlet extends HttpServlet {
 			num = 0;
 		}
 		
+		postService.updatePostView(num);
+		
 		PostVO post = postService.getPost(num);
 		request.setAttribute("post", post);
 		
