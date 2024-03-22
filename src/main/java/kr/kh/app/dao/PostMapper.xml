@@ -138,7 +138,6 @@
 		LIMIT 10
 	</select>
 
-
 	<select id="selectTotalPopularLikePostList" resultType="kr.kh.app.model.vo.PostVO">
 		SELECT 
 			post.*,
@@ -153,12 +152,43 @@
 	</select>
 	
 	
-	
 	<select id="selectAttachPath" resultType="kr.kh.app.model.vo.AttachVO">
 			select * from attach
 			where attach_post_id = #{attach_post_id} and attach_link_check = 1
 	</select>
 	
+	<insert id="insertLike">
+		insert into upvote(post_id, user_id, upvote) 
+		values (#{like.post_id},#{like.user_id},#{like.upvote})
+	</insert>
+	
+	<select id="selectLike" resultType="kr.kh.app.model.vo.UpvoteVO">
+		select * from upvote where post_id = #{post_id} and user_id = #{user_id}
+	</select>
+	
+	<update id="updateLike">
+		update upvote set upvote = #{like.upvote} where post_id = #{like.post_id} and user_id = #{like.user_id}
+	</update>
+	
+	<update id="updatePostView">
+		update post set post_view = post_view + 1 where post_id = #{num}
+	</update>
+	
+	<update id="updatePostUpvotePlus">
+		update post post
+		inner join upvote upvote
+		on post.post_id = upvote.post_id
+	    set post_upvotes = post_upvotes + 1 
+		where post.post_id = #{num} and upvote.upvote = 1;
+	</update>
+	
+	<update id="updatePostUpvoteMinus">
+		update post post
+		inner join upvote upvote
+		on post.post_id = upvote.post_id
+	    set post_upvotes = post_upvotes - 1 
+		where post.post_id = #{num} and upvote.upvote = 0;
+	</update>
 	<insert id="insertComment">
 		insert into comment(comment_post_num, comment_content, comment_user_id, comment_date)
 		values(#{co.comment_post_num},#{co.comment_content},#{co.comment_user_id}, now())

@@ -17,11 +17,11 @@ import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.UpvoteVO;
 import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.CommentCriteria;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
-import lombok.Data;
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDao;
@@ -239,7 +239,6 @@ public class PostServiceImp implements PostService {
 		}
 
 		if (link != null) {
-			System.out.println("으으앙아아아아악");
 			try {
 				int attach_post_id = attach.getAttach_post_id();
 				
@@ -300,6 +299,39 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+	public int like(int post_id, int upvote, UserVO user) {
+		if(user == null) {
+			throw new RuntimeException();
+		}
+		
+		UpvoteVO like = postDao.selectLike(user.getUser_id(), post_id);
+		
+		if(like == null) {
+			like = new UpvoteVO(post_id, user.getUser_id(), upvote);
+			postDao.insertLike(like);
+			postDao.updatePostUpvotePlus(post_id);
+			return upvote;
+		} else {
+			if(upvote == like.getUpvote()) {
+				like.setUpvote(0);
+				postDao.updateLike(like);
+				postDao.updatePostUpvoteMinus(post_id);
+			} else {
+				like.setUpvote(upvote);
+				postDao.updateLike(like);
+				postDao.updatePostUpvotePlus(post_id);
+			}
+			
+			return like.getUpvote();
+		}
+	}
+
+	@Override
+	public boolean updatePostView(int num) {
+		return postDao.updatePostView(num);
+	}
+	
+	
 	public boolean insertComment(CommentVO comment) {
 		if( comment == null || 
 				!checkString(comment.getComment_content())) {

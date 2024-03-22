@@ -42,6 +42,9 @@ public interface PostService {
 
 	boolean updateAttach(PostVO post, UserVO user, String link, AttachVO attach);
 
+	int like(int post_id, int upvote, UserVO user);
+
+	boolean updatePostView(int num);
 	boolean insertComment(CommentVO comment);
 
 	ArrayList<CommentVO> getCommentList(Criteria cri);
