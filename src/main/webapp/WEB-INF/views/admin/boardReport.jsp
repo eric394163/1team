@@ -17,6 +17,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/team1/css/common.css" />
+    <link rel="stylesheet" href="/team1/css/boardStyle.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
@@ -30,7 +31,8 @@ prefix="c"%> <%@ page isELIgnored="false" %>
           <div class="h2_title_wrap">
             <!-- 타이틀영역 -->
             <h2>관리자페이지 - 신고게시판</h2>
-            <table class="table">
+          </div>
+          <table class="table">
               <thead class="table-dark">
                 <tr>
                   <th>카테고리</th>
@@ -103,7 +105,6 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                 </li>
               </c:if>
             </ul>
-          </div>
         </div>
       </div>
     </div>
