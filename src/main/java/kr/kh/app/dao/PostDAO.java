@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.pagination.Criteria;
 
@@ -56,6 +57,17 @@ public interface PostDAO {
     int selectReportedPostCount(@Param("cri") Criteria cri);
 
 	ArrayList<PostVO> selectReportedPostList(@Param("cri") Criteria cri);
+	boolean insertComment(@Param("co")CommentVO comment);
+
+	ArrayList<CommentVO> selectCommentList(@Param("cri")Criteria cri);
+
+	int selectTotalCountComment(@Param("cri")Criteria cri);
+
+	CommentVO selectComment(@Param("comment_id")int num);
+
+	boolean deleteComment(@Param("comment_id")int num);
+
+	boolean updateComment(@Param("co")CommentVO comment);
 
 
 

@@ -15,7 +15,9 @@ public class CommentVO {
     private Date comment_date;
     
     
-	public CommentVO(String comment_user_id) {
+	public CommentVO(int comment_post_num, String comment_content, String comment_user_id) {
+		this.comment_post_num = comment_post_num;
+		this.comment_content = comment_content;
 		this.comment_user_id = comment_user_id;
 	}
   

@@ -15,8 +15,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.pagination.CommentCriteria;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
 import lombok.Data;
@@ -311,6 +313,63 @@ public class PostServiceImp implements PostService {
 			cri = new Criteria();
 		}
 		return postDao.selectReportedPostList(cri);
+	public boolean insertComment(CommentVO comment) {
+		if( comment == null || 
+				!checkString(comment.getComment_content())) {
+				return false;
+			}
+		return postDao.insertComment(comment);
+	}
+
+	@Override
+	public ArrayList<CommentVO> getCommentList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria(1,2);
+		}
+		return postDao.selectCommentList(cri);
+	}
+
+	@Override
+	public int getTotalCountComment(Criteria cri) {
+		if(cri == null) {
+			return 0;
+		}
+		return postDao.selectTotalCountComment(cri);
+	}
+
+	@Override
+	public boolean deleteComment(int num, UserVO user) {
+		if(user == null) {
+			return false;
+		}
+		//댓글 번호와 일치하는 댓글을 가져옴
+		CommentVO comment = postDao.selectComment(num);
+		//댓글 작성자가 회원인지 확인하여 아니면 false 리턴
+		if( comment == null || 
+			!comment.getComment_user_id().equals(user.getUser_id())) {
+			return false;
+		}
+		//맞으면 삭제 요청
+		
+		return postDao.deleteComment(num);
+	}
+
+	@Override
+	public boolean updateComment(CommentVO comment) {
+		if( comment == null ||
+				!checkString(comment.getComment_content()) || 
+				!checkString(comment.getComment_user_id())) {
+				return false;
+			}
+			
+			CommentVO dbComment = postDao.selectComment(comment.getComment_id());
+			
+			if( dbComment == null || 
+				!dbComment.getComment_user_id().equals(comment.getComment_user_id())) {
+				return false;
+			}
+			
+			return postDao.updateComment(comment);
 	}
 
 }
