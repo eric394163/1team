@@ -313,6 +313,8 @@ public class PostServiceImp implements PostService {
 			cri = new Criteria();
 		}
 		return postDao.selectReportedPostList(cri);
+	}
+	
 	public boolean insertComment(CommentVO comment) {
 		if( comment == null || 
 				!checkString(comment.getComment_content())) {
