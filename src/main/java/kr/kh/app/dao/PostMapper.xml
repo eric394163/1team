@@ -189,4 +189,33 @@
 	    set post_upvotes = post_upvotes - 1 
 		where post.post_id = #{num} and upvote.upvote = 0;
 	</update>
+	<insert id="insertComment">
+		insert into comment(comment_post_num, comment_content, comment_user_id, comment_date)
+		values(#{co.comment_post_num},#{co.comment_content},#{co.comment_user_id}, now())
+	</insert>
+	
+	<select id="selectCommentList" resultType="kr.kh.app.model.vo.CommentVO">
+		select * from comment 
+		where comment_post_num = #{cri.post_num}
+		order by comment_id desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectTotalCountComment" resultType="int">
+		select count(*) from comment
+		where comment_post_num = #{cri.post_num}
+	</select>
+	
+	<select id="selectComment" resultType="kr.kh.app.model.vo.CommentVO">
+		select * from comment where comment_id = #{comment_id}
+	</select>
+	
+	<delete id="deleteComment">
+		delete from comment where comment_id = #{comment_id}
+	</delete>
+	
+	<update id="updateComment">
+		update comment set comment_content = #{co.comment_content} where comment_id = #{co.comment_id}
+	</update>
+	
 </mapper>
