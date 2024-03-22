@@ -15,7 +15,6 @@ import kr.kh.app.model.dto.SignUpDTO;
 import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.Criteria;
-import kr.kh.app.utils.CheckErrAndMsg;
 import kr.kh.app.utils.NullCheck;
 
 public class UserServiceImp implements UserService {
@@ -232,6 +231,29 @@ public class UserServiceImp implements UserService {
 	@Override
 	public boolean unblockUser(BlockedVO blocked) {
 		return userDao.deleteBlockedUser(blocked);
+	}
+
+	@Override
+	public ArrayList<UserVO> getUserList(Criteria cri) {
+		return userDao.selectUserList(cri);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return userDao.selectTotalCount(cri);
+	}
+
+	@Override
+	public boolean updateUserByUserState(UserVO updateUser) {
+		return userDao.updateUserByUserState(updateUser);
+	}
+
+	@Override
+	public boolean updateUserByUserState2(UserVO updateUser) {
+		return userDao.updateUserByUserState2(updateUser);
 	}
 
 

@@ -33,4 +33,12 @@ public interface UserService {
 
     boolean unblockUser(BlockedVO blocked);
 
+	ArrayList<UserVO> getUserList(Criteria cri);
+
+	int getTotalCount(Criteria cri);
+
+	boolean updateUserByUserState(UserVO updateUser);
+
+	boolean updateUserByUserState2(UserVO updateUser);
+
 }
