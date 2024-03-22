@@ -6,8 +6,10 @@ import javax.servlet.http.Part;
 
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.pagination.CommentCriteria;
 import kr.kh.app.pagination.Criteria;
 
 public interface PostService {
@@ -39,5 +41,15 @@ public interface PostService {
 	ArrayList<PostVO> getPopularLikePostList(Criteria popularLikeCri);
 
 	boolean updateAttach(PostVO post, UserVO user, String link, AttachVO attach);
+
+	boolean insertComment(CommentVO comment);
+
+	ArrayList<CommentVO> getCommentList(Criteria cri);
+
+	int getTotalCountComment(Criteria cri);
+
+	boolean deleteComment(int num, UserVO user);
+
+	boolean updateComment(CommentVO comment);
 
 }
