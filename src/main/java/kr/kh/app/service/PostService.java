@@ -40,4 +40,8 @@ public interface PostService {
 
 	boolean updateAttach(PostVO post, UserVO user, String link, AttachVO attach);
 
+    int getReportedPostCount(Criteria cri);
+
+	ArrayList<PostVO> getReportedPostList(Criteria cri);
+
 }

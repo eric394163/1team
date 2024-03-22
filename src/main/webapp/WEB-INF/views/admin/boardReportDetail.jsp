@@ -30,7 +30,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
           <div class="h2_title_wrap">
             <!-- 타이틀영역 -->
             <h2>관리자페이지 - 신고게시판</h2>
-            ${list}
+
             <table class="table">
               <thead class="table-dark">
                 <tr>
@@ -44,9 +44,10 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                 <c:if test="${not empty list}">
                   <c:forEach items="${list}" var="post">
                     <tr>
-                      <td>${post.board_name}</td>
+                      <td>${post.post_board_name}</td>
+                      <td>${post.post_title}</td>
                       <td>
-                        <c:url var="url" value="/admin/boardReportDetail">
+                        <c:url var="url" value="/post/detail">
                           <c:param name="num" value="${post.post_id}" />
                         </c:url>
                         <a href="${url}">${post.post_title}</a>
@@ -54,7 +55,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                       <td>
                         <a href="">${post.post_user_id}</a>
                       </td>
-                      <td>${post.post_reported }</td>
+                      <td>${post.post_view }</td>
                     </tr>
                   </c:forEach>
                 </c:if>
@@ -72,37 +73,34 @@ prefix="c"%> <%@ page isELIgnored="false" %>
             <ul class="pagination justify-content-center">
               <!-- pm.prev의 값이 true일 경우에만 내부 코드를 실행합니다. 이는 "이전" 페이지 그룹으로 이동할 수 있는지 여부를 확인하는 조건입니다. -->
               <c:if test="${pm.prev}">
-                <c:url value="/admin/boardReport" var="listurl">
+                <c:url value="/totalSearchList" var="searchListurl">
                   <c:param name="page" value="${pm.startPage - 1}" />
-                  <!-- <c:param name="totalsearch" value="${pm.cri.search}" /> -->
-				  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
+                  <c:param name="totalsearch" value="${pm.cri.search}" />
                 </c:url>
                 <li class="page-item">
-                  <a class="page-link" href="${listurl}">이전</a>
+                  <a class="page-link" href="${searchListurl}">이전</a>
                 </li>
               </c:if>
 
               <c:forEach begin="${pm.startPage }" end="${pm.endPage}" var="i">
-                <c:url value="/admin/boardReport" var="listurl">
+                <c:url value="/totalSearchList" var="searchListurl">
                   <c:param name="page" value="${i}" />
-                  <!-- <c:param name="totalsearch" value="${pm.cri.search}" /> -->
-				  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
+                  <c:param name="totalsearch" value="${pm.cri.search}" />
                 </c:url>
                 <li
                   class="page-item <c:if test='${pm.cri.page == i}'>active</c:if>"
                 >
-                  <a class="page-link" href="${listurl}">${i}</a>
+                  <a class="page-link" href="${searchListurl}">${i}</a>
                 </li>
               </c:forEach>
 
               <c:if test="${pm.next}">
-                <c:url value="/admin/boardReport" var="listurl">
+                <c:url value="/totalSearchList" var="searchListurl">
                   <c:param name="page" value="${pm.endPage + 1}" />
-                  <!-- <c:param name="totalsearch" value="${pm.cri.search}" /> -->
-				  <!-- 만약에 검색어가 있으면 여기 추가하기 -->
+                  <c:param name="totalsearch" value="${pm.cri.search}" />
                 </c:url>
                 <li class="page-item">
-                  <a class="page-link" href="${listurl}">다음</a>
+                  <a class="page-link" href="${searchListurl}">다음</a>
                 </li>
               </c:if>
             </ul>

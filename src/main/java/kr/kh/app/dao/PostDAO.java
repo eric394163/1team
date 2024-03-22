@@ -53,6 +53,10 @@ public interface PostDAO {
 
 	AttachVO selectAttachPath(@Param("attach_post_id") int attach_post_id);
 
+    int selectReportedPostCount(@Param("cri") Criteria cri);
+
+	ArrayList<PostVO> selectReportedPostList(@Param("cri") Criteria cri);
+
 
 
 }

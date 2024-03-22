@@ -69,7 +69,7 @@
 				</a>
 				<ul class="subnav">
 					<li class="postdelete"><a href="<c:url value="/admin/postdelete" />" class="nav-link text-white">게시글 삭제</a></li>
-					<li class="boardreport"><a href="<c:url value="/admin/boardreport" />" class="nav-link text-white">신고게시판</a></li>
+					<li class="boardreport"><a href="<c:url value="/admin/boardReport" />" class="nav-link text-white">신고게시판</a></li>
 				</ul>
 			</li>
 			<li class="drop-down">
