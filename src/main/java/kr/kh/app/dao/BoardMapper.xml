@@ -80,7 +80,7 @@
 		group by
 			post_id) a
 	</select>
-	<select id="selectCommentPostList" resultType="kr.kh.app.model.vo.PostVO">
+	<select id="selectCommentPostList" resultMap="PostMap1">
 		select `post`.*
 		from
 			`comment`
@@ -97,7 +97,7 @@
 	<select id="selectLikePostCount" resultType="int">
 		select count(*) from upvote where user_id = #{cri.search} and upvote = 1
 	</select>
-	<select id="selectLikePostList" resultType="kr.kh.app.model.vo.PostVO">
+	<select id="selectLikePostList" resultMap="PostMap1">
 		select a.*
 		from
 			post as a
@@ -106,4 +106,18 @@
 				on a.post_id = b.post_id
 		where user_id = #{cri.search} and upvote = 1
 	</select>
+	
+	<select id="selectBoardByName" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board where board_name = #{board_name};
+	</select>
+	
+	<insert id="insertBoard">
+		insert into board(board_name, board_category_num)
+		values(#{bo.board_name},#{bo.board_category_num})
+	</insert>
+	
+	<select id="selectCaBoardList" resultType="kr.kh.app.model.vo.BoardVO">
+		select * from board where board_category_num = #{ca_num}
+	</select>
+	
 </mapper>

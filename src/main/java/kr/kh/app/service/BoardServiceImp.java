@@ -32,6 +32,13 @@ public class BoardServiceImp implements BoardService{
 		}
 	}
 
+	private boolean checkString(String str) {
+		if(str == null || str.length() == 0) {
+			return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public int getTotalCount(Criteria cri) {
 		if(cri == null) {
@@ -84,5 +91,22 @@ public class BoardServiceImp implements BoardService{
 			cri = new BoardListCriteria();
 		}
 		return boardDao.selectLikePostList(cri);
+	}
+
+	@Override
+	public boolean insertBoard(BoardVO board) throws Exception {
+		if(board == null ||
+			!checkString(board.getBoard_name())) {
+			return false;
+		}
+		if (boardDao.selectBoardByName(board.getBoard_name()) != null) {
+			throw new Exception("게시판 이름이 중복됩니다.");
+		}
+		return boardDao.insertBoard(board);
+	}
+
+	@Override
+	public ArrayList<BoardVO> getCaBoardList(int ca_num) {
+		return boardDao.selectCaBoardList(ca_num);
 	}
 }
