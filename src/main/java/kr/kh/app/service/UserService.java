@@ -40,5 +40,6 @@ public interface UserService {
 	boolean updateUserByUserState(UserVO updateUser);
 
 	boolean updateUserByUserState2(UserVO updateUser);
+    ArrayList<BlockedVO> getBlockedUsers(String userId);
 
 }

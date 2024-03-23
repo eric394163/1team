@@ -2,6 +2,7 @@ package kr.kh.app.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.pagination.BlockedCriteria;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.pagination.PageMaker;
 import kr.kh.app.service.PostService;
@@ -24,8 +28,8 @@ public class TotalSearchList extends HttpServlet {
       throws ServletException, IOException {
     MainServlet.commonAsideInfo(request);
 
-    String totalSearch = request.getParameter("totalsearch");
 
+    String totalSearch = request.getParameter("totalsearch");
     if (totalSearch == null || totalSearch.equals("")) {
 
       request.setAttribute("msg", "검색어가 없습니다.");
@@ -34,14 +38,20 @@ public class TotalSearchList extends HttpServlet {
     }
 
     int page;
-
     try {
       page = Integer.parseInt(request.getParameter("page"));
     } catch (Exception e) {
       page = 1;
     }
 
-    Criteria cri = new Criteria(page, 3, totalSearch);
+    String blocking_user_id = "";
+    UserVO user = (UserVO) request.getSession().getAttribute("user");
+    if (user != null) {
+      String userId = user.getUser_id();
+      blocking_user_id = userId;
+    }
+
+    Criteria cri = new BlockedCriteria(page, 10, totalSearch, blocking_user_id);
 
     // 검색된 게시글 전체 수
     int totalCount = postService.getTotalPostCount(cri);

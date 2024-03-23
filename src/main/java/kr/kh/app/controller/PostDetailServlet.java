@@ -29,14 +29,31 @@ public class PostDetailServlet extends HttpServlet {
 			num = 0;
 		}
 		
-		PostVO post = postService.getPost(num);
-		request.setAttribute("post", post);
+		//게시글을 작성하고 게시글 상세페이지로 이동 했을때 목록보기를 누르면 아무 값도 안 들어가서 게시글리스트가 제대로 안 나옴
+
+		postService.updatePostView(num);
 		
-		ArrayList<AttachVO> fileList = postService.getFile(num);
+		PostVO post = postService.getPost(num);
+		request.setAttribute("post", post); 
+
+		int boNum = post.getPost_board_num();
+		request.setAttribute("boNum", boNum); // 게시판 번호
+
+		
+		ArrayList<AttachVO> fileList = postService.getFile(num); 
 		request.setAttribute("fileList", fileList);
 		
 		AttachVO link = postService.getLink(num);
 		request.setAttribute("link", link);
+		
+		//page정보 파라미터에서 받아오기 // 페이지정보는 string 이여서 int로 변환하고 넘겨줘야함 그냥 넘기면 아무것도 안 나옴
+		int page;
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		}catch(Exception e) {
+			page = 1;
+		}
+		request.setAttribute("page", page);
 		
 		request.getRequestDispatcher("/WEB-INF/views/post/detail.jsp").forward(request, response);
 	}

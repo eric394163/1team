@@ -255,6 +255,12 @@ public class UserServiceImp implements UserService {
 	public boolean updateUserByUserState2(UserVO updateUser) {
 		return userDao.updateUserByUserState2(updateUser);
 	}
+	public ArrayList<BlockedVO> getBlockedUsers(String user_id) {
+		if(!checkString(user_id)) {
+			return null;
+		}
+		return userDao.selectBlockedUsers(user_id);
+	}
 
 
 }

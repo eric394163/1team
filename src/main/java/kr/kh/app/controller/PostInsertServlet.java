@@ -61,7 +61,7 @@ public class PostInsertServlet extends HttpServlet {
 		// 서비스에게 게시글 객체를 주면서 등록하라고 시킴
 
 		if (postService.insertPost(post, partList, attach)) {
-			response.sendRedirect(request.getContextPath() + "/post/list");
+			response.sendRedirect(request.getContextPath() + "/post/detail?num=" + post.getPost_id());
 		} else {
 			response.sendRedirect(request.getContextPath() + "/post/insert");
 		}
