@@ -12,10 +12,11 @@ public class DateCriteria extends Criteria {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public DateCriteria(int page, int perPageNum, LocalDate today, LocalDate weekAgo) {
+    public DateCriteria(int page, int perPageNum, LocalDate today, LocalDate weekAgo, String blocking_user_id) {
         super(page, perPageNum);
         this.startDate = today;
         this.endDate = weekAgo;
+        this.setBlocking_user_id(blocking_user_id);
     }
 
 }

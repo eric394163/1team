@@ -52,4 +52,35 @@
         DELETE FROM blocked 
         WHERE blocked_user_id = #{blocked.blocked_user_id} and blocking_user_id = #{blocked.blocking_user_id}
     </delete>
+    
+    <select id="selectUserList"  resultType="kr.kh.app.model.vo.UserVO">
+    	select * from user 
+    	<if test='cri.type=="nickname"'>
+			where user_role not in("관리자") and (user_nickname like concat('%', #{cri.search},'%') 
+			or user_nickname = #{cri.search})
+		</if>
+		<if test='cri.type=="id"'>
+			where user_role not in("관리자") and (user_id like concat('%', #{cri.search},'%') 
+			or user_id = #{cri.search})
+		</if>
+		order by user_id desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+    </select>
+    
+    <select id="selectTotalCount" resultType="int">
+		select count(*) 
+		from user where user_role not in("관리자")
+	</select>
+	
+	<update id="updateUserByUserState">
+		update user set user_state = "정지중", user_state_date = #{user.user_state_date} where user_id = #{user.user_id}
+	</update>
+	<update id="updateUserByUserState2">
+		update user set user_state = "이용중", user_state_date = #{user.user_state_date}  where user_id = #{user.user_id}
+	</update>
+    <select id="selectBlockedUsers" resultType="kr.kh.app.model.vo.BlockedVO">
+        SELECT * 
+        FROM blocked 
+        WHERE blocking_user_id = #{id.blocking_user_id}
+    </select>
 </mapper>

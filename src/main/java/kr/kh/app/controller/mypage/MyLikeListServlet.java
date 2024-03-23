@@ -23,6 +23,7 @@ public class MyLikeListServlet extends HttpServlet {
 	private BoardService boardService = new BoardServiceImp();
       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		UserVO user = (UserVO)request.getSession().getAttribute("user");
 		String search = user.getUser_id();
 		String type = "mypage";

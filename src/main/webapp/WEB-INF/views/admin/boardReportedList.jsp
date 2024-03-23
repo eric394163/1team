@@ -30,16 +30,13 @@ prefix="c"%> <%@ page isELIgnored="false" %>
           <div class="h2_title_wrap">
             <!-- 타이틀영역 -->
             <h2>관리자페이지 - 신고게시판</h2>
-
+          </div>
             <c:if test="${post != null }">
               <div>
                 <div class="mb-3 mt-3">
                     <label for="community" class="form-label">게시판</label>
                     <input type="text" class="form-control" id="community" name="community" readonly value="${post.board.board_name}">
                 </div>	
-                <div class="mb-3 mt-3">
-                  <a href="<c:url value='/post/list'/>">게시글 목록</a>
-                </div>
                  <div class="mb-3 mt-3">
                     <label for="writer" class="form-label">작성자</label>
                     <input type="text" class="form-control" id="writer" name="writer" value = "${post.post_user_id}" readonly>
@@ -69,12 +66,15 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                     <div class="form-control" style="min-height : 300px;">${post.post_content}</div>
                  </div>
 
-                 <c:url value="/board/list" var="url">
-                   <c:param name="boNum" value="${post.post_board_num}" />
-                   <c:param name="page" value="${page}" />
-                   <c:param name="type" value="all" />
-                 </c:url>
+                 <c:url value="/admin/boardReport" var="url"></c:url>
                  <a href="${url}" class="btn btn-outline-dark">목록으로</a>
+
+                 <c:url value="/post/delete" var="url2">
+                  <c:param name="num" value="${post.post_id}" />
+                  <c:param name="checkUrl" value="/admin/boardReportedList" />
+
+                </c:url>
+                <a href="${url2}" class="btn btn-outline-dark">삭제</a>
 
                  <hr>
 
@@ -97,19 +97,17 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                       <td>${report.report_user_id}</td>
                       <td>${report.report_reason}</td>
                       <td>
-                        <button type="button" class="btn btn-outline-dark">
+                        <button type="button" class="btn btn-outline-dark report-btn" 
+                          data-bs-toggle="modal" 
+                          data-id="${report.report_user_id}" 
+                          data-reason="${report.report_reason}"
+                          data-content="${report.report_content}">
                           신고 내용
                         </button>
+                      
                       </td>
                     </tr>
                   </c:forEach>
-                </c:if>
-                <c:if test="${empty list}">
-                  <tr>
-                    <th colspan="5" class="text-center">
-                      신고 안 된 게시글입니다.
-                    </th>
-                  </tr>
                 </c:if>
               </tbody>
             </table>
@@ -118,7 +116,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
             <ul class="pagination justify-content-center">
               <!-- pm.prev의 값이 true일 경우에만 내부 코드를 실행합니다. 이는 "이전" 페이지 그룹으로 이동할 수 있는지 여부를 확인하는 조건입니다. -->
               <c:if test="${pm.prev}">
-                <c:url value="/admin/boardReport" var="listurl">
+                <c:url value="/admin/boardReportedList" var="listurl">
                   <c:param name="page" value="${pm.startPage - 1}" />
                   <!-- <c:param name="totalsearch" value="${pm.cri.search}" /> -->
                   <!-- 만약에 검색어가 있으면 여기 추가하기 -->
@@ -129,7 +127,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
               </c:if>
 
               <c:forEach begin="${pm.startPage }" end="${pm.endPage}" var="i">
-                <c:url value="/admin/boardReport" var="listurl">
+                <c:url value="/admin/boardReportedList" var="listurl">
                   <c:param name="page" value="${i}" />
                   <!-- <c:param name="totalsearch" value="${pm.cri.search}" /> -->
                   <!-- 만약에 검색어가 있으면 여기 추가하기 -->
@@ -152,26 +150,54 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                 </li>
               </c:if>
             </ul>
-          </div>
+
+
+            <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">신고 내용</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- 신고 정보가 여기에 들어갑니다. -->
+                    <p id="reportId"></p>
+                    <p id="reportReason"></p>
+                    <p id="reportContent"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
         </div>
       </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-    <div class="popup-box">
-        <h2>신고 내용 확인</h2>
-        <label for="post-title">게시글 제목: ${post.post_title} </label>
-        <label for="service-rating">서비스 평가:</label>
-        <label><input type="radio" name="service_rating" value="excellent"> 우수</label>
-        <label><input type="radio" name="service_rating" value="good"> 좋음</label>
-        <label><input type="radio" name="service_rating" value="average"> 보통</label>
-        <label><input type="radio" name="service_rating" value="poor"> 나쁨</label>
-        <label><input type="radio" name="service_rating" value="terrible"> 아주 나쁨</label>
-        
-        <label for="comments">신고 내용:</label>
-        <textarea id="comments" name="comments" rows="4"></textarea>
-        
-        <button type="submit">확인!</button>
-    </div>
+    <script>
+      $(document).ready(function() {
+        $('.report-btn').click(function() {
+          let id = $(this).data('id');
+          let reason = $(this).data('reason');
+          let content = $(this).data('content');
+
+          // Modal 내의 요소에 값을 설정합니다.
+          $('#reportId').text('신고자 ID: ' + id);
+          $('#reportReason').text('신고 이유: ' + reason);
+          $('#reportContent').text('신고 내용: ' + content);
+
+          // Modal을 띄웁니다.
+          $('#reportModal').modal('show');
+        });
+      });
+
+    </script>  
   </body>
 </html>
+
+

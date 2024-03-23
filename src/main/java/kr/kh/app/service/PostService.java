@@ -67,6 +67,7 @@ public interface PostService {
 	ArrayList<CommentVO> getTotalCommentList(int post_num);
 
 	boolean insertuserBlocked(BlockedVO blocked);
+    boolean deletePost(int num);
 
 
 }

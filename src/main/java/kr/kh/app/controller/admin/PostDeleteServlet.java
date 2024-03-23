@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //관리자페이지 - 게시글 삭제
-@WebServlet("/admin/postdelete")
+@WebServlet("/admin/postDelete")
 public class PostDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

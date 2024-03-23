@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CategoryVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.pagination.DateCriteria;
 import kr.kh.app.pagination.PageMaker;
@@ -30,20 +31,23 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int page;
+		UserVO user = (UserVO) request.getSession().getAttribute("user");
+		String blocking_user_id = "";
+		if (user != null) {
+			String userId = user.getUser_id();
+			blocking_user_id = userId;
+		}
 
-		LocalDate today = LocalDate.now(); 
+		LocalDate today = LocalDate.now();
 		LocalDate tomorrow = today.plusDays(1);
 
 		LocalDate weekAgo = today.minusDays(8);
-
 
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
 		} catch (Exception e) {
 			page = 1;
 		}
-		
-	
 
 		Criteria cri = new Criteria(page, 10);
 
@@ -56,15 +60,14 @@ public class MainServlet extends HttpServlet {
 		request.setAttribute("list", list);
 
 		// 조회수가 높은 게시글 리스트
-		Criteria popularViewCri = new DateCriteria( page, 10, tomorrow, weekAgo);
+		Criteria popularViewCri = new DateCriteria(page, 10, tomorrow, weekAgo, blocking_user_id);
 
 		ArrayList<PostVO> popularViewPostList = postService.getPopularViewPostList(popularViewCri);
-
 
 		request.setAttribute("popularViewPostList", popularViewPostList);
 
 		// 좋아요가 높은 게시글 리스트
-		Criteria popularLikeCri = new DateCriteria(page, 10, tomorrow, weekAgo);
+		Criteria popularLikeCri = new DateCriteria(page, 10, tomorrow, weekAgo, blocking_user_id);
 
 		ArrayList<PostVO> popularLikePostList = postService.getPopularLikePostList(popularLikeCri);
 

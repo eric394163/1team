@@ -24,18 +24,31 @@
 	<select id="selectBoardList" resultType="kr.kh.app.model.vo.BoardVO"> select * from board; </select>
 
 
+
 	<select id="selectTotalPostCount" resultType="int"> 
 		SELECT count(*) FROM post 
 		JOIN board ON board_id = post_board_num
-		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%') </select>
+		LEFT JOIN blocked ON post_user_id = blocked_user_id AND blocking_user_id = #{cri.blocking_user_id}
+		where blocked_user_id IS NULL and 
+		post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%') 
+	</select>
 
 	<select id="selectTotalSearchResultList" resultType="kr.kh.app.model.vo.PostVO"> 
-		SELECT post.* , board_name As post_board_name
+		<!-- SELECT post.* , board_name
 		FROM post 
 		JOIN board ON board_id = post_board_num
 		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%')
 		ORDER BY post_id DESC LIMIT
-		#{cri.pageStart}, #{cri.perPageNum} </select>
+		#{cri.pageStart}, #{cri.perPageNum} -->
+		SELECT post.*, board_name
+		FROM post 
+		JOIN board ON board_id = post_board_num
+		LEFT JOIN blocked ON post_user_id = blocked_user_id AND blocking_user_id = #{cri.blocking_user_id}
+		where blocked_user_id IS NULL and 
+		post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%') 
+		ORDER BY post_id DESC LIMIT
+		#{cri.pageStart}, #{cri.perPageNum}
+	 </select>
 
 
 	<select id="selectBoard" resultType="kr.kh.app.model.vo.BoardVO">
@@ -133,7 +146,9 @@
 			post
 				JOIN
 			board ON post.post_board_num = board.board_id
-		WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
+				LEFT JOIN 
+			blocked ON post_user_id = blocked_user_id AND blocking_user_id = #{cri.blocking_user_id}
+		WHERE blocked_user_id IS NULL and (post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate})
 		ORDER BY post_view desc
 		LIMIT 10
 	</select>
@@ -146,7 +161,9 @@
 			post
 				JOIN
 			board ON post.post_board_num = board.board_id
-			WHERE post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
+				LEFT JOIN 
+			blocked ON post_user_id = blocked_user_id AND blocking_user_id = #{cri.blocking_user_id}
+			WHERE blocked_user_id IS NULL and post.post_date BETWEEN #{cri.endDate} AND #{cri.startDate} 
 		ORDER BY post_upvotes desc
 		LIMIT 10
 	</select>

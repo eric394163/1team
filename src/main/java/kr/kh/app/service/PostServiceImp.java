@@ -266,10 +266,21 @@ public class PostServiceImp implements PostService {
 		if (user == null) {
 			return false;
 		}
+		
 
 		PostVO post = postDao.selectPost(num);
 
-		if (post == null || !post.getPost_user_id().equals(user.getUser_id())) {
+		if (post == null ) {
+			return false;
+		}
+
+		int checkRole = 0;
+
+		if(user.getUser_role().equals("관리자") || user.getUser_role().equals("운영자")) {
+			checkRole = 1;
+		}
+
+		if(checkRole == 0 && !post.getPost_user_id().equals(user.getUser_id())) {
 			return false;
 		}
 
@@ -436,6 +447,18 @@ public class PostServiceImp implements PostService {
 			return false;
 		}
 		return postDao.insertuserBlocked(blocked);
+	public boolean deletePost(int num) {
+		PostVO post = postDao.selectPost(num);
+		if(post == null) {
+			return false;
+		}
+		
+		ArrayList<AttachVO> fileList = postDao.selectFileByPost_id(num);
+		for(AttachVO file : fileList) {
+			deleteFile(file);
+		}
+		
+		return postDao.deletePost(num);
 	}
 
 }
