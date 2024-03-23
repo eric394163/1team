@@ -23,6 +23,9 @@ public class UserVO {
     	String str = format.format(user_birth);
     	return str;
     }
+    public UserVO(String id) {
+		this.user_id = id;
+	}
     public UserVO(String id, String pw) {
 		this.user_id = id;
 		this.user_pw = pw;
@@ -34,5 +37,9 @@ public class UserVO {
 		this.user_email = email;
 		this.user_state_date = state_date;
 		this.user_state = state;
+	}
+	public UserVO(String id, Date state_date) {
+		this.user_id = id;
+		this.user_state_date = state_date;
 	}
 }

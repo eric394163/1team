@@ -43,6 +43,7 @@
 	background-size: 15px;
 	background-position: calc(100% - 10px) center;
 	background-repeat: no-repeat;
+	border-radius: 5px 0 0 5px;
 }
 #search-input{ width: 60%; }
 #search-btn{ width: 15%; }
@@ -122,12 +123,24 @@
 	justify-content: flex-end; align-items: center;
 	margin-bottom: 10px; padding: 0 10px;
 }
+.all-check-area button:nth-child(-n+2){ margin-right: 10px; }
 .table.block-table td{ vertical-align: middle; text-align: center; }
 .table.block-table tr td:last-child{ text-align: right; }
 .table.block-table td:nth-child(1), .table.block-table th:nth-child(1){ width: 60px; }
 .table.block-table td:nth-child(2), .table.block-table th:nth-child(2){ width: 60px; }
 .table.block-table td:nth-child(3), .table.block-table th:nth-child(3){ width: 150px; }
 .table.block-table td:nth-child(4), .table.block-table th:nth-child(4){ width: 550px; }
+
+
+/* 관리자페이지 - 회원관리 */
+.table.member-table td{ vertical-align: middle; text-align: center; }
+.table.member-table td:nth-child(1), .table.member-table th:nth-child(1){ width: 60px; }
+.table.member-table td:nth-child(2), .table.member-table th:nth-child(2){ width: 80px; }
+.table.member-table td:nth-child(3), .table.member-table th:nth-child(3){ width: 140px; }
+.table.member-table td:nth-child(4), .table.member-table th:nth-child(4){ width: 140px; }
+.table.member-table td:nth-child(5), .table.member-table th:nth-child(5){ width: 160px; }
+.table.member-table td:nth-child(6), .table.member-table th:nth-child(6){ width: 160px; }
+.table.member-table td:nth-child(7), .table.member-table th:nth-child(76){ width: 80px; }
 
 
 /* 게시글 쓰기 */
