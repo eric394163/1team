@@ -64,6 +64,9 @@ public interface PostService {
 
     ArrayList<ReportVO> getPostReportedList(Criteria cri);
 
+	ArrayList<CommentVO> getTotalCommentList(int post_num);
+
+	boolean insertuserBlocked(BlockedVO blocked);
     boolean deletePost(int num);
 
 

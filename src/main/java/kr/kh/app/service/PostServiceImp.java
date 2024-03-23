@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.AttachVO;
+import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
@@ -436,6 +437,16 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+	public ArrayList<CommentVO> getTotalCommentList(int post_num) {
+		return postDao.selectTotalCommentList(post_num);
+	}
+
+	@Override
+	public boolean insertuserBlocked(BlockedVO blocked) {
+		if(blocked == null) {
+			return false;
+		}
+		return postDao.insertuserBlocked(blocked);
 	public boolean deletePost(int num) {
 		PostVO post = postDao.selectPost(num);
 		if(post == null) {

@@ -14,7 +14,7 @@ prefix="c"%>
 	        <li>
 	        	<span>${status.index + 1}</span>
 	            <span><a href="<c:url value="/post/detail?num=${post.post_id}" />">${post.post_title}</a></span>
-	            <span><img src="/team1/images/like_icon.svg" alt="좋아요" width="24" class="like">${post.post_upvotes}</span>
+	            <span><img src="/team1/images/like_icon.svg" alt="조회수" width="20" class="like">${post.post_upvotes}</span>
 	        </li>
 	    </c:forEach>
     </ul>

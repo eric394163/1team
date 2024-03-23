@@ -4,16 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>게시글 상세보기</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css" rel="stylesheet">
-<link rel="stylesheet" href="/team1/css/common.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
-
+	<meta charset="UTF-8">
+	<title>PlayGround - 상세게시글보기</title>
+	<link rel="shortcut icon" href="/team1/images/favicon.png" type="image/png">
+	<!-- 부트스트랩5 css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css" rel="stylesheet">
+	<link rel="stylesheet" href="/team1/css/common.css">
+	<link rel="stylesheet" href="/team1/css/boardStyle.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>		
@@ -21,99 +22,107 @@
 	<div class="inner-wrap">
 		<jsp:include page="/WEB-INF/views/common/aside.jsp" />
 		<div class="main-contents">
+			<div class="h2_title_wrap">
+				<h2>상세게시글보기</h2> 
+				<a href="<c:url value="/post/list"/>" class="btn btn-outline-dark">게시글 목록</a>
+			</div>
 			<c:choose>
 				<c:when test="${post != null }">
-					<div>
-						<div class="mb-3 mt-3">
-						    <label for="community" class="form-label">게시판</label>
-						    <input type="text" class="form-control" id="community" name="community" readonly value="${post.board.board_name}">
-						    <!-- <div id="community" name="community" readonly value="${post.board.board_name}">${post.board.board_name}</div> -->
-						</div>	
-						<div class="mb-3 mt-3">
-							<a href="<c:url value="/post/list"/>">게시글 목록</a>
-						</div>
-						 <div class="mb-3 mt-3">
-						    <label for="writer" class="form-label">작성자</label>
-						    <input type="text" class="form-control" id="writer" name="writer" value = "${post.post_user_id}" readonly>
-						    <!-- <div id="writer" name="writer" value = "${post.post_user_id}" readonly>작성자 ${post.post_user_id}</div> -->
+					<div class="detail-box">
+						 <div class="form-row">
+						    <p class="board-name">${post.board.board_name}</p>
+						 </div>	
+						 <div class="form-row  first-line">
+						    <div class="left-box">
+						    	<c:if test="${writer != null && writer.user_role == '사용자'}">
+						    		<img src="<c:url value="/images/face_login.svg" />" alt="얼굴아이콘" width="30" class="face-icon">
+						    	</c:if>
+						    	<c:if test="${writer != null && (writer.user_role == '관리자' || writer.user_role == '운영자')}">
+						    		<img src="<c:url value="/images/face_login_admin.svg" />" alt="얼굴아이콘" width="30" class="face-icon">
+						    	</c:if>
+						    	<p>${writer.user_nickname}</p>
+						 	</div>
+						 	<div class="right-box">
+						 		<img src="<c:url value="/images/calender_icon.svg" />" alt="달력아이콘" width="24" class="calender-icon">
+						 		<fmt:formatDate value="${post.post_date}" pattern="yyyy-MM-dd" /> 
+						 		<img src="<c:url value="/images/eye_icon.svg" />" alt="눈아이콘" width="24" class="eye-icon">
+						 		<span>${post.post_view}</span>
+						 	</div>
 						 </div>
-						 <div class="mb-3 mt-3">
-						    <label for="date" class="form-label">작성일</label>
-						    <fmt:formatDate value="${post.post_date}" pattern="yyyy-MM-dd" /> 
+						 <div class="form-row second-line">
+						 	<div class="left-box">
+						 		<span class="board-title">${post.post_title}</span>
+						 	</div>
+						    <div class="right-box">
+						 		<img src="<c:url value="/images/siren_icon.svg" />" alt="사이렌아이콘" width="24" class="siren-icon">
+						 		<span>${post.post_reported}</span> 
+						 		<img src="<c:url value="/images/like_icon.svg" />" alt="라이크아이콘" width="24" class="like-icon">
+						 		<span>${post.post_upvotes}</span>
+						 	</div>
 						 </div>
-						 <div class="mb-3 mt-3">
-						    <label for="view" class="form-label">조회수 </label>
-						    <input type="text" class="form-control" id="view" name="view" value = "${post.post_view}" readonly>
-						    <!--<div type="text" id="view" name="view" value = "${post.post_view}" readonly>조회수 ${post.post_view}</div>-->
-						 </div>
-						<div class="mb-3 mt-3">
-						    <label for="title" class="form-label">제목</label>
-						    <input type="text" class="form-control" id="title" name="title" readonly value="${post.post_title}">
-						 </div>
-						 <div class="mb-3 mt-3">
-								<div>신고 수 ${post.post_reported}</div>
-						 </div>
-						 <div class="mb-3 mt-3">
-								<div>좋아요 수 ${post.post_upvotes}</div>
-						 </div>
-						 <div class="mb-3 mt-3">
-						    <label for="content" class="form-label">내용</label>
-						    <div class="form-control" style="min-height : 300px;">${post.post_content}</div>
-						 </div>
-						 <div class="mb-3 mt-3">
-								<button type="button" id="btnUp" data-state="1" class="btn btn-outline-success btn-up col=6">좋아요</button>
-						 </div>
+						 <c:if test="${link != null && link != ''}">
+						 	<c:if test="${link.attach_link_check == 1}">
+								 <div class="form-row link-box">
+								    <label for="link">첨부링크 : </label>
+					    			<a href="<c:url value="${link.attach_path}" />" target="_blank">${link.attach_path}</a>
+								 </div>
+							 </c:if>
+						 </c:if>
 						 <c:if test="${fileList != null && fileList.size() != 0}">
-						 	 <div class="mb-3 mt-3">
-							 		 <label for="file" class="form-label">첨부파일</label>
-						 			 <c:forEach items="${fileList}" var="file">
+						 	 <div class="form-row file-box-wrap">
+						 		 <label for="file"><img src="<c:url value="/images/save_icon.svg" />" alt="파일아이콘" width="24" class="save-icon">첨부파일 : </label>
+						 		 <div class="file-box">
+						 			 <c:forEach items="${fileList}" var="file" begin="0" varStatus="status">
 								 		 <c:if test="${file.attach_link_check == 0}">
-						 					 <a href="<c:url value="/download?filename=${file.attach_path}" />" class="form-control" download="${file.attach_path}">${file.attach_path}</a>
+						 					 <a href="<c:url value="/download?filename=${file.attach_path}" />" title="${file.attach_path}" download="${file.attach_path}">첨부파일${status.index + 1}</a>
 								 		 </c:if>
 						 			 </c:forEach>
+					 			 </div>
 						 	 </div>
 						 </c:if>
-						 <c:if test="${link != null && link != ''}">
-							 <div class="mb-3 mt-6">
-						    		<c:if test="${link.attach_link_check == 1}">
-									    <label for="link" class="form-label">링크</label>
-						    			<a href="<c:url value="${link.attach_path}" />" class="form-control">${link.attach_path}</a> 
-						    		</c:if>
-							 </div>
-						 </c:if>
-						 <c:url value="/board/list" var="url">
-						 	<c:param name="boNum" value="${post.post_board_num}" />
-						 	<c:param name="page" value="${page}" />
-						 	<c:param name="type" value="all" />
-						 </c:url>
-						 <a href="${url}" class="btn btn-outline-dark">목록으로</a>
-						 <c:if test="${post.post_user_id == user.user_id || (user.user_role == '관리자' || user.user_role == '운영자')}">
-							 <a href="<c:url value="/post/update?num=${post.post_id}"/>" class="btn btn-outline-danger">수정</a>
-							 <a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
-						 </c:if>
-						 <hr>
-						 <div class="mt-3 mb-3 comment-box">
-					  		<h3>댓글</h3>
-					  		<!-- 댓글 리스트를 보여주는 박스 -->
-					  		<div class="comment-list">
-					  			<div class="input-group mb-3">
-									<div class="col-3"></div>
-									<div class="col-9"></div>
-								</div>
-					  		</div>
-					  		<!-- 댓글 페이지네이션 박스 -->
-					  		<div class="comment-pagination">
-					  			<ul class="pagination justify-content-center">
-					  				
-					  			</ul>
-					  		</div>
-					  		<!-- 댓글 입력 박스 -->
-					  		<div class="comment-input-box">
-								<div class="input-group">
-									<textarea class="form-control comment-content"></textarea>
-									<button type="button" class="btn btn-outline-success btn-comment-insert">등록</button>
-								</div>
-					  		</div>
+						 <div class="form-row content">
+						    <div class="form-control second-box">${post.post_content}</div>
+						 </div>
+						 <div class="form-row btn-box">
+							 <div class="left-box">
+								<button type="button" id="btnUp" data-state="1" class="like-btn btn-up">
+									<img src="<c:url value="/images/like_icon.svg" />" alt="라이크아이콘" width="24" class="like-icon2">
+									좋아요
+								</button>
+								<button type="button" id="btnReport" class="report-btn">
+									<img src="<c:url value="/images/siren_icon.svg" />" alt="신고아이콘" width="24" class="siren_icon2">
+									신고
+								</button>
+								<button type="button" id="btnComment" class="comment-btn">
+									<img src="<c:url value="/images/comment_icon.svg" />" alt="신고아이콘" width="24" class="comment_icon">
+									<span class="text"></span>
+								</button>
+							</div>
+						 </div>
+						 <!-- 댓글 리스트를 보여주는 박스 -->
+			  			 <div class="comment-list"></div>
+			  			 <!-- 댓글 페이지네이션 박스 -->
+				  		 <div class="comment-pagination">
+			  			 	<ul class="pagination justify-content-center"></ul>
+				  		 </div>
+				  		 <!-- 댓글 입력 박스 -->
+						 <div class="form-row comment-input-box">
+							<div class="input-group">
+								<textarea class="form-control comment-content"></textarea>
+								<button type="button" class="btn btn-outline-dark btn-comment-insert">댓글 등록</button>
+							</div>
+					  	</div>
+					  	<div class="form-row btn-last-box">
+							<c:if test="${post.post_user_id == user.user_id}">
+								 <a href="<c:url value="/post/update?num=${post.post_id}"/>" class="btn btn-outline-warning">수정</a>
+								 <a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
+							</c:if>
+							<c:url value="/board/list" var="url">
+							 	<c:param name="boNum" value="${post.post_board_num}" />
+							 	<c:param name="page" value="${page == null?1:page}" />
+							 	<c:param name="type" value="all" />
+							 </c:url>
+						  	<a href="${url}" class="btn btn-outline-dark">목록으로</a>
 					  	</div>
 					</div>
 				</c:when>
@@ -234,7 +243,6 @@ let cri = {
 	page : 1,
 	post_num : '${post.post_id}'
 }
-//댓글 리스트를 화면에 출력하는 함수
 function getCommentList(cri){
 	$.ajax({
 		url : '<c:url value="/comment/list"/>',
@@ -243,28 +251,65 @@ function getCommentList(cri){
 		success : function(data){
 		
 			let str = '';
-			for(comment of data.list){
+			
+			for(let i in data.list){
 				let btns = '';
-				if('${user.user_id}' == comment.comment_user_id){
+				let nickname = data.writerList[i].user_nickname;
+				let writerid = data.writerList[i].user_id;
+				if('${user.user_id}' == data.list[i].comment_user_id){
 					btns +=					
 					`
 					<div class="btn-comment-group">
-						<button class="btn btn-outline-warning btn-comment-update" data-num="\${comment.comment_id}">수정</button>
-						<button class="btn btn-outline-danger btn-comment-delete" data-num="\${comment.comment_id}">삭제</button>
+						<a href="#update" title="댓글수정" class="btn-comment-update" data-num="\${data.list[i].comment_id}"><img src="<c:url value="/images/write_icon.svg" />" alt="수정아이콘" width="20" class="write-icon"></a>
+						<a href="#delete" title="댓글삭제" class="btn-comment-delete" data-num="\${data.list[i].comment_id}"><img src="<c:url value="/images/trash_icon.svg" />" alt="삭제아이콘" width="20" class="trash-icon"></a>
 					</div>
 					`
+				}else{
+					btns +=			
+					`
+					<div class="btn-comment-group">
+					`;
+					if('${user == null}'){        
+                        btns += ``;
+                    }else if(data.writerList[i].user_role == '사용자'){		
+						btns +=	`<a href="#block" title="사용자차단" class="btn-comment-block" data-role="사용자" data-nickname="\${nickname}" data-writeid="\${writerid}"><img src="<c:url value="/images/block_icon.svg" />" alt="차단아이콘" width="20" class="block-icon"></a>`;
+					}else if(data.writerList[i].user_role == '관리자'){		
+						btns +=	`<a href="#block" title="사용자차단" class="btn-comment-block" data-role="관리자" data-nickname="\${nickname}" data-writeid="\${writerid}"><img src="<c:url value="/images/block_icon.svg" />" alt="차단아이콘" width="20" class="block-icon"></a>`;
+					}else{
+						btns +=	`<a href="#block" title="사용자차단" class="btn-comment-block" data-role="운영자" data-nickname="\${nickname}" data-writeid="\${writerid}"><img src="<c:url value="/images/block_icon.svg" />" alt="차단아이콘" width="20" class="block-icon"></a>`;
+					}
+					btns +=	
+					`
+					</div>
+					`;
 				}
 				
 				str +=
 				`
-				<div class="input-group mb-3 box-comment">
-					<div class="col-3">\${comment.comment_user_id}</div>
-					<div class="col-6 comment_content">\${comment.comment_content}</div>
+				<div class="box-comment">
+					<div class="comment-wrap">
+				`;
+				
+				if(data.writerList[i].user_role == '사용자'){
+					str += `<img src="<c:url value="/images/face_login.svg" />" alt="얼굴아이콘" width="30" class="face-icon">`;
+				}else{
+					str += `<img src="<c:url value="/images/face_login_admin.svg" />" alt="얼굴아이콘" width="30" class="face-icon">`;
+				}
+				str +=
+				`
+						\${nickname}
+						<div class="comment_content">\${data.list[i].comment_content}</div>
+					</div>
 					\${btns}
 				</div>
 				`;
 			}
 			$(".comment-list").html(str);
+			if(data.list.length != 0){
+				$('.comment-list').addClass('active');
+			}
+			let total = JSON.parse(data.total);
+			$(".comment-btn .text").html(total);
 			//JSON.parse(문자열) : json형태의 문자열을 객체로 변환
 			//JSON.stringify(객체) : 객체를 json형태의 문자열로 변환
 			let pm = JSON.parse(data.pm);
@@ -320,10 +365,12 @@ $(document).on("click",".btn-comment-delete", function(){
 			num
 		},
 		success : function(data){
-			console.log(data);
 			if(data == 'ok'){
 				alert("댓글을 삭제했습니다.");
 				getCommentList(cri);
+				if($('.box-comment').length == 1){
+					$('.comment-list').removeClass('active');
+				}
 			}else{
 				alert("댓글을 삭제하지 못했습니다.");
 			}
@@ -341,20 +388,20 @@ $(document).on("click", ".btn-comment-update", function(){
 	initComment();
 	//현재 댓글 보여주는 창이 textarea태그로 변경
 	//기존 댓글 창을 감춤
-	$(this).parents(".box-comment").find(".cm_content").hide();
-	let comment = $(this).parents(".box-comment").find(".cm_content").text();
+	$(this).parents(".box-comment").find(".comment_content").hide();
+	let comment = $(this).parents(".box-comment").find(".comment_content").text();
 	let textarea = 
 	`
 	<textarea class="form-control com-input">\${comment}</textarea>
 	`
-	$(this).parents(".box-comment").find(".cm_content").after(textarea);
+	$(this).parents(".box-comment").find(".comment_content").after(textarea);
 	
 	//수정 삭제 버튼 대신 수정 완료 버튼으로 변경
 	$(this).parent().hide();
 	let num = $(this).data("num");
 	let btn = 
 	`
-	<button class="btn btn-outline-success btn-complete" data-num="\${num}">수정완료</button>
+	<button class="btn btn-outline-dark btn-complete" data-num="\${num}">수정완료</button>
 	`;
 	$(this).parent().after(btn);
 	
@@ -388,6 +435,46 @@ $(document).on("click",".btn-complete", function(){
 				getCommentList(cri);
 			}else{
 				alert("댓글을 수정하지 못했습니다.");
+			}
+		}, 
+		error : function(xhr, status, error){
+			
+		}
+	});
+});
+</script>
+<!-- 사용자 차단 -->
+<script type="text/javascript">
+$(document).on('click','.btn-comment-block',function(){
+	let blocked_user_id = $(this).data("writeid"); //차단당하는 아이디
+	let role = $(this).data("role");
+	let nickname = $(this).data("nickname");
+	let blocking_user_id = '${user.user_id}'; //차단을 실행하는 아이디
+	
+	if(role == '운영자' || role == '관리자'){
+		alert('운영자와 관리자는 차단할 수 없습니다.');
+		return;
+	}
+	
+	let q = confirm(nickname + "님의 모든 게시글과 댓글을 안보이게 차단합니다.");
+	
+	if(!q){
+		return;
+	}
+	
+	$.ajax({
+		url : '<c:url value="/comment/block"/>',
+		method : 'post',
+		data : {
+			blocked_user_id, 
+			blocking_user_id 
+		},
+		success : function(data){
+			if(data == "ok"){
+				alert(nickname + "님을 차단했습니다.");
+				getCommentList(cri);
+			}else{
+				alert(nickname + "님을 차단하지 못했습니다.");
 			}
 		}, 
 		error : function(xhr, status, error){

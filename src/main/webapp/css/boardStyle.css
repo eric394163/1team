@@ -131,7 +131,14 @@
 .table.block-table td:nth-child(3), .table.block-table th:nth-child(3){ width: 150px; }
 .table.block-table td:nth-child(4), .table.block-table th:nth-child(4){ width: 550px; }
 
+/* 관리자페이지 - 신고게시판 */
+.table.report-table td{ vertical-align: middle; text-align: center; }
+.table.report-table td:nth-child(1), .table.report-table th:nth-child(1){ width: 170px; }
+.table.report-table td:nth-child(2), .table.report-table th:nth-child(2){ width: 400px; }
+.table.report-table td:nth-child(3), .table.report-table th:nth-child(3){ width: 150px; }
+.table.report-table td:nth-child(4), .table.report-table th:nth-child(4){ width: 100px; }
 
+/* 게시글 쓰기 & 상세게시글 보기 */
 /* 관리자페이지 - 회원관리 */
 .table.member-table td{ vertical-align: middle; text-align: center; }
 .table.member-table td:nth-child(1), .table.member-table th:nth-child(1){ width: 60px; }
@@ -189,4 +196,141 @@
 .form-row.last{ margin-top: 30px; }
 .form-row .btn-dark{
 	width: 100%; padding: 10px;
+}
+
+/* 상세게시글 보기 */
+.detail-box .form-row{ 
+	margin-bottom: 0;
+	border-bottom: 1px solid #999;
+}
+.detail-box .first-line{
+	border-top: 2px solid #212529;
+	border-bottom: 1px solid #999;
+}
+.detail-box .content{
+	border-bottom: none;
+}
+.detail-box .btn-box{
+	border-bottom: none;
+}
+.detail-box .board-name{ 
+	display: inline-block; padding: 6px 15px 5px; 
+	margin: 0; margin-bottom: 10px;
+	font-size: 14px; font-weight: bold; color: #fff;
+	background-color: #000; border-radius: 5px;
+}
+.detail-box .board-title{
+	width: 570px; height: 27px;
+	line-height: 27px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.detail-box .left-box, .detail-box .right-box{
+	display: flex; align-items: center;
+	padding: 20px;
+}
+.detail-box .left-box p{
+	padding: 0; margin: 0;
+	font-weight: bold;
+}
+.detail-box .face-icon, .detail-box .calender-icon, .detail-box .eye-icon, .detail-box .siren-icon, .detail-box .like-icon{
+	position: relative; top: 1px;
+	margin-right: 10px;
+}
+.detail-box .eye-icon, .detail-box .like-icon{
+	margin-left: 20px;
+}
+.detail-box .board-title{
+	font-size: 18px; font-weight: bold;
+}
+.detail-box .second-box{
+	border: none; padding: 20px;
+}
+.detail-box .btn-box{
+	border-bottom: 1px solid #999;
+}
+.detail-box .btn-box .left-box{
+	padding: 10px 20px;
+}
+.detail-box .btn-box button{
+	border: none; background-color: transparent;
+	display: flex; align-items: center;
+}
+.detail-box img{
+	margin-right: 5px;
+}
+.detail-box .comment-btn{
+	cursor: none; pointer-events : none;
+}
+.detail-box .link-box{
+	padding: 20px; justify-content: flex-start;
+}
+.detail-box .link-box label, .detail-box .file-box-wrap label{
+	width: auto; margin-right: 10px;
+}
+.detail-box .file-box-wrap{
+	padding: 10px 20px; justify-content: flex-end;
+	border-bottom: none; 
+}
+.detail-box .save-icon{
+	position: relative; top: -2px;
+}
+.detail-box .comment-list.active{
+	background-color: #ededed;
+	padding: 10px 20px; margin-bottom: 10px;
+	border-bottom: 1px solid #999;
+}
+.detail-box .comment-writer{
+	font-size: 14px; color: #666;
+	align-items: center; margin-bottom: 10px;
+}
+.detail-box .box-comment{
+	border-bottom: 1px solid #ccc;
+}
+.detail-box .box-comment:last-child{
+	border-bottom: none;
+}
+.detail-box .comment-pagination .page-link{
+	font-size: 14px; padding: 2px 6px;
+	border-radius: 2px;
+}
+.detail-box .comment-input-box{
+	margin-bottom: 20px; padding-bottom: 20px;
+	border-bottom: 2px solid #212529;
+}
+.detail-box .btn-comment-insert{
+	background-color: #000; color: #fff;
+}
+.detail-box .form-control.com-input{
+	width: 600px;
+	margin-top: 10px;
+}
+.detail-box .box-comment{
+	display: flex; justify-content: space-between;
+	align-items: center; padding: 10px;
+} 
+.detail-box .comment-wrap{
+	font-size: 14px; font-weight: bold; color: #666;
+}
+.detail-box .comment_content{
+	margin-top: 10px;
+	font-size: 16px; font-weight: normal; color: #212529;
+}
+.detail-box .btn.btn-outline-dark.btn-complete{
+	background-color: #fff; border: 1px solid #000;
+	padding: 6px 12px; border-radius: 5px;
+}
+.detail-box .btn.btn-outline-dark.btn-complete:hover{
+	color: #000;
+}
+.detail-box .box-comment button{
+	border: none; background-color: transparent;
+	padding: 0; margin: 0;
+}
+.detail-box .btn-last-box{
+	border-bottom: none; justify-content: flex-end;
+}
+.detail-box .btn-last-box a{
+	margin-left: 10px;
 }

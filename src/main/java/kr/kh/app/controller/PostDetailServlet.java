@@ -11,13 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;
+import kr.kh.app.service.UserService;
+import kr.kh.app.service.UserServiceImp;
 
 @WebServlet("/post/detail")
 public class PostDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PostService postService = new PostServiceImp();
+	private UserService userService = new UserServiceImp();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MainServlet.commonAsideInfo(request);
@@ -40,7 +44,11 @@ public class PostDetailServlet extends HttpServlet {
 		request.setAttribute("boNum", boNum); // 게시판 번호
 
 		
-		ArrayList<AttachVO> fileList = postService.getFile(num); 
+		//글쓴이 정보
+		UserVO writer = userService.getUser(post.getPost_user_id());
+		request.setAttribute("writer", writer);
+		
+		ArrayList<AttachVO> fileList = postService.getFile(num);
 		request.setAttribute("fileList", fileList);
 		
 		AttachVO link = postService.getLink(num);

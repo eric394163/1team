@@ -87,16 +87,21 @@
 										</td>
 										<td>${post.post_view}</td>
 									</tr>
-								</c:when>
-								<c:when test="${list.size() == 0 }">
-									<tr>
-										<th colspan="5">
-											<h3 class="text-center">등록된 게시글이 없습니다.</h3>
-										</th>
-									</tr>
+									<c:if test="${list.size() == 0 }">
+										<tr>
+											<th colspan="5">
+												<h3 class="text-center">등록된 게시글이 없습니다.</h3>
+											</th>
+										</tr>
+									</c:if>
 								</c:when>
 							</c:choose>
 						</c:forEach>
+						<c:if test="${list.size() == 0 }">
+							<tr>
+								<th colspan="5">등록된 게시글이 없습니다.</th>
+							</tr>
+						</c:if>
 					</tbody>
 				</table>
 				<ul class="pagination justify-content-center">
