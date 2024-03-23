@@ -129,8 +129,14 @@
 .table.block-table td:nth-child(3), .table.block-table th:nth-child(3){ width: 150px; }
 .table.block-table td:nth-child(4), .table.block-table th:nth-child(4){ width: 550px; }
 
+/* 관리자페이지 - 신고게시판 */
+.table.report-table td{ vertical-align: middle; text-align: center; }
+.table.report-table td:nth-child(1), .table.report-table th:nth-child(1){ width: 170px; }
+.table.report-table td:nth-child(2), .table.report-table th:nth-child(2){ width: 400px; }
+.table.report-table td:nth-child(3), .table.report-table th:nth-child(3){ width: 150px; }
+.table.report-table td:nth-child(4), .table.report-table th:nth-child(4){ width: 100px; }
 
-/* 게시글 쓰기 */
+/* 게시글 쓰기 & 상세게시글 보기 */
 .form-row{
 	display: flex; align-items: center;
 	justify-content: space-between;
@@ -176,4 +182,83 @@
 .form-row.last{ margin-top: 30px; }
 .form-row .btn-dark{
 	width: 100%; padding: 10px;
+}
+
+/* 상세게시글 보기 */
+.detail-box .form-row{ 
+	margin-bottom: 0;
+	border-bottom: 1px solid #999;
+}
+.detail-box .first-line{
+	border-top: 2px solid #212529;
+	border-bottom: 1px solid #999;
+}
+.detail-box .content{
+	border-bottom: none;
+}
+.detail-box .btn-box{
+	border-bottom: none;
+}
+.detail-box .board-name{ 
+	display: inline-block; padding: 6px 15px 5px; 
+	margin: 0; margin-bottom: 10px;
+	font-size: 14px; font-weight: bold; color: #fff;
+	background-color: #000; border-radius: 5px;
+}
+.detail-box .board-title{
+	width: 570px; height: 27px;
+	line-height: 27px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.detail-box .left-box, .detail-box .right-box{
+	display: flex; align-items: center;
+	padding: 20px;
+}
+.detail-box .left-box p{
+	padding: 0; margin: 0;
+	font-weight: bold;
+}
+.detail-box .face-icon, .detail-box .calender-icon, .detail-box .eye-icon, .detail-box .siren-icon, .detail-box .like-icon{
+	position: relative; top: 1px;
+	margin-right: 10px;
+}
+.detail-box .eye-icon, .detail-box .like-icon{
+	margin-left: 20px;
+}
+.detail-box .board-title{
+	font-size: 18px; font-weight: bold;
+}
+.detail-box .second-box{
+	border: none; padding: 20px;
+}
+.detail-box .btn-box{
+	border-bottom: 1px solid #999;
+}
+.detail-box .btn-box .left-box{
+	padding: 10px 20px;
+}
+.detail-box .btn-box button{
+	border: none; background-color: transparent;
+	display: flex; align-items: center;
+}
+.detail-box img{
+	margin-right: 5px;
+}
+.detail-box .comment-btn{
+	cursor: none; pointer-events : none;
+}
+.detail-box .link-box{
+	padding: 20px; justify-content: flex-start;
+}
+.detail-box .link-box label, .detail-box .file-box-wrap label{
+	width: auto; margin-right: 10px;
+}
+.detail-box .file-box-wrap{
+	padding: 10px 20px; justify-content: flex-end;
+	border-bottom: none; 
+}
+.detail-box .save-icon{
+	position: relative; top: -2px;
 }

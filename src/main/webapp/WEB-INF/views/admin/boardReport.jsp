@@ -32,7 +32,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
             <!-- 타이틀영역 -->
             <h2>관리자페이지 - 신고게시판</h2>
           </div>
-          <table class="table">
+          <table class="table report-table">
               <thead class="table-dark">
                 <tr>
                   <th>카테고리</th>
@@ -42,7 +42,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                 </tr>
               </thead>
               <tbody>
-                <c:if test="${not empty list}">
+                <c:if test="${list.size() != 0}">
                   <c:forEach items="${list}" var="post">
                     <tr>
                       <td>${post.board_name}</td>
