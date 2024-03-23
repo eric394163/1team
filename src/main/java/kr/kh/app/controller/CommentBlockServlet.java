@@ -24,7 +24,7 @@ public class CommentBlockServlet extends HttpServlet {
 		
 		System.out.println(blocked_user_id);
 		
-		BlockedVO blocked = new BlockedVO(blocked_user_id, blocking_user_id);
+		BlockedVO blocked = new BlockedVO(blocking_user_id, blocked_user_id);
 		
 		boolean res = postService.insertuserBlocked(blocked);
     	response.getWriter().write(res?"ok":"");
