@@ -71,6 +71,8 @@ prefix="c"%> <%@ page isELIgnored="false" %>
 
                  <c:url value="/post/delete" var="url2">
                   <c:param name="num" value="${post.post_id}" />
+                  <c:param name="checkUrl" value="/admin/boardReportedList" />
+
                 </c:url>
                 <a href="${url2}" class="btn btn-outline-dark">삭제</a>
 

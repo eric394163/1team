@@ -20,7 +20,7 @@ public class postDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		UserVO user = (UserVO) request.getSession().getAttribute("user");
-		
+
 		boolean res;
 		int num;
 		try {
@@ -29,41 +29,32 @@ public class postDeleteServlet extends HttpServlet {
 			num = 0;
 		}
 
-		switch (user.getUser_role()) {
-			case "관리자":
+		// url에 따라서 다르게 처리
 
-				res = postService.deletePost(num);
+		String checkUrl = request.getParameter("checkUrl");
 
-				if (res) {
-					request.setAttribute("msg", "게시글을 삭제했습니다.");
-					request.setAttribute("url", "/admin/boardReport");
-				} else {
-					request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
-					request.setAttribute("url", "/admin/boardReportedList?num=" + num);
-				}
+		if (checkUrl != null
+				&& checkUrl.equals("boardReportList")
+				&& (user.getUser_role().equals("관리자") || user.getUser_role().equals("운영자"))) {
+			res = postService.deletePost(num);
+			if (res) {
+				request.setAttribute("msg", "게시글을 삭제했습니다.");
+				request.setAttribute("url", "/admin/boardReport");
+			} else {
+				request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
+				request.setAttribute("url", "/admin/boardReportedList?num=" + num);
+			}
+		} else {
+			res = postService.deletePost(num, user);
+			System.out.println("게시글 삭제 결과 : " + res);
 
-				break;
-
-			case "운영자":
-
-				break;
-
-			case "사용자":
-
-				res = postService.deletePost(num, user);
-
-				if (res) {
-					request.setAttribute("msg", "게시글을 삭제했습니다.");
-					request.setAttribute("url", "post/list");
-				} else {
-					request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
-					request.setAttribute("url", "post/detail?num=" + num);
-				}
-
-				break;
-
-			default:
-				break;
+			if (res) {
+				request.setAttribute("msg", "게시글을 삭제했습니다.");
+				request.setAttribute("url", "post/list");
+			} else {
+				request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
+				request.setAttribute("url", "post/detail?num=" + num);
+			}
 		}
 
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
