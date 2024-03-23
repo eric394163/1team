@@ -17,6 +17,7 @@ import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.ReportVO;
 import kr.kh.app.model.vo.UpvoteVO;
 import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.CommentCriteria;
@@ -404,6 +405,38 @@ public class PostServiceImp implements PostService {
 			}
 			
 			return postDao.updateComment(comment);
+	}
+
+	@Override
+	public int getPostReportedListCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectPostReportedListCount(cri);
+	}
+
+	@Override
+	public ArrayList<ReportVO> getPostReportedList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectPostReportedList(cri);
+
+	}
+
+	@Override
+	public boolean deletePost(int num) {
+		PostVO post = postDao.selectPost(num);
+		if(post == null) {
+			return false;
+		}
+		
+		ArrayList<AttachVO> fileList = postDao.selectFileByPost_id(num);
+		for(AttachVO file : fileList) {
+			deleteFile(file);
+		}
+		
+		return postDao.deletePost(num);
 	}
 
 }

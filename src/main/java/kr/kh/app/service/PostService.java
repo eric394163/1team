@@ -8,6 +8,7 @@ import kr.kh.app.model.vo.AttachVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.ReportVO;
 import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.CommentCriteria;
 import kr.kh.app.pagination.Criteria;
@@ -57,5 +58,11 @@ public interface PostService {
 	boolean deleteComment(int num, UserVO user);
 
 	boolean updateComment(CommentVO comment);
+
+	int getPostReportedListCount(Criteria cri);
+
+    ArrayList<ReportVO> getPostReportedList(Criteria cri);
+
+    boolean deletePost(int num);
 
 }
