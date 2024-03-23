@@ -49,10 +49,8 @@ public class CommentListServlet extends HttpServlet {
 			writerList.add(userService.getUser(tmp.getComment_user_id()));
 		}
 		
-
 		//전체 댓글 수 (현재 게시글에 대한)
 		int totalCount = postService.getTotalCountComment(cri);
-		
 		
 		//페이지네이션 생성
 		PageMaker pm = new PageMaker(5, cri, totalCount);

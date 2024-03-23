@@ -22,8 +22,6 @@ public class CommentBlockServlet extends HttpServlet {
 		String blocked_user_id = request.getParameter("blocked_user_id");
 		String blocking_user_id = request.getParameter("blocking_user_id");
 		
-		System.out.println(blocked_user_id);
-		
 		BlockedVO blocked = new BlockedVO(blocking_user_id, blocked_user_id);
 		
 		boolean res = postService.insertuserBlocked(blocked);
