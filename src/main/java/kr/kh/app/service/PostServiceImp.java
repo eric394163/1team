@@ -424,4 +424,19 @@ public class PostServiceImp implements PostService {
 
 	}
 
+	@Override
+	public boolean deletePost(int num) {
+		PostVO post = postDao.selectPost(num);
+		if(post == null) {
+			return false;
+		}
+		
+		ArrayList<AttachVO> fileList = postDao.selectFileByPost_id(num);
+		for(AttachVO file : fileList) {
+			deleteFile(file);
+		}
+		
+		return postDao.deletePost(num);
+	}
+
 }

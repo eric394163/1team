@@ -30,7 +30,7 @@
 		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%') </select>
 
 	<select id="selectTotalSearchResultList" resultType="kr.kh.app.model.vo.PostVO"> 
-		SELECT post.* , board_name As post_board_name
+		SELECT post.* , board_name
 		FROM post 
 		JOIN board ON board_id = post_board_num
 		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%')

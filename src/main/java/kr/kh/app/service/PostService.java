@@ -63,4 +63,6 @@ public interface PostService {
 
     ArrayList<ReportVO> getPostReportedList(Criteria cri);
 
+    boolean deletePost(int num);
+
 }
