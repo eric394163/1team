@@ -1,7 +1,6 @@
 package kr.kh.app.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,33 +8,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import kr.kh.app.model.vo.CommentVO;
-import kr.kh.app.model.vo.UserVO;
+import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;
 
-@WebServlet("/comment/delete")
-public class CommentDeleteServlet extends HttpServlet {
+
+@WebServlet("/comment/block")
+public class CommentBlockServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PostService postService = new PostServiceImp();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//삭제할 댓글 번호를 가져옴
-    	int num = 0;
-    	try {
-    		num = Integer.parseInt(request.getParameter("num"));
-    	}catch (Exception e) {
-    		e.printStackTrace();
-		}
-    	//회원 정보 가져옴
-    	UserVO user = (UserVO) request.getSession().getAttribute("user");
-    	boolean res = postService.deleteComment(num, user);
+		String blocked_user_id = request.getParameter("blocked_user_id");
+		String blocking_user_id = request.getParameter("blocking_user_id");
+		
+		System.out.println(blocked_user_id);
+		
+		BlockedVO blocked = new BlockedVO(blocked_user_id, blocking_user_id);
+		
+		boolean res = postService.insertuserBlocked(blocked);
     	response.getWriter().write(res?"ok":"");
-    	
 	}
 
 }

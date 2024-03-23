@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.app.model.vo.AttachVO;
+import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
@@ -86,5 +87,9 @@ public interface PostDAO {
 	int selectPostReportedListCount(@Param("cri") Criteria cri);
 
 	ArrayList<ReportVO> selectPostReportedList(@Param("cri") Criteria cri);
+
+	ArrayList<CommentVO> selectTotalCommentList(@Param("post_num")int post_num);
+
+	boolean insertuserBlocked(@Param("blocked")BlockedVO blocked);
 
 }

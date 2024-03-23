@@ -27,9 +27,10 @@ public class CommentInsertServlet extends HttpServlet {
     		e.printStackTrace();
 		}
     	//댓글 작성자를 가져옴 => 회원 정보를 가져옴 
-    	UserVO user = (UserVO)request.getSession().getAttribute("user");
+    	UserVO writer = (UserVO)request.getSession().getAttribute("user");
+    	request.setAttribute("writer", writer);
     	//댓글 등록하라고 시킴
-    	CommentVO comment = new CommentVO(post_num, content, user.getUser_id());
+    	CommentVO comment = new CommentVO(post_num, content, writer.getUser_id());
     	boolean res = postService.insertComment(comment);
     	response.getWriter().write(res?"ok":"");
 	}

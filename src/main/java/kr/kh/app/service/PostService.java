@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.Part;
 
 import kr.kh.app.model.vo.AttachVO;
+import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
@@ -62,5 +63,10 @@ public interface PostService {
 	int getPostReportedListCount(Criteria cri);
 
     ArrayList<ReportVO> getPostReportedList(Criteria cri);
+
+	ArrayList<CommentVO> getTotalCommentList(int post_num);
+
+	boolean insertuserBlocked(BlockedVO blocked);
+
 
 }

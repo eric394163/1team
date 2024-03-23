@@ -262,3 +262,61 @@
 .detail-box .save-icon{
 	position: relative; top: -2px;
 }
+.detail-box .comment-list.active{
+	background-color: #ededed;
+	padding: 10px 20px; margin-bottom: 10px;
+	border-bottom: 1px solid #999;
+}
+.detail-box .comment-writer{
+	font-size: 14px; color: #666;
+	align-items: center; margin-bottom: 10px;
+}
+.detail-box .box-comment{
+	border-bottom: 1px solid #ccc;
+}
+.detail-box .box-comment:last-child{
+	border-bottom: none;
+}
+.detail-box .comment-pagination .page-link{
+	font-size: 14px; padding: 2px 6px;
+	border-radius: 2px;
+}
+.detail-box .comment-input-box{
+	margin-bottom: 20px; padding-bottom: 20px;
+	border-bottom: 2px solid #212529;
+}
+.detail-box .btn-comment-insert{
+	background-color: #000; color: #fff;
+}
+.detail-box .form-control.com-input{
+	width: 600px;
+	margin-top: 10px;
+}
+.detail-box .box-comment{
+	display: flex; justify-content: space-between;
+	align-items: center; padding: 10px;
+} 
+.detail-box .comment-wrap{
+	font-size: 14px; font-weight: bold; color: #666;
+}
+.detail-box .comment_content{
+	margin-top: 10px;
+	font-size: 16px; font-weight: normal; color: #212529;
+}
+.detail-box .btn.btn-outline-dark.btn-complete{
+	background-color: #fff; border: 1px solid #000;
+	padding: 6px 12px; border-radius: 5px;
+}
+.detail-box .btn.btn-outline-dark.btn-complete:hover{
+	color: #000;
+}
+.detail-box .box-comment button{
+	border: none; background-color: transparent;
+	padding: 0; margin: 0;
+}
+.detail-box .btn-last-box{
+	border-bottom: none; justify-content: flex-end;
+}
+.detail-box .btn-last-box a{
+	margin-left: 10px;
+}

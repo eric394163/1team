@@ -228,6 +228,12 @@
 		where comment_post_num = #{cri.post_num}
 	</select>
 	
+	<select id="selectTotalCommentList" resultType="kr.kh.app.model.vo.CommentVO">
+		select * from comment
+		where comment_post_num = #{post_num}
+	</select>
+	
+	
 	<select id="selectComment" resultType="kr.kh.app.model.vo.CommentVO">
 		select * from comment where comment_id = #{comment_id}
 	</select>
@@ -251,4 +257,8 @@
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
+	<insert id="insertuserBlocked">
+		insert into blocked(blocked_user_id, blocking_user_id)
+		values(#{blocked.blocked_user_id},#{blocked.blocking_user_id})
+	</insert>
 </mapper>
