@@ -234,5 +234,13 @@ public class UserServiceImp implements UserService {
 		return userDao.deleteBlockedUser(blocked);
 	}
 
+	@Override
+	public ArrayList<BlockedVO> getBlockedUsers(String user_id) {
+		if(!checkString(user_id)) {
+			return null;
+		}
+		return userDao.selectBlockedUsers(user_id);
+	}
+
 
 }

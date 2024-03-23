@@ -33,4 +33,6 @@ public interface UserService {
 
     boolean unblockUser(BlockedVO blocked);
 
+    ArrayList<BlockedVO> getBlockedUsers(String userId);
+
 }

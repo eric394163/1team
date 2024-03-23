@@ -52,4 +52,10 @@
         DELETE FROM blocked 
         WHERE blocked_user_id = #{blocked.blocked_user_id} and blocking_user_id = #{blocked.blocking_user_id}
     </delete>
+    
+    <select id="selectBlockedUsers" resultType="kr.kh.app.model.vo.BlockedVO">
+        SELECT * 
+        FROM blocked 
+        WHERE blocking_user_id = #{id.blocking_user_id}
+    </select>
 </mapper>

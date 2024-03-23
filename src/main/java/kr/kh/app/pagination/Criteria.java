@@ -1,6 +1,5 @@
 package kr.kh.app.pagination;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,8 +13,7 @@ public class Criteria {
 	private String search = ""; // 검색어 : 기본값 - 빈문자열=> 전체 검색
 	private String type = "all"; // 검색 타입 : 기본값 - 전체검색
 
-
-
+	private String blocking_user_id;
 
 	public Criteria(int page) {
 		this.page = page;
@@ -36,9 +34,10 @@ public class Criteria {
 		return (page - 1) * perPageNum;
 	}
 
-	public Criteria(int page, int perPageNum, String search) {
+	public Criteria(int page, int perPageNum, String search ) {
 		this(page, perPageNum); 
 		this.search = search == null ? "" : search;
 	}
+
 
 }

@@ -34,4 +34,6 @@ public interface UserDAO {
 
     boolean deleteBlockedUser(@Param("blocked") BlockedVO blocked);
 
+    ArrayList<BlockedVO> selectBlockedUsers(@Param("id") String user_id);
+
 }
