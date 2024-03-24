@@ -63,9 +63,14 @@
 				//user/delete로 보내서 회원 탈퇴(회원정보 수정 => 이메일기록만 남기고 다른 데이터 UUID로 변경,글자수는자름) & 회원 게시글, 댓글 삭제
 				let q = confirm("정말로 탈퇴하시겠습니까?");
 				let id = '${user.user_id}';
+				let role = '${user.user_role}';
 				
 				if(q){ //확인버튼 눌렀다면
-					location.href = `<c:url value="/user/delete"/>`;
+					if(role == '사용자'){
+						location.href = `<c:url value="/user/delete"/>`;
+					}else{
+						alert('관리자와 운영자는 탈퇴할 수 없습니다.');
+					}
 				}else{ //취소버튼 눌렀다면
 					alert('좋은 선택입니다. Play Ground서비스를 다시 이용하세요.');
 					location.href = `<c:url value="/" />`;
