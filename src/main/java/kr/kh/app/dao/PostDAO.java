@@ -92,4 +92,6 @@ public interface PostDAO {
 
 	boolean insertuserBlocked(@Param("blocked")BlockedVO blocked);
 
+	ArrayList<BlockedVO> selectBlock(@Param("blo")BlockedVO blocked);
+
 }
