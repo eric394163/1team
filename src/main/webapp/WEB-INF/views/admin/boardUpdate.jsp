@@ -64,17 +64,13 @@ function getBoardList(){
 				str +=
 				`
 				<li>
-   					<form action="<c:url value="/admin/board/update" />" class="left-box">
-    					<input type="text" class="category-name" name="board_name" value="\${board.board_name}" tabindex="-1" readonly>
-    					<input type="hidden" value="\${board.board_id}" name="board_id">
-    					<button type="submit" class="btn btn-dark">수정</button>
-   					</form>
+   					<div class="left-box">
+    					<input type="text" class="category-name board-name" name="board_name" value="\${board.board_name}" tabindex="-1" readonly>
+    					<button type="submit" class="btn btn-dark board-update" data-bonum="\${board.board_id}">수정</button>
+   					</div>
    					<div class="right-box">
-   						<a href="#update" class="category-update"><img src="<c:url value="/images/write_icon.svg" />" alt="수정아이콘" width="20"></a>
-   						<c:url value="/admin/board/delete" var="url">
-   							<c:param name="categoryName" value="\${board.board_name}" />
-   						</c:url>
-    					<a href="${url}" class="category-delete"><img src="<c:url value="/images/trash_icon.svg" />" alt="삭제아이콘" width="20"></a>
+   						<a href="#update" class="category-update board-update-icon"><img src="<c:url value="/images/write_icon.svg" />" alt="수정아이콘" width="20"></a>
+    					<a href="javascript:void(0);" class="category-delete board-delete" data-bonum="\${board.board_id}"><img src="<c:url value="/images/trash_icon.svg" />" alt="삭제아이콘" width="20"></a>
    					</div>
    				</li>
 				`;
@@ -85,20 +81,78 @@ function getBoardList(){
 			
 		}
 	});
-	
 }
-
+getBoardList();
 </script>
 <script type="text/javascript">
 //업데이트(연필) 아이콘 클릭했을 때
-$(document).on("click",".category-update", function(){
-	//해당 input태그 - readonly속성 추가
-	$(this).parents('li').find('.category-name').prop('readonly', false);
-	//초점받게 처리
-	$(this).parents('li').find('.category-name').attr('tabindex','0');
-	
+$(document).on("click",".board-update-icon", function(){
+	initIcon();
+	$(this).parents('li').find('.board-name').hide();
+	let bo_name = $(this).parents("li").find(".board-name").val();
+	let input = 
+	`
+	<input input type="text" class="category-name name-input" value="\${bo_name}">
+	`
+	$(this).parents("li").find(".board-name").after(input);
 	//해당 버튼 보이게 처리
 	$(this).parents('li').find('.btn-dark').show();
+});
+function initIcon(){
+	//수정 초기화
+	$(".board-name").show();
+	$(".name-input").remove();
+	$('.btn-dark').hide();
+}
+</script>
+<script type="text/javascript">
+//게시글 삭제버튼
+$(document).on("click",".board-delete", function(){
+	let num = $(this).data("bonum");
+	$.ajax({
+		url : '<c:url value="/admin/board/delete"/>',
+		method : 'get',
+		data : {
+			board_id : num
+		},
+		success : function(data){
+			if(data == "ok"){
+				alert("게시글 삭제했습니다.");
+				getBoardList();
+			}else{
+				alert("게시글 삭제 못함.");
+			}
+		}, 
+		error : function(xhr, status, error){
+			
+		}
+	});
+});
+</script>
+<script type="text/javascript">
+//게시글 수정버튼
+$(document).on("click",".board-update", function(){
+	let num = $(this).data("bonum");
+	let name = $(".name-input").val();
+	$.ajax({
+		url : '<c:url value="/admin/board/update"/>',
+		method : 'get',
+		data : {
+			board_id : num,
+			board_name : name
+		},
+		success : function(data){
+			if(data == "ok"){
+				alert("게시글 수정 했다.");
+				getBoardList();
+			}else{
+				alert("게시글 수정 못함.");
+			}
+		}, 
+		error : function(xhr, status, error){
+			
+		}
+	});
 });
 </script>
   </body>

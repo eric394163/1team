@@ -27,4 +27,8 @@ public interface BoardService {
 
 	ArrayList<BoardVO> getCaBoardList(int ca_num);
 
+	boolean deleteBoard(int board_id);
+
+	boolean updateBoard(BoardVO board);
+
 }

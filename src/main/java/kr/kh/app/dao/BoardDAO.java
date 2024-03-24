@@ -30,4 +30,8 @@ public interface BoardDAO {
 
 	ArrayList<BoardVO> selectCaBoardList(@Param("ca_num")int ca_num);
 
+	boolean deleteBoard(@Param("board_id")int board_id);
+
+	boolean updateBoard(@Param("bo")BoardVO board);
+
 }

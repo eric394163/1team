@@ -41,7 +41,6 @@ public class BoardInsertServlet extends HttpServlet {
     		ca_num = 1;
 		}
 		ArrayList<BoardVO> list = boardService.getCaBoardList(ca_num);
-		System.out.println(list);
 		JSONObject jobj = new JSONObject();
 		jobj.put("list", list);
 		response.setContentType("application/json; charset=utf-8");

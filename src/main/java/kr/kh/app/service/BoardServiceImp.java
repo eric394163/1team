@@ -109,4 +109,14 @@ public class BoardServiceImp implements BoardService{
 	public ArrayList<BoardVO> getCaBoardList(int ca_num) {
 		return boardDao.selectCaBoardList(ca_num);
 	}
+
+	@Override
+	public boolean deleteBoard(int board_id) {
+		return boardDao.deleteBoard(board_id);
+	}
+
+	@Override
+	public boolean updateBoard(BoardVO board) {
+		return boardDao.updateBoard(board);
+	}
 }
