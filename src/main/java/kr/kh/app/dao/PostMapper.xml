@@ -67,6 +67,16 @@
 		    post
 		        JOIN
 		    board ON post_board_num = board_id
+		<if test='cri.type=="all"'>
+			where (post_title like concat('%', #{cri.search},'%')
+				or post_user_id = #{cri.search})
+		</if>
+		<if test='cri.type=="title"'>
+			where post_title like concat('%', #{cri.search},'%')
+		</if>
+		<if test='cri.type=="writer"'>
+			where post_user_id = #{cri.search}
+		</if>
 		GROUP BY post_id
 		ORDER BY post_id desc
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
@@ -75,6 +85,16 @@
 	<select id="selectTotalCount" resultType="int">
 		select count(*) 
 		from post
+		<if test='cri.type=="all"'>
+			where (post_title like concat('%', #{cri.search},'%')
+				or post_user_id = #{cri.search})
+		</if>
+		<if test='cri.type=="title"'>
+			where post_title like concat('%', #{cri.search},'%')
+		</if>
+		<if test='cri.type=="writer"'>
+			where post_user_id = #{cri.search}
+		</if>
 	</select>
 	
 	<select id="selectPost" resultMap="PostMap">
