@@ -117,6 +117,9 @@
 								 <a href="<c:url value="/post/update?num=${post.post_id}"/>" class="btn btn-outline-warning">수정</a>
 								 <a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
 							</c:if>
+							<c:if test="${post.post_user_id != user.user_id && (user.user_role == '관리자' || user.user_role == '운영자')}">
+								 <a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
+							</c:if>
 							<c:url value="/board/list" var="url">
 							 	<c:param name="boNum" value="${post.post_board_num}" />
 							 	<c:param name="page" value="${page == null?1:page}" />
