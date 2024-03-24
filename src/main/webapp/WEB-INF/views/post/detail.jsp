@@ -117,6 +117,9 @@
 								 <a href="<c:url value="/post/update?num=${post.post_id}"/>" class="btn btn-outline-warning">수정</a>
 								 <a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
 							</c:if>
+							<c:if test="${post.post_user_id != user.user_id && (user.user_role == '관리자' || user.user_role == '운영자')}">
+								 <a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
+							</c:if>
 							<c:url value="/board/list" var="url">
 							 	<c:param name="boNum" value="${post.post_board_num}" />
 							 	<c:param name="page" value="${page == null?1:page}" />
@@ -269,9 +272,10 @@ function getCommentList(cri){
 					`
 					<div class="btn-comment-group">
 					`;
-					if('${user == null}'){        
+					if('${user.user_id}' == ''){        
                         btns += ``;
                     }else if(data.writerList[i].user_role == '사용자'){		
+                    	
 						btns +=	`<a href="#block" title="사용자차단" class="btn-comment-block" data-role="사용자" data-nickname="\${nickname}" data-writeid="\${writerid}"><img src="<c:url value="/images/block_icon.svg" />" alt="차단아이콘" width="20" class="block-icon"></a>`;
 					}else if(data.writerList[i].user_role == '관리자'){		
 						btns +=	`<a href="#block" title="사용자차단" class="btn-comment-block" data-role="관리자" data-nickname="\${nickname}" data-writeid="\${writerid}"><img src="<c:url value="/images/block_icon.svg" />" alt="차단아이콘" width="20" class="block-icon"></a>`;

@@ -21,7 +21,6 @@ import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.model.vo.ReportVO;
 import kr.kh.app.model.vo.UpvoteVO;
 import kr.kh.app.model.vo.UserVO;
-import kr.kh.app.pagination.CommentCriteria;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
 
@@ -448,7 +447,6 @@ public class PostServiceImp implements PostService {
 		}
 		return postDao.insertuserBlocked(blocked);
 	}
-	
 	public boolean deletePost(int num) {
 		PostVO post = postDao.selectPost(num);
 		if(post == null) {
