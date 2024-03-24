@@ -447,6 +447,8 @@ public class PostServiceImp implements PostService {
 			return false;
 		}
 		return postDao.insertuserBlocked(blocked);
+	}
+	
 	public boolean deletePost(int num) {
 		PostVO post = postDao.selectPost(num);
 		if(post == null) {
