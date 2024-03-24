@@ -26,7 +26,7 @@ import kr.kh.app.utils.FileUploadUtils;
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDao;
-	private static String uploadPath = "D:\\musicfile";
+	private static String uploadPath = "C:\\musicfile";
 
 	public PostServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
@@ -445,6 +445,13 @@ public class PostServiceImp implements PostService {
 		if(blocked == null) {
 			return false;
 		}
+		ArrayList<BlockedVO> blockList = postDao.selectBlock(blocked);
+		for(BlockedVO blo : blockList) {
+			if(blo.getBlocked_user_id().contains(blocked.getBlocked_user_id())) {
+				return false;
+			}
+		}
+		
 		return postDao.insertuserBlocked(blocked);
 	}
 	public boolean deletePost(int num) {
