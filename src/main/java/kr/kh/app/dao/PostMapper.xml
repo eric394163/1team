@@ -235,14 +235,17 @@
 	
 	<select id="selectCommentList" resultType="kr.kh.app.model.vo.CommentVO">
 		select * from comment 
-		where comment_post_num = #{cri.post_num}
+		where
+		comment_post_num = #{cri.post_num} and
+    	comment_user_id not in(select blocked_user_id from blocked where blocking_user_id = #{cri.user.user_id})
 		order by comment_id desc
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
 	<select id="selectTotalCountComment" resultType="int">
 		select count(*) from comment
-		where comment_post_num = #{cri.post_num}
+		where comment_post_num = #{cri.post_num} and
+    	comment_user_id not in(select blocked_user_id from blocked where blocking_user_id = #{cri.user.user_id})
 	</select>
 	
 	<select id="selectTotalCommentList" resultType="kr.kh.app.model.vo.CommentVO">

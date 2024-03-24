@@ -37,7 +37,8 @@ public class CommentListServlet extends HttpServlet {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		CommentCriteria cri = new CommentCriteria(page, 2, post_num);
+		UserVO user = (UserVO) request.getSession().getAttribute("user");
+		CommentCriteria cri = new CommentCriteria(page, 2, post_num, user);
 		//현재 페이지에 맞는 댓글을 가져오라고 시킴
 		ArrayList<CommentVO> list = postService.getCommentList(cri);
 		ArrayList<CommentVO> totalList = postService.getTotalCommentList(post_num);
