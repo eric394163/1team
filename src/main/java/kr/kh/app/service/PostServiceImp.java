@@ -446,6 +446,13 @@ public class PostServiceImp implements PostService {
 		if(blocked == null) {
 			return false;
 		}
+		ArrayList<BlockedVO> blockList = postDao.selectBlock(blocked);
+		for(BlockedVO blo : blockList) {
+			if(blo.getBlocked_user_id().contains(blocked.getBlocked_user_id())) {
+				return false;
+			}
+		}
+		
 		return postDao.insertuserBlocked(blocked);
 	}
 	public boolean deletePost(int num) {

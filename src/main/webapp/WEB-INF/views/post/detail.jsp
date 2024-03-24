@@ -478,7 +478,7 @@ $(document).on('click','.btn-comment-block',function(){
 				alert(nickname + "님을 차단했습니다.");
 				getCommentList(cri);
 			}else{
-				alert(nickname + "님을 차단하지 못했습니다.");
+				alert("이미 차단한 사용자거나 없는 사용자입니다.");
 			}
 		}, 
 		error : function(xhr, status, error){

@@ -281,4 +281,8 @@
 		insert into blocked(blocked_user_id, blocking_user_id)
 		values(#{blocked.blocked_user_id},#{blocked.blocking_user_id})
 	</insert>
+	
+	<select id="selectBlock" resultType="kr.kh.app.model.vo.BlockedVO">
+		select * from blocked where blocking_user_id = #{blo.blocking_user_id}
+	</select>
 </mapper>
