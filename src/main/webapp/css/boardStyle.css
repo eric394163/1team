@@ -138,6 +138,41 @@
 .table.report-table td:nth-child(3), .table.report-table th:nth-child(3){ width: 150px; }
 .table.report-table td:nth-child(4), .table.report-table th:nth-child(4){ width: 100px; }
 
+/* 관리자페이지 - 신고게시판 */
+.table.repoart-list-table td{ vertical-align: middle; text-align: center; }
+.table.repoart-list-table td:nth-child(1), .table.repoart-list-table th:nth-child(1){ width: 100px; }
+.table.repoart-list-table td:nth-child(2), .table.repoart-list-table th:nth-child(2){ width: 220px; }
+.table.repoart-list-table td:nth-child(3), .table.repoart-list-table th:nth-child(3){ width: 200px; }
+.table.repoart-list-table td:nth-child(4), .table.repoart-list-table th:nth-child(4){ width: 300px; }
+
+/* 관리자페이지 - 신고게시판 팝업 */
+.report-list-box{ 
+	display: none; 
+	position: fixed; left: 0; top: 0; z-index: 1000;
+	width: 100%; height: 100%;
+	background-color: rgba(0,0,0,0.7);
+}
+.report-list{ 
+	position: absolute; 
+	left: 0; right: 0; top: 50%; transform: translateY(-50%);
+	width: 500px; 
+	margin: 0 auto; padding: 40px 30px;
+	background-color: #fff; 
+}
+.report-list h2{
+	font-size: 24px; font-weight: bold; color: #212529; text-align: center;
+	padding-bottom: 10px; border-bottom: 2px solid #212529; margin-bottom: 20px; /* 여백/테두리 */
+}
+.report-list p{
+	font-size: 14px; padding: 0 20px;
+}
+
+.report-list-box .close_btn{
+	position: absolute; top: 10px; right: 10px;
+}
+.report-list-box .btn.btn-dark{ width: 100%; }
+
+
 /* 게시글 쓰기 & 상세게시글 보기 */
 /* 관리자페이지 - 회원관리 */
 .table.member-table td{ vertical-align: middle; text-align: center; }
@@ -199,6 +234,9 @@
 }
 
 /* 상세게시글 보기 */
+.detail-box {
+	margin-bottom: 50px;
+}
 .detail-box .form-row{ 
 	margin-bottom: 0;
 	border-bottom: 1px solid #999;
