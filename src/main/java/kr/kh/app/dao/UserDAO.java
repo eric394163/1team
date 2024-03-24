@@ -18,6 +18,7 @@ public interface UserDAO {
 	UserVO selectFindUser(@Param("user_email")String email,@Param("user_birth") String birth);
 
 	boolean updateUserPw(@Param("user")UserVO user);
+	
     UserVO selectUserById(@Param("id") String id);
 
     UserVO selectUserByEmail(@Param("email") String email);

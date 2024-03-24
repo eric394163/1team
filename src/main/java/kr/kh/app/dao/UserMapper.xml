@@ -47,6 +47,7 @@
         
     </select>
 
+
     <delete id="deleteBlockedUser">
         DELETE FROM blocked 
         WHERE blocked_user_id = #{blocked.blocked_user_id} and blocking_user_id = #{blocked.blocking_user_id}
@@ -91,4 +92,5 @@
         FROM blocked 
         WHERE blocking_user_id = #{id.blocking_user_id}
     </select>
+
 </mapper>

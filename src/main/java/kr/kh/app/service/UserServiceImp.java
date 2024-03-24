@@ -233,6 +233,7 @@ public class UserServiceImp implements UserService {
 		return userDao.deleteBlockedUser(blocked);
 	}
 
+
 	@Override
 	public ArrayList<UserVO> getTotalUserList(Criteria cri) {
 		if(cri == null) {
@@ -249,6 +250,8 @@ public class UserServiceImp implements UserService {
 		}
 		
 		return userDao.selectTotalUserCount(cri);
+	}
+	
 	public ArrayList<UserVO> getUserList(Criteria cri) {
 		return userDao.selectUserList(cri);
 	}
@@ -270,12 +273,12 @@ public class UserServiceImp implements UserService {
 	public boolean updateUserByUserState2(UserVO updateUser) {
 		return userDao.updateUserByUserState2(updateUser);
 	}
+	
 	public ArrayList<BlockedVO> getBlockedUsers(String user_id) {
 		if(!checkString(user_id)) {
 			return null;
 		}
 		return userDao.selectBlockedUsers(user_id);
 	}
-
 
 }
