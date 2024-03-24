@@ -14,16 +14,19 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.PostDAO;
 import kr.kh.app.model.vo.AttachVO;
+import kr.kh.app.model.vo.BlockedVO;
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.PostVO;
+import kr.kh.app.model.vo.ReportVO;
+import kr.kh.app.model.vo.UpvoteVO;
 import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.pagination.Criteria;
 import kr.kh.app.utils.FileUploadUtils;
-import lombok.Data;
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDao;
-	private static String uploadPath = "D:\\musicfile";
+	private static String uploadPath = "C:\\musicfile";
 
 	public PostServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
@@ -237,7 +240,6 @@ public class PostServiceImp implements PostService {
 		}
 
 		if (link != null) {
-			System.out.println("으으앙아아아아악");
 			try {
 				int attach_post_id = attach.getAttach_post_id();
 				
@@ -263,10 +265,21 @@ public class PostServiceImp implements PostService {
 		if (user == null) {
 			return false;
 		}
+		
 
 		PostVO post = postDao.selectPost(num);
 
-		if (post == null || !post.getPost_user_id().equals(user.getUser_id())) {
+		if (post == null ) {
+			return false;
+		}
+
+		int checkRole = 0;
+
+		if(user.getUser_role().equals("관리자") || user.getUser_role().equals("운영자")) {
+			checkRole = 1;
+		}
+
+		if(checkRole == 0 && !post.getPost_user_id().equals(user.getUser_id())) {
 			return false;
 		}
 
@@ -295,6 +308,164 @@ public class PostServiceImp implements PostService {
 			cri = new Criteria();
 		}
 		return postDao.selectTotalPopularLikePostList(cri);
+	}
+
+	@Override
+	public int like(int post_id, int upvote, UserVO user) {
+		if(user == null) {
+			throw new RuntimeException();
+		}
+		
+		UpvoteVO like = postDao.selectLike(user.getUser_id(), post_id);
+		
+		if(like == null) {
+			like = new UpvoteVO(post_id, user.getUser_id(), upvote);
+			postDao.insertLike(like);
+			postDao.updatePostUpvotePlus(post_id);
+			return upvote;
+		} else {
+			if(upvote == like.getUpvote()) {
+				like.setUpvote(0);
+				postDao.updateLike(like);
+				postDao.updatePostUpvoteMinus(post_id);
+			} else {
+				like.setUpvote(upvote);
+				postDao.updateLike(like);
+				postDao.updatePostUpvotePlus(post_id);
+			}
+			
+			return like.getUpvote();
+		}
+	}
+
+	@Override
+	public boolean updatePostView(int num) {
+		return postDao.updatePostView(num);
+	}
+	
+	
+	public int getReportedPostCount(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectReportedPostCount(cri);
+	}
+
+	@Override
+	public ArrayList<PostVO> getReportedPostList(Criteria cri) {
+		if (cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectReportedPostList(cri);
+	}
+	
+	public boolean insertComment(CommentVO comment) {
+		if( comment == null || 
+				!checkString(comment.getComment_content())) {
+				return false;
+			}
+		return postDao.insertComment(comment);
+	}
+
+	@Override
+	public ArrayList<CommentVO> getCommentList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria(1,2);
+		}
+		return postDao.selectCommentList(cri);
+	}
+
+	@Override
+	public int getTotalCountComment(Criteria cri) {
+		if(cri == null) {
+			return 0;
+		}
+		return postDao.selectTotalCountComment(cri);
+	}
+
+	@Override
+	public boolean deleteComment(int num, UserVO user) {
+		if(user == null) {
+			return false;
+		}
+		//댓글 번호와 일치하는 댓글을 가져옴
+		CommentVO comment = postDao.selectComment(num);
+		//댓글 작성자가 회원인지 확인하여 아니면 false 리턴
+		if( comment == null || 
+			!comment.getComment_user_id().equals(user.getUser_id())) {
+			return false;
+		}
+		//맞으면 삭제 요청
+		
+		return postDao.deleteComment(num);
+	}
+
+	@Override
+	public boolean updateComment(CommentVO comment) {
+		if( comment == null ||
+				!checkString(comment.getComment_content()) || 
+				!checkString(comment.getComment_user_id())) {
+				return false;
+			}
+			
+			CommentVO dbComment = postDao.selectComment(comment.getComment_id());
+			
+			if( dbComment == null || 
+				!dbComment.getComment_user_id().equals(comment.getComment_user_id())) {
+				return false;
+			}
+			
+			return postDao.updateComment(comment);
+	}
+
+	@Override
+	public int getPostReportedListCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectPostReportedListCount(cri);
+	}
+
+	@Override
+	public ArrayList<ReportVO> getPostReportedList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return postDao.selectPostReportedList(cri);
+
+	}
+
+	@Override
+	public ArrayList<CommentVO> getTotalCommentList(int post_num) {
+		return postDao.selectTotalCommentList(post_num);
+	}
+
+	@Override
+	public boolean insertuserBlocked(BlockedVO blocked) {
+		if(blocked == null) {
+			return false;
+		}
+		ArrayList<BlockedVO> blockList = postDao.selectBlock(blocked);
+		for(BlockedVO blo : blockList) {
+			if(blo.getBlocked_user_id().contains(blocked.getBlocked_user_id())) {
+				return false;
+			}
+		}
+		
+		return postDao.insertuserBlocked(blocked);
+	}
+	public boolean deletePost(int num) {
+		PostVO post = postDao.selectPost(num);
+		if(post == null) {
+			return false;
+		}
+		
+		ArrayList<AttachVO> fileList = postDao.selectFileByPost_id(num);
+		for(AttachVO file : fileList) {
+			deleteFile(file);
+		}
+		
+		return postDao.deletePost(num);
 	}
 
 }

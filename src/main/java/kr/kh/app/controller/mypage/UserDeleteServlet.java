@@ -21,7 +21,6 @@ public class UserDeleteServlet extends HttpServlet {
 	UserService userService = new UserServiceImp();
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
 		UserVO user = (UserVO) httpServletRequest.getSession().getAttribute("user");
 		

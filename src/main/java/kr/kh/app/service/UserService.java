@@ -37,4 +37,14 @@ public interface UserService {
 
 	int getTotalUserCount(Criteria cri);
 
+	ArrayList<UserVO> getUserList(Criteria cri);
+
+	int getTotalCount(Criteria cri);
+
+	boolean updateUserByUserState(UserVO updateUser);
+
+	boolean updateUserByUserState2(UserVO updateUser);
+	
+    ArrayList<BlockedVO> getBlockedUsers(String userId);
+
 }

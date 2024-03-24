@@ -25,7 +25,7 @@
 	        		<h2>${board.board_name }</h2>
 	        		<div class="title_btn">
 	        			<c:if test="${user != null}">
-	        				<a href="<c:url value="/post/insert" />" class="btn btn-outline-dark">게시판쓰기</a>
+	        				<a href="<c:url value="/post/insert" />" class="btn btn-outline-dark">게시글쓰기</a>
 	        			</c:if>
 	        		</div>
 	        	</div>
@@ -47,8 +47,9 @@
 										<td>${post.post_id}</td>
 										<td>${post.board.board_name}</td>
 										<td>
-											<c:url var="url" value="/board/detail">
+											<c:url var="url" value="/post/detail">
 												<c:param name="num" value="${post.post_id}" />
+												<c:param name="page" value="${pm.cri.page}" />
 											</c:url>
 											<a href="${url}">${post.post_title}</a>
 										</td>
@@ -69,8 +70,9 @@
 										<td>${post.post_id}</td>
 										<td>${board.board_name}</td>
 										<td>
-											<c:url var="url" value="/board/detail">
+											<c:url var="url" value="/post/detail">
 												<c:param name="num" value="${post.post_id}" />
+												<c:param name="page" value="${pm.cri.page}" />
 											</c:url>
 											<a href="${url}">${post.post_title}</a>
 										</td>
@@ -85,16 +87,21 @@
 										</td>
 										<td>${post.post_view}</td>
 									</tr>
-								</c:when>
-								<c:when test="${list.size() == 0 }">
-									<tr>
-										<th colspan="5">
-											<h3 class="text-center">등록된 게시글이 없습니다.</h3>
-										</th>
-									</tr>
+									<c:if test="${list.size() == 0 }">
+										<tr>
+											<th colspan="5">
+												<h3 class="text-center">등록된 게시글이 없습니다.</h3>
+											</th>
+										</tr>
+									</c:if>
 								</c:when>
 							</c:choose>
 						</c:forEach>
+						<c:if test="${list.size() == 0 }">
+							<tr>
+								<th colspan="5">등록된 게시글이 없습니다.</th>
+							</tr>
+						</c:if>
 					</tbody>
 				</table>
 				<ul class="pagination justify-content-center">

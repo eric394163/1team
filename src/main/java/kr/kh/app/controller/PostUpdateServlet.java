@@ -49,7 +49,7 @@ public class PostUpdateServlet extends HttpServlet {
 		
 		if(post == null || user == null || !post.getPost_user_id().equals(user.getUser_id())) {
 			request.setAttribute("msg", "작성자가 아닙니다.");
-			request.setAttribute("url", "post/detail?num="+num);
+			request.setAttribute("url", "/post/detail?num="+num);
 			request.getRequestDispatcher("/WEB-INF/views/message.jsp").forward(request, response);
 			return;
 		}
@@ -99,6 +99,8 @@ public class PostUpdateServlet extends HttpServlet {
 		AttachVO attach = new AttachVO(num, 1, before_link);
 		attach.setAttach_post_id(num);
 		
+		// boolean res = postService.updateBoard(post, user, nums, fileList, link);
+		
 		boolean res1 = postService.updateBoard(post, user, nums, fileList);
 		boolean res2 = postService.updateAttach(post, user, before_link, attach);
 		System.out.println(res1);
@@ -106,11 +108,11 @@ public class PostUpdateServlet extends HttpServlet {
 		
 		if(res1 && res2) {
 			request.setAttribute("msg", "게시글을 수정했습니다.");
-			request.setAttribute("url", "post/detail?num="+num);
+			request.setAttribute("url", "/post/detail?num="+num);
 		}
 		else {
 			request.setAttribute("msg", "게시글을 수정하지 못했습니다.");
-			request.setAttribute("url", "post/detail?num="+num);
+			request.setAttribute("url", "/post/detail?num="+num);
 		}
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 		

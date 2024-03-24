@@ -38,4 +38,14 @@ public interface UserDAO {
 
 	int selectTotalUserCount(@Param("cri")Criteria cri);
 
+	ArrayList<UserVO> selectUserList(@Param("cri")Criteria cri);
+
+	int selectTotalCount(@Param("cri")Criteria cri);
+
+	boolean updateUserByUserState(@Param("user")UserVO updateUser);
+
+	boolean updateUserByUserState2(@Param("user")UserVO updateUser);
+    
+    ArrayList<BlockedVO> selectBlockedUsers(@Param("id") String user_id);
+
 }

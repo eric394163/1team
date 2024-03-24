@@ -26,8 +26,20 @@
 	            <li><a href="<c:url value="/signup" />">회원가입</a></li>
 	          </ul>
           </c:if>
-          <c:if test="${user != null}">
+          <c:if test="${user != null && user.user_role == '사용자'}">
           	<img alt="로그인얼굴" src="/team1/images/face_login.svg" width="80" /> <br />
+	          <p>
+	            ${user.user_nickname}(${user.user_id})님 <br>
+	            PLAY GROUND에 오신 걸<br> 
+	            환영합니다.
+	          </p>
+	          <ul>
+	            <li><a href="<c:url value="/mypage/postlist" />">마이페이지</a></li>
+	            <li><a href="<c:url value="/logout" />">로그아웃</a></li>
+	          </ul>
+          </c:if>
+          <c:if test="${user != null && (user.user_role == '관리자' || user.user_role == '운영자')}">
+          	<img alt="로그인얼굴" src="/team1/images/face_login_admin.svg" width="80" /> <br />
 	          <p>
 	            ${user.user_nickname}(${user.user_id})님 <br>
 	            PLAY GROUND에 오신 걸<br> 
@@ -76,7 +88,7 @@
 			</li>
 			</c:forEach>
 		</ul>
-		<c:if test="${user != null && (user.user_role == '관리자' || user_role == '운영자')}">
+		<c:if test="${user != null && (user.user_role == '관리자' || user.user_role == '운영자')}">
         	<hr />
 	        <div class="manage-btn">
         		<a class="nav-link" href="<c:url value="/admin/categoryinsert" />">관리자 페이지</a>

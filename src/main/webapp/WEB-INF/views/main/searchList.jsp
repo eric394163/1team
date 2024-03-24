@@ -47,7 +47,7 @@ prefix="c"%>
 	                <c:forEach items="${list}" var="post">
 	                  <tr>
 	                    <td>${post.post_id }</td>
-	                    <td>${post.post_board_name}</td>
+	                    <td>${post.board_name}</td>
 	                    <td>
 	                      <c:url var="url" value="/post/detail">
 	                        <c:param name="num" value="${post.post_id}" />
@@ -55,7 +55,7 @@ prefix="c"%>
 	                      <a href="${url}">${post.post_title}</a>
 	                    </td>
 	                    <td>
-	                      <a href="">${post.post_user_id}</a>
+	                      <a href="">${post.user_nickname}</a>
 	                    </td>
 	                    <td>${post.post_view }</td>
 	                  </tr>
