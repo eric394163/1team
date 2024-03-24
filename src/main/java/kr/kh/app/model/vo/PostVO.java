@@ -21,6 +21,7 @@ public class PostVO {
     private BoardVO board;
     private UserVO user;
     private String board_name; // ksh_전 조인으로 게시판 이름 보이게 해서 이거 있어야 해요
+    private String user_nickname;
     private Date report_date;
 
     public PostVO(int post_board_num, String post_title, String post_content, String post_user_id, Date post_date) {

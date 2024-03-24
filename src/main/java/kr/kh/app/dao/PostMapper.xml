@@ -40,9 +40,10 @@
 		where post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%')
 		ORDER BY post_id DESC LIMIT
 		#{cri.pageStart}, #{cri.perPageNum} -->
-		SELECT post.*, board_name
+		SELECT post.*, board_name, user.user_nickname
 		FROM post 
 		JOIN board ON board_id = post_board_num
+		JOIN user ON user_id = post_user_id
 		LEFT JOIN blocked ON post_user_id = blocked_user_id AND blocking_user_id = #{cri.blocking_user_id}
 		where blocked_user_id IS NULL and 
 		post_title like concat('%', #{cri.search},'%') OR post_content like concat('%', #{cri.search},'%') 
@@ -184,11 +185,13 @@
 		SELECT 
 			post.*,
 			board.board_name,
-			report.report_date
+			report.report_date,
+			user.user_nickname
 		FROM
 			post
 			JOIN board ON post.post_board_num = board.board_id
 			JOIN report ON post.post_id = report.report_post_id
+			JOIN user ON post.post_user_id = user.user_id
 		WHERE post.post_reported > 9
 		ORDER BY report.report_date DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}

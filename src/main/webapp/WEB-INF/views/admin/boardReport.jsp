@@ -52,7 +52,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
                         </c:url>
                         <a href="${url}">${post.post_title}</a>
                       </td>
-                      <td>${post.post_user_id}</td>
+                      <td>${post.user_nickname}</td>
                       <td>${post.post_reported }</td>
                     </tr>
                   </c:forEach>
