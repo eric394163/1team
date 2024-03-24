@@ -25,7 +25,7 @@
 	        		<h2>${board.board_name }</h2>
 	        		<div class="title_btn">
 	        			<c:if test="${user != null}">
-	        				<a href="<c:url value="/post/insert" />" class="btn btn-outline-dark">게시판쓰기</a>
+	        				<a href="<c:url value="/post/insert" />" class="btn btn-outline-dark">게시글쓰기</a>
 	        			</c:if>
 	        		</div>
 	        	</div>
