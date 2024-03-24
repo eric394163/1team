@@ -269,9 +269,10 @@ function getCommentList(cri){
 					`
 					<div class="btn-comment-group">
 					`;
-					if('${user == null}'){        
+					if('${user.user_id}' == ''){        
                         btns += ``;
                     }else if(data.writerList[i].user_role == '사용자'){		
+                    	
 						btns +=	`<a href="#block" title="사용자차단" class="btn-comment-block" data-role="사용자" data-nickname="\${nickname}" data-writeid="\${writerid}"><img src="<c:url value="/images/block_icon.svg" />" alt="차단아이콘" width="20" class="block-icon"></a>`;
 					}else if(data.writerList[i].user_role == '관리자'){		
 						btns +=	`<a href="#block" title="사용자차단" class="btn-comment-block" data-role="관리자" data-nickname="\${nickname}" data-writeid="\${writerid}"><img src="<c:url value="/images/block_icon.svg" />" alt="차단아이콘" width="20" class="block-icon"></a>`;
