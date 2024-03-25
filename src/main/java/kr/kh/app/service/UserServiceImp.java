@@ -20,8 +20,6 @@ import kr.kh.app.utils.NullCheck;
 public class UserServiceImp implements UserService {
 	private UserDAO userDao;
 
-	NullCheck nullCheck = new NullCheck();
-
 	public UserServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
 
