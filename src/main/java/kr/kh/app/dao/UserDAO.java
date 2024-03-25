@@ -18,6 +18,7 @@ public interface UserDAO {
 	UserVO selectFindUser(@Param("user_email")String email,@Param("user_birth") String birth);
 
 	boolean updateUserPw(@Param("user")UserVO user);
+	
     UserVO selectUserById(@Param("id") String id);
 
     UserVO selectUserByEmail(@Param("email") String email);
@@ -34,6 +35,10 @@ public interface UserDAO {
 
     boolean deleteBlockedUser(@Param("blocked") BlockedVO blocked);
 
+	ArrayList<UserVO> selectTotalUserList(@Param("cri")Criteria cri);
+
+	int selectTotalUserCount(@Param("cri")Criteria cri);
+
 	ArrayList<UserVO> selectUserList(@Param("cri")Criteria cri);
 
 	int selectTotalCount(@Param("cri")Criteria cri);
@@ -41,6 +46,13 @@ public interface UserDAO {
 	boolean updateUserByUserState(@Param("user")UserVO updateUser);
 
 	boolean updateUserByUserState2(@Param("user")UserVO updateUser);
+    
     ArrayList<BlockedVO> selectBlockedUsers(@Param("id") String user_id);
+
+	boolean updateUserByUserRoleUserToOp(@Param("user")UserVO updateUser);
+
+	boolean updateUserByUserRoleOpToUser(@Param("user")UserVO updateUser);
+
+	ArrayList<UserVO> selectUserListNotAdmin(@Param("cri")Criteria cri);
 
 }

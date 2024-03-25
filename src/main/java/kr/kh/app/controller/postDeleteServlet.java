@@ -47,7 +47,7 @@ public class postDeleteServlet extends HttpServlet {
 			}
 
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
-		}
+		} else {
 
 			res = postService.deletePost(num, user);
 			System.out.println("게시글 삭제 결과 : " + res);
@@ -62,7 +62,5 @@ public class postDeleteServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 		}
 
-		
-	
-
+	}
 }

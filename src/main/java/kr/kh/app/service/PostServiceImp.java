@@ -66,7 +66,7 @@ public class PostServiceImp implements PostService {
 		if (attach == null || post_id == 0) {
 			return;
 		}
-
+		attach.setAttach_post_id(post_id);
 		postDao.insertLink(attach);
 	}
 
@@ -471,6 +471,18 @@ public class PostServiceImp implements PostService {
 	@Override
 	public int getVoteCount(int post_id) {
 		return postDao.getVoteCount(post_id);
+  }
+  
+	public boolean reportPost(ReportVO report) {
+		if(report == null) {
+			return false;
+		}
+		return postDao.insertReportPost(report);
+	}
+
+	@Override
+	public void updateReportCount(int post_id) {
+		postDao.updateReportCount(post_id);
 	}
 
 }

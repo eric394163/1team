@@ -20,8 +20,6 @@ import kr.kh.app.utils.NullCheck;
 public class UserServiceImp implements UserService {
 	private UserDAO userDao;
 
-	NullCheck nullCheck = new NullCheck();
-
 	public UserServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
 
@@ -232,8 +230,7 @@ public class UserServiceImp implements UserService {
 	public boolean unblockUser(BlockedVO blocked) {
 		return userDao.deleteBlockedUser(blocked);
 	}
-
-	@Override
+	
 	public ArrayList<UserVO> getUserList(Criteria cri) {
 		return userDao.selectUserList(cri);
 	}
@@ -255,6 +252,7 @@ public class UserServiceImp implements UserService {
 	public boolean updateUserByUserState2(UserVO updateUser) {
 		return userDao.updateUserByUserState2(updateUser);
 	}
+	
 	public ArrayList<BlockedVO> getBlockedUsers(String user_id) {
 		if(!checkString(user_id)) {
 			return null;
@@ -262,5 +260,19 @@ public class UserServiceImp implements UserService {
 		return userDao.selectBlockedUsers(user_id);
 	}
 
+	@Override
+	public boolean updateUserByUserRoleUserToOp(UserVO updateUser) {
+		return userDao.updateUserByUserRoleUserToOp(updateUser);
+	}
+
+	@Override
+	public boolean updateUserByUserRoleOpToUser(UserVO updateUser) {
+		return userDao.updateUserByUserRoleOpToUser(updateUser);
+	}
+
+	@Override
+	public ArrayList<UserVO> getUserListNotAdmin(Criteria cri) {
+		return userDao.selectUserListNotAdmin(cri);
+	}
 
 }

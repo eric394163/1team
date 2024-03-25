@@ -30,22 +30,22 @@
 					<div class="form-row">
 					    <label for="board" class="form-label">게시판 선택</label>
 					    <select class="form-control second-box" id="board" name="board"  required="required">
-						    <option value="" selected disabled hidden>게시판을 선택해주세요.</option>
-						    <c:choose>
-								<c:when test="${user.user_role == '사용자'}">
-									<c:forEach items="${list}" var="board" begin="2">
-										<option value="${board.board_id}">${board.board_name}</option>
-									</c:forEach>
-								</c:when>
-								<c:when test="${user.user_role == '관리자' || user.user_role == '운영자'}">
-									<c:forEach items="${list}" var="board">
-										<c:if test="${board.board_id != 2}">
-											<option value="${board.board_id}">${board.board_name}</option>
-										</c:if>
-									</c:forEach>
-								</c:when>
-							</c:choose>
-						</select>
+                <option value="" selected disabled hidden>게시판을 선택해주세요.</option>
+							    <c:choose>
+                    <c:when test="${user.user_role == '사용자'}">
+                        <c:forEach items="${list}" var="board" begin="2">
+                            <option value="${board.board_id}">${board.board_name}</option>
+                        </c:forEach>
+                    </c:when>
+                    <c:when test="${user.user_role == '관리자' || user.user_role == '운영자'}">
+                       <c:forEach items="${list}" var="board">
+                          <c:if test="${board.board_id != 2}">
+                             <option value="${board.board_id}">${board.board_name}</option>
+                          </c:if>
+                       </c:forEach>
+                    </c:when>
+                  </c:choose>
+              </select>
 					    <span class="icon">▼</span>
 					</div>
 					<div class="form-row">
@@ -65,8 +65,8 @@
 					    </div>
 					 </div>
 					 <div class="form-row">
-					    <label for="youtube" class="form-label">링크</label>
-					    <input type="text" class="form-control second-box" name="youtube" placeholder="http:// 혹은 https:// 로 시작하는 주소를 입력하세요.">
+					    <label for="link" class="form-label">링크</label>
+					    <input type="text" class="form-control second-box" name="link" placeholder="http:// 혹은 https:// 로 시작하는 주소를 입력하세요.">
 					 </div>
 					 <div class="form-row last">
 					 	<button class="btn btn-dark">게시글 등록</button>

@@ -71,5 +71,10 @@ public interface PostService {
 
 	int getVoteCount(int post_id);
 
+	boolean reportPost(ReportVO report);
+
+    void updateReportCount(int post_id);
+
+
 
 }

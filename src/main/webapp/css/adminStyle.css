@@ -67,3 +67,20 @@
 	height: 35px; font-size: 14px;
 	position: relative; top: -2px;
 }
+
+/* 게시판 수정삭제 */
+#category{ 
+	width: 100%; 
+	/* 기호처리 */
+	background-image: url(/team1/images/down_arrow.svg);
+	background-size: 15px;
+	background-position: calc(100% - 10px) center;
+	background-repeat: no-repeat;
+}
+
+
+/* 게시판 수정 */
+.insert-box{ margin-top: 30px; }
+.insert-box input{
+	position: relative; top: 2px;
+}

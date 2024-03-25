@@ -15,7 +15,7 @@ import kr.kh.app.model.vo.UserVO;
 
 @WebFilter({
 		"/admin/categoryinsert", "/admin/categoryupdate", "/admin/boardinsert", "/admin/boardupdate",
-		"/admin/boardReport1", "/admin/postdelete", "/admin/usermanage", "/admin/userblock"
+		"/admin/boardReport", "/admin/postdelete", "/admin/usermanage", "/admin/userblock"
 })
 public class AdminFilter extends HttpFilter implements Filter {
 
