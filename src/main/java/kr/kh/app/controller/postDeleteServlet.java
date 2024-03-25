@@ -32,7 +32,6 @@ public class postDeleteServlet extends HttpServlet {
 		// url에 따라서 다르게 처리
 
 		String checkUrl = request.getParameter("checkUrl");
-		System.out.println("checkUrl : " + checkUrl);
 
 		if (checkUrl != null
 				&& checkUrl.equals("/admin/boardReportedList")
@@ -58,11 +57,12 @@ public class postDeleteServlet extends HttpServlet {
 				request.setAttribute("url", "/board/list");
 			} else {
 				request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
-				request.setAttribute("url", "/post/detail?num=" + num);
+				request.setAttribute("url", "post/detail?num=" + num);
 			}
-		
+			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+		}
 
-		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+		
 	}
 
 }
