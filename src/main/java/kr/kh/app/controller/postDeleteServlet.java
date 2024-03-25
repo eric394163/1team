@@ -54,7 +54,7 @@ public class postDeleteServlet extends HttpServlet {
 
 			if (res) {
 				request.setAttribute("msg", "게시글을 삭제했습니다.");
-				request.setAttribute("url", "/board/list");
+				request.setAttribute("url", "/board/list?boNum=2&page=1&search=&type=all");
 			} else {
 				request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
 				request.setAttribute("url", "post/detail?num=" + num);

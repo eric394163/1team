@@ -106,7 +106,7 @@ function initIcon(){
 }
 </script>
 <script type="text/javascript">
-//게시글 삭제버튼
+//게시판 삭제버튼
 $(document).on("click",".board-delete", function(){
 	let num = $(this).data("bonum");
 	$.ajax({
@@ -117,10 +117,10 @@ $(document).on("click",".board-delete", function(){
 		},
 		success : function(data){
 			if(data == "ok"){
-				alert("게시글 삭제했습니다.");
+				alert("게시판 삭제했습니다.");
 				getBoardList();
 			}else{
-				alert("게시글 삭제 못함.");
+				alert("게시판 삭제 못함.");
 			}
 		}, 
 		error : function(xhr, status, error){
@@ -143,10 +143,10 @@ $(document).on("click",".board-update", function(){
 		},
 		success : function(data){
 			if(data == "ok"){
-				alert("게시글 수정 했다.");
+				alert("게시판 수정 했다.");
 				getBoardList();
 			}else{
-				alert("게시글 수정 못함.");
+				alert("게시판 수정 못함.");
 			}
 		}, 
 		error : function(xhr, status, error){
