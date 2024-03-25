@@ -468,4 +468,17 @@ public class PostServiceImp implements PostService {
 		return postDao.deletePost(num);
 	}
 
+	@Override
+	public boolean reportPost(ReportVO report) {
+		if(report == null) {
+			return false;
+		}
+		return postDao.insertReportPost(report);
+	}
+
+	@Override
+	public void updateReportCount(int post_id) {
+		postDao.updateReportCount(post_id);
+	}
+
 }

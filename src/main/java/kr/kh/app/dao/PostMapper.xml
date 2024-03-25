@@ -197,7 +197,7 @@
 
 
 	<select id="selectReportedPostCount" resultType="int"> 
-		select count(*) from post where post_reported > 9 
+		select count(*) from post where post_reported > 5 
 	</select>
 	
 	<select id="selectReportedPostList" resultType="kr.kh.app.model.vo.PostVO">
@@ -212,7 +212,7 @@
 			JOIN board ON post.post_board_num = board.board_id
 			JOIN report ON post.post_id = report.report_post_id
 			JOIN user ON post.post_user_id = user.user_id
-		WHERE post.post_reported > 9
+		WHERE post.post_reported > 5
 		ORDER BY report.report_date DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 
@@ -308,4 +308,15 @@
 	<select id="selectBlock" resultType="kr.kh.app.model.vo.BlockedVO">
 		select * from blocked where blocking_user_id = #{blo.blocking_user_id}
 	</select>
+
+
+
+	<insert id="insertReportPost">
+		insert into report(report_post_id, report_reason, report_content, report_date, report_state, report_user_id)
+		values(#{report.report_post_id},#{report.report_reason},#{report.report_content}, now(), #{report.report_state},#{report.report_user_id})
+	</insert>
+
+	<update id="updateReportCount">
+		update post set post_reported = post_reported + 1 where post_id = #{id}
+	</update>
 </mapper>
