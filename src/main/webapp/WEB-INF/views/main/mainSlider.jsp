@@ -65,6 +65,7 @@ prefix="c"%>
 					player.playVideo();	
 				}
 			}
+			
 		});
 	</script>
 </body>
