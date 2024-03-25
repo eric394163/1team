@@ -182,17 +182,27 @@
             }
             
             var operatorCount = 0;
+            var manageCount = 0;
             
-            // 체크한 사람중 운영자가 있다면
+            // 체크한 사람중 운영자나 관리자가 있다면
             userRole.forEach(function(userNowRole){
-            	if(userNowRole == "운영자"){
+            	if(userNowRole == "운영자") {
             		operatorCount++;
+            	}
+            	if(userNowRole == "관리자") {
+            		manageCount++;
             	}
             });
             
             // 운영자는 다시 운영자로 선정할 수 없음
             if(operatorCount > 0) {
             	alert("이미 운영자입니다.");
+            	return;
+            }
+            
+            // 관리자는 운영자로 변경할 수 없음
+            if(manageCount > 0) {
+            	alert("관리자는 운영자로 변경할 수 없습니다.");
             	return;
             }
             
