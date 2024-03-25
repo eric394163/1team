@@ -24,4 +24,14 @@ public interface BoardDAO {
 
 	ArrayList<PostVO> selectLikePostList(@Param("cri")Criteria cri);
 
+	boolean insertBoard(@Param("bo")BoardVO board);
+
+	Object selectBoardByName(@Param("board_name")String board_name);
+
+	ArrayList<BoardVO> selectCaBoardList(@Param("ca_num")int ca_num);
+
+	boolean deleteBoard(@Param("board_id")int board_id);
+
+	boolean updateBoard(@Param("bo")BoardVO board);
+
 }

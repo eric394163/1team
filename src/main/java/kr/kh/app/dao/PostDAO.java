@@ -42,8 +42,8 @@ public interface PostDAO {
 	void deleteFile(@Param("attach_num") int attach_num);
 
 	boolean deleteLink(@Param("attach") AttachVO attachVo);
-	
-	boolean updatePost(@Param("post")PostVO post);
+
+	boolean updatePost(@Param("post") PostVO post);
 
 	AttachVO selectFile(@Param("attach_num") int attach_num);
 
@@ -53,45 +53,50 @@ public interface PostDAO {
 
 	ArrayList<PostVO> selectTotalPopularLikePostList(@Param("cri") Criteria cri);
 
-	boolean updateAttach(@Param("attach")AttachVO attach);
+	boolean updateAttach(@Param("attach") AttachVO attach);
 
 	AttachVO selectAttachPath(@Param("attach_post_id") int attach_post_id);
 
-	void insertLike(@Param("like")UpvoteVO like);
-    int selectReportedPostCount(@Param("cri") Criteria cri);
+	void insertLike(@Param("like") UpvoteVO like);
+
+	int selectReportedPostCount(@Param("cri") Criteria cri);
 
 	ArrayList<PostVO> selectReportedPostList(@Param("cri") Criteria cri);
-	boolean insertComment(@Param("co")CommentVO comment);
 
-	ArrayList<CommentVO> selectCommentList(@Param("cri")Criteria cri);
+	boolean insertComment(@Param("co") CommentVO comment);
 
-	int selectTotalCountComment(@Param("cri")Criteria cri);
+	ArrayList<CommentVO> selectCommentList(@Param("cri") Criteria cri);
 
-	CommentVO selectComment(@Param("comment_id")int num);
+	int selectTotalCountComment(@Param("cri") Criteria cri);
 
-	boolean deleteComment(@Param("comment_id")int num);
+	CommentVO selectComment(@Param("comment_id") int num);
 
-	boolean updateComment(@Param("co")CommentVO comment);
+	boolean deleteComment(@Param("comment_id") int num);
 
+	boolean updateComment(@Param("co") CommentVO comment);
 
-	UpvoteVO selectLike(@Param("user_id")String user_id, @Param("post_id")int post_id);
+	UpvoteVO selectLike(@Param("user_id") String user_id, @Param("post_id") int post_id);
 
-	void updateLike(@Param("like")UpvoteVO like);
+	void updateLike(@Param("like") UpvoteVO like);
 
-	boolean updatePostView(@Param("num")int num);
+	boolean updatePostView(@Param("num") int num);
 
-	boolean updatePostUpvotePlus(@Param("num")int post_id);
+	boolean updatePostUpvotePlus(@Param("num") int post_id);
 
-	boolean updatePostUpvoteMinus(@Param("num")int post_id);
+	boolean updatePostUpvoteMinus(@Param("num") int post_id);
 
 	int selectPostReportedListCount(@Param("cri") Criteria cri);
 
 	ArrayList<ReportVO> selectPostReportedList(@Param("cri") Criteria cri);
 
-	ArrayList<CommentVO> selectTotalCommentList(@Param("post_num")int post_num);
+	ArrayList<CommentVO> selectTotalCommentList(@Param("post_num") int post_num);
 
-	boolean insertuserBlocked(@Param("blocked")BlockedVO blocked);
+	boolean insertuserBlocked(@Param("blocked") BlockedVO blocked);
 
-	ArrayList<BlockedVO> selectBlock(@Param("blo")BlockedVO blocked);
+	ArrayList<BlockedVO> selectBlock(@Param("blo") BlockedVO blocked);
+
+	boolean insertReportPost(@Param("report") ReportVO report);
+
+	void updateReportCount(@Param("id") int post_id);
 
 }

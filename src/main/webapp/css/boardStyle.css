@@ -372,3 +372,6 @@
 .detail-box .btn-last-box a{
 	margin-left: 10px;
 }
+.detail-box iframe{
+	display: block; margin: 30px auto;
+}

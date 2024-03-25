@@ -26,7 +26,7 @@ import kr.kh.app.utils.FileUploadUtils;
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDao;
-	private static String uploadPath = "C:\\musicfile";
+	private static String uploadPath = "D:\\musicfile";
 
 	public PostServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
@@ -466,6 +466,19 @@ public class PostServiceImp implements PostService {
 		}
 		
 		return postDao.deletePost(num);
+	}
+
+	@Override
+	public boolean reportPost(ReportVO report) {
+		if(report == null) {
+			return false;
+		}
+		return postDao.insertReportPost(report);
+	}
+
+	@Override
+	public void updateReportCount(int post_id) {
+		postDao.updateReportCount(post_id);
 	}
 
 }

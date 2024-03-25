@@ -56,7 +56,8 @@ public class PostInsertServlet extends HttpServlet {
 
 		// 첨부파일 가져오기
 		ArrayList<Part> partList = (ArrayList<Part>) request.getParts();
-
+		
+		int post_id = post.getPost_id();
 		// 주소 가져오기
 		String link = request.getParameter("link");
 		AttachVO attach = new AttachVO(link);
