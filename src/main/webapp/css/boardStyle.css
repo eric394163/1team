@@ -375,3 +375,29 @@
 .detail-box iframe{
 	display: block; margin: 30px auto;
 }
+/* 상세 신고 폼 */
+.report-list-box .row-box{
+	display: flex; justify-content: space-between;
+	margin-bottom: 15px;
+}
+.report-list-box .row-box:first-child{
+	margin-bottom: 0;
+}
+.report-list-box div.row-box:nth-of-type(-n+2) label, .report-list-box div.row-box:nth-of-type(-n+2) input{
+	padding-top: 0; padding-bottom: 0;
+}
+.report-list-box .row-box label{
+	width: 120px;
+}
+.report-list-box .row-box input, .report-list-box .row-box textarea, .report-list-box .row-box select{
+	width: 330px; 
+}
+.report-list-box #report_user_nickname, .report-list-box #report_post_title{
+	border: none; padding-left: 0;
+}
+.report-list-box #report_post_title{
+	width: 330px; height: 24px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

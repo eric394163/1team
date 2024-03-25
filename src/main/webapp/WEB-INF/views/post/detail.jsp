@@ -136,6 +136,38 @@
 		</div>
 	</div>
 </div>
+<!-- 신고 모달 -->
+<div class="report-list-box">
+	<div class="report-list">
+	  	<h2>게시글 신고하기</h2>
+	  	<form id="reportForm">
+			<input type="hidden" id="report_post_id" name="post_id" value=""> 
+			<div class="row-box">
+			  <label for="report_user_nickname">작성자:</label>
+			  <input type="text" id="report_user_nickname" name="report_user_nickname" readonly>
+			</div>
+			<div class="row-box">
+			  <label for="report_post_title">제목:</label>
+			  <input type="text" id="report_post_title" name="report_post_title" readonly>
+			</div>
+			<div class="row-box">
+			  <label for="report_reason" class="col-form-label">신고 사유:</label>
+			  <select class="form-select" id="report_reason" name="report_reason" required>
+				<option value="">선택해주세요</option>
+				<c:forEach items="${reportReasonList}" var="reason">
+				  <option value="${reason.report_reason}">${reason.report_reason}</option> 
+				</c:forEach>
+			  </select>
+			</div>
+			<div class="row-box">
+			  <label for="report_content" class="col-form-label">상세 내용:</label>
+			  <textarea class="form-control" id="report_content" name="report_content"></textarea>
+			</div>
+		</form>
+	  	<a href="#close" class="close_btn"><img src="<c:url value="/images/close_icon.svg" />" alt="닫기아이콘" width="30"></a>
+		<button class="btn btn-dark">확인</button>
+	</div>
+ </div>
 
 
 
@@ -155,47 +187,6 @@
 		
 	}
 </script>
-<!-- 신고 모달 -->
-<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h5 class="modal-title" id="reportModalLabel">게시글 신고하기</h5>
-		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body">
-		  <form id="reportForm">
-			<input type="hidden" id="report_post_id" name="post_id" value=""> 
-			<div class="mb-3">
-			  <label for="report_user_nickname" class="col-form-label">작성자:</label>
-			  <input type="text" class="form-control" id="report_user_nickname" name="report_user_nickname" readonly>
-			</div>
-			<div class="mb-3">
-			  <label for="report_post_title" class="col-form-label">제목:</label>
-			  <input type="text" class="form-control" id="report_post_title" name="report_post_title" readonly>
-			</div>
-			<div class="mb-3">
-			  <label for="report_reason" class="col-form-label">신고 사유:</label>
-			  <select class="form-select" id="report_reason" name="report_reason" required>
-				<option value="">선택해주세요</option>
-				<c:forEach items="${reportReasonList}" var="reason">
-				  <option value="${reason.report_reason}">${reason.report_reason}</option> 
-				</c:forEach>
-			  </select>
-			</div>
-			<div class="mb-3">
-			  <label for="report_content" class="col-form-label">상세 내용:</label>
-			  <textarea class="form-control" id="report_content" name="report_content"></textarea>
-			</div>
-		  </form>
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		  <button type="button" class="btn btn-primary" id="submitReport">신고하기</button>
-		</div>
-	  </div>
-	</div>
-  </div>
 
 <!-- 좋아요 -->
 <script type="text/javascript">
@@ -569,8 +560,8 @@ $(document).on('click','.btn-comment-block',function(){
 		console.log(title);
 
 
-	  // 모달 표시
-	  new bootstrap.Modal(document.getElementById('reportModal')).show();
+	  	// 모달 표시
+		$('.report-list-box').show();
 	});
   
 
@@ -589,35 +580,28 @@ $(document).on('click','.btn-comment-block',function(){
 		dataType: "json", // 서버로부터 JSON 형식의 응답을 기대합니다.
 		success: function(response) {
 		// 서버로부터 받은 메시지를 alert로 표시합니다.
-		alert(response.message);
-		location.reload();
-		$('#reportModal').modal('hide');
-		},
+			alert(response.message);
+			location.reload();
+			$('#reportModal').modal('hide');
+			},
 		error: function(xhr, status, error) {
-		// 서버로부터 받은 에러 메시지를 alert로 표시합니다.
-		// 서버 측에서 적절한 JSON 응답을 보내야 합니다.
-		var errorMessage = xhr.status + ': ' + xhr.statusText
-		alert('Error - ' + errorMessage);
+			// 서버로부터 받은 에러 메시지를 alert로 표시합니다.
+			// 서버 측에서 적절한 JSON 응답을 보내야 합니다.
+			var errorMessage = xhr.status + ': ' + xhr.statusText
+			alert('Error - ' + errorMessage);
 		}
-	});
+	  });
 	});
 
 
-	$("#submitReport").on("click", function() {
-		console.log("신고하기 버튼 클릭");
-	  $("#reportForm").submit(); 
+	$('.close_btn').click(function(){
+		$('.report-list-box').hide();
+	});
+	$('.report-list-box button').click(function(){
+		$('.report-list-box').hide();
+		$("#reportForm").submit(); 
 	});
   </script>
-  
 
-
-
-
-
-
-
-
-
-  
 </body>
 </html>
