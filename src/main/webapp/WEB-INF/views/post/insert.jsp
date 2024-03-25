@@ -54,8 +54,8 @@
 					    </div>
 					 </div>
 					 <div class="form-row">
-					    <label for="youtube" class="form-label">링크</label>
-					    <input type="text" class="form-control second-box" name="youtube" placeholder="http:// 혹은 https:// 로 시작하는 주소를 입력하세요.">
+					    <label for="link" class="form-label">링크</label>
+					    <input type="text" class="form-control second-box" name="link" placeholder="http:// 혹은 https:// 로 시작하는 주소를 입력하세요.">
 					 </div>
 					 <div class="form-row last">
 					 	<button class="btn btn-dark">게시글 등록</button>

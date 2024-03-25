@@ -64,7 +64,7 @@
 						 	<c:if test="${link.attach_link_check == 1}">
 								 <div class="form-row link-box">
 								    <label for="link">첨부링크 : </label>
-					    			<a href="<c:url value="${link.attach_path}" />" target="_blank">${link.attach_path}</a>
+					    			<a href="<c:url value="${link.attach_path}" />" target="_blank" class="link-text">${link.attach_path}</a>
 								 </div>
 							 </c:if>
 						 </c:if>
@@ -137,6 +137,24 @@
 	</div>
 </div>
 
+
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<!-- 유튜브 주소 -->
+<script type="text/javascript">
+	let linkFile = '${link.attach_path}';
+	let url = '';
+	
+	if(linkFile.indexOf('https://www.youtube.com/embed') != '-1'){
+		$('.link-box').hide();
+		url += 
+		`
+			<iframe width="560" height="315" src="\${linkFile}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		`;
+		$('.link-box').after(url);
+		
+	}
+</script>
 <!-- 좋아요 -->
 <script type="text/javascript">
 	function checkLogin() {
@@ -192,8 +210,6 @@
 	});
 	
 </script>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <!-- 댓글 등록 -->
 <script type="text/javascript">
 //(댓글)등록 버튼 클릭 이벤트를 등록
