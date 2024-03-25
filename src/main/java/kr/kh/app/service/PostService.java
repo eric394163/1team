@@ -69,5 +69,7 @@ public interface PostService {
 	boolean insertuserBlocked(BlockedVO blocked);
     boolean deletePost(int num);
 
+	int getVoteCount(int post_id);
+
 
 }

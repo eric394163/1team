@@ -94,4 +94,6 @@ public interface PostDAO {
 
 	ArrayList<BlockedVO> selectBlock(@Param("blo")BlockedVO blocked);
 
+	int getVoteCount(@Param("post_id")int post_id);
+
 }

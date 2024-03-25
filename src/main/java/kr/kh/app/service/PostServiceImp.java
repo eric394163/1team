@@ -468,4 +468,9 @@ public class PostServiceImp implements PostService {
 		return postDao.deletePost(num);
 	}
 
+	@Override
+	public int getVoteCount(int post_id) {
+		return postDao.getVoteCount(post_id);
+	}
+
 }

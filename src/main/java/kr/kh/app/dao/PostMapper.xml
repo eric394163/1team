@@ -308,4 +308,8 @@
 	<select id="selectBlock" resultType="kr.kh.app.model.vo.BlockedVO">
 		select * from blocked where blocking_user_id = #{blo.blocking_user_id}
 	</select>
+	
+	<select id="getVoteCount" resultType="int">
+		select count(*) from upvote where post_id = #{post_id} and upvote = 1
+	</select>
 </mapper>
