@@ -83,10 +83,7 @@ prefix="c"%> <%@ page isELIgnored="false" %>
 									    <div class="form-control second-box">${post.post_content}</div>
 									 </div>
 	                				 <div class="form-row btn-last-box">
-										<c:if test="${post.post_user_id != user.user_id && (user.user_role == '관리자' || user.user_role == '운영자')}">
-											<a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
-										</c:if>
-
+										<a href="<c:url value="/post/delete?num=${post.post_id}"/>" class="btn btn-outline-danger">삭제</a>
 										<a href="<c:url value="/admin/boardReport" />" class="btn btn-outline-dark">목록으로</a>
 								  	 </div>
 	                 			</div>

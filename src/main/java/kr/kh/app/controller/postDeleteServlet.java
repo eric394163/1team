@@ -32,6 +32,9 @@ public class postDeleteServlet extends HttpServlet {
 		// url에 따라서 다르게 처리
 
 		String checkUrl = request.getParameter("checkUrl");
+		
+		System.out.println(checkUrl);
+		
 
 		if (checkUrl != null
 				&& checkUrl.equals("boardReportList")
@@ -50,10 +53,10 @@ public class postDeleteServlet extends HttpServlet {
 
 			if (res) {
 				request.setAttribute("msg", "게시글을 삭제했습니다.");
-				request.setAttribute("url", "post/list");
+				request.setAttribute("url", "/board/list");
 			} else {
 				request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
-				request.setAttribute("url", "post/detail?num=" + num);
+				request.setAttribute("url", "/board/detail?boNum=" + num + "&type=all&page=1");
 			}
 		}
 
