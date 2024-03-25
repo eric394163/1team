@@ -197,23 +197,27 @@
 
 
 	<select id="selectReportedPostCount" resultType="int"> 
-		select count(*) from post where post_reported > 5 
+		select count(*) from post where post_reported > 3
 	</select>
 	
 	<select id="selectReportedPostList" resultType="kr.kh.app.model.vo.PostVO">
 
 		SELECT 
-			post.*,
-			board.board_name,
-			report.report_date,
+			post.*, 
+			board.board_name, 
+			MAX(report.report_date) AS report_date, 
 			user.user_nickname
-		FROM
+		FROM 
 			post
-			JOIN board ON post.post_board_num = board.board_id
-			JOIN report ON post.post_id = report.report_post_id
-			JOIN user ON post.post_user_id = user.user_id
+		JOIN 
+			board ON post.post_board_num = board.board_id
+		JOIN 
+			report ON post.post_id = report.report_post_id
+		JOIN 
+			user ON post.post_user_id = user.user_id
 		WHERE post.post_reported > 5
-		ORDER BY report.report_date DESC
+		GROUP BY post.post_id
+		ORDER BY report_date DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 
 	</select>
