@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/team1/images/favicon.png" type="image/png">
 	<!-- 부트스트랩5 css/js -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/team1/css/common.css">
+	<link rel="stylesheet" href="/team1/css/boardStyle.css" />
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
@@ -25,12 +25,12 @@
 	        	</div>
 	        	<c:choose>
 	        		<c:when test="${user.user_role == '관리자'}">
-			        	<!-- <input type='checkbox' name='authory' value='selectall' onclick='selectAll(this)'/> 전체 선택 -->
+			        	<div class="all-check-area">
 							<button type="submit" class="btn btn-dark" id="operator-select-box">운영자 선정</button>
 							<button type="submit" class="btn btn-dark" id ="operator-release-box">운영자 해제</button>
-		
-							<table class="table table hover">
-								<thead>
+						</div>
+							<table class="table member-table">
+								<thead class="table-dark">
 									<tr>
 										<th><input type="checkbox" id="all-chk" /></th>
 										<th>권한</th>
