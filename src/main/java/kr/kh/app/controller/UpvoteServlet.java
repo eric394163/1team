@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.kh.app.model.vo.PostVO;
 import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;
@@ -21,12 +26,22 @@ public class UpvoteServlet extends HttpServlet {
 		int post_id = 0;
 		try {
 			post_id = Integer.parseInt(request.getParameter("postId"));
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int voteCount = postService.getVoteCount(post_id);
 		
-		response.getWriter().write("" + voteCount);
+		PostVO post = postService.getPost(post_id);
+		JSONObject jobj = new JSONObject();
+		ObjectMapper om = new ObjectMapper();
+		String postStr = "";
+		try {
+			postStr = om.writeValueAsString(post);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		jobj.put("post", postStr);
+		response.setContentType("application/json; charset=utf-8");
+		response.getWriter().print(jobj);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

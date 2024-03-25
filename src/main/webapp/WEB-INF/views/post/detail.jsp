@@ -60,7 +60,7 @@
 						 	</div>
 						    <div class="right-box icon-box">
 						 		<img src="<c:url value="/images/siren_icon.svg" />" alt="사이렌아이콘" width="24" class="siren-icon">
-						 		<span>${post.post_reported}</span> 
+						 		<span class="init-siren">${post.post_reported}</span> 
 						 		<img src="<c:url value="/images/like_icon.svg" />" alt="라이크아이콘" width="24" class="like-icon">
 						 		<span class="init-like">${post.post_upvotes}</span>
 						 	</div>
@@ -610,7 +610,7 @@ $(document).on('click','.btn-comment-block',function(){
 		success: function(response) {
 		// 서버로부터 받은 메시지를 alert로 표시합니다.
 			alert(response.message);
-			location.reload();
+			updatevote();
 			$('#reportModal').modal('hide');
 			},
 		error: function(xhr, status, error) {
@@ -630,6 +630,37 @@ $(document).on('click','.btn-comment-block',function(){
 		$('.report-list-box').hide();
 		$("#reportForm").submit(); 
 	});
+	
+	function updatevote(){
+		   let postId = '${post.post_id}';
+		   let like = {
+		      postId : postId
+		   }
+		   $.ajax({
+		      url : '<c:url value="/upvote/check"/>',
+		      method : "get",
+		      data : like,
+		      success : function(data){
+		    	//data : 포스트 정보 불러옴
+		    	let post = JSON.parse(data.post);
+		        $(".init-like").remove();
+		        $(".init-siren").remove();
+				let sirenNum =
+		        `
+		        <span class="init-siren">\${post.post_reported}</span> 
+		        `
+		        let likeNum =
+		        `
+		        <span class="init-like">\${post.post_upvotes}</span>
+		        `
+		        $(".like-icon").after(likeNum);
+		      	$(".siren-icon").after(sirenNum);
+		      }, 
+		      error : function(a, b, c){
+		         
+		      }
+		   });
+		}
   </script>
 
 </body>
