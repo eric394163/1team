@@ -26,7 +26,7 @@ import kr.kh.app.utils.FileUploadUtils;
 
 public class PostServiceImp implements PostService {
 	private PostDAO postDao;
-	private static String uploadPath = "C:\\musicfile";
+	private static String uploadPath = "D:\\musicfile";
 
 	public PostServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
