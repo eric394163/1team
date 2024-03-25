@@ -16,9 +16,9 @@ prefix="c"%>
 	<main>
 		<div class="mainSwiper">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide"><iframe id="video1" width="820" height="460" src="https://www.youtube.com/embed/0Bvd2mInMJQ?enablejsapi=1&controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="swiper-slide"><img src="<c:url value="/images/main02_2.jpg" />" alt="메인이미지"></div>
-				<div class="swiper-slide"><img src="<c:url value="/images/main03_2.jpg" />" alt="메인이미지"></div>
+				<div class="swiper-slide"><iframe id="video1" width="818" height="458" src="https://www.youtube.com/embed/0Bvd2mInMJQ?enablejsapi=1&controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+				<div class="swiper-slide"><img src="<c:url value="/images/main02.jpg" />" alt="메인이미지"></div>
+				<div class="swiper-slide"><img src="<c:url value="/images/main03.jpg" />" alt="메인이미지"></div>
 			</div>
 			<div class="swiper-button-next"></div>
 			<div class="swiper-button-prev"></div>
@@ -59,7 +59,7 @@ prefix="c"%>
 			loop: true,
 			on: {
 				transitionStart: function(){
-					player.pauseVideo();	
+					//player.pauseVideo();	
 				},
 				transitionEnd: function(){
 					player.playVideo();	
