@@ -23,8 +23,13 @@
 		<jsp:include page="/WEB-INF/views/common/aside.jsp" />
 		<div class="main-contents">
 			<div class="h2_title_wrap">
-				<h2>상세게시글보기</h2> 
-				<a href="<c:url value="/post/list"/>" class="btn btn-outline-dark">게시글 목록</a>
+				<h2>상세게시글보기</h2>
+					<c:url value="/board/list" var="url">
+						<c:param name="boNum" value="${post.post_board_num}" />
+						<c:param name="page" value="${page == null?1:page}" />
+						<c:param name="type" value="all" />
+					</c:url>
+					<a href="${url}" class="btn btn-outline-dark">게시글 목록</a>
 			</div>
 			<c:choose>
 				<c:when test="${post != null }">
