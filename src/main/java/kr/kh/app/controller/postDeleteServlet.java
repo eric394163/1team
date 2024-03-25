@@ -60,9 +60,8 @@ public class postDeleteServlet extends HttpServlet {
 				request.setAttribute("url", "post/detail?num=" + num);
 			}
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
-		}
-
-		
 	}
 
+		
 }
+

@@ -487,5 +487,105 @@ $(document).on('click','.btn-comment-block',function(){
 	});
 });
 </script>
+
+<script>
+	$(document).on("click", "#btnReport", function() {
+		var postId = '${post.post_id}';
+		var author = '${writer.user_nickname}';
+		var title = '${post.post_title}';
+
+		$('#report_post_id').val(postId);
+		$('#report_user_nickname').val(author);
+		$('#report_post_title').val(title);
+		
+		console.log(postId);
+		console.log(author);
+		console.log(title);
+
+
+	  // 모달 표시
+	  new bootstrap.Modal(document.getElementById('reportModal')).show();
+	});
+  
+
+	$("#reportForm").on("submit", function(event) {
+	  event.preventDefault(); // 폼 기본 제출 방지
+	  var formData = $(this).serialize();
+
+	  console.log(formData);
+	  console.log("신고 폼 제출");
+
+	  // AJAX 요청
+	  $.ajax({
+		type: "POST",
+		url: "<c:url value='/post/report'/>", 
+		data: formData,
+		success: function(response) {
+		  alert("신고가 접수되었습니다.");
+		  $('#reportModal').modal('hide');
+		},
+		error: function() {
+		  alert("신고 접수에 실패했습니다. 다시 시도해주세요.");
+		}
+	  });
+	});
+
+
+	$("#submitReport").on("click", function() {
+		console.log("신고하기 버튼 클릭");
+	  $("#reportForm").submit(); 
+	});
+  </script>
+  
+
+
+
+
+
+
+
+
+<!-- 신고 모달 -->
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="reportModalLabel">게시글 신고하기</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  <form id="reportForm">
+			<input type="hidden" id="report_post_id" name="post_id" value=""> 
+			<div class="mb-3">
+			  <label for="report_user_nickname" class="col-form-label">작성자:</label>
+			  <input type="text" class="form-control" id="report_user_nickname" name="report_user_nickname" readonly>
+			</div>
+			<div class="mb-3">
+			  <label for="report_post_title" class="col-form-label">제목:</label>
+			  <input type="text" class="form-control" id="report_post_title" name="report_post_title" readonly>
+			</div>
+			<div class="mb-3">
+			  <label for="report_reason" class="col-form-label">신고 사유:</label>
+			  <select class="form-select" id="report_reason" name="report_reason" required>
+				<option value="">선택해주세요</option>
+				<c:forEach items="${reportReasonList}" var="reason">
+				  <option value="${reason.report_reason}">${reason.report_reason}</option> 
+				</c:forEach>
+			  </select>
+			</div>
+			<div class="mb-3">
+			  <label for="report_content" class="col-form-label">상세 내용:</label>
+			  <textarea class="form-control" id="report_content" name="report_content"></textarea>
+			</div>
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		  <button type="button" class="btn btn-primary" id="submitReport">신고하기</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
 </body>
 </html>
