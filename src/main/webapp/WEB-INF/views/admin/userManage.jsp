@@ -233,17 +233,16 @@
 		var userIds = [];
 		
 		// 체크된 사용자의 권한을 저장하는 배열
-		var userStates = [];
+		var userRole = [];
 		
 		// 체크된 모든 사용자의 ID와 상태 수집
 		$(".block-chk:checked").each(function() {
 			var userId = $(this).data("id");
 			userIds.push(userId);
 			
-			var userState = $(this).data("state");
-              userStates.push(userState);
+			var userNowRole = $(this).data("state");
+			userRole.push(userNowRole);
 		});
-		
 
         // 아무것도 선택 안 함
         if (userIds.length === 0) {
@@ -251,7 +250,49 @@
           return;
         }
         
+        var userCount = 0;
+        var manageCount = 0;
+        
+        // 체크한 사람중 사용자나 관리자가 있다면
+        userRole.forEach(function(userNowRole){
+        	if(userNowRole == "사용자") {
+        		userCount++;
+        	}
+        	if(userNowRole == "관리자") {
+        		manageCount++;
+        	}
+        });
+        
+        // 사용자는 운영자 해제를 할 수 없음
+        if(userCount > 0) {
+        	alert("이미 사용자입니다.");
+        	return;
+        }
+        
+        // 관리자는 사용자로 변경할 수 없음
+        if(manageCount > 0) {
+        	alert("관리자는 사용자로 변경할 수 없습니다.");
+        	return;
+        }
+        
+        // 체크된 모든 운영자 권한을 사용자로 변경
+        userIds.forEach(function(userId) {
+        	$.ajax({
+        		 url: "<c:url value='/admin/changeuser' />", 
+                 type: "POST",
+                 data: { changeUser: userId },
+                 success: function (response) {
+               
+                 },
+                 error: function (xhr, status, error) {
+                   
+                 },
+        	});
+        });
+        
+        alert("선택된 운영자들의 권한을 사용자로 변경합니다.");
         location.reload();
+        
 	});
 	</script>
   </body>

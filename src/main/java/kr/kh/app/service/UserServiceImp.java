@@ -282,8 +282,13 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public boolean updateUserByUserRole(UserVO updateUser) {
-		return userDao.updateUserByUserRole(updateUser);
+	public boolean updateUserByUserRoleUserToOp(UserVO updateUser) {
+		return userDao.updateUserByUserRoleUserToOp(updateUser);
+	}
+
+	@Override
+	public boolean updateUserByUserRoleOpToUser(UserVO updateUser) {
+		return userDao.updateUserByUserRoleOpToUser(updateUser);
 	}
 
 }

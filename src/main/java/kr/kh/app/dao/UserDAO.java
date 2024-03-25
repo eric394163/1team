@@ -49,6 +49,8 @@ public interface UserDAO {
     
     ArrayList<BlockedVO> selectBlockedUsers(@Param("id") String user_id);
 
-	boolean updateUserByUserRole(@Param("user")UserVO updateUser);
+	boolean updateUserByUserRoleUserToOp(@Param("user")UserVO updateUser);
+
+	boolean updateUserByUserRoleOpToUser(@Param("user")UserVO updateUser);
 
 }

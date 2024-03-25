@@ -93,8 +93,12 @@
         WHERE blocking_user_id = #{id.blocking_user_id}
     </select>
     
-    <update id="updateUserByUserRole">
+    <update id="updateUserByUserRoleUserToOp">
     	update user set user_role = "운영자" where user_id = #{user.user_id};
+    </update>
+    
+    <update id="updateUserByUserRoleOpToUser">
+    	update user set user_role = "사용자" where user_id = #{user.user_id};
     </update>
 
 </mapper>
