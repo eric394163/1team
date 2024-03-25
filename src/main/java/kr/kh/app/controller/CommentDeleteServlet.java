@@ -1,7 +1,6 @@
 package kr.kh.app.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,11 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import kr.kh.app.model.vo.CommentVO;
 import kr.kh.app.model.vo.UserVO;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;

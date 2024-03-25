@@ -92,5 +92,9 @@
         FROM blocked 
         WHERE blocking_user_id = #{id.blocking_user_id}
     </select>
+    
+    <update id="updateUserByUserRole">
+    	update user set user_role = "운영자" where user_id = #{user.user_id};
+    </update>
 
 </mapper>

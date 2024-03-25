@@ -164,24 +164,54 @@
 			var userIds = [];
 			
 			// 체크된 사용자의 권한을 저장하는 배열
-			var userStates = [];
+			var userRole = [];
 			
 			// 체크된 모든 사용자의 ID와 상태 수집
 			$(".block-chk:checked").each(function() {
 				var userId = $(this).data("id");
 				userIds.push(userId);
 				
-				var userState = $(this).data("state");
-	              userStates.push(userState);
+				var userNowRole = $(this).data("state");
+				userRole.push(userNowRole);
 			});
 			
-
             // 아무것도 선택 안 함
             if (userIds.length === 0) {
               alert("선택된 사용자가 없습니다.");
               return;
             }
             
+            var operatorCount = 0;
+            
+            // 체크한 사람중 운영자가 있다면
+            userRole.forEach(function(userNowRole){
+            	if(userNowRole == "운영자"){
+            		operatorCount++;
+            	}
+            });
+            
+            // 운영자는 다시 운영자로 선정할 수 없음
+            if(operatorCount > 0) {
+            	alert("이미 운영자입니다.");
+            	return;
+            }
+            
+            // 체크된 모든 사용자 권한을 운영자로 변경
+            userIds.forEach(function(userId) {
+            	$.ajax({
+            		 url: "<c:url value='/admin/changeoperator' />", 
+                     type: "POST",
+                     data: { changeOperator: userId },
+                     success: function (response) {
+                   
+                     },
+                     error: function (xhr, status, error) {
+                       
+                     },
+            	});
+            });
+            
+            alert("선택된 사용자들의 권한을 운영자로 변경합니다.");
             location.reload();
 		});
 	</script>

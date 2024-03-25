@@ -281,4 +281,9 @@ public class UserServiceImp implements UserService {
 		return userDao.selectBlockedUsers(user_id);
 	}
 
+	@Override
+	public boolean updateUserByUserRole(UserVO updateUser) {
+		return userDao.updateUserByUserRole(updateUser);
+	}
+
 }

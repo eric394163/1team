@@ -47,4 +47,6 @@ public interface UserService {
 	
     ArrayList<BlockedVO> getBlockedUsers(String userId);
 
+	boolean updateUserByUserRole(UserVO updateUser);
+
 }
