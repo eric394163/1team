@@ -15,4 +15,16 @@ public class ReportVO {
     private Date report_date; // 신고일 
     private String report_state; // 신고 처리
     private String report_user_id; // 신고자 
+
+
+    public ReportVO(int post_id, String report_reason, String report_content, String report_state,
+            String report_user_id) {
+        this.report_post_id = post_id;
+        this.report_reason = report_reason;
+        this.report_content = report_content;
+        this.report_state = report_state;
+        this.report_user_id = report_user_id;
+    }
+
+    
 }

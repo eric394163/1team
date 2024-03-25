@@ -69,5 +69,9 @@ public interface PostService {
 	boolean insertuserBlocked(BlockedVO blocked);
     boolean deletePost(int num);
 
+	boolean reportPost(ReportVO report);
+
+    void updateReportCount(int post_id);
+
 
 }
