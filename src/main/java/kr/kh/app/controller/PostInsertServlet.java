@@ -32,10 +32,12 @@ public class PostInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		MainServlet.commonAsideInfo(request);
+		UserVO user =  (UserVO)request.getSession().getAttribute("user");
 		// 게시판 전체 가져옴
 		ArrayList<BoardVO> list = postService.getBoardList();
+		
+		request.setAttribute("user", user);
 		request.setAttribute("list", list);
-
 		request.getRequestDispatcher("/WEB-INF/views/post/insert.jsp").forward(request, response);
 	}
 
