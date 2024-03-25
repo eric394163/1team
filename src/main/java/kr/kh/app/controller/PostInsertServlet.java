@@ -35,9 +35,9 @@ public class PostInsertServlet extends HttpServlet {
 		UserVO user =  (UserVO)request.getSession().getAttribute("user");
 		// 게시판 전체 가져옴
 		ArrayList<BoardVO> list = postService.getBoardList();
-		
-		request.setAttribute("user", user);
+
 		request.setAttribute("list", list);
+		request.setAttribute("user", user);
 		request.getRequestDispatcher("/WEB-INF/views/post/insert.jsp").forward(request, response);
 	}
 

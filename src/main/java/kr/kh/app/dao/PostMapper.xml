@@ -311,7 +311,9 @@
 		select * from blocked where blocking_user_id = #{blo.blocking_user_id}
 	</select>
 
-
+	<select id="getVoteCount" resultType="int">
+		select count(*) from upvote where post_id = #{post_id} and upvote = 1
+	</select>
 
 	<insert id="insertReportPost">
 		insert into report(report_post_id, report_reason, report_content, report_date, report_state, report_user_id)
@@ -321,4 +323,5 @@
 	<update id="updateReportCount">
 		update post set post_reported = post_reported + 1 where post_id = #{id}
 	</update>
+
 </mapper>

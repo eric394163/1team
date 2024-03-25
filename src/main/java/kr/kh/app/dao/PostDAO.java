@@ -99,4 +99,6 @@ public interface PostDAO {
 
 	void updateReportCount(@Param("id") int post_id);
 
+	int getVoteCount(@Param("post_id")int post_id);
+
 }

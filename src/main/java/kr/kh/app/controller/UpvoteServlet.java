@@ -18,10 +18,15 @@ public class UpvoteServlet extends HttpServlet {
 	private PostService postService = new PostServiceImp();
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserVO user = (UserVO)request.getSession().getAttribute("user");
+		int post_id = 0;
+		try {
+			post_id = Integer.parseInt(request.getParameter("postId"));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		int voteCount = postService.getVoteCount(post_id);
 		
-		
-		
+		response.getWriter().write("" + voteCount);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

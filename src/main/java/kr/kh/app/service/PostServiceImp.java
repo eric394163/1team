@@ -469,6 +469,10 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
+	public int getVoteCount(int post_id) {
+		return postDao.getVoteCount(post_id);
+  }
+  
 	public boolean reportPost(ReportVO report) {
 		if(report == null) {
 			return false;
