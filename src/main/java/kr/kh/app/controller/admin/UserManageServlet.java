@@ -41,7 +41,7 @@ public class UserManageServlet extends HttpServlet {
 				request.setAttribute("pm", pm);
 
 
-				ArrayList<UserVO> list = userService.getUserList(cri);
+				ArrayList<UserVO> list = userService.getUserListNotAdmin(cri);
 				request.setAttribute("list", list);
 				
 				request.getRequestDispatcher("/WEB-INF/views/admin/userManage.jsp").forward(request, response);

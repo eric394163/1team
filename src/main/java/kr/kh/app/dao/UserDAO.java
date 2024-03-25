@@ -53,4 +53,6 @@ public interface UserDAO {
 
 	boolean updateUserByUserRoleOpToUser(@Param("user")UserVO updateUser);
 
+	ArrayList<UserVO> selectUserListNotAdmin(@Param("cri")Criteria cri);
+
 }

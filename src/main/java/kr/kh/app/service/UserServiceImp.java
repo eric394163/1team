@@ -272,4 +272,9 @@ public class UserServiceImp implements UserService {
 		return userDao.updateUserByUserRoleOpToUser(updateUser);
 	}
 
+	@Override
+	public ArrayList<UserVO> getUserListNotAdmin(Criteria cri) {
+		return userDao.selectUserListNotAdmin(cri);
+	}
+
 }

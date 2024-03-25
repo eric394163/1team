@@ -92,4 +92,18 @@
     	update user set user_role = "사용자" where user_id = #{user.user_id};
     </update>
 
+	<select id="selectUserListNotAdmin"  resultType="kr.kh.app.model.vo.UserVO">
+    	SELECT * FROM USER 
+    	WHERE user_role not in ("관리자")
+    	<if test='cri.type=="nickname"'>
+			and (user_nickname like concat('%', #{cri.search},'%') 
+			or user_nickname = #{cri.search})
+		</if>
+		<if test='cri.type=="id"'>
+			and (user_id like concat('%', #{cri.search},'%') 
+			or user_id = #{cri.search})
+		</if>
+    	order by user_id desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+    </select>
 </mapper>
