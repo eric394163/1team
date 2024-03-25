@@ -25,4 +25,8 @@ public class AttachVO {
 		this.attach_link_check = attach_link_check;
 		this.attach_path = youtube;
 	}
+
+	public AttachVO(String attach_path) {
+		this.attach_path = attach_path;
+	}
 }

@@ -17,6 +17,7 @@ public interface UserService {
 	String checkId(String id);
 
 	boolean updateSignUp(SignUpDTO signUpDto) throws Exception;
+	
     int getTotalBlockedUserCount(Criteria cri);
 
     ArrayList<BlockedVO> getBlockedUserList(Criteria cri);
@@ -40,6 +41,13 @@ public interface UserService {
 	boolean updateUserByUserState(UserVO updateUser);
 
 	boolean updateUserByUserState2(UserVO updateUser);
+	
     ArrayList<BlockedVO> getBlockedUsers(String userId);
+
+	boolean updateUserByUserRoleUserToOp(UserVO updateUser);
+
+	boolean updateUserByUserRoleOpToUser(UserVO updateUser);
+
+	ArrayList<UserVO> getUserListNotAdmin(Criteria cri);
 
 }
