@@ -32,11 +32,13 @@ public class postDeleteServlet extends HttpServlet {
 		// url에 따라서 다르게 처리
 
 		String checkUrl = request.getParameter("checkUrl");
+		System.out.println("checkUrl : " + checkUrl);
 
 		if (checkUrl != null
-				&& checkUrl.equals("boardReportList")
+				&& checkUrl.equals("/admin/boardReportedList")
 				&& (user.getUser_role().equals("관리자") || user.getUser_role().equals("운영자"))) {
 			res = postService.deletePost(num);
+			System.out.println("이게 보여야 함 ");
 			if (res) {
 				request.setAttribute("msg", "게시글을 삭제했습니다.");
 				request.setAttribute("url", "/admin/boardReport");
@@ -44,18 +46,21 @@ public class postDeleteServlet extends HttpServlet {
 				request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
 				request.setAttribute("url", "/admin/boardReportedList?num=" + num);
 			}
-		} else {
+
+			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+		}
+
 			res = postService.deletePost(num, user);
 			System.out.println("게시글 삭제 결과 : " + res);
 
 			if (res) {
 				request.setAttribute("msg", "게시글을 삭제했습니다.");
-				request.setAttribute("url", "post/list");
+				request.setAttribute("url", "/board/list");
 			} else {
 				request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
-				request.setAttribute("url", "post/detail?num=" + num);
+				request.setAttribute("url", "/post/detail?num=" + num);
 			}
-		}
+		
 
 		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 	}
