@@ -37,7 +37,7 @@
 	        		<form action="<c:url value="/admin/categoryinsert" />" method="post">
 	        			<div class="form-group">
 	        				<label for="category">새로운 카테고리명 입력 : </label>
-	        				<input type="text" id="category" name="category" class="form-control" placeholder="기존 카테고리와는 다른 카테고리명으로 입력하세요." required />
+	        				<input type="text" id="category2" name="category" class="form-control" placeholder="기존 카테고리와는 다른 카테고리명으로 입력하세요." required />
 	        				<button type="submit" class="btn btn-dark">카테고리추가</button>
 	        			</div>
 	        		</form>
