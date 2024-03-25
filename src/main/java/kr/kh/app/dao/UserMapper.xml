@@ -94,7 +94,7 @@
 
 	<select id="selectUserListNotAdmin"  resultType="kr.kh.app.model.vo.UserVO">
     	SELECT * FROM USER 
-    	WHERE user_role not in ("관리자")
+    	WHERE user_role not in ("관리자") and user_state not in("탈퇴중") and user_state not in ("정지중")
     	<if test='cri.type=="nickname"'>
 			and (user_nickname like concat('%', #{cri.search},'%') 
 			or user_nickname = #{cri.search})
