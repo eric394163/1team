@@ -53,15 +53,6 @@
         WHERE blocked_user_id = #{blocked.blocked_user_id} and blocking_user_id = #{blocked.blocking_user_id}
     </delete>
     
-    <select id="selectTotalUserList" resultType="kr.kh.app.model.vo.UserVO">
-    	select * from user
-    </select>
-    
-    <select id="selectTotalUserCount" resultType="int">
-    	select count(*)
-    	from user
-    </select>
-    
     <select id="selectUserList"  resultType="kr.kh.app.model.vo.UserVO">
     	select * from user 
     	<if test='cri.type=="nickname"'>

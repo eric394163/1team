@@ -35,33 +35,16 @@ public class UserManageServlet extends HttpServlet {
 				
 				Criteria cri = new Criteria(page, 10, type, search);
 
-//				int totalCount = userService.getTotalUserCount(cri);
 				int totalCount = userService.getTotalCount(cri);
 				
 				PageMaker pm = new PageMaker(5, cri, totalCount);
 				request.setAttribute("pm", pm);
 
 
-				ArrayList<UserVO> list = userService.getTotalUserList(cri);
+				ArrayList<UserVO> list = userService.getUserList(cri);
 				request.setAttribute("list", list);
 				
 				request.getRequestDispatcher("/WEB-INF/views/admin/userManage.jsp").forward(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String [] user_id = request.getParameterValues("authory-user-id");
-//		String [] user_role = request.getParameterValues("authory-user-role");
-//
-//		// user_id 받아오는지 확인
-//		for (int i = 0 ; i < user_id.length; i++){
-//			System.out.println(user_id[i]);
-//		}	
-//
-//		// user_role 받아오는지 확인
-//		for (int i = 0 ; i < user_role.length; i++){
-//			System.out.println(user_role[i]);
-//		}		
-
-//		UserVO user = new UserVO(user_id, user_role);
-	}
 }

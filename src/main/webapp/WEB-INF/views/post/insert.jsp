@@ -28,7 +28,6 @@
 				</div>
 				<form action="<c:url value="/post/insert"/>" method = "post" enctype ="multipart/form-data" class="insert-form">
 					<div class="form-row">
-						<input type="hidden" name="num" value="${post.post_id }">
 					    <label for="board" class="form-label">게시판 선택</label>
 					    <select class="form-control second-box" id="board" name="board"  required="required">
 						    <option value="" selected disabled hidden>게시판을 선택해주세요.</option>
