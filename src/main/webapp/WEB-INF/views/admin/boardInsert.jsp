@@ -23,6 +23,21 @@
 				<div class="h2_title_wrap"><!-- 타이틀영역 -->
 	        		<h2>관리자페이지 - 게시판 등록</h2>
 	        	</div>
+	        	<div class="admin-box">
+	        		<form action="<c:url value="/admin/boardinsert" />" method="post">
+		        		<h3>▣ 카테고리 선택</h3>
+	        			<select class="form-control" id="category" name="category">
+					    	<c:forEach items="${categoryList}" var="category">
+					    		<option value="${category.category_id}">${category.category_name}</option>
+					    	</c:forEach>
+					    </select>
+	        			<div class="form-group mt-5">
+	        				<label for="category"><h4>새로운 게시판명 입력 : </h4></label>
+	        				<input type="text" id="board" name="board" class="form-control mb-1" placeholder="기존 게시판과는 다른 게시판명으로 입력하세요." required />
+	        				<button type="submit" class="btn btn-dark">게시판추가</button>
+	        			</div>
+	        		</form>
+	        	</div>
 			</div>
 		</div>
 	</div>

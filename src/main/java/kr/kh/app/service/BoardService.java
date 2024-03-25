@@ -23,4 +23,12 @@ public interface BoardService {
 
 	ArrayList<PostVO> getLikePostList(Criteria cri);
 
+	boolean insertBoard(BoardVO board) throws Exception;
+
+	ArrayList<BoardVO> getCaBoardList(int ca_num);
+
+	boolean deleteBoard(int board_id);
+
+	boolean updateBoard(BoardVO board);
+
 }
