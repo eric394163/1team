@@ -28,6 +28,7 @@
 				</div>
 				<form action="<c:url value="/post/insert"/>" method = "post" enctype ="multipart/form-data" class="insert-form">
 					<div class="form-row">
+						<input type="hidden" name="num" value="${post.post_id }">
 					    <label for="board" class="form-label">게시판 선택</label>
 					    <select class="form-control second-box" id="board" name="board"  required="required">
 						    <option value="" selected disabled hidden>게시판을 선택해주세요.</option>
@@ -54,8 +55,8 @@
 					    </div>
 					 </div>
 					 <div class="form-row">
-					    <label for="youtube" class="form-label">링크</label>
-					    <input type="text" class="form-control second-box" name="youtube" placeholder="http:// 혹은 https:// 로 시작하는 주소를 입력하세요.">
+					    <label for="link" class="form-label">링크</label>
+					    <input type="text" class="form-control second-box" name="link" placeholder="http:// 혹은 https:// 로 시작하는 주소를 입력하세요.">
 					 </div>
 					 <div class="form-row last">
 					 	<button class="btn btn-dark">게시글 등록</button>

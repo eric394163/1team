@@ -35,6 +35,7 @@ public class PostInsertServlet extends HttpServlet {
 		// 게시판 전체 가져옴
 		ArrayList<BoardVO> list = postService.getBoardList();
 		request.setAttribute("list", list);
+
 		request.getRequestDispatcher("/WEB-INF/views/post/insert.jsp").forward(request, response);
 	}
 
@@ -56,7 +57,7 @@ public class PostInsertServlet extends HttpServlet {
 
 		// 주소 가져오기
 		String link = request.getParameter("link");
-		AttachVO attach = new AttachVO(post_board_num, link);
+		AttachVO attach = new AttachVO(link);
 
 		// 서비스에게 게시글 객체를 주면서 등록하라고 시킴
 

@@ -66,7 +66,7 @@ public class PostServiceImp implements PostService {
 		if (attach == null || post_id == 0) {
 			return;
 		}
-
+		attach.setAttach_post_id(post_id);
 		postDao.insertLink(attach);
 	}
 

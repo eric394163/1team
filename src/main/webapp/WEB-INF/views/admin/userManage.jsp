@@ -92,7 +92,7 @@
 								</li>
 							</c:if>
 						</ul>
-						<form action="<c:url value="/admin/userblock"/>" class="mb-3 mt-3" id="seachbox">
+						<form action="<c:url value="/admin/usermanage"/>" class="mb-3 mt-3" id="seachbox">
 							<div class="input-group">
 								<input type="hidden" name="page" value="1">
 								<select name="type" class="form-control" id="search-select">
