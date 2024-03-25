@@ -49,19 +49,17 @@ public class postDeleteServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 		}
 
-			res = postService.deletePost(num, user);
-			System.out.println("게시글 삭제 결과 : " + res);
+		res = postService.deletePost(num, user);
+		System.out.println("게시글 삭제 결과 : " + res);
 
-			if (res) {
-				request.setAttribute("msg", "게시글을 삭제했습니다.");
-				request.setAttribute("url", "/board/list");
-			} else {
-				request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
-				request.setAttribute("url", "post/detail?num=" + num);
-			}
-			request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
+		if (res) {
+			request.setAttribute("msg", "게시글을 삭제했습니다.");
+			request.setAttribute("url", "/board/list");
+		} else {
+			request.setAttribute("msg", "게시글을 삭제하지 못했습니다.");
+			request.setAttribute("url", "post/detail?num=" + num);
+		}
+		request.getRequestDispatcher("/WEB-INF/views/common/message.jsp").forward(request, response);
 	}
 
-		
 }
-
