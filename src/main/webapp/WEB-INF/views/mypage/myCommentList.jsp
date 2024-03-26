@@ -49,7 +49,7 @@
 								<td>${post.post_view}</td>
 							</tr>
 						</c:forEach>
-						<c:if test="${list.size() == 0 }">
+						<c:if test="${myList.size() == 0 }">
 							<tr>
 								<th colspan="5" class="text-center">등록된 게시글이 없습니다.</th>
 							</tr>
