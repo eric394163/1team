@@ -28,7 +28,6 @@ public class UserDropServlet extends HttpServlet {
 		
 		
 		String user_drop_id = request.getParameter("userDropId");
-		String user_email = user.getUser_email();
 
 		// 유효성 검사: blockedUserId가 null이거나 빈 문자열인지 검사
 		if (user_drop_id == null || user_drop_id.trim().isEmpty()) {
@@ -52,7 +51,7 @@ public class UserDropServlet extends HttpServlet {
 		//상태가 변화는 오늘 날짜
 		Date today = new Date();
 
-		UserVO dropUser = new UserVO(uuid, uuid, user_email, today, "탈퇴중");
+		UserVO dropUser = new UserVO(uuid, uuid, "", today, "탈퇴중");
 				
 		if(userService.updateDropUser(dropUser, user_drop_id)) {
 			request.setAttribute("msg", "PlayGround에서 강퇴시켰습니다.");
